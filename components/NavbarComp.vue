@@ -5,18 +5,17 @@
         <div class="row d-none d-xl-flex">
           <div class="col-2 d-flex align-items-center">
             <div class="position-relative">
-              <a
+              <!-- <a
                 href="#search-popup"
                 data-gtf-mfp="true"
                 class="nav-search d-flex align-items-center"
               >
-                <!-- <i style="font-size: 12px" class="el-icon-search"> </i> -->
                 <font-awesome-icon :icon="['fas', 'fa-magnifying-glass']" />
 
                 <span class="d-none d-xl-inline-block mx-2 font-weight-500">
                   Search
                 </span>
-              </a>
+              </a> -->
             </div>
           </div>
           <div
@@ -24,22 +23,22 @@
           >
             <!-- <nuxt-link ></nuxt-link> -->
             <nuxt-link to="/" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> Главный </span>
+              <span class="dropdown_hover home_nav" id="hover"> Главный </span>
             </nuxt-link>
-            <nuxt-link to="/categories" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> Каталог </span>
+            <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
+              <span class="dropdown_hover home_nav" id="hover"> Каталог </span>
             </nuxt-link>
 
             <nuxt-link to="/" class="navbar-brand">
               <img src="../static/images/logo.png" alt="" />
             </nuxt-link>
 
-            <div class="dropdown_btn">
+            <nuxt-link to="/contact" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> Контакт </span>
-            </div>
-            <div class="dropdown_btn">
+            </nuxt-link>
+            <nuxt-link to="/company" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> О компании </span>
-            </div>
+            </nuxt-link>
           </div>
           <div class="col-2 d-flex align-items-center justify-content-end">
             <font-awesome-icon :icon="['fas', 'fa-phone']" />
@@ -49,8 +48,11 @@
               v-b-toggle.sidebar-1
             >
            </b-button> -->
-            <a href="tel:+998997301499" class="mx-3 nav-phone"
-              >+998 99 730 14 99</a
+            <a
+              href="tel:+998997301499"
+              id="hover-effect"
+              class="mx-3 nav-phone"
+              >{{ siteInfo.phone_number }}</a
             >
             <!-- <font-awesome-icon class="mx-3" icon="fa-regular fa-user" />
               <div class="badge_box mx-3">
@@ -85,13 +87,15 @@
                     <nuxt-link to="/">Главный</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/categories">Каталог</nuxt-link>
+                    <nuxt-link to="/categories/1/products?page=1"
+                      >Каталог</nuxt-link
+                    >
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/">Контакт</nuxt-link>
+                    <nuxt-link to="/contact">Контакт</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/">О компании</nuxt-link>
+                    <nuxt-link to="/company">О компании</nuxt-link>
                   </li>
                 </ul>
               </div>
@@ -115,6 +119,7 @@
 <script>
 export default {
   name: "data-center",
+  props: ["siteInfo"],
   data() {
     return {
       open: true,
@@ -122,6 +127,10 @@ export default {
     };
   },
   components: {},
+  async asyncData({ $axios }) {
+    console.log("siteinfo");
+    // const siteInfo = await getSiteInfo.getSiteInfo($axios)
+  },
   methods: {
     toggle() {
       this.open = !this.open;
@@ -333,7 +342,12 @@ ul {
   font-family: "Poppins", sans-serif;
   margin-bottom: 0 !important;
   font-weight: 500 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
+  position: relative;
+  transition: 0.3s;
+}
+.nav-phone:hover {
+  color: #777 !important;
 }
 .navbar-toggler:active {
   border: 0 !important;
@@ -353,9 +367,27 @@ ul {
   padding-right: 50px !important;
 }
 
-
 .b-sidebar .b-sidebar-header {
   padding: 24px 50px !important;
   margin-top: 50px !important;
+}
+
+.dropdown_hover::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px;
+  background: black;
+  transition: 0.3s;
+}
+.dropdown_hover:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: #000 !important;
 }
 </style>

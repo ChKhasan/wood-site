@@ -67,8 +67,7 @@
                 ><a href="#">See 3 Reviews</a>
               </p>
             </div> -->
-          <p class="mt-3 mb-6 body_card_info">
-           {{info}}
+          <p class="mt-3 mb-6 body_card_info" v-html="info">
           </p>
           <img
             class="img_catchap"
@@ -231,7 +230,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
       <InformationTab />
     </div>
   </div>
@@ -253,7 +252,6 @@
   },
   methods: {
     takeColor(e) {
-      console.log(e);
       const take = document.querySelectorAll(".list-inline-item");
       take.forEach((item) => {
         item.classList.remove("selected");

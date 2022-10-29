@@ -1,46 +1,42 @@
 <template lang="html">
   <div>
     <!-- <v-scroll-to-top></v-scroll-to-top> -->
-    <LayoutComp>
       <BreadCrumbComp category="Товар" />
       <ProductPageBody :product="product.data"/>
-      <TitleComp title=" May You Like This" />
+      <TitleComp title="Последние товары" />
       <div class="container containe-xxl mb-120">
         <div class="row py-5">
           <div class="col-12">
-            <!-- <CardCarousel /> -->
+            <CardCarousel :products="products"/>
           </div>
         </div>
       </div>
-    </LayoutComp>
   </div>
 </template>
 <script>
 import BreadCrumbComp from "../../components/BreadCrumbComp.vue";
 import ProductPageBody from "../../components/ProductPageBody.vue";
 import TitleComp from "../../components/TitleComp.vue";
-import LayoutComp from "../../Layouts/LayoutComp.vue";
-// import CardCarousel from "../../components/CardCarousel.vue";
+import CardCarousel from "../../components/CardCarousel.vue";
 import productApi from "@/api/product.js";
 import categoryApi from "@/api/product.js";
 
 export default {
   data() {
-    return {
-      slug: "adasfaf"
-    }
+  
   },
   components: {
     BreadCrumbComp,
     ProductPageBody,
-    LayoutComp,
-    // CardCarousel,
+    CardCarousel,
     TitleComp,
   },
+  mounted() {
+  },
   async asyncData({ $axios,params }) {
-  const product = await $axios.$get(`/products/${params.index}`)
-  const products = await $axios.$get(`/products`)
-console.log(product);
+    const product = await $axios.$get(`/products/${params.index}`)
+    // const products = await $axios.$get(`/products`)
+    const products = await productApi.getProducts($axios);
   return { product,products }
 },
   // async asyncData({ $axios }) {
@@ -86,7 +82,7 @@ console.log(product);
 }
 @media (min-width: 1200px) {
   .grid-container {
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 .mb-120 {

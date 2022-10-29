@@ -1,6 +1,11 @@
 <template>
   <div>
-    <HomePage :products="products"/>
+      <BannerComp />
+      <HomeCardBox :products="products" :category="category"/>
+      <TitleComp title="Недавние Посты" />
+      <JournalComp :posts="posts" />
+      <ContactCardBox />
+      <CustomServiceInfo />
   </div>
 </template>
 
@@ -9,7 +14,14 @@ import HomePage from "./HomePage.vue";
 import { mapState, mapActions } from "vuex";
 import productApi from "@/api/product.js";
 import categoryApi from "@/api/category.js";
-
+import postApi from "@/api/post.js";
+import BannerComp from "~/components/BannerComp.vue";
+import HomeCardBox from "../components/HomeCardBox.vue";
+import TitleComp from "../components/TitleComp.vue";
+import ContactCardBox from "../components/ContactCardBox.vue";
+import CustomServiceInfo from "../components/CustomServiceInfo.vue";
+import LayoutComp from "../layouts/default.vue";
+import JournalComp from "~/components/JournalComp.vue";
 export default {
   name: "IndexPage",
   data() {
@@ -17,30 +29,40 @@ export default {
       ip: [],
     };
   },
-  async asyncData({ $axios}) {
+  async asyncData({ $axios }) {
     const products = await productApi.getProducts($axios);
     const category = await categoryApi.getCategories($axios);
+    const posts = await postApi.getPosts($axios);
     return {
       products,
-      category
+      category,
+      posts,
     };
   },
 
   components: {
-    HomePage,
+    BannerComp,
+    HomeCardBox,
+    TitleComp,
+    ContactCardBox,
+    CustomServiceInfo,
+    LayoutComp,
+    JournalComp,
   },
   computed: {
     ...mapState(["data"]),
   },
-  mounted() {
-    mapActions(["getProducts"]);
+  // mounted() {
+  //   this.getProducts();
+  // },
 
-  // axios.get("https://jsonplaceholder.typicode.com/posts").then((res) => {
-  //     console.log(res);
-  //   })
-  },
-
-  methods: {},
+  // methods: {
+  //   async getProducts() {
+  //     const products = await this.$axios.$get("/products");
+  //     this.products = products.data.data.data;
+      
+  //   },
+  // },
 };
 </script>
 <style>

@@ -1,55 +1,81 @@
 <template lang="">
-    <div
-      class="shopping_card gr-start-lg-2 grid-item px-sm-5 px-2 py-sm-4 py-2"
-      style="background-image: url(images/c_18.jpg)" 
-    >
-      <div class="sh_control_box d-flex flex-column justify-content-between">
-        <div class="sh_title">
-          <h1>Dining <br />Table</h1>
-        </div>
-        <div>
-          <router-link to="/shop-page" class="btn btn-outline-primary text-uppercase shop_now_btn"
-            >Shop Now</router-link
-          >
-        </div>
+  <div
+    class="shopping_card gr-start-lg-2 grid-item px-sm-5 px-2 py-sm-4 py-2"
+    :class="gridClass"
+    :style="{ 'background-image': `url(${category.lg_img})` }"
+  >
+    <div class="sh_control_box d-flex flex-column justify-content-between">
+      <div class="sh_title">
+        <h1>
+          {{ category.title.ru }} <br />
+          category
+        </h1>
+      </div>
+      <div>
+        <router-link
+          :to="`/categories/${category.id}/products?page=1`"
+          class="btn btn-outline-primary text-uppercase shop_now_btn"
+          >Shop Now</router-link
+        >
       </div>
     </div>
-  </template>
-  <script>
-  export default {};
-  </script>
-  <style lang="css">
-  .shopping_card {
-    background-position: center;
-    background-size: cover;
-    display: grid;
-    height: 100%;
-    cursor: pointer;
-  }
-  .sh_title {
-    max-width: 300px;
-  }
-  @media (min-width: 992px) {
-    .sh_title h1 {
-      font-size: 40px !important;
-    }
-  }
-  @media (min-width: 576px) {
-    .shopping_card {
-      grid-column: span 2 !important;
-    }
-  }
-  
+  </div>
+</template>
+<script>
+export default {
+  props: ["gridClass", "category"],
+};
+</script>
+<style lang="css">
+.shopping_card {
+  background-position: center;
+  background-size: cover;
+  display: grid;
+  height: 100%;
+  cursor: pointer;
+  padding-top: 40px !important;
+  transition: transform .5s !important;
+}
+.shopping_card:hover {
+transform: translateY(-10px) !important;
+}
+.sh_title {
+  max-width: 300px;
+}
+@media (min-width: 992px) {
   .sh_title h1 {
-    font-size: 48px !important;
-    font-weight: 700;
-    line-height: 1.25;
+    font-size: 40px !important;
   }
-  
-  
-  .grid-item {
-    display: grid;
-    width: 100%;
+}
+@media (min-width: 576px) {
+  .shopping_card-grid1 {
+    grid-row-start: 4 !important;
+    grid-column-start: 3 !important;
+    grid-column-end: 5 !important;
   }
-  </style>
-  
+}
+@media (min-width: 576px) {
+  .shopping_card-grid2 {
+    grid-row-start: 2 !important;
+    grid-column-start: 1 !important;
+    grid-column-end: 3 !important;
+  }
+}
+@media (min-width: 576px) {
+  .shopping_card-grid3 {
+    grid-row-start: 6 !important;
+    grid-column-start: 1 !important;
+    grid-column-end: 3 !important;
+  }
+}
+.sh_title h1 {
+  font-size: 43px !important;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.grid-item {
+  display: grid;
+  width: 100%;
+}
+</style>

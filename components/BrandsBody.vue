@@ -5,39 +5,24 @@
         <div class="shop-sticky">
           <div class="filter-card">
             <div class="filter-card-title">
-              <h3>Категории продуктов</h3>
+              <h3>Бренды продуктов</h3>
             </div>
             <div class="filter-card-body">
               <ul class="f-card-list" style="padding-left: none">
                 <li
                   style="cursor: pointer"
-                  class="mb-1 hover-effect"
-                  v-for="(category, index) in categories.slice().reverse()"
-                  :key="category.id"
+                  class="mb-1"
+                  v-for="(brand, index) in brands"
+                  :key="brand.id"
                 >
                   <span
                     class="list-inline-item"
-                    :class="{ active: category.id == id }"
-                    @click="
-                      $router.push(`/categories/${category.id}/products?page=1`)
-                    "
+                    :class="{ active: brand.id == id }"
+                    @click="$router.push(`/brands/${brand.id}/products?page=1`)"
+                    >{{ brand.title }}</span
                   >
-                    {{ category.title.ru }}
-                  </span>
                 </li>
               </ul>
-            </div>
-
-            <div class="filter-card-title">
-              <h3>
-                <nuxt-link
-                  class="d-flex align-items-center to-brands-link"
-                  to="/brands/1/products?page=1"
-                  >Просмотреть бренды &nbsp;<font-awesome-icon
-                    size="1x"
-                    :icon="['fas', 'fa-arrow-right']"
-                /></nuxt-link>
-              </h3>
             </div>
           </div>
           <!-- <div class="filter-card">
@@ -211,7 +196,7 @@
           <div
             class="category-banner"
             :style="{
-              'background-image': `url(${categoryImg.lg_img})`,
+              'background-image': `url(${brandImg.lg_img})`,
             }"
           ></div>
           <!-- <img
@@ -275,10 +260,10 @@
               </div>
             </div> -->
           </div>
-          <div
+          <!-- <div
             class="ml-auto col-12 mt-4 d-md-none d-flex align-items-center justify-content-start"
           >
-            <!-- <div class="dropdown">
+            <div class="dropdown">
               <a
                 href="#"
                 class="dropdown-toggle fs-14"
@@ -302,8 +287,8 @@
                 >
                 <a class="dropdown-item text-primary fs-14" href="#">Random</a>
               </div>
-            </div> -->
-          </div>
+            </div>
+          </div> -->
         </div>
         <div class="shop-card-controller">
           <ProductCard
@@ -311,7 +296,7 @@
             data-aos-delay="400"
             data-aos-duration="900"
             img="./images/product-10.jpg"
-            v-for="(item, index) in productsByCategory"
+            v-for="(item, index) in productsByBrand"
             :key="index"
             :product="item"
           />
@@ -334,16 +319,16 @@ import VsPagination from "@vuesimple/vs-pagination";
 export default {
   data() {
     return {
-      productsByCategory: [],
-      categoryById: {},
-      categoryImg: {},
+      productsByBrand: [],
+      brandById: {},
+      brandImg: {},
       id: 1,
       search: "",
-      categories: [],
+      brands: [],
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 6,
+        paginate: 2,
       },
       page: {
         page: 1,
@@ -365,32 +350,25 @@ export default {
       this.id = id;
       this.params.page = 1;
       const products = await this.$axios.$get(
-        `${this.$route.fullPath}&paginate=6`
+        `${this.$route.fullPath}&paginate=2`
       );
-      const categoryImg = await this.$axios.$get(`/categories/${this.id}`);
-      const categories = await this.$axios.$get(`/categories`);
-
-      this.categories = categories.data;
-      this.categoryImg = categoryImg.data;
-      this.productsByCategory = products.data.data;
-      this.currentPage = products.data.last_page;
-
-      const brandImg = await this.$axios.$get(`/categories/${this.id}`);
+      const brandImg = await this.$axios.$get(`/brands/${this.id}`);
       const brands = await this.$axios.$get(`/brands`);
 
-      this.brands = brands.data;
+      this.brands = brands.data.slice().reverse();
       this.brandImg = brandImg.data;
-      this.productsByCategory = products.data.data;
+      this.productsByBrand = products.data.data;
+      this.currentPage = products.data.last_page;
     },
 
     async searchProduct() {
       const searchProducts = await this.$axios.$get(
-        `categories/${this.id}/products?search=${this.search}`
+        `brands/${this.id}/products?search=${this.search}`
       );
-      const categoryById = await this.$axios.$get(`categories/${this.id}`);
-      this.categoryById = categoryById.data;
+      const brandById = await this.$axios.$get(`brands/${this.id}`);
+      this.brandById = brandById.data;
 
-      this.productsByCategory = searchProducts.data.data;
+      this.productsByBrand = searchProducts.data.data;
       this.currentPage = searchProducts.data.last_page;
     },
     async changePage(val) {
@@ -398,14 +376,14 @@ export default {
       this.page.page = val;
 
       this.$router.replace({
-        path: `/categories/${this.id}/products`,
+        path: `/brands/${this.id}/products`,
         query: this.page,
       });
 
-      const pro = await this.$axios.$get(`categories/${this.id}/products`, {
+      const pro = await this.$axios.$get(`brands/${this.id}/products`, {
         params: this.params,
       });
-      this.productsByCategory = pro.data.data;
+      this.productsByBrand = pro.data.data;
       this.currentPage = pro.data.last_page;
     },
 
@@ -442,28 +420,29 @@ export default {
   font-weight: 400 !important;
   font-family: "Poppins", sans-serif;
   border-bottom: 1px solid transparent;
+  position: relative;
 }
 /* .f-card-list li span:hover {
   border-bottom: 1px solid #000 !important;
 } */
-/* .hover-effect::after{
+.f-card-list li span::after{
  content: "";
  position: absolute;
  left: 0;
  bottom: 0;
  width: 0;
- height: 3px;
+ height: 1px;
  background: black;
  transition: .3s;
 }
-.hover-effect:hover::after{
+.f-card-list li span:hover::after{
  content: "";
  position: absolute;
  bottom: 0;
  width: 100%;
- height: 3px;
+ height: 1px;
  background: #000 !important;
-} */
+}
 .filter-card-title h3 {
   font-size: 20px !important;
   font-weight: 700;
@@ -675,11 +654,5 @@ export default {
   widows: 20px;
   height: 20px;
   border: none;
-}
-.to-brands-link {
-  transition: 0.4s;
-}
-.to-brands-link:hover {
-  transform: translateX(8px);
 }
 </style>

@@ -4,27 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import Aos from "aos";
-import VsPagination from '@vuesimple/vs-pagination';
-
-Vue.component('vs-pagination', VsPagination);
-// import 'element-ui/lib/theme-chalk/index.css';/
-// import ElementUI from 'element-ui';
-// import ElementUI from "element-ui";
-// import VueAos from "vue-aos";
-// Vue.use(VueAos);
+import VsPagination from "@vuesimple/vs-pagination";
+import YmapPlugin from "vue-yandex-maps";
+const options = {
+  // you may define your apiKey, lang and version or skip this.
+  apiKey: "xxx", // '' by default
+  lang: "ru_RU", // 'ru_RU' by default
+  version: "2.1", // '2.1' by default
+};
+Vue.component("vs-pagination", VsPagination);
 Vue.use(Aos);
 
-// Vue.use(ElementUI);
-// Vue.use(ElementUI);
-// Aos.init();
-// This is important, we are going to let Nuxt.js worry about the CSS
-// config.autoAddCss = false
+Vue.use(YmapPlugin, options);
 
-// You can add your icons directly in this plugin. See other examples for how you
-// can add other styles or just individual icons.
 library.add(fas, fab);
 
-// Register the component globally
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 export default {
@@ -44,11 +38,15 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@fortawesome/fontawesome-svg-core/styles.css","element-ui/lib/theme-chalk/index.css"],
+  css: [
+    "@fortawesome/fontawesome-svg-core/styles.css",
+    "element-ui/lib/theme-chalk/index.css",
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~plugins/vs-pagination', mode: 'client' }
+    { src: "~plugins/vs-pagination", mode: "client" },
+    { src: "~/plugins/ymapPlugin.js", mode: "client" },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -67,17 +65,16 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     "@nuxtjs/axios",
     "bootstrap-vue/nuxt",
-    'nuxt-element-ui'
-    
+    "nuxt-element-ui",
+    "vue-yandex-maps/nuxt",
+    // options,
   ],
   elementUI: {
-    components: ['Button', 'DatePicker',"Pagination"],
-    locale: 'fr',
+    components: ["Button", "DatePicker", "Pagination", "Collapse"],
+    locale: "fr",
   },
-  mode: 'spa',
-  axios:{ baseURL: "https://plaza.choopon.uz/api" }
- ,
-
+  mode: "spa",
+  axios: { baseURL: "https://plaza.choopon.uz/api" },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     vendor: ["aos"],

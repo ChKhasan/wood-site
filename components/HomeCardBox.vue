@@ -1,16 +1,15 @@
 <template lang="html">
   <div class="container_block card_box">
     <div class="d-grid g-1 g-sm-2 g-lg-4 grid-gap grid-container">
-      <!-- <span v-for="(item, index) in products" v-bind:key="index"> -->
-        <ProductCard
-            data-aos="fade-up"
-            data-aos-delay="200"
-            data-aos-duration="900"
-            v-for="(item, index) in products" v-bind:key="index"
-            :product="item"
-            img="../static/images/product-19.jpg"
-          />
-      <!-- </span> -->
+      <span
+        v-for="(item, index) in products"
+        data-aos="fade-up"
+        data-aos-duration="900"
+        :data-aos-delay="(1 + (index % 5)) * 100"
+        v-bind:key="index"
+      >
+        <ProductCard :product="item" img="../static/images/product-19.jpg" />
+      </span>
 
       <!-- <ProductCard
         data-aos="fade-up"
@@ -36,12 +35,18 @@
         data-aos-duration="900"
         img="../images/product-04.jpg"
       />
+      -->
       <ShoppingCard
         data-aos="fade-up"
         data-aos-delay="200"
         data-aos-duration="900"
-        img="../static/images/product-16.jpg"
+        v-for="(item, index) in category"
+        v-bind:key="index"
+        :category="item"
+        :gridClass="`shopping_card-grid${index + 1}`"
       />
+
+      <!--
       <ProductCard
         data-aos="fade-up"
         data-aos-delay="350"
@@ -81,7 +86,7 @@
     </div>
     <div class="d-flex justify-content-center my-5">
       <nuxt-link
-      to="/categories"
+        to="/categories"
         class="btn btn-outline-primary text-uppercase shop_now_btn"
         data-aos="fade-up"
         data-aos-duration="1000"
@@ -95,25 +100,23 @@
 import ProductCard from "../smallComponents/ProductCard.vue";
 // import ShoppingCard from "../smallComponents/ShoppingCard.vue";
 import { mapState } from "vuex";
+import ShoppingCard from "~/smallComponents/ShoppingCard.vue";
 
 export default {
-  props: ["products"],
+  props: ["products", "category"],
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     ProductCard,
-    // ShoppingCard,
+    ShoppingCard,
   },
- 
+
   async asyncData({ $axios, $config }) {
-    const mountains = await $axios.$get(`/posts`)
-    console.log(mountains);
-    return { mountains }
+    const mountains = await $axios.$get(`/posts`);
+    return { mountains };
   },
-  mounted() {
-  },
+  mounted() {},
 
   computed: {
     ...mapState(["data"]),
@@ -135,6 +138,7 @@ export default {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px;
 }
+
 @media (min-width: 576px) {
   .grid-container {
     grid-template-columns: auto auto;
@@ -147,7 +151,7 @@ export default {
 }
 @media (min-width: 1200px) {
   .grid-container {
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 </style>

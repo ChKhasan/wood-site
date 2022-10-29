@@ -11,7 +11,7 @@
               <ul class="f-card-list" style="padding-left: none">
                 <li
                   style="cursor: pointer"
-                  class="mb-1 hover-effect"
+                  class="mb-1"
                   v-for="(category, index) in categories.slice().reverse()"
                   :key="category.id"
                 >
@@ -19,25 +19,15 @@
                     class="list-inline-item"
                     :class="{ active: category.id == id }"
                     @click="
-                      $router.push(`/categories/${category.id}/products?page=1`)
+                      $router.push(
+                        `/post-categories/${category.id}/posts?page=1`
+                      )
                     "
                   >
                     {{ category.title.ru }}
                   </span>
                 </li>
               </ul>
-            </div>
-
-            <div class="filter-card-title">
-              <h3>
-                <nuxt-link
-                  class="d-flex align-items-center to-brands-link"
-                  to="/brands/1/products?page=1"
-                  >Просмотреть бренды &nbsp;<font-awesome-icon
-                    size="1x"
-                    :icon="['fas', 'fa-arrow-right']"
-                /></nuxt-link>
-              </h3>
             </div>
           </div>
           <!-- <div class="filter-card">
@@ -305,15 +295,15 @@
             </div> -->
           </div>
         </div>
-        <div class="shop-card-controller">
-          <ProductCard
+        <div class="post-card-controller">
+          <JournalCard
             data-aos="fade-up"
             data-aos-delay="400"
             data-aos-duration="900"
             img="./images/product-10.jpg"
             v-for="(item, index) in productsByCategory"
             :key="index"
-            :product="item"
+            :post="item"
           />
         </div>
         <div class="shop-pagination d-flex justify-content-center pt-5">
@@ -331,6 +321,7 @@
 <script>
 import ProductCard from "../smallComponents/ProductCard.vue";
 import VsPagination from "@vuesimple/vs-pagination";
+import JournalCard from "~/smallComponents/JournalCard.vue";
 export default {
   data() {
     return {
@@ -343,7 +334,7 @@ export default {
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 6,
+        paginate: 2,
       },
       page: {
         page: 1,
@@ -354,6 +345,7 @@ export default {
   components: {
     ProductCard,
     VsPagination,
+    JournalCard,
   },
   async mounted() {
     this.fetchSomething();
@@ -364,30 +356,25 @@ export default {
       let id = this.$route.params.id;
       this.id = id;
       this.params.page = 1;
+      
       const products = await this.$axios.$get(
-        `${this.$route.fullPath}&paginate=6`
+        `${this.$route.fullPath}&paginate=2`
       );
-      const categoryImg = await this.$axios.$get(`/categories/${this.id}`);
-      const categories = await this.$axios.$get(`/categories`);
-
+      const categoryImg = await this.$axios.$get(`/post-categories/${this.id}`);
+      const categories = await this.$axios.$get(`/post-categories`);
       this.categories = categories.data;
       this.categoryImg = categoryImg.data;
       this.productsByCategory = products.data.data;
       this.currentPage = products.data.last_page;
-
-      const brandImg = await this.$axios.$get(`/categories/${this.id}`);
-      const brands = await this.$axios.$get(`/brands`);
-
-      this.brands = brands.data;
-      this.brandImg = brandImg.data;
-      this.productsByCategory = products.data.data;
     },
 
     async searchProduct() {
       const searchProducts = await this.$axios.$get(
-        `categories/${this.id}/products?search=${this.search}`
+        `/post-categories/${this.id}/posts?search=${this.search}`
       );
-      const categoryById = await this.$axios.$get(`categories/${this.id}`);
+      const categoryById = await this.$axios.$get(
+        `/post-categories/${this.id}`
+      );
       this.categoryById = categoryById.data;
 
       this.productsByCategory = searchProducts.data.data;
@@ -398,11 +385,11 @@ export default {
       this.page.page = val;
 
       this.$router.replace({
-        path: `/categories/${this.id}/products`,
+        path: `/post-categories/${this.id}/posts`,
         query: this.page,
       });
 
-      const pro = await this.$axios.$get(`categories/${this.id}/products`, {
+      const pro = await this.$axios.$get(`post-categories/${this.id}/posts`, {
         params: this.params,
       });
       this.productsByCategory = pro.data.data;
@@ -423,6 +410,9 @@ export default {
 };
 </script>
 <style lang="css">
+.shop-sticky {
+  transition: .5s;
+}
 .category-banner {
   width: 100%;
   aspect-ratio: 1/0.5;
@@ -445,24 +435,6 @@ export default {
 }
 /* .f-card-list li span:hover {
   border-bottom: 1px solid #000 !important;
-} */
-/* .hover-effect::after{
- content: "";
- position: absolute;
- left: 0;
- bottom: 0;
- width: 0;
- height: 3px;
- background: black;
- transition: .3s;
-}
-.hover-effect:hover::after{
- content: "";
- position: absolute;
- bottom: 0;
- width: 100%;
- height: 3px;
- background: #000 !important;
 } */
 .filter-card-title h3 {
   font-size: 20px !important;
@@ -554,24 +526,24 @@ export default {
   font-weight: 400;
   line-height: 1.63;
 }
-.shop-card-controller {
+.post-card-controller {
   display: grid;
   grid-template-columns: auto;
   grid-gap: 30px;
 }
 @media (min-width: 576px) {
-  .shop-card-controller {
-    grid-template-columns: 1fr 1fr;
+  .post-card-controller {
+    grid-template-columns: 1fr;
   }
 }
 @media (min-width: 768px) {
-  .shop-card-controller {
-    grid-template-columns: 1fr 1fr;
+  .post-card-controller {
+    grid-template-columns: 1fr;
   }
 }
 @media (min-width: 992px) {
-  .shop-card-controller {
-    grid-template-columns: 1fr 1fr 1fr;
+  .post-card-controller {
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media (min-width: 1200px) {
@@ -675,11 +647,5 @@ export default {
   widows: 20px;
   height: 20px;
   border: none;
-}
-.to-brands-link {
-  transition: 0.4s;
-}
-.to-brands-link:hover {
-  transform: translateX(8px);
 }
 </style>

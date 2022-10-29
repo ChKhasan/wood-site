@@ -3,9 +3,10 @@
       <div class="container_block container-xxl">
         <div class="row">
           <div class="col-12 j-card-controller">
-            <JournalCard img="../images/blog_01.jpg" />
-            <JournalCard img="../images/blog_02.jpg" />
-            <JournalCard img="../images/blog_03.jpg" />
+            <JournalCard v-for="(item,index) in posts" :key="index" :post="item" />
+            <!-- <JournalCard v-for="(item,index) in posts" :key="index" :post="item" />
+            <JournalCard v-for="(item,index) in posts" :key="index" :post="item" /> -->
+          
           </div>
         </div>
       </div>
@@ -14,6 +15,7 @@
   <script>
   import JournalCard from "../smallComponents/JournalCard.vue";
   export default {
+    props: ["posts"],
     components: {
       JournalCard,
     },
@@ -37,7 +39,7 @@
   @media (min-width: 768px) {
     .j-card-controller {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 30px;
     padding-bottom: 120px;
   }

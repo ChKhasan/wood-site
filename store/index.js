@@ -11,7 +11,6 @@ export const state = () => ({
 export const actions = {
  async getProducts({ commit }) {
     const product = await axios.get("https://plaza.choopon.uz/api/products")
-      console.log(res.data.data.data);
       commit("SET_PRODUCTS", product);
       return product
     

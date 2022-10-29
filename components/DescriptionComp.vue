@@ -1,11 +1,11 @@
 <template lang="html">
     <div class="description_comp pt-4">
       <div class="text-center mt-40">
-        <img
+        <!-- <img
           class="w-100"
           src="../static/images/description-product.jpg"
           alt="Description Product"
-        />
+        /> -->
       </div>
       <p class="mt-6 mt-md-10 mxw-830 mx-auto mb-0 color-gray">
         Perfect for Equestrian homes or every horse lover. Designer premium

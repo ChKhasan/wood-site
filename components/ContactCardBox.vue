@@ -3,10 +3,10 @@
       <div class="container_block container-xxl">
         <div class="row">
           <div class="col-xl-6 my-4">
-            <ContactCard name="follow us" img="./images/banner-02.jpg"/>
+            <ContactCard name="Подробнее" img="./images/banner-02.jpg"/>
           </div>
           <div class="col-xl-6 my-4">
-            <ContactCard name="follow us" img="./images/banner-01.jpg"/>
+            <ContactCard name="Подробнее" img="./images/banner-01.jpg"/>
           </div>
         </div>
       </div>

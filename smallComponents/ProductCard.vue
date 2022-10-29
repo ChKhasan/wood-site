@@ -62,7 +62,7 @@
       <div class="product_card_title d-flex flex-column">
         <p class="p_card_title_type">Table</p>
         <div class="d-flex justify-content-between">
-          <nuxt-link class="p_card_title mt-1" :to="`/product/${product.slug}`">
+          <nuxt-link class="p_card_title mt-1" :to="`/product/${product.slug}`" >
             {{ product.title.ru }}
           </nuxt-link>
           <p class="p_card_title_price">${{ product.price }}</p>
@@ -85,6 +85,10 @@ a {
 .p_card_title {
   line-height: 1.2 !important;
   font-weight: 700 !important;
+  text-overflow: clip;
+  overflow: hidden;
+  width: 70%;
+  height: 20px;
 }
 .p_card_title_type {
   font-size: 13px !important;
@@ -189,5 +193,12 @@ a {
   background-position: center;
   background-size: cover;
   overflow: hidden;
+  transition: 0.3s;
+}
+.product_card {
+  transition: .3s !important;
+}
+.product_card:hover {
+  transform: scale(1.07) !important;
 }
 </style>

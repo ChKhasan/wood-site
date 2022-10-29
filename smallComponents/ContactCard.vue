@@ -44,6 +44,10 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    transition: .5s;
+  }
+  .contact-card:hover {
+transform: translateY(-8px);
   }
   .c-card-title h3 {
     font-size: 30px !important;
