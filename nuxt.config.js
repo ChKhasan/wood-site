@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { library, config } from "@fortawesome/fontawesome-svg-core";
+import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
@@ -7,10 +7,9 @@ import Aos from "aos";
 import VsPagination from "@vuesimple/vs-pagination";
 import YmapPlugin from "vue-yandex-maps";
 const options = {
-  // you may define your apiKey, lang and version or skip this.
-  apiKey: "xxx", // '' by default
-  lang: "ru_RU", // 'ru_RU' by default
-  version: "2.1", // '2.1' by default
+  apiKey: "xxx",
+  lang: "ru_RU",
+  version: "2.1",
 };
 Vue.component("vs-pagination", VsPagination);
 Vue.use(Aos);
@@ -45,8 +44,12 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: "~plugins/vs-pagination", mode: "client" },
+    // { src: "~plugins/vs-pagination", mode: "client" },
     { src: "~/plugins/ymapPlugin.js", mode: "client" },
+    { src: "~plugins/v-scroll-to-top.js", mode: "client" },
+
+    { src: "~/plugins/aos", ssr: false },
+    "@/plugins/element-ui",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -79,6 +82,10 @@ export default {
   build: {
     vendor: ["aos"],
   },
-  plugins: [{ src: "~/plugins/aos", ssr: false }],
+  plugins: [
+    { src: "~/plugins/aos", ssr: false },
+    { src: "~plugins/v-scroll-to-top.js", ssr: false },
+    { src: "~plugins/element-ui.js", ssr: false },
+  ],
   css: ["aos/dist/aos.css"],
 };

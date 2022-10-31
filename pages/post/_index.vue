@@ -1,182 +1,195 @@
 <template lang="html">
   <div class="">
-      <BreadCrumbComp category="Пост" />
-      <div class="container container-xxl pt-10 mb-5 post-transition">
-        <div v-if="usePN" class="row">
-          <div class="col-12 d-flex justify-content-center flex-column">
-            <p class="post-date">APRIL 24, 2019</p>
-            <h1 class="post-title mb-5">{{ thePost.title.ru }}</h1>
-            <!-- <span class="owner">By Selena Gomez on Interior Design</span> -->
-            <div class="mb-5 d-flex justify-content-center mt-5">
-              <img style="width: 100%" :src="thePost.post_images[0].lg_img" alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div class="row" v-else>
-          <div class="col-12 d-flex justify-content-center flex-column">
-            <p class="post-date">APRIL 24, 2019</p>
-            <h1 class="post-title mb-5">{{ thisPost.title.ru }}</h1>
-            <!-- <span class="owner">By Selena Gomez on Interior Design</span> -->
-            <div class="mb-5 d-flex justify-content-center mt-5">
-              <img style="width: 100%" :src="thisPost.post_images[0].lg_img" alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div v-if="usePN" class="row justify-content-center">
-          <div class="col-lg-9">
-            <p class="post-subtitle">subtitle</p>
-          </div>
-          <div class="col-lg-9">
-            <p class="post-description" v-html="thePost.desc.ru"></p>
-            <p>desc</p>
-            <PostMessenger />
-          </div>
-        </div>
-
-        <div v-else class="row justify-content-center">
-          <div class="col-lg-9">
-            <p class="post-subtitle">subtitle</p>
-          </div>
-          <div class="col-lg-9">
-            <p class="post-description" v-html="thisPost.desc.ru"></p>
-            <p>desc</p>
-            <PostMessenger />
+    <BreadCrumbComp category="Пост" />
+    <div class="container container-xxl pt-10 mb-5 post-transition">
+      <div v-if="usePN" class="row">
+        <div class="col-12 d-flex justify-content-center flex-column">
+          <p class="post-date">APRIL 24, 2019</p>
+          <h1 class="post-title mb-5">{{ thePost.title.ru }}</h1>
+          <!-- <span class="owner">By Selena Gomez on Interior Design</span> -->
+          <div class="mb-5 d-flex justify-content-center mt-5">
+            <img
+              class="post-banner"
+              style="width: 100%"
+              :src="thePost.post_images[0].lg_img"
+              alt=""
+            />
           </div>
         </div>
       </div>
-      <div
-        class="container-fluid"
-        style="border-bottom: 1px solid #e4e4e4 !important"
-      ></div>
-      <div class="container container mt-15 mb-5">
-        <div class="row justify-content-center">
-          <div v-if="usePN" class="col-lg-9 d-flex justify-content-between">
-            <div class="col-lg-6 mt-4">
-              <div
-                v-if="thePrevPost"
-                @click="prevPost(thePrevPost.slug)"
-                class="previous-card d-flex align-items-center"
-              >
-                <div class="pre-btn">
-                  <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
-                </div>
-                <div class="pre-img mx-3">
-                  <!-- <img
+
+      <div class="row" v-else>
+        <div class="col-12 d-flex justify-content-center flex-column">
+          <p class="post-date">APRIL 24, 2019</p>
+          <h1 class="post-title mb-5">{{ thisPost.title.ru }}</h1>
+          <!-- <span class="owner">By Selena Gomez on Interior Design</span> -->
+          <div class="mb-5 d-flex justify-content-center mt-5">
+            <img
+              class="post-banner"
+              style="width: 100%"
+              :src="thisPost.post_images[0].lg_img"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+
+      <div v-if="usePN" class="row justify-content-center">
+        <div class="col-lg-9">
+          <p class="post-subtitle">subtitle</p>
+        </div>
+        <div class="col-lg-9">
+          <p class="post-description" v-html="thePost.desc.ru"></p>
+          <p>desc</p>
+          <PostMessenger />
+        </div>
+      </div>
+
+      <div v-else class="row justify-content-center">
+        <div class="col-lg-9">
+          <p class="post-subtitle">subtitle</p>
+        </div>
+        <div class="col-lg-9">
+          <p class="post-description" v-html="thisPost.desc.ru"></p>
+          <p>desc</p>
+          <PostMessenger />
+        </div>
+      </div>
+    </div>
+    <div
+      class="container-fluid"
+      style="border-bottom: 1px solid #e4e4e4 !important"
+    ></div>
+    <div class="container container mt-15 mb-5">
+      <div class="row justify-content-center">
+        <div
+          v-if="usePN"
+          class="col-lg-9 d-flex flex-wrap justify-content-between"
+        >
+          <div class="col-lg-6 mt-4">
+            <div
+              v-if="thePrevPost"
+              @click="prevPost(thePrevPost.slug)"
+              class="previous-card d-flex align-items-center"
+            >
+              <div class="pre-btn">
+                <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
+              </div>
+              <div class="pre-img mx-3">
+                <!-- <img
                     style="width: 70px"
                     :src="thePrevPost.post_images[0].lg_img"
                     alt=""
                   /> -->
-                  <div
-                    class="prev-next-img"
-                    :style="{
-                      'background-image': `url(${thePrevPost.post_images[0].lg_img})`,
-                    }"
-                  ></div>
-                </div>
-                <div class="pre-title">
-                  <p>PREVIOUS</p>
-                  <a href="">{{ thePrevPost.title.ru }}</a>
-                </div>
+                <div
+                  class="prev-next-img"
+                  :style="{
+                    'background-image': `url(${thePrevPost.post_images[0].lg_img})`,
+                  }"
+                ></div>
+              </div>
+              <div class="pre-title">
+                <p>PREVIOUS</p>
+                <a href="">{{ thePrevPost.title.ru }}</a>
               </div>
             </div>
-            <div class="col-lg-6 mt-4">
-              <div
-                v-if="theNextPost"
-                @click="nextPost(theNextPost.slug)"
-                class="next-card d-flex align-items-center justify-content-end"
-              >
-                <div class="next-title">
-                  <p>NEXT</p>
-                  <a href="">{{ theNextPost.title.ru }}</a>
-                </div>
-                <div class="next-img mx-3">
-                  <!-- <img
+          </div>
+          <div class="col-lg-6 mt-4">
+            <div
+              v-if="theNextPost"
+              @click="nextPost(theNextPost.slug)"
+              class="next-card d-flex align-items-center justify-content-end"
+            >
+              <div class="next-title">
+                <p>NEXT</p>
+                <a href="">{{ theNextPost.title.ru }}</a>
+              </div>
+              <div class="next-img mx-3">
+                <!-- <img
                     style="width: 70px"
                     :src="theNextPost.post_images[0].lg_img"
                     alt=""
                   /> -->
-                  <div
-                    class="prev-next-img"
-                    :style="{
-                      'background-image': `url(${theNextPost.post_images[0].lg_img})`,
-                    }"
-                  ></div>
-                </div>
-                <div class="next-btn">
-                  <font-awesome-icon :icon="['fas', 'fa-arrow-right']" />
-                </div>
+                <div
+                  class="prev-next-img"
+                  :style="{
+                    'background-image': `url(${theNextPost.post_images[0].lg_img})`,
+                  }"
+                ></div>
+              </div>
+              <div class="next-btn">
+                <font-awesome-icon :icon="['fas', 'fa-arrow-right']" />
               </div>
             </div>
           </div>
+        </div>
 
-          <div v-else class="col-lg-9 d-flex justify-content-between">
-            <div class="col-lg-6 mt-4">
-              <div
-                v-if="thisPrevPost"
-                @click="prevPost(thisPrevPost.slug)"
-                class="previous-card d-flex align-items-center"
-              >
-                <div class="pre-btn">
-                  <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
-                </div>
-                <div class="pre-img mx-3">
-                  <!-- <img
+        <div v-else class="col-lg-9 d-flex justify-content-between">
+          <div class="col-lg-6 mt-4">
+            <div
+              v-if="thisPrevPost"
+              @click="prevPost(thisPrevPost.slug)"
+              class="previous-card d-flex align-items-center"
+            >
+              <div class="pre-btn">
+                <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
+              </div>
+              <div class="pre-img mx-3">
+                <!-- <img
                     style="width: 70px"
                     :src="thisPrevPost.post_images[0].lg_img"
                     alt=""
                   /> -->
-                  <div
-                    class="prev-next-img"
-                    :style="{
-                      'background-image': `url(${thisPrevPost.post_images[0].lg_img})`,
-                    }"
-                  ></div>
-                </div>
-                <div class="pre-title">
-                  <p>PREVIOUS</p>
-                  <a href="">{{ thisPrevPost.title.ru }}</a>
-                </div>
+                <div
+                  class="prev-next-img"
+                  :style="{
+                    'background-image': `url(${thisPrevPost.post_images[0].lg_img})`,
+                  }"
+                ></div>
+              </div>
+              <div class="pre-title">
+                <p>PREVIOUS</p>
+                <a href="">{{ thisPrevPost.title.ru }}</a>
               </div>
             </div>
-            <div class="col-lg-6 mt-4">
-              <div
-                v-if="thisNextPost"
-                @click="nextPost(thisNextPost.slug)"
-                class="next-card d-flex align-items-center justify-content-end"
-              >
-                <div class="next-title">
-                  <p>NEXT</p>
-                  <a href="">{{ thisNextPost.title.ru }}</a>
-                </div>
-                <div class="next-img mx-3">
-                  <!-- <img
+          </div>
+          <div class="col-lg-6 mt-4">
+            <div
+              v-if="thisNextPost"
+              @click="nextPost(thisNextPost.slug)"
+              class="next-card d-flex align-items-center justify-content-end"
+            >
+              <div class="next-title">
+                <p>NEXT</p>
+                <a href="">{{ thisNextPost.title.ru }}</a>
+              </div>
+              <div class="next-img mx-3">
+                <!-- <img
                     style="width: 70px"
                     :src="thisNextPost.post_images[0].lg_img"
                     alt=""
                   /> -->
-                  <div
-                    class="prev-next-img"
-                    :style="{
-                      'background-image': `url(${thisNextPost.post_images[0].lg_img})`,
-                    }"
-                  ></div>
-                </div>
-                <div class="next-btn">
-                  <font-awesome-icon :icon="['fas', 'fa-arrow-right']" />
-                </div>
+                <div
+                  class="prev-next-img"
+                  :style="{
+                    'background-image': `url(${thisNextPost.post_images[0].lg_img})`,
+                  }"
+                ></div>
+              </div>
+              <div class="next-btn">
+                <font-awesome-icon :icon="['fas', 'fa-arrow-right']" />
               </div>
             </div>
           </div>
         </div>
-        <div class="row mt-5 mb-5">
-          <div class="col-12">
-            <TitleComp title="Недавние Посты" />
-            <JournalComp :posts="this.posts" />
-          </div>
+      </div>
+      <div class="row mt-5 mb-5">
+        <div class="col-12">
+          <TitleComp title="Недавние Посты" />
+          <JournalComp :posts="this.posts" />
         </div>
       </div>
+    </div>
   </div>
 </template>
 <script>
@@ -355,6 +368,11 @@ export default {
 }
 .previous-card {
   border-right: 1px;
+  cursor: pointer;
+}
+
+.next-card {
+  cursor: pointer;
 }
 @media (min-width: 576px) {
   .previous-card {
@@ -370,6 +388,10 @@ export default {
   background-size: cover;
 }
 .post-transition {
-  transition: .5sА;
+  transition: 0.5sА;
+}
+.post-banner {
+  /* height: 100%;
+  object-fit: cover; */
 }
 </style>

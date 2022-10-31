@@ -1,21 +1,20 @@
 <template lang="html">
   <div class="sticky-area" id="container">
     <div class="container-fluid" id="bg-white">
-      <div class="container_block container-xxl">
+      <div class="container container-xxl">
         <div class="row d-none d-xl-flex">
           <div class="col-2 d-flex align-items-center">
             <div class="position-relative">
-              <!-- <a
-                href="#search-popup"
-                data-gtf-mfp="true"
-                class="nav-search d-flex align-items-center"
-              >
-                <font-awesome-icon :icon="['fas', 'fa-magnifying-glass']" />
-
-                <span class="d-none d-xl-inline-block mx-2 font-weight-500">
-                  Search
+              <el-dropdown @command="handleCommand">
+                <span class="el-dropdown-link">
+                  {{ lang[language]
+                  }}<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
-              </a> -->
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item command="ru">RUS</el-dropdown-item>
+                  <el-dropdown-item command="uz">UZ</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
           </div>
           <div
@@ -41,7 +40,7 @@
             </nuxt-link>
           </div>
           <div class="col-2 d-flex align-items-center justify-content-end">
-            <font-awesome-icon :icon="['fas', 'fa-phone']" />
+            <font-awesome-icon class="mx-1" :icon="['fas', 'fa-phone']" />
 
             <!-- <b-button
               class="navbar-toggler border-0 px-0 canvas-toggle"
@@ -49,9 +48,9 @@
             >
            </b-button> -->
             <a
-              href="tel:+998997301499"
+              :href="`tel:${siteInfo.phone_number}`"
               id="hover-effect"
-              class="mx-3 nav-phone"
+              class="nav-phone"
               >{{ siteInfo.phone_number }}</a
             >
             <!-- <font-awesome-icon class="mx-3" icon="fa-regular fa-user" />
@@ -67,8 +66,8 @@
           </div>
         </div>
 
-        <div class="d-flex align-items-center d-xl-none py-3">
-          <div class="col-2">
+        <div class="row align-items-center d-xl-none py-3">
+          <div class="col-2 menu-btn">
             <button
               class="navbar-toggler border-0 px-0 canvas-toggle"
               v-b-toggle.sidebar-1
@@ -106,6 +105,7 @@
               <img src="../static/images/logo.png" alt="" />
             </a>
           </div>
+
           <div class="col-2 d-flex justify-content-end">
             <a href="#" class="nav-search d-flex align-items-center">
               <font-awesome-icon :icon="['fas', 'fa-magnifying-glass']" />
@@ -124,6 +124,12 @@ export default {
     return {
       open: true,
       drawer: false,
+      language: "",
+      currentEl: "",
+      lang: {
+        ru: "russian",
+        uz: "uzbek",
+      },
     };
   },
   components: {},
@@ -131,17 +137,26 @@ export default {
     console.log("siteinfo");
     // const siteInfo = await getSiteInfo.getSiteInfo($axios)
   },
+
   methods: {
-    toggle() {
-      this.open = !this.open;
+    handleCommand(command) {
+      localStorage.setItem("Lang", command);
+      location.href = "/";
     },
-    func() {
-      var container = this.$el.querySelector("#container");
-      container.scrollTop = container.scrollHeight;
-      console.log(container.scrollHeight);
-    },
+    // handleClick(e) {
+    //   console.log("change");
+    // },
+    // toggle() {
+    //   this.open = !this.open;
+    // },
+    // func() {
+    //   var container = this.$el.querySelector("#container");
+    //   container.scrollTop = container.scrollHeight;
+    //   console.log(container.scrollHeight);
+    // },
   },
   mounted() {
+    this.language = localStorage.getItem("Lang");
     var header = document.querySelector("#container");
     let lastScrollTop = 0;
     window.addEventListener("scroll", () => {
@@ -160,6 +175,11 @@ export default {
       lastScrollTop = scrollTop;
     });
   },
+  watch: {
+    currentEl(newVal, oldVal) {
+      console.log(newVal, oldVal);
+    },
+  },
 };
 </script>
 <style lang="css" scoped>
@@ -167,6 +187,9 @@ export default {
 
 .badge_box {
   position: relative;
+}
+.menu-btn {
+  padding-left: 0 !important;
 }
 .badge_abs {
   position: absolute;
@@ -342,7 +365,7 @@ ul {
   font-family: "Poppins", sans-serif;
   margin-bottom: 0 !important;
   font-weight: 500 !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
   position: relative;
   transition: 0.3s;
 }
@@ -378,7 +401,7 @@ ul {
   left: 0;
   bottom: 0;
   width: 0;
-  height: 3px;
+  height: 2px;
   background: black;
   transition: 0.3s;
 }
@@ -387,7 +410,16 @@ ul {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 3px;
+  height: 2px;
   background: #000 !important;
+}
+.el-dropdown {
+  vertical-align: top;
+}
+.el-dropdown + .el-dropdown {
+  margin-left: 15px;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
 }
 </style>

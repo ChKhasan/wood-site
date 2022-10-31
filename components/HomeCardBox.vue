@@ -1,15 +1,15 @@
 <template lang="html">
   <div class="container_block card_box">
-    <div class="d-grid g-1 g-sm-2 g-lg-4 grid-gap grid-container">
-      <span
+    <div class="grid-container">
+      <ProductCard
         v-for="(item, index) in products"
         data-aos="fade-up"
         data-aos-duration="900"
         :data-aos-delay="(1 + (index % 5)) * 100"
         v-bind:key="index"
-      >
-        <ProductCard :product="item" img="../static/images/product-19.jpg" />
-      </span>
+        :product="item"
+        img="../static/images/product-19.jpg"
+      />
 
       <!-- <ProductCard
         data-aos="fade-up"
@@ -130,28 +130,24 @@ export default {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 1fr;
   grid-gap: 30px;
 }
-.w_sh_card {
+/* .w_sh_card {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px;
+} */
+
+/* @media (min-width: 576px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-@media (min-width: 576px) {
+@media (min-width: 992px) {
   .grid-container {
-    grid-template-columns: auto auto;
+    grid-template-columns: repeat(4, 1fr);
   }
-}
-@media (min-width: 768px) {
-  .grid-container {
-    grid-template-columns: auto auto;
-  }
-}
-@media (min-width: 1200px) {
-  .grid-container {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-}
+} */
 </style>

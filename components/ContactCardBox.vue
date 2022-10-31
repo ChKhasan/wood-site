@@ -9,6 +9,14 @@
             <ContactCard name="Подробнее" img="./images/banner-01.jpg"/>
           </div>
         </div>
+        <!-- <div class="row">
+          <div class="col-xl-6 my-4">
+            <ContactCard name="Подробнее" img="./images/banner-02.jpg"/>
+          </div>
+          <div class="col-xl-6 my-4">
+            <ContactCard name="Подробнее" img="./images/banner-01.jpg"/>
+          </div>
+        </div> -->
       </div>
     </div>
   </template>

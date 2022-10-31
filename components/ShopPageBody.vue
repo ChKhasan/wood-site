@@ -208,12 +208,9 @@
       </div>
       <div class="col-md-9">
         <div class="shop-page-banner">
-          <div
-            class="category-banner"
-            :style="{
-              'background-image': `url(${categoryImg.lg_img})`,
-            }"
-          ></div>
+          <div class="category-banner">
+            <img :src="categoryImg.lg_img" alt="" />
+          </div>
           <!-- <img
             :src="status ? categoryById.lg_img : firstCategory.lg_img"
             alt=""
@@ -425,7 +422,8 @@ export default {
 <style lang="css">
 .category-banner {
   width: 100%;
-  aspect-ratio: 1/0.5;
+  /* height: 100%; */
+  /* aspect-ratio: 1/0.5; */
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -632,11 +630,16 @@ export default {
   color: #000 !important;
   cursor: default;
 }
+@media (min-width: 576px) {
+  .search-input {
+    padding: 1px 1.25rem;
+  }
+}
 .search-input {
   border: none;
   border-width: 2px !important;
   height: calc(1.25em + 1.4375rem + 2px);
-  padding: 1px 1.25rem;
+
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;

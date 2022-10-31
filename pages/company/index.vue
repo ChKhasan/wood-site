@@ -70,7 +70,35 @@ export default {
 }
 .team-card-controller {
   display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+@media (min-width: 576px) {
+  .team-card-controller {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 30px;
+}
+}
+@media (min-width: 768px) {
+  .team-card-controller {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 30px;
+}
+}
+@media (min-width: 992px) {
+  .team-card-controller {
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
+}
+}
+@media (min-width: 1200px) {
+  .team-card-controller {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 30px;
+}
 }
 </style>

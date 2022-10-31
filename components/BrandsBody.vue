@@ -193,12 +193,9 @@
       </div>
       <div class="col-md-9">
         <div class="shop-page-banner">
-          <div
-            class="category-banner"
-            :style="{
-              'background-image': `url(${brandImg.lg_img})`,
-            }"
-          ></div>
+          <div class="category-banner">
+            <img :src="brandImg.lg_img" alt="" />
+          </div>
           <!-- <img
             :src="status ? categoryById.lg_img : firstCategory.lg_img"
             alt=""
@@ -403,10 +400,11 @@ export default {
 <style lang="css">
 .category-banner {
   width: 100%;
-  aspect-ratio: 1/0.5;
+  /* aspect-ratio: 1/0.5; */
   background-position: center;
   background-size: cover;
   overflow: hidden;
+  height: 100%;
 }
 .f-card-list {
   list-style: none;
@@ -425,23 +423,23 @@ export default {
 /* .f-card-list li span:hover {
   border-bottom: 1px solid #000 !important;
 } */
-.f-card-list li span::after{
- content: "";
- position: absolute;
- left: 0;
- bottom: 0;
- width: 0;
- height: 1px;
- background: black;
- transition: .3s;
+.f-card-list li span::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: black;
+  transition: 0.3s;
 }
-.f-card-list li span:hover::after{
- content: "";
- position: absolute;
- bottom: 0;
- width: 100%;
- height: 1px;
- background: #000 !important;
+.f-card-list li span:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #000 !important;
 }
 .filter-card-title h3 {
   font-size: 20px !important;
@@ -611,11 +609,15 @@ export default {
   color: #000 !important;
   cursor: default;
 }
+@media (min-width: 576px) {
+  .search-input {
+    padding: 1px 1.25rem;
+  }
+}
 .search-input {
   border: none;
   border-width: 2px !important;
   height: calc(1.25em + 1.4375rem + 2px);
-  padding: 1px 1.25rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;

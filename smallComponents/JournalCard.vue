@@ -35,9 +35,7 @@ export default {
 .journal-card {
   transition: 0.3s;
 }
-/* .journal-card:hover {
-  transform: scale(1.05) !important;
-} */
+
 .j-card-img {
   flex-shrink: 0;
   width: 100%;
@@ -102,9 +100,16 @@ export default {
   height: 50px;
   white-space: wrap;
 }
+.j-card-title h3 {
+  text-overflow: clip;
+  overflow: hidden;
+  width: 70%;
+  height: 20px;
+  white-space: wrap;
+}
 .journal-img {
   height: 200px;
-  transition: .5s;
+  transition: 0.5s;
   object-fit: cover !important;
 }
 .journal-img img {
@@ -112,10 +117,9 @@ export default {
   height: 200px;
   transition: background-size 2s linear;
   object-fit: cover;
-  transition: .5s !important;
-
+  transition: 0.5s !important;
 }
-.journal-img:hover{
+.journal-img:hover {
   transform: scale(1.2);
 }
 </style>

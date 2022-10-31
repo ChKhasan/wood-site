@@ -23,15 +23,20 @@ export default {
 };
 </script>
 <style lang="css">
-.team-card-img {
-}
+
 .t-img {
   border-radius: 50%;
   overflow: hidden;
   aspect-ratio: 1/1;
   height: 130px;
-  transition: 0.5s;
+  transition:  0.5s;
   flex-shrink: 0;
+}
+.team-card {
+  transition: .3s;
+}
+.team-card:hover {
+  transform: translateY(-8px);
 }
 .t-img img {
   width: auto;
@@ -53,7 +58,6 @@ export default {
   cursor: pointer;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
 }
 </style>

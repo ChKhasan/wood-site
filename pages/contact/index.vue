@@ -1,15 +1,15 @@
 <template lang="html">
   <div>
-      <BreadCrumbComp category="Контакт" />
-      <div class="container container-xxl mt-3 py-5 pb-14">
-        <div class="row pb-5">
-          <div class="col-12 contact-title">
-            <h1>Свяжитесь с нами</h1>
-          </div>
+    <BreadCrumbComp category="Контакт" />
+    <div class="container container-xxl mt-3 py-5 pb-14">
+      <div class="row pb-5">
+        <div class="col-12 contact-title">
+          <h1>Свяжитесь с нами</h1>
         </div>
-        <div class="row">
-          <div class="col-12 map-control">
-            <!-- <yandex-map
+      </div>
+      <div class="row">
+        <div class="col-12 map-control">
+          <!-- <yandex-map
               :coords="[41.311158, 69.279737]"
               zoom="16"
               style="width: 100%; aspect-ratio: 1/0.5"
@@ -36,78 +36,81 @@
                 cluster-name="1"
               ></ymap-marker>
             </yandex-map> -->
-            <iframe
-              :src="site_info.map"
-              width="100%"
-              style="border: 0; aspect-ratio: 1/0.5"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-8 mb-8 mb-md-0">
-            <h2 class="fs-24 mb-2 form-title">
-              We would love to hear from you.
-            </h2>
-            <p class="mb-7 form-text">
-              If you’ve got great products your making or looking to work with
-              us then drop us a line.
-            </p>
-            <form action="">
-              <div class="row mb-6">
-                <div class="col-sm-6">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Your Name*"
-                    required=""
-                  />
-                </div>
-                <div class="col-sm-6">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Your Email*"
-                    required=""
-                  />
-                </div>
-              </div>
-              <div class="form-group mb-4">
-                <textarea class="form-control" rows="6">Comment</textarea>
-              </div>
-              <div class="custom-control custom-checkbox mb-6">
-                <input
-                  type="checkbox"
-                  class="custom-control-input"
-                  id="customCheck1"
-                />
-                <label class="custom-control-label fs-15" for="customCheck1">
-                  Save my name, email, and website in this browser for the next
-                  time I comment.</label
-                >
-              </div>
-              <button
-                type="submit"
-                class="btn form-btn text-uppercase letter-spacing-05"
-              >
-                submit now
-              </button>
-            </form>
-          </div>
-          <div class="col-md-4 pl-xl-13 pl-md-6">
-            <p class="font-weight-bold adress-title mb-3">Address</p>
-            <address class="mb-6 form-text">
-             {{site_info.address.ru}}
-            </address>
-            <p class="font-weight-bold info-title mb-2 form-text">Infomation</p>
-            <p class="mb-0 form-text">{{site_info.phone_number}}</p>
-            <p class="mb-7 form-text">{{site_info.email}}</p>
-          </div>
+          <iframe
+            :src="site_info.map"
+            width="100%"
+            style="border: 0; aspect-ratio: 1/0.5"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-8 mb-8 mb-md-0 mt-4">
+          <h2 class="fs-24 mb-2 form-title">
+            Мы были бы рады получить известия от вас.
+          </h2>
+          <p class="mb-7 form-text">
+            Если у вас есть отличные продукты, которые вы делаете или хотите
+            работать с нами, напишите нам.
+          </p>
+          <form action="">
+            <div class="row mb-6">
+              <div class="col-sm-6 mt-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ваше Имя*"
+                  required=""
+                />
+              </div>
+              <div class="col-sm-6 mt-4">
+                <input
+                  type="email"
+                  class="form-control"
+                  placeholder="Ваше Эл. адрес*"
+                  required=""
+                />
+              </div>
+            </div>
+            <div class="form-group mb-4">
+              <textarea class="form-control" rows="6">Комментарий</textarea>
+            </div>
+            <div class="custom-control custom-checkbox mb-6">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customCheck1"
+              />
+              <label class="custom-control-label fs-15" for="customCheck1">
+                Сохраните мое имя, адрес электронной почты и веб-сайт в этом
+                браузере для следующего комментария.</label
+              >
+            </div>
+            <button
+              type="submit"
+              class="btn form-btn text-uppercase letter-spacing-05"
+            >
+              отправить сейчас
+            </button>
+          </form>
+        </div>
+
+        <div class="col-md-4 pl-xl-13 pl-md-6 mt-4">
+          <p class="font-weight-bold adress-title mb-3">Адрес</p>
+          <address class="mb-6 form-text">
+            {{ site_info.address.ru }}
+          </address>
+          <p class="font-weight-bold info-title mb-2 form-text">Информация</p>
+          <p class="mb-0 form-text">{{ site_info.phone_number }}</p>
+          <a :href="`mailto:${site_info.email}`" class="mb-7 form-text">{{
+            site_info.email
+          }}</a>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -129,7 +132,7 @@ export default {
       ],
     };
   },
-  components: { yandexMap, ymapMarker,BreadCrumbComp },
+  components: { yandexMap, ymapMarker, BreadCrumbComp },
   async asyncData({ $axios }) {
     const siteInfo = await $axios.$get("/site-info");
     let site_info = siteInfo.data;
@@ -195,7 +198,7 @@ export default {
 .info-title {
   color: #000 !important;
   font-weight: 700 !important;
-  font-family: poppins, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   line-height: 1.63;
 }

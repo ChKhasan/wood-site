@@ -4,11 +4,9 @@
   >
     <nuxt-link class="mt-1" :to="`/product/${product.slug}`">
       <div
-        class="product-card-banner px-sm-4 px-2 py-sm-4 py-2 d-flex align-items-end"
-        :style="{
-          'background-image': `url(${product.product_images[0].lg_img})`,
-        }"
+        class="product-card-banner  d-flex align-items-end"
       >
+        <img :src="product.product_images[0].lg_img" alt="" />
         <!-- <div class="status_sale status" v-if="false"><span>SALE</span></div>
       <div class="status_new status" v-else><span>SALE</span></div>
       <div class="d-flex flex-row content-change-vertical">
@@ -62,7 +60,7 @@
       <div class="product_card_title d-flex flex-column">
         <p class="p_card_title_type">Table</p>
         <div class="d-flex justify-content-between">
-          <nuxt-link class="p_card_title mt-1" :to="`/product/${product.slug}`" >
+          <nuxt-link class="p_card_title mt-1" :to="`/product/${product.slug}`">
             {{ product.title.ru }}
           </nuxt-link>
           <p class="p_card_title_price">${{ product.price }}</p>
@@ -195,10 +193,15 @@ a {
   overflow: hidden;
   transition: 0.3s;
 }
+.product-card-banner img{
+width: 100%;
+height: 100%;
+object-fit: cover !important;
+}
 .product_card {
-  transition: .3s !important;
+  transition: 0.3s !important;
 }
 .product_card:hover {
-  transform: scale(1.07) !important;
+  transform: scale(1.05) !important;
 }
 </style>

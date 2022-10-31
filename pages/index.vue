@@ -1,17 +1,17 @@
 <template>
   <div>
-      <BannerComp />
-      <HomeCardBox :products="products" :category="category"/>
-      <TitleComp title="Недавние Посты" />
-      <JournalComp :posts="posts" />
-      <ContactCardBox />
-      <CustomServiceInfo />
+    <v-scroll-to-top></v-scroll-to-top>
+    <BannerComp />
+    <HomeCardBox :products="products" :category="category" />
+    <TitleComp title="Недавние Посты" />
+    <JournalComp :posts="posts" />
+    <ContactCardBox />
+    <!-- <CustomServiceInfo /> -->
   </div>
 </template>
 
 <script>
-import HomePage from "./HomePage.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import productApi from "@/api/product.js";
 import categoryApi from "@/api/category.js";
 import postApi from "@/api/post.js";
@@ -19,9 +19,11 @@ import BannerComp from "~/components/BannerComp.vue";
 import HomeCardBox from "../components/HomeCardBox.vue";
 import TitleComp from "../components/TitleComp.vue";
 import ContactCardBox from "../components/ContactCardBox.vue";
-import CustomServiceInfo from "../components/CustomServiceInfo.vue";
+// import CustomServiceInfo from "../components/CustomServiceInfo.vue";
 import LayoutComp from "../layouts/default.vue";
 import JournalComp from "~/components/JournalComp.vue";
+// import VScrollToTop from 'v-scroll-to-top'
+
 export default {
   name: "IndexPage",
   data() {
@@ -45,24 +47,17 @@ export default {
     HomeCardBox,
     TitleComp,
     ContactCardBox,
-    CustomServiceInfo,
+    // CustomServiceInfo,
+    // VScrollToTop,
     LayoutComp,
     JournalComp,
+  },
+  mouted() {
+    localStorage.setItem("Lang","ru")
   },
   computed: {
     ...mapState(["data"]),
   },
-  // mounted() {
-  //   this.getProducts();
-  // },
-
-  // methods: {
-  //   async getProducts() {
-  //     const products = await this.$axios.$get("/products");
-  //     this.products = products.data.data.data;
-      
-  //   },
-  // },
 };
 </script>
 <style>

@@ -21,6 +21,7 @@
     "element-ui": "^2.15.10",
     "nuxt": "^2.13.3",
     "nuxt-element-ui": "^1.0.10",
+    "v-scroll-to-top": "^1.0.2",
     "vue": "^2.7.13",
     "vue-aos": "^3.1.0",
     "vue-nuxt-accordion": "^1.0.4",

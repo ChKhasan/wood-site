@@ -198,12 +198,9 @@
       </div>
       <div class="col-md-9">
         <div class="shop-page-banner">
-          <div
-            class="category-banner"
-            :style="{
-              'background-image': `url(${categoryImg.lg_img})`,
-            }"
-          ></div>
+          <div class="category-banner">
+            <img :src="categoryImg.lg_img" alt="" />
+          </div>
           <!-- <img
             :src="status ? categoryById.lg_img : firstCategory.lg_img"
             alt=""
@@ -356,7 +353,7 @@ export default {
       let id = this.$route.params.id;
       this.id = id;
       this.params.page = 1;
-      
+
       const products = await this.$axios.$get(
         `${this.$route.fullPath}&paginate=2`
       );
@@ -411,14 +408,15 @@ export default {
 </script>
 <style lang="css">
 .shop-sticky {
-  transition: .5s;
+  transition: 0.5s;
 }
 .category-banner {
   width: 100%;
-  aspect-ratio: 1/0.5;
+  /* aspect-ratio: 1/0.5; */
   background-position: center;
   background-size: cover;
   overflow: hidden;
+  height: 100%;
 }
 .f-card-list {
   list-style: none;
@@ -604,11 +602,15 @@ export default {
   color: #000 !important;
   cursor: default;
 }
+@media (min-width: 576px) {
+  .search-input {
+    padding: 1px 1.25rem;
+  }
+}
 .search-input {
   border: none;
   border-width: 2px !important;
   height: calc(1.25em + 1.4375rem + 2px);
-  padding: 1px 1.25rem;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.25;

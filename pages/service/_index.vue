@@ -5,7 +5,7 @@
         <BreadCrumbComp category="Товар" />
         <ProductPageBody :product="product.data"/>
         <TitleComp title="Последние товары" />
-        <div class="container containe-xxl mb-120">
+        <div class="container container-xxl mb-120">
           <div class="row py-5">
             <div class="col-12">
               <CardCarousel :products="products"/>
@@ -68,26 +68,22 @@
     grid-template-columns: auto;
     grid-gap: 30px;
   }
-  .w_sh_card {
+  /* .w_sh_card {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
-  }
+  } */
   @media (min-width: 576px) {
-    .grid-container {
-      grid-template-columns: auto auto;
-    }
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
   }
-  @media (min-width: 768px) {
-    .grid-container {
-      grid-template-columns: auto auto;
-    }
+}
+
+@media (min-width: 992px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
   }
-  @media (min-width: 1200px) {
-    .grid-container {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-  }
+}
   .mb-120 {
     margin-bottom: 120px;
   }
