@@ -8,8 +8,6 @@
             :key="index"
             :post="item"
           />
-          <!-- <JournalCard v-for="(item,index) in posts" :key="index" :post="item" />
-            <JournalCard v-for="(item,index) in posts" :key="index" :post="item" /> -->
         </div>
       </div>
     </div>

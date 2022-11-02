@@ -30,6 +30,8 @@ export default {
   //   return { categories, categoryById, productsById, brands };
   // },
   mounted() {
+    // this.$i18n.defaultLocale = localStorage.getItem("Lang");
+    this.$i18n.setLocale(localStorage.getItem("Lang"))
     // this.params.page = this.$route.query.paginate || 1;
     // this.$router.replace({
     //   path: "/categories/1/products",

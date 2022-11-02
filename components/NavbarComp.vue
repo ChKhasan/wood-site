@@ -5,16 +5,8 @@
         <div class="row d-none d-xl-flex">
           <div class="col-2 d-flex align-items-center">
             <div class="position-relative">
-              <el-dropdown @command="handleCommand">
-                <span class="el-dropdown-link">
-                  {{ lang[language]
-                  }}<i class="el-icon-arrow-down el-icon--right"></i>
-                </span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="ru">RUS</el-dropdown-item>
-                  <el-dropdown-item command="uz">UZ</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
+              <button @click="locatePage('ru')">ru</button>
+              <button @click="locatePage('en')">en</button>
             </div>
           </div>
           <div
@@ -22,7 +14,7 @@
           >
             <!-- <nuxt-link ></nuxt-link> -->
             <nuxt-link to="/" class="dropdown_btn">
-              <span class="dropdown_hover home_nav" id="hover"> Главный </span>
+              <span class="dropdown_hover home_nav" id="hover">Главный</span>
             </nuxt-link>
             <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
               <span class="dropdown_hover home_nav" id="hover"> Каталог </span>
@@ -53,6 +45,7 @@
               class="nav-phone"
               >{{ siteInfo.phone_number }}</a
             >
+
             <!-- <font-awesome-icon class="mx-3" icon="fa-regular fa-user" />
               <div class="badge_box mx-3">
                 <span class="badge_abs">0</span>
@@ -116,44 +109,48 @@
     </div>
   </div>
 </template>
+
+<!-- <i18n>
+  {
+    "ru": {
+      "navHome": "Главный",
+      "navCategory": "Каталог",
+      "navContact": "Контакт",
+      "navCompany": "О компании"
+    },
+    "en": {
+      "navHome": "Home",
+      "navCategory": "Category",
+      "navContact": "Contact",
+      "navCompany": "Company"
+    }
+  }
+  </i18n> -->
 <script>
 export default {
   name: "data-center",
   props: ["siteInfo"],
+
   data() {
     return {
       open: true,
       drawer: false,
       language: "",
       currentEl: "",
-      lang: {
-        ru: "russian",
-        uz: "uzbek",
-      },
+      currLang: "ru",
+      lang: this.siteInfo,
     };
-  },
-  components: {},
-  async asyncData({ $axios }) {
-    console.log("siteinfo");
-    // const siteInfo = await getSiteInfo.getSiteInfo($axios)
   },
 
   methods: {
+    locatePage(lang) {
+      console.log(this.store.state.i18n.locale);
+      localStorage.setItem("Lang", lang);
+    },
     handleCommand(command) {
       localStorage.setItem("Lang", command);
       location.href = "/";
     },
-    // handleClick(e) {
-    //   console.log("change");
-    // },
-    // toggle() {
-    //   this.open = !this.open;
-    // },
-    // func() {
-    //   var container = this.$el.querySelector("#container");
-    //   container.scrollTop = container.scrollHeight;
-    //   console.log(container.scrollHeight);
-    // },
   },
   mounted() {
     this.language = localStorage.getItem("Lang");
@@ -421,5 +418,22 @@ ul {
 }
 .el-icon-arrow-down {
   font-size: 12px;
+}
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled) {
+  background-color: #fff;
+  color: #777 !important;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+.el-dropdown-menu__item:focus,
+.el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: #fff !important;
+  color: #000 !important;
+}
+.lan-btn {
+  font-weight: 500 !important;
+  font-family: "Poppins", sans-serif;
+  color: #000 !important;
 }
 </style>

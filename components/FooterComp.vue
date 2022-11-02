@@ -89,8 +89,11 @@
               />
             </a>
           </div>
-          <p class="mb-0 text-gray text-lg-right footer-links">
-            © {{ year }} Furnitor.<br />
+          <p
+            class="mb-0 text-gray text-lg-right footer-links"
+            v-if="siteInfo && siteInfo.title"
+          >
+            © {{ year }} {{ siteInfo.title.ru }} .<br />
             All rights reserved.
           </p>
         </div>
@@ -106,6 +109,10 @@ export default {
     return {
       year: new Date().getFullYear(),
     };
+  },
+
+  mounted() {
+    this.$i18n.setLocale(localStorage.getItem("Lang"));
   },
 };
 </script>

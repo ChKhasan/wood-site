@@ -51,14 +51,7 @@
       </div>
       <div class="mt-auto">
         <div class="container_block container-xxl">
-          <div>
-            <!-- <p class="design-by-p">
-                Designed by
-                <span class="design-by-span"
-                  >Nicholas Karlovasitis &amp; Sarah Gibson</span
-                >
-              </p> -->
-          </div>
+          <div></div>
         </div>
       </div>
     </div>

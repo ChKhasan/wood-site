@@ -49,6 +49,9 @@ export default {
       team,
     };
   },
+  mounted() {
+    this.$i18n.setLocale(localStorage.getItem("Lang"))
+  },
   components: { TeamCard, TitleComp },
 };
 </script>

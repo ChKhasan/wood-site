@@ -132,6 +132,9 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$i18n.setLocale(localStorage.getItem("Lang"))
+  },
   components: { yandexMap, ymapMarker, BreadCrumbComp },
   async asyncData({ $axios }) {
     const siteInfo = await $axios.$get("/site-info");

@@ -8,7 +8,7 @@
 <script>
 import NavbarComp from "../components/NavbarComp.vue";
 import FooterComp from "../components/FooterComp.vue";
-import getSiteInfo from "@/api/site-info.js";
+
 export default {
   data() {
     return {

@@ -22,7 +22,6 @@ export default {
 @media (min-width: 576px) {
   .contact-card {
     height: 408px;
-    /* width: 200px; */
   }
   .c-card-title h3 {
     font-size: 40px !important;
@@ -42,8 +41,13 @@ export default {
   flex-direction: column;
   transition: 0.5s;
 }
-.contact-card:hover {
-  transform: translateY(-8px);
+@media (max-width: 576px) {
+  .contact-card {
+    height: 300px;
+  padding: 30px;
+
+  }
+
 }
 .c-card-title h3 {
   font-size: 30px !important;

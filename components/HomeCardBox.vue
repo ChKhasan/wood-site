@@ -11,31 +11,6 @@
         img="../static/images/product-19.jpg"
       />
 
-      <!-- <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="200"
-        data-aos-duration="900"
-        img="../images/product-19.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="300"
-        data-aos-duration="900"
-        img="../images/product-02.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="400"
-        data-aos-duration="900"
-        img="../images/product-10.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="500"
-        data-aos-duration="900"
-        img="../images/product-04.jpg"
-      />
-      -->
       <ShoppingCard
         data-aos="fade-up"
         data-aos-delay="200"
@@ -45,44 +20,6 @@
         :category="item"
         :gridClass="`shopping_card-grid${index + 1}`"
       />
-
-      <!--
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="350"
-        data-aos-duration="900"
-        img="../images/product-08.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="500"
-        data-aos-duration="900"
-        img="../images/product-09.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="200"
-        data-aos-duration="900"
-        img="../images/product-19.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="300"
-        data-aos-duration="900"
-        img="../images/product-02.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="400"
-        data-aos-duration="900"
-        img="../images/product-10.jpg"
-      />
-      <ProductCard
-        data-aos="fade-up"
-        data-aos-delay="500"
-        data-aos-duration="900"
-        img="../images/product-04.jpg"
-      /> -->
     </div>
     <div class="d-flex justify-content-center my-5">
       <nuxt-link
@@ -98,7 +35,6 @@
 </template>
 <script>
 import ProductCard from "../smallComponents/ProductCard.vue";
-// import ShoppingCard from "../smallComponents/ShoppingCard.vue";
 import { mapState } from "vuex";
 import ShoppingCard from "~/smallComponents/ShoppingCard.vue";
 

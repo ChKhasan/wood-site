@@ -7,7 +7,6 @@
               <div class="bread_crumb_box">
                 <router-link class="bread_crumb" to="/"> Главный </router-link>
                 <span>/</span>
-  
                 <a href="#" class="last_crumb">{{category}}</a><span></span>
               </div>
             </div>

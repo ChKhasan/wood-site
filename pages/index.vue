@@ -2,14 +2,27 @@
   <div>
     <v-scroll-to-top></v-scroll-to-top>
     <BannerComp />
+
     <HomeCardBox :products="products" :category="category" />
+
     <TitleComp title="Недавние Посты" />
+
     <JournalComp :posts="posts" />
     <ContactCardBox />
     <!-- <CustomServiceInfo /> -->
   </div>
 </template>
 
+<i18n>
+  {
+    "ru": {
+      "hello": "hello world!"
+    },
+    "en": {
+      "hello": "こんにちは、世界!"
+    }
+  }
+  </i18n>
 <script>
 import { mapState } from "vuex";
 import productApi from "@/api/product.js";
@@ -22,6 +35,7 @@ import ContactCardBox from "../components/ContactCardBox.vue";
 // import CustomServiceInfo from "../components/CustomServiceInfo.vue";
 import LayoutComp from "../layouts/default.vue";
 import JournalComp from "~/components/JournalComp.vue";
+
 // import VScrollToTop from 'v-scroll-to-top'
 
 export default {
@@ -30,6 +44,9 @@ export default {
     return {
       ip: [],
     };
+  },
+  mounted() {
+    this.$i18n.setLocale(localStorage.getItem("Lang"))
   },
   async asyncData({ $axios }) {
     const products = await productApi.getProducts($axios);
@@ -47,13 +64,11 @@ export default {
     HomeCardBox,
     TitleComp,
     ContactCardBox,
-    // CustomServiceInfo,
-    // VScrollToTop,
     LayoutComp,
     JournalComp,
   },
   mouted() {
-    localStorage.setItem("Lang","ru")
+    localStorage.setItem("Lang", "ru");
   },
   computed: {
     ...mapState(["data"]),

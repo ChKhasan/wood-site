@@ -388,7 +388,7 @@ export default {
   background-size: cover;
 }
 .post-transition {
-  transition: 0.5sА;
+  transition: 0.5s;
 }
 .post-banner {
   /* height: 100%;

@@ -1,27 +1,11 @@
 <template lang="html">
   <div class="mt-5">
     <div class="d-none d-md-block">
-      <!-- <el-tabs v-model="activeName" @tab-click="handleClick"> -->
       <div class="info-title d-flex justify-content-center">
         <h1>Description</h1>
       </div>
 
-      <!-- <el-tab-pane label="Description" name="first"> -->
       <DescriptionComp />
-      <!-- </el-tab-pane> -->
-      <!-- <el-tab-pane
-            label="
-    Infomation"
-            name="second"
-            ><InformationComp
-          /></el-tab-pane>
-          <el-tab-pane
-            label="
-    Reviews (3)"
-            name="third"
-            ><CommentsComp
-          /></el-tab-pane> -->
-      <!-- </el-tabs> -->
     </div>
     <div class="d-md-none">
       <vsa-list>
@@ -32,28 +16,12 @@
             <DescriptionComp />
           </vsa-content>
         </vsa-item>
-        <!-- <vsa-item>
-          <vsa-heading> Infomation </vsa-heading>
-
-          <vsa-content>
-            <InformationComp />
-          </vsa-content>
-        </vsa-item>
-        <vsa-item>
-          <vsa-heading> Reviews (3) </vsa-heading>
-
-          <vsa-content>
-            <CommentsComp />
-          </vsa-content>
-        </vsa-item> -->
       </vsa-list>
     </div>
   </div>
 </template>
 <script>
 import DescriptionComp from "./DescriptionComp.vue";
-// import InformationComp from "../components/InformationComp.vue";
-// import CommentsComp from "../components/CommentsComp.vue";
 import { VsaList, VsaItem, VsaHeading, VsaContent } from "vue-simple-accordion";
 import "vue-simple-accordion/dist/vue-simple-accordion.css";
 export default {
@@ -64,16 +32,14 @@ export default {
   },
   components: {
     DescriptionComp,
-    // InformationComp,
-    // CommentsComp,
+
     VsaList,
     VsaItem,
     VsaHeading,
     VsaContent,
   },
   methods: {
-    handleClick(tab, event) {
-    },
+    handleClick(tab, event) {},
   },
 };
 </script>

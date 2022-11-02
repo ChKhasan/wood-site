@@ -5,7 +5,7 @@
       <ProductPageBody :product="product.data"/>
       <TitleComp title="Последние товары" />
       <div class="container container-xxl mb-120">
-        <div class="row py-5">
+        <div class="row pb-4">
           <div class="col-12">
             <CardCarousel :products="products"/>
           </div>

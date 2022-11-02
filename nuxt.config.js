@@ -33,6 +33,9 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
+    script: [{
+      src: "https://www.google.com/recaptcha/api.js"
+    }],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
 
@@ -50,6 +53,10 @@ export default {
 
     { src: "~/plugins/aos", ssr: false },
     "@/plugins/element-ui",
+    "@/plugins/vue-i18n",
+    "@/plugins/vue-tel-input",
+    "@/plugins/vue-the-mask",
+    "@/plugins/vue-recaptcha",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -66,15 +73,43 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
+
     "@nuxtjs/axios",
+    "@nuxtjs/i18n",
     "bootstrap-vue/nuxt",
     "nuxt-element-ui",
     "vue-yandex-maps/nuxt",
+    "nuxt-i18n",
+    "@nuxtjs/recaptcha"
+    // "vue-recaptcha"
+
+    // "@intlify/vue-i18n-loader",
     // options,
   ],
+
+  i18n: {
+    locales: ["ru", "en"],
+    defaultLocale: "ru",
+    vueI18n: {
+      fallbackLocale: "ru",
+      messages: {
+        en: {
+          curLang: "en",
+        },
+        ru: {
+          curLang: "ru",
+        },
+      },
+    },
+  },
+  recaptcha: {
+    hideBadge: true,
+    siteKey: '6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV',
+    version: 3
+  },
   elementUI: {
     components: ["Button", "DatePicker", "Pagination", "Collapse"],
-    locale: "fr",
+    locale: "",
   },
   mode: "spa",
   axios: { baseURL: "https://plaza.choopon.uz/api" },
@@ -86,6 +121,7 @@ export default {
     { src: "~/plugins/aos", ssr: false },
     { src: "~plugins/v-scroll-to-top.js", ssr: false },
     { src: "~plugins/element-ui.js", ssr: false },
+    { src: "~plugins/vue-i18n.js", ssr: false },
   ],
   css: ["aos/dist/aos.css"],
 };

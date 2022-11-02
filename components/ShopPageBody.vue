@@ -371,13 +371,6 @@ export default {
       this.categoryImg = categoryImg.data;
       this.productsByCategory = products.data.data;
       this.currentPage = products.data.last_page;
-
-      const brandImg = await this.$axios.$get(`/categories/${this.id}`);
-      const brands = await this.$axios.$get(`/brands`);
-
-      this.brands = brands.data;
-      this.brandImg = brandImg.data;
-      this.productsByCategory = products.data.data;
     },
 
     async searchProduct() {
@@ -386,7 +379,6 @@ export default {
       );
       const categoryById = await this.$axios.$get(`categories/${this.id}`);
       this.categoryById = categoryById.data;
-
       this.productsByCategory = searchProducts.data.data;
       this.currentPage = searchProducts.data.last_page;
     },
@@ -405,17 +397,6 @@ export default {
       this.productsByCategory = pro.data.data;
       this.currentPage = pro.data.last_page;
     },
-
-    // takeColor(e) {
-    //   console.log(e.target);
-    //   const take = document.querySelectorAll(".list-inline-item");
-    //   take.forEach((item) => {
-    //     item.classList.remove("selected");
-    //   });
-    //   e.target.className === "list-inline-item"
-    //     ? e.target.classList.add("selected")
-    //     : e.target.parentNode.classList.add("selected");
-    // },
   },
 };
 </script>

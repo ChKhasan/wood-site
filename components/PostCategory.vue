@@ -359,6 +359,7 @@ export default {
       );
       const categoryImg = await this.$axios.$get(`/post-categories/${this.id}`);
       const categories = await this.$axios.$get(`/post-categories`);
+      
       this.categories = categories.data;
       this.categoryImg = categoryImg.data;
       this.productsByCategory = products.data.data;
@@ -393,16 +394,7 @@ export default {
       this.currentPage = pro.data.last_page;
     },
 
-    // takeColor(e) {
-    //   console.log(e.target);
-    //   const take = document.querySelectorAll(".list-inline-item");
-    //   take.forEach((item) => {
-    //     item.classList.remove("selected");
-    //   });
-    //   e.target.className === "list-inline-item"
-    //     ? e.target.classList.add("selected")
-    //     : e.target.parentNode.classList.add("selected");
-    // },
+
   },
 };
 </script>
@@ -412,11 +404,15 @@ export default {
 }
 .category-banner {
   width: 100%;
-  /* aspect-ratio: 1/0.5; */
+  aspect-ratio: 1/0.5;
   background-position: center;
   background-size: cover;
   overflow: hidden;
+}
+.category-banner img {
+  width: 100%;
   height: 100%;
+  object-fit: cover !important;
 }
 .f-card-list {
   list-style: none;

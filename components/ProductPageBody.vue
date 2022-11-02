@@ -1,13 +1,9 @@
 <template lang="html">
   <div class="container container-xxl py-5">
-    <div class="row pb-6">
-      <div class="col-md-6 mb-8 mb-md-0" >
-        <a href="" v-for="(img,index) in product.product_images" :key="index">
-          <img
-            class="my-2 product_info_img"
-            :src="img.lg_img"
-            alt=""
-          />
+    <div class="row pb-4">
+      <div class="col-md-6 mb-8 mb-md-0">
+        <a href="" v-for="(img, index) in product.product_images" :key="index">
+          <img class="my-2 product_info_img" :src="img.lg_img" alt="" />
         </a>
         <!-- <a href="">
           <img
@@ -52,126 +48,132 @@
           >
             STOOL
           </p>
-          <h2 class="body_title fs-30 fs-lg-40 mb-2">{{product.title.ru}}</h2>
-          <!-- <p class="fs-20 mb-4 body_price">$790.00</p> -->
-          <!-- <div class="d-flex align-items-center flex-wrap">
-              <div class="reting_star_box">
-                <font-awesome-icon class="reyt_star" icon="fa-solid fa-star" />
-                <font-awesome-icon class="reyt_star" icon="fa-solid fa-star" />
-                <font-awesome-icon class="reyt_star" icon="fa-solid fa-star" />
-                <font-awesome-icon class="reyt_star" icon="fa-solid fa-star" />
-                <font-awesome-icon class="reyt_star" icon="fa-solid fa-star" />
-              </div>
-              <p class="mb-0 fs-15 lh-1 overflow-hidden pl-4 see_reviews px-2">
-                <span class="pr-1 mr-1 border-right">5.0</span
-                ><a href="#">See 3 Reviews</a>
-              </p>
-            </div> -->
-          <p class="mt-3 mb-6 body_card_info" v-html="info">
-          </p>
-          <img
+          <h2 class="body_title fs-30 fs-lg-40 mb-2">{{ product.title.ru }}</h2>
+
+          <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
+          <!-- <img
             class="img_catchap"
             src="../static/images/product-page-09.jpg"
             alt=""
-          />
-          <form>
-            <div class="form-group shop-swatch mb-6">
-              <!-- <label class="mb-3 color_title"
-                  ><span class="fs-16 font-weight-bold">Color:</span>
-                  <span class="var text-capitalize">Green</span></label
-                >
-                <ul class="list-inline d-flex justify-content-start mb-0">
-                  <li class="list-inline-item mr-1 selected" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="black"
-                      style="background-color: #000000"
-                    >
-                    </a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="brown"
-                      style="background-color: #68412d"
-                    ></a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="green"
-                      style="background-color: #9ec8bb"
-                    >
-                    </a>
-                  </li>
-                </ul> -->
-              <select
-                name="swatches"
-                class="form-select swatches-select d-none"
-                aria-label="Default select example"
-              >
-                <option selected="" value="black">Black</option>
-                <option value="brown">Brown</option>
-                <option value="green">Green</option>
-              </select>
+          /> -->
+
+          <!-- <div class="row align-items-end no-gutters mx-n2 pb-5">
+            <div class="col-12 mb-1">
+              <span class="ml-1 placing-title">Количество:</span>
             </div>
-            <div class="row align-items-end no-gutters mx-n2">
-              <div class="form-group px-2 mb-6">
-                <label
-                  class="fs-16 font-weight-bold mb-3 quality_title"
-                  for="number"
-                  >Quantity:
-                </label>
-                <div class="d-flex quality_resp w-100">
+            <div class="col-12">
+              <div class="couter-box mb-4">
+                <a class="count-btn" @click="countFunc(false)"
+                  ><font-awesome-icon :icon="['fas', 'fa-minus']" /></a
+                >{{ couter
+                }}<a class="count-btn" @click="countFunc(true)"
+                  ><font-awesome-icon :icon="['fas', 'fa-plus']"
+                /></a>
+              </div>
+
+              <div class="input-form d-flex flex-column">
+                <div class="mb-4 d-flex flex-column">
+                  <label for="client_name">Имя* </label>
+                  <input
+                    id="client_name"
+                    type="text"
+                    placeholder="Ввдите Имя"
+                    v-model="client_name"
+                    class="tel-number-input"
+                  />
+                </div>
+                <div class="d-flex flex-column">
+                  <label for="client_phone_number">Номер телефона* </label>
+                  <the-mask
+                    v-model="client_number"
+                    id="client_phone_number"
+                    class="tel-number-input"
+                    value=""
+                    placeholder="+998 __ ___-__-__"
+                    :mask="['+998 ## ### ## ##', '+998 ## ### ## ##']"
+                  />
+                </div>
+                <div class="send-info-btn">
                   <div
-                    class="col-sm-3 control_quality d-flex justify-content-between"
+                    class="send_btn d-flex justify-content-center"
+                    @click="sendFeedback"
                   >
-                    <a href="#" class="pl-2 z-index-2">
-                      <font-awesome-icon :icon="['fas', 'fa-minus']" />
-                    </a>
-                    {{ quality }}
-                    <a href="#" class="up pr-2 z-index-2">
-                      <font-awesome-icon :icon="['fas', 'fa-plus']" />
-                    </a>
+                    Отправить
                   </div>
-                  <div class="col-sm-9 ml-2">
-                    <button type="submit" class="btn btn-block">
-                      add to cart
-                    </button>
-                  </div>
+                  <div class="send_btn" @click="sendFeedback">Отправить</div>
                 </div>
               </div>
             </div>
-            <p class="border-bottom pb-4 mb-4 d-flex">
-              <span class="d-inline-block mr-2 fs-14">
-                <font-awesome-icon :icon="['fas', 'fa-truck-fast']" />
-              </span>
-              <span class="fs-15 px-3"
-                >Get it between Aug 11, 2020 - Aug 18, 2020</span
-              >
-            </p>
-          </form>
+          </div> -->
+          <el-form
+            :model="dynamicValidateForm"
+            ref="dynamicValidateForm"
+            class="demo-dynamic"
+            :rules="rules"
+          >
+            <label class="ml-1 placing-title">Количество:</label>
+            <el-form-item prop="massage">
+              <div class="couter-box">
+                <a class="count-btn" @click="countFunc(false)"
+                  ><font-awesome-icon :icon="['fas', 'fa-minus']"
+                /></a>
+
+                <span>{{ dynamicValidateForm.message }}</span
+                ><a class="count-btn" @click="countFunc(true)"
+                  ><font-awesome-icon :icon="['fas', 'fa-plus']"
+                /></a>
+              </div>
+            </el-form-item>
+            <label for="client_name">Имя* </label>
+            <el-form-item prop="name">
+              <el-input
+                class="tel-number-input"
+                placeholder="Ввдите Имя"
+                v-model="dynamicValidateForm.name"
+              ></el-input>
+            </el-form-item>
+            <label for="client_phone_number">Номер телефона* </label>
+            <el-form-item prop="phone_number">
+              <the-mask
+                v-model="dynamicValidateForm.phone_number"
+                class="tel-number-inputs"
+                value="+998"
+                placeholder="+998 __ ___-__-__"
+                :mask="['+998 ## ### ## ##', '+998 ## ### ## ##']"
+              />
+            </el-form-item>
+            <div class="send-info-btn">
+              <el-form-item>
+                <el-button
+                  type="primary"
+                  class="send_btn"
+                  @click="submitForm('dynamicValidateForm')"
+                >
+                  Отправить</el-button
+                >
+              </el-form-item>
+              <div
+                class="g-recaptcha"
+                data-sitekey="6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV"
+              ></div>
+            </div>
+          </el-form>
+          <p class="border-bottom pb-4 mb-4 d-flex">
+            <span class="d-inline-block mr-2 fs-14">
+              <font-awesome-icon :icon="['fas', 'fa-truck-fast']" />
+            </span>
+            <span class="fs-15 px-3"
+              >Get it between Aug 11, 2020 - Aug 18, 2020</span
+            >
+          </p>
+
           <div class="d-flex align-items-center flex-wrap mt-6">
             <a
               href="#"
               class="text-uppercase font-weight-bold letter-spacing-05 fs-14 mr-6"
             >
-              <!-- <font-awesome-icon
-                class="mr-3 card_icons"
-                icon="fa-solid fa-shuffle"
-              /> -->
               <span class="ml-1 compare">Compare</span>
             </a>
-            <!-- <a
-                href="#"
-                class="text-uppercase font-weight-bold letter-spacing-05 fs-14"
-              >
-                <font-awesome-icon
-                  class="mx-3 card_icons"
-                  icon="fa-regular fa-heart"
-                />
-                <span class="ml-1 compare">Add to wishlist</span>
-              </a> -->
           </div>
           <ul class="list-unstyled mt-5">
             <li class="row mb-2">
@@ -230,27 +232,106 @@
         </div>
       </div>
     </div>
+
     <div class="row justify-content-center">
       <InformationTab />
     </div>
   </div>
 </template>
+<script src="https://unpkg.com/vue-recaptcha@^2/dist/vue-recaptcha.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"
+  async
+  defer
+></script>
 <script>
-  // import InformationTab from "./InformationTab.vue";
+import InformationTab from "./InformationTab.vue";
+import { VueTelInput } from "vue-tel-input";
+import { IMaskComponent } from "vue-imask";
+import { TheMask } from "vue-the-mask";
 
-  export default {
+export default {
   props: ["product"],
   data() {
     return {
+      rules: {
+        name: [
+          {
+            required: true,
+            message: "Please input Activity name",
+            trigger: "blur",
+          },
+          {
+            min: 3,
+            max: 10,
+            message: "Length should be 3 to 5",
+            trigger: "blur",
+          },
+        ],
+        phone_number: [
+          {
+            required: true,
+            message: "Please select Activity phone number",
+            trigger: "change",
+          },
+        ],
+      },
+      dynamicValidateForm: {
+        name: "",
+        phone_number: "",
+        message: "1",
+        page: "https://plaza.choopon.uz",
+      },
+      numberModel: "",
+
+      mask: {
+        mask: "{8}000000",
+        lazy: false,
+      },
       quality: 1,
       info: this.product.info.ru,
-      value: 3.7,
+      value: "",
     };
   },
   components: {
-    //   InformationTab,
+    TheMask,
+    InformationTab,
+    "imask-input": IMaskComponent,
+    VueTelInput,
+  },
+  async mounted() {
+    try {
+      await this.$recaptcha.init();
+    } catch (e) {
+      console.log(e);
+    }
   },
   methods: {
+    async submitForm(formName) {
+      const token = await this.$recaptcha.execute("login");
+      console.log("ReCaptcha token:", token);
+      if (!token) return false;
+      await this.$axios.post("/feedback", this.dynamicValidateForm);
+    },
+    async recaptcha() {
+      await this.$recaptchaLoaded();
+      const token = await this.$recaptcha("login");
+    },
+    async sendFeedback() {
+      const data = await this.$axios.post("/feedback", {
+        name: this.client_name,
+        phone_number: this.client_number,
+        message: this.client_number,
+        page: "https://plaza.choopon.uz",
+      });
+    },
+    countFunc(def) {
+      def
+        ? this.dynamicValidateForm.message++
+        : this.dynamicValidateForm.message--;
+    },
+
     takeColor(e) {
       const take = document.querySelectorAll(".list-inline-item");
       take.forEach((item) => {
@@ -263,6 +344,7 @@
   },
 };
 </script>
+<style src="vue-tel-input/dist/vue-tel-input.css"></style>
 <style lang="css">
 .product_info_img {
   width: 100%;
@@ -448,5 +530,70 @@
   .pb-6 {
     padding-bottom: 6.875rem !important;
   }
+}
+.tel-number-input input,
+.tel-number-inputs {
+  height: 63px !important;
+  border: 1px solid #f2f2fa !important;
+  border: none;
+  border-radius: 0 !important;
+  padding: 0 24px !important;
+  margin-bottom: 10px !important;
+}
+.tel-number-inputs {
+  width: 100%;
+}
+.tel-number-input:focus,
+.tel-number-inputs:focus {
+  outline: none !important;
+  border: none !important;
+  border-bottom: 2px solid transparent;
+  box-shadow: 0px 0px 1px rgba(75, 77, 78, 0.75);
+}
+.placing-title {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #5d5d5f;
+}
+.count-btn {
+  cursor: pointer;
+  padding: 10px;
+}
+.couter-box {
+  border: 1px solid #f2f2fa;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 168px;
+}
+.input-form label {
+  font-size: 16px;
+  font-weight: 600 !important;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.send_btn {
+  background: #191d31 !important;
+  padding: 0 63px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  height: 64px;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 24px !important;
+  letter-spacing: 0em !important;
+  text-align: left;
+  color: #fff !important;
+}
+.send-info-btn {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
 }
 </style>
