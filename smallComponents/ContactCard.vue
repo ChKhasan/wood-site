@@ -3,7 +3,7 @@
     <div class="c-card-title mb-5">
       <h3>Follow Our Store <br />On Instagram</h3>
     </div>
-    <div class="-card-text"><p>@furnitor.trending</p></div>
+    <div class="-card-text"><a href="#">@furnitor.trending</a></div>
     <div class="c-card-btn">
       <BorderBlackBtn :name="name" />
     </div>

@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import ContactCard from "../smallComponents/ContactCard.vue";
+import ContactCard from "../../smallComponents/ContactCard.vue";
 export default {
   components: {
     ContactCard,

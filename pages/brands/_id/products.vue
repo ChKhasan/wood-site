@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import BrandsBody from "~/components/BrandsBody.vue";
+import BrandsBody from "~/components/Brands/BrandsBody.vue";
 import BreadCrumbComp from "../../../components/BreadCrumbComp.vue";
 export default {
   data() {

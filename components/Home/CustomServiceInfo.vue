@@ -6,7 +6,7 @@
             class="d-flex border-md-right justify-content-center align-items-center"
           >
             <div class="ci-img w-52px mr-5">
-              <img src="../static/images/icon-box-03.png" alt="" />
+              <img src="../../static/images/icon-box-03.png" alt="" />
             </div>
             <div class="ci-body">
               <h3 class="fs-20 mb-1">100 Days Return</h3>
@@ -19,7 +19,7 @@
             class="d-flex border-md-right justify-content-center align-items-center"
           >
             <div class="ci-img w-52px mr-5">
-              <img src="../static/images/icon-box-02.png" alt="" />
+              <img src="../../static/images/icon-box-02.png" alt="" />
             </div>
             <div class="ci-body">
               <h3 class="fs-20 mb-1">Lifetime Warranty</h3>
@@ -30,7 +30,7 @@
         <div class="col-md-4 mb-6 mb-md-0">
           <div class="d-flex justify-content-center align-items-center">
             <div class="ci-img w-52px mr-5">
-              <img src="../static/images/icon-box-01.png" alt="" />
+              <img src="../../static/images/icon-box-01.png" alt="" />
             </div>
             <div class="ci-body">
               <h3 class="fs-20 mb-1">Custom Services</h3>

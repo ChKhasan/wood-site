@@ -8,9 +8,9 @@
               <h3>Категории продуктов</h3>
             </div>
             <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none">
+              <ul class="f-card-list" style="padding-left: none;">
                 <li
-                  style="cursor: pointer"
+                  style="cursor: pointer;"
                   class="mb-1"
                   v-for="(category, index) in categories.slice().reverse()"
                   :key="category.id"
@@ -30,170 +30,6 @@
               </ul>
             </div>
           </div>
-          <!-- <div class="filter-card">
-              <div class="filter-card-title">
-                <h3>Price</h3>
-              </div>
-              <div class="filter-card-body">
-                <ul class="f-card-list" style="padding-left: none">
-                  <li class="mb-1">
-                    <a href="#" class="">All</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">$10 - $100</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">$100 - $200</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">$200 - $300</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">$300 - $400</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="filter-card">
-              <div class="filter-card-title">
-                <h3>Material</h3>
-              </div>
-              <div class="filter-card-body">
-                <ul class="f-card-list" style="padding-left: none">
-                  <li class="mb-1">
-                    <a href="#" class="">Laminate</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">Acrylic</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">Aluminium</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">Cotton</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">Leather</a>
-                  </li>
-                  <li class="mb-1">
-                    <a href="#" class="">Metal</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="filter-card">
-              <div class="filter-card-title">
-                <h3>Color</h3>
-              </div>
-              <div class="filter-card-body">
-                <ul
-                  class="f-card-list list-inline color_selection d-flex justify-content-start mb-0"
-                >
-                  <li class="list-inline-item mr-1 selected" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="black"
-                      style="background-color: #d0a272"
-                    >
-                    </a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="brown"
-                      style="background-color: #68412d"
-                    ></a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="green"
-                      style="background-color: #000000"
-                    >
-                    </a>
-                  </li>
-                  <li class="list-inline-item mr-1" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="black"
-                      style="background-color: #aa5959"
-                    >
-                    </a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="brown"
-                      style="background-color: #8db4d2"
-                    ></a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="green"
-                      style="background-color: #c2c3a0"
-                    >
-                    </a>
-                  </li>
-                  <li class="list-inline-item mr-1" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="black"
-                      style="background-color: #c7857d"
-                    >
-                    </a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="brown"
-                      style="background-color: #e3e1e7"
-                    ></a>
-                  </li>
-                  <li class="list-inline-item" @click="takeColor">
-                    <a
-                      class="d-block swatches-item"
-                      data-var="green"
-                      style="background-color: #b490b0"
-                    >
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="filter-card">
-              <div class="filter-card-title">
-                <h3>Tags</h3>
-              </div>
-              <div class="filter-card-body">
-                <ul
-                  class="f-card-list d-flex flex-wrap"
-                  style="padding-left: none"
-                >
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Accessories</a>
-                  </li>
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Chairs</a>
-                  </li>
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Clock</a>
-                  </li>
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Dining Tables</a>
-                  </li>
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Lighting</a>
-                  </li>
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Lounges &amp; Sofa</a>
-                  </li>
-                  <li class="mr-2 py-1">
-                    <a href="#" class="">Stool</a>
-                  </li>
-                </ul>
-              </div>
-            </div> -->
         </div>
       </div>
       <div class="col-md-9">
@@ -201,10 +37,6 @@
           <div class="category-banner">
             <img :src="categoryImg.lg_img" alt="" />
           </div>
-          <!-- <img
-            :src="status ? categoryById.lg_img : firstCategory.lg_img"
-            alt=""
-          /> -->
 
           <div class="shop-page-img-overlay pt-xl-10">
             <p class="fs-18 font-weight-bold text-center text-white mb-2">
@@ -226,7 +58,7 @@
                 placeholder="Search"
               />
               <font-awesome-icon
-                style="cursor: pointer"
+                style="cursor: pointer;"
                 @click="searchProduct"
                 class="serach-btn"
                 icon="fa-solid fa-magnifying-glass"
@@ -235,62 +67,10 @@
           </div>
           <div
             class="ml-auto d-none col-md-6 d-md-flex align-items-center justify-content-end"
-          >
-            <!-- <div class="dropdown">
-              <a
-                href="#"
-                class="dropdown-toggle fs-14"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Default Sorting
-              </a>
-              <div
-                class="dropdown-menu dropdown-menu-right"
-                aria-labelledby="dropdownMenuButton"
-                style=""
-              >
-                <a class="dropdown-item text-primary fs-14" href="#"
-                  >Price high to low</a
-                >
-                <a class="dropdown-item text-primary fs-14" href="#"
-                  >Price low to high</a
-                >
-                <a class="dropdown-item text-primary fs-14" href="#">Random</a>
-              </div>
-            </div> -->
-          </div>
+          ></div>
           <div
             class="ml-auto col-12 mt-4 d-md-none d-flex align-items-center justify-content-start"
-          >
-            <!-- <div class="dropdown">
-              <a
-                href="#"
-                class="dropdown-toggle fs-14"
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Default Sorting
-              </a>
-              <div
-                class="dropdown-menu dropdown-menu-right"
-                aria-labelledby="dropdownMenuButton"
-                style=""
-              >
-                <a class="dropdown-item text-primary fs-14" href="#"
-                  >Price high to low</a
-                >
-                <a class="dropdown-item text-primary fs-14" href="#"
-                  >Price low to high</a
-                >
-                <a class="dropdown-item text-primary fs-14" href="#">Random</a>
-              </div>
-            </div> -->
-          </div>
+          ></div>
         </div>
         <div class="post-card-controller">
           <JournalCard
@@ -316,7 +96,7 @@
   </div>
 </template>
 <script>
-import ProductCard from "../smallComponents/ProductCard.vue";
+import ProductCard from "../../smallComponents/ProductCard.vue";
 import VsPagination from "@vuesimple/vs-pagination";
 import JournalCard from "~/smallComponents/JournalCard.vue";
 export default {
@@ -359,7 +139,7 @@ export default {
       );
       const categoryImg = await this.$axios.$get(`/post-categories/${this.id}`);
       const categories = await this.$axios.$get(`/post-categories`);
-      
+
       this.categories = categories.data;
       this.categoryImg = categoryImg.data;
       this.productsByCategory = products.data.data;
@@ -393,8 +173,6 @@ export default {
       this.productsByCategory = pro.data.data;
       this.currentPage = pro.data.last_page;
     },
-
-
   },
 };
 </script>
@@ -427,9 +205,7 @@ export default {
   font-family: "Poppins", sans-serif;
   border-bottom: 1px solid transparent;
 }
-/* .f-card-list li span:hover {
-  border-bottom: 1px solid #000 !important;
-} */
+
 .filter-card-title h3 {
   font-size: 20px !important;
   font-weight: 700;

@@ -9,20 +9,21 @@ props: ["name"]
 }
 </script>
 <style lang="css">
-.j-card-btn a{
-border-color: rgba(0,0,0,.11)!important;
-font-size: 14px!important;
-border-bottom: 1px solid #e4e4e4!important;
 
-font-weight: 700 !important;
-text-transform: uppercase!important;
-font-family: "Poppins",sans-serif;
-transition: .4s;
-}
 .j-card-btn a:hover {
-border-bottom: 1px solid #000!important;
+  border-bottom: 1px solid #000!important;
 }
 .b-btn {
+  border-color: rgba(0,0,0,.11)!important;
+font-size: 14px!important;
+border-bottom: 1px solid #e4e4e4!important;
+text-transform: uppercase!important;
+transition: .4s;
+
   font-weight: 700 !important;
+  font-size: 1rem !important;
+  line-height: 26px;
+  color: #000 !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important; 
 }
 </style>

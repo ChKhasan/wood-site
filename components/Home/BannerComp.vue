@@ -6,16 +6,6 @@
       <div class="d-flex flex-column h-100 justify-content-center">
         <div class="container container-xxl">
           <div>
-            <p
-              class="newIn"
-              data-animate="fadeInUp"
-              data-aos="fade-up"
-              data-aos-offset="100"
-              data-aos-delay="200"
-              data-aos-duration="800"
-            >
-              New - In
-            </p>
             <h1
               class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113"
               data-aos="fade-up"
@@ -26,12 +16,12 @@
               <strong
                 class="d-block title_banner fadeInUp animated"
                 data-animate="fadeInUp"
-                >Sundae</strong
+                >Офисные</strong
               >
               <strong
                 class="d-block title_banner fadeInUp animated"
                 data-animate="fadeUp"
-                >Lounges</strong
+                >кресла</strong
               >
             </h1>
             <nuxt-link
@@ -44,7 +34,7 @@
               class="btn btn-outline-primary text-uppercase shop_now_btn"
               data-animate="fadeInUp"
               tabindex="0"
-              >Shop Now</nuxt-link
+              >Купить сейчас</nuxt-link
             >
           </div>
         </div>
@@ -66,7 +56,7 @@ export default {
 <style lang="css">
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 .banner_comp {
-  background-image: url("../static/images/bg-home-01.jpg");
+  background-image: url("../../static/images/image_banner2.png");
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;

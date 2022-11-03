@@ -39,7 +39,7 @@
           <iframe
             :src="site_info.map"
             width="100%"
-            style="border: 0; aspect-ratio: 1/0.5"
+            style="border: 0; aspect-ratio: 1/0.5;"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -133,7 +133,7 @@ export default {
     };
   },
   mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"))
+    this.$i18n.setLocale(localStorage.getItem("Lang"));
   },
   components: { yandexMap, ymapMarker, BreadCrumbComp },
   async asyncData({ $axios }) {

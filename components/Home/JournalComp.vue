@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-import JournalCard from "../smallComponents/JournalCard.vue";
+import JournalCard from "../../smallComponents/JournalCard.vue";
 export default {
   props: ["posts"],
   components: {

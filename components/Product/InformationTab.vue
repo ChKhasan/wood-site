@@ -32,7 +32,6 @@ export default {
   },
   components: {
     DescriptionComp,
-
     VsaList,
     VsaItem,
     VsaHeading,

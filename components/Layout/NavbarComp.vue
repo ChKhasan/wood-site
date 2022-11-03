@@ -5,14 +5,13 @@
         <div class="row d-none d-xl-flex">
           <div class="col-2 d-flex align-items-center">
             <div class="position-relative">
-              <button @click="locatePage('ru')">ru</button>
-              <button @click="locatePage('en')">en</button>
+              <!-- <button @click="locatePage('ru')">ru</button>
+              <button @click="locatePage('en')">en</button> -->
             </div>
           </div>
           <div
             class="col-8 d-flex py-xl-3 justify-content-between align-items-center justify-content-center"
           >
-            <!-- <nuxt-link ></nuxt-link> -->
             <nuxt-link to="/" class="dropdown_btn">
               <span class="dropdown_hover home_nav" id="hover">Главный</span>
             </nuxt-link>
@@ -21,7 +20,7 @@
             </nuxt-link>
 
             <nuxt-link to="/" class="navbar-brand">
-              <img src="../static/images/logo.png" alt="" />
+              <img src="../../static/images/logo.png" alt="" />
             </nuxt-link>
 
             <nuxt-link to="/contact" class="dropdown_btn">
@@ -34,28 +33,12 @@
           <div class="col-2 d-flex align-items-center justify-content-end">
             <font-awesome-icon class="mx-1" :icon="['fas', 'fa-phone']" />
 
-            <!-- <b-button
-              class="navbar-toggler border-0 px-0 canvas-toggle"
-              v-b-toggle.sidebar-1
-            >
-           </b-button> -->
             <a
               :href="`tel:${siteInfo.phone_number}`"
               id="hover-effect"
               class="nav-phone"
               >{{ siteInfo.phone_number }}</a
             >
-
-            <!-- <font-awesome-icon class="mx-3" icon="fa-regular fa-user" />
-              <div class="badge_box mx-3">
-                <span class="badge_abs">0</span>
-  
-                <font-awesome-icon icon="fa-regular fa-heart" />
-              </div>
-              <div class="badge_box mx-3">
-                <span class="badge_abs">0</span>
-                <font-awesome-icon class="" icon="fa-solid fa-basket-shopping" />
-              </div> -->
           </div>
         </div>
 
@@ -95,7 +78,7 @@
           </div>
           <div class="d-flex justify-content-center col-8">
             <a href="" class="navbar-brand">
-              <img src="../static/images/logo.png" alt="" />
+              <img src="../../static/images/logo.png" alt="" />
             </a>
           </div>
 
@@ -110,22 +93,6 @@
   </div>
 </template>
 
-<!-- <i18n>
-  {
-    "ru": {
-      "navHome": "Главный",
-      "navCategory": "Каталог",
-      "navContact": "Контакт",
-      "navCompany": "О компании"
-    },
-    "en": {
-      "navHome": "Home",
-      "navCategory": "Category",
-      "navContact": "Contact",
-      "navCompany": "Company"
-    }
-  }
-  </i18n> -->
 <script>
 export default {
   name: "data-center",
@@ -144,12 +111,9 @@ export default {
 
   methods: {
     locatePage(lang) {
-      console.log(this.store.state.i18n.locale);
-      localStorage.setItem("Lang", lang);
-    },
-    handleCommand(command) {
-      localStorage.setItem("Lang", command);
-      location.href = "/";
+      console.log(this.$i18n);
+      this.$i18n.defaultLocale = lang;
+      this.$i18n.locale = lang;
     },
   },
   mounted() {
@@ -227,24 +191,19 @@ export default {
 .dropdown-bottom {
   position: absolute;
   background: white;
-  /* bottom: -170px; */
   top: 150%;
 
   z-index: 1000 !important;
   display: none;
-  /* top: 100%; */
   transition: 0.2s !important;
   opacity: 0;
   z-index: 1000;
-
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
   font-size: 1rem;
   color: #777;
-
   background-color: #fff;
-
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 18%);
@@ -258,20 +217,19 @@ a {
   font-weight: 600;
 }
 ul {
-  /* display: flex; */
   list-style: none;
   margin-bottom: 0 !important;
   padding-left: 0 !important;
 }
 .el-dropdown-link,
 .dropdown_hover {
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   font-size: 1rem !important;
   line-height: 26px;
   color: #000 !important;
-  font-family: "Poppins", sans-serif !important;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-
 .navbar-brand {
   max-width: 177px;
   display: block;
@@ -288,8 +246,6 @@ ul {
   position: fixed;
   top: 0;
   z-index: 2000 !important;
-  /* transition: 1.5s; */
-  /* background: transparent !important; */
 }
 
 .toggle-icon {

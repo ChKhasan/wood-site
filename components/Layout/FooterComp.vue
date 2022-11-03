@@ -5,7 +5,7 @@
         <div class="col-lg mb-6 mb-lg-0">
           <div class="footer_logo">
             <nuxt-link to="" class="navbar-brand">
-              <img src="../static/images/logo.png" alt="" />
+              <img src="../../static/images/logo.png" alt="" />
             </nuxt-link>
           </div>
         </div>
@@ -93,7 +93,7 @@
             class="mb-0 text-gray text-lg-right footer-links"
             v-if="siteInfo && siteInfo.title"
           >
-            © {{ year }} {{ siteInfo.title.ru }} .<br />
+            © {{ year }} {{ siteInfo.title[$t('curLang')] }} .<br />
             All rights reserved.
           </p>
         </div>

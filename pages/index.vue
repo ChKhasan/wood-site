@@ -13,40 +13,43 @@
   </div>
 </template>
 
-<i18n>
-  {
-    "ru": {
-      "hello": "hello world!"
-    },
-    "en": {
-      "hello": "こんにちは、世界!"
-    }
-  }
-  </i18n>
+<script
+  src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"
+  async
+  defer
+></script>
 <script>
 import { mapState } from "vuex";
 import productApi from "@/api/product.js";
 import categoryApi from "@/api/category.js";
 import postApi from "@/api/post.js";
-import BannerComp from "~/components/BannerComp.vue";
-import HomeCardBox from "../components/HomeCardBox.vue";
+import BannerComp from "~/components/Home/BannerComp.vue";
+import HomeCardBox from "../components/Home/HomeCardBox.vue";
 import TitleComp from "../components/TitleComp.vue";
-import ContactCardBox from "../components/ContactCardBox.vue";
+import ContactCardBox from "../components/Home/ContactCardBox.vue";
 // import CustomServiceInfo from "../components/CustomServiceInfo.vue";
 import LayoutComp from "../layouts/default.vue";
-import JournalComp from "~/components/JournalComp.vue";
-
+import JournalComp from "~/components/Home/JournalComp.vue";
+// import { VueRecaptcha } from 'vue-recaptcha';
 // import VScrollToTop from 'v-scroll-to-top'
 
 export default {
   name: "IndexPage",
+  publicRuntimeConfig: {
+    // recaptcha: {
+    //   /* reCAPTCHA options */
+    //   siteKey: process.env."6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV" // for example
+    // }
+  },
   data() {
     return {
       ip: [],
     };
   },
   mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"))
+    this.$i18n.setLocale(localStorage.getItem("Lang"));
+    console.log("log", this.$store);
+    localStorage.setItem("Lang", "ru");
   },
   async asyncData({ $axios }) {
     const products = await productApi.getProducts($axios);
@@ -66,10 +69,9 @@ export default {
     ContactCardBox,
     LayoutComp,
     JournalComp,
+    // "vue-recaptcha": VueRecaptcha
   },
-  mouted() {
-    localStorage.setItem("Lang", "ru");
-  },
+
   computed: {
     ...mapState(["data"]),
   },

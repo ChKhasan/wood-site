@@ -7,7 +7,7 @@
 
 <script>
 import BreadCrumbComp from "../../../components/BreadCrumbComp.vue";
-import PostCategory from "~/components/PostCategory.vue";
+import PostCategory from "~/components/Posts/PostCategory.vue";
 
 export default {
   components: {

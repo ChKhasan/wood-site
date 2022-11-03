@@ -88,7 +88,7 @@
   </div>
 </template>
 <script>
-import ProductCard from "../smallComponents/ProductCard.vue";
+import ProductCard from "../../smallComponents/ProductCard.vue";
 import VsPagination from "@vuesimple/vs-pagination";
 export default {
   data() {

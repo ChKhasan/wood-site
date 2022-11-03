@@ -33,9 +33,15 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    script: [{
-      src: "https://www.google.com/recaptcha/api.js"
-    }],
+    script: [
+      {
+        src: "https://unpkg.com/vue-recaptcha@^2/dist/vue-recaptcha.js",
+      },
+      {
+        src:
+          "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
+      },
+    ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
 
@@ -50,13 +56,14 @@ export default {
     // { src: "~plugins/vs-pagination", mode: "client" },
     { src: "~/plugins/ymapPlugin.js", mode: "client" },
     { src: "~plugins/v-scroll-to-top.js", mode: "client" },
-
     { src: "~/plugins/aos", ssr: false },
+    { src: "~/plugins/bl-components.js", mode: "client" },
     "@/plugins/element-ui",
     "@/plugins/vue-i18n",
     "@/plugins/vue-tel-input",
     "@/plugins/vue-the-mask",
     "@/plugins/vue-recaptcha",
+    "@/plugins/bl-components"
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -73,16 +80,14 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
-
     "@nuxtjs/axios",
     "@nuxtjs/i18n",
+    '@nuxtjs/recaptcha',
     "bootstrap-vue/nuxt",
     "nuxt-element-ui",
     "vue-yandex-maps/nuxt",
     "nuxt-i18n",
-    "@nuxtjs/recaptcha"
-    // "vue-recaptcha"
-
+    // "vue-recaptcha",
     // "@intlify/vue-i18n-loader",
     // options,
   ],
@@ -103,9 +108,12 @@ export default {
     },
   },
   recaptcha: {
-    hideBadge: true,
-    siteKey: '6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV',
-    version: 3
+    hideBadge: true, // Hide badge element (v3 & v2 via size=invisible)
+    language: "en",   // Recaptcha language (v2)
+    // mode: String,       // Mode: 'base', 'enterprise'
+    siteKey: "6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV",    // Site key for requests
+    version: 2,    // Version
+    // size: String        // Size: 'compact', 'normal', 'invisible' (v2)
   },
   elementUI: {
     components: ["Button", "DatePicker", "Pagination", "Collapse"],

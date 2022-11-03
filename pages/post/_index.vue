@@ -6,7 +6,6 @@
         <div class="col-12 d-flex justify-content-center flex-column">
           <p class="post-date">APRIL 24, 2019</p>
           <h1 class="post-title mb-5">{{ thePost.title.ru }}</h1>
-          <!-- <span class="owner">By Selena Gomez on Interior Design</span> -->
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
@@ -22,7 +21,6 @@
         <div class="col-12 d-flex justify-content-center flex-column">
           <p class="post-date">APRIL 24, 2019</p>
           <h1 class="post-title mb-5">{{ thisPost.title.ru }}</h1>
-          <!-- <span class="owner">By Selena Gomez on Interior Design</span> -->
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
@@ -197,7 +195,7 @@ import TitleComp from "~/components/TitleComp.vue";
 import LayoutComp from "~/layouts/default.vue";
 import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
 import PostMessenger from "./postMessenger.vue";
-import JournalComp from "../../components/JournalComp.vue";
+import JournalComp from "../../components/Home/JournalComp.vue";
 import postApi from "@/api/post.js";
 
 export default {

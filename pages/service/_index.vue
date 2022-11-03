@@ -16,9 +16,9 @@
   </template>
   <script>
   import BreadCrumbComp from "../../components/BreadCrumbComp.vue";
-  import ProductPageBody from "../../components/ProductPageBody.vue";
+  import ProductPageBody from "../../components/Product/ProductPageBody.vue";
   import TitleComp from "../../components/TitleComp.vue";
-  import CardCarousel from "../../components/CardCarousel.vue";
+  import CardCarousel from "../../components/Product/CardCarousel.vue";
   import productApi from "@/api/product.js";
   import categoryApi from "@/api/product.js";
   

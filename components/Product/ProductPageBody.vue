@@ -5,41 +5,6 @@
         <a href="" v-for="(img, index) in product.product_images" :key="index">
           <img class="my-2 product_info_img" :src="img.lg_img" alt="" />
         </a>
-        <!-- <a href="">
-          <img
-            class="my-2 product_info_img"
-            src="../static/images/product-13_3.jpg"
-            alt=""
-          />
-        </a>
-        <a href="">
-          <img
-            class="my-2 product_info_img"
-            src="../static/images/product-13_3.jpg"
-            alt=""
-          />
-        </a>
-        <a href="">
-          <img
-            class="my-2 product_info_img"
-            src="../static/images/product-13_3.jpg"
-            alt=""
-          />
-        </a>
-        <a href="">
-          <img
-            class="my-2 product_info_img"
-            src="../static/images/product-13_3.jpg"
-            alt=""
-          />
-        </a>
-        <a href="">
-          <img
-            class="my-2 product_info_img"
-            src="../static/images/product-13_3.jpg"
-            alt=""
-          />
-        </a> -->
       </div>
       <div class="pt-3 mr-40 col-md-5 pl-md-6 pl-lg-0">
         <div class="content-right primary-summary summary-sticky">
@@ -51,60 +16,7 @@
           <h2 class="body_title fs-30 fs-lg-40 mb-2">{{ product.title.ru }}</h2>
 
           <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
-          <!-- <img
-            class="img_catchap"
-            src="../static/images/product-page-09.jpg"
-            alt=""
-          /> -->
 
-          <!-- <div class="row align-items-end no-gutters mx-n2 pb-5">
-            <div class="col-12 mb-1">
-              <span class="ml-1 placing-title">Количество:</span>
-            </div>
-            <div class="col-12">
-              <div class="couter-box mb-4">
-                <a class="count-btn" @click="countFunc(false)"
-                  ><font-awesome-icon :icon="['fas', 'fa-minus']" /></a
-                >{{ couter
-                }}<a class="count-btn" @click="countFunc(true)"
-                  ><font-awesome-icon :icon="['fas', 'fa-plus']"
-                /></a>
-              </div>
-
-              <div class="input-form d-flex flex-column">
-                <div class="mb-4 d-flex flex-column">
-                  <label for="client_name">Имя* </label>
-                  <input
-                    id="client_name"
-                    type="text"
-                    placeholder="Ввдите Имя"
-                    v-model="client_name"
-                    class="tel-number-input"
-                  />
-                </div>
-                <div class="d-flex flex-column">
-                  <label for="client_phone_number">Номер телефона* </label>
-                  <the-mask
-                    v-model="client_number"
-                    id="client_phone_number"
-                    class="tel-number-input"
-                    value=""
-                    placeholder="+998 __ ___-__-__"
-                    :mask="['+998 ## ### ## ##', '+998 ## ### ## ##']"
-                  />
-                </div>
-                <div class="send-info-btn">
-                  <div
-                    class="send_btn d-flex justify-content-center"
-                    @click="sendFeedback"
-                  >
-                    Отправить
-                  </div>
-                  <div class="send_btn" @click="sendFeedback">Отправить</div>
-                </div>
-              </div>
-            </div>
-          </div> -->
           <el-form
             :model="dynamicValidateForm"
             ref="dynamicValidateForm"
@@ -152,10 +64,7 @@
                   Отправить</el-button
                 >
               </el-form-item>
-              <div
-                class="g-recaptcha"
-                data-sitekey="6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV"
-              ></div>
+              <recaptcha class="form-recaptcha" />
             </div>
           </el-form>
           <p class="border-bottom pb-4 mb-4 d-flex">
@@ -187,47 +96,6 @@
                 </p></span
               >
             </li>
-            <!-- <li class="row mb-2">
-                <span class="d-block col-3 font-weight-500 fs-15"
-                  >Categories:</span
-                >
-                <span class="d-block col-9 fs-15 color-gray"
-                  >Sweaters, Clothing</span
-                >
-              </li> -->
-            <!-- <li class="row mb-2 flex-row">
-                <span class="d-block col-3 font-weight-500 fs-15">Share:</span>
-                <div class="d-flex col-9">
-                  <a href="#" class="mr-4">
-                    <font-awesome-icon
-                      style="font-size: 20px"
-                      class="i_body_icon"
-                      icon="fa-brands  fa-facebook-f mx-2"
-                    />
-                  </a>
-                  <a href="#" class="mr-4">
-                    <font-awesome-icon
-                      style="font-size: 20px"
-                      class="i_body_icon"
-                      icon="fa-brands  fa-pinterest-p mx-2"
-                    />
-                  </a>
-                  <a href="#" class="mr-4">
-                    <font-awesome-icon
-                      style="font-size: 20px"
-                      class="i_body_icon"
-                      icon="fa-brands fa-instagram"
-                    />
-                  </a>
-                  <a href="#" class="mr-4">
-                    <font-awesome-icon
-                      style="font-size: 20px"
-                      class="i_body_icon"
-                      icon="fa-brands  fa-twitter"
-                    />
-                  </a>
-                </div>
-              </li> -->
           </ul>
         </div>
       </div>
@@ -253,6 +121,12 @@ import { TheMask } from "vue-the-mask";
 
 export default {
   props: ["product"],
+  components: {
+    TheMask,
+    InformationTab,
+    "imask-input": IMaskComponent,
+    VueTelInput,
+  },
   data() {
     return {
       rules: {
@@ -294,12 +168,7 @@ export default {
       value: "",
     };
   },
-  components: {
-    TheMask,
-    InformationTab,
-    "imask-input": IMaskComponent,
-    VueTelInput,
-  },
+
   async mounted() {
     try {
       await this.$recaptcha.init();
@@ -309,10 +178,14 @@ export default {
   },
   methods: {
     async submitForm(formName) {
-      const token = await this.$recaptcha.execute("login");
-      console.log("ReCaptcha token:", token);
-      if (!token) return false;
-      await this.$axios.post("/feedback", this.dynamicValidateForm);
+      try {
+        const token = await this.$recaptcha.getResponse();
+        console.log("ReCaptcha token:", token);
+        await this.$axios.post("/feedback", this.dynamicValidateForm);
+        await this.$recaptcha.reset();
+      } catch (error) {
+        console.log("Login error:", error);
+      }
     },
     async recaptcha() {
       await this.$recaptchaLoaded();
@@ -330,16 +203,6 @@ export default {
       def
         ? this.dynamicValidateForm.message++
         : this.dynamicValidateForm.message--;
-    },
-
-    takeColor(e) {
-      const take = document.querySelectorAll(".list-inline-item");
-      take.forEach((item) => {
-        item.classList.remove("selected");
-      });
-      e.target.className === "list-inline-item"
-        ? e.target.classList.add("selected")
-        : e.target.parentNode.classList.add("selected");
     },
   },
 };
@@ -581,6 +444,7 @@ export default {
   background: #191d31 !important;
   padding: 0 63px !important;
   border: none !important;
+  width: 100%;
   border-radius: 0 !important;
   height: 64px;
   font-size: 16px !important;
@@ -593,7 +457,8 @@ export default {
 .send-info-btn {
   margin-top: 16px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 24px;
+  grid-template-columns: 1fr;
+  margin-bottom: 16px;
+  /* grid-gap: 24px; */
 }
 </style>

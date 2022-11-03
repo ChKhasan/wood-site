@@ -9,32 +9,31 @@
     <div class="col-sm-6 d-flex align-items-center justify-content-end">
       <span class="post-messengers">Share:</span>
       <div class="brands_block d-flex">
-            <a href="#">
-              <!-- <font-awesome-icon
-                style="font-size: 20px"
-                icon="fa-brands footer_icon fa-facebook-f"
-              /> -->
-              <font-awesome-icon  style="font-size: 20px" :icon="['fab', 'fa-facebook-f']"  />
-            </a>
-            <a href="#">
-              <font-awesome-icon
-                style="font-size: 20px"
-                icon="fa-brands footer_icon fa-pinterest-p"
-              />
-            </a>
-            <a href="#">
-              <font-awesome-icon
-                style="font-size: 20px"
-                icon="fa-brands footer_icon fa-instagram"
-              />
-            </a>
-            <a href="#">
-              <font-awesome-icon
-                style="font-size: 20px"
-                icon="fa-brands footer_icon fa-twitter"
-              />
-            </a>
-          </div>
+        <a href="#">
+          <font-awesome-icon
+            style="font-size: 20px;"
+            :icon="['fab', 'fa-facebook-f']"
+          />
+        </a>
+        <a href="#">
+          <font-awesome-icon
+            style="font-size: 20px;"
+            icon="fa-brands footer_icon fa-pinterest-p"
+          />
+        </a>
+        <a href="#">
+          <font-awesome-icon
+            style="font-size: 20px;"
+            icon="fa-brands footer_icon fa-instagram"
+          />
+        </a>
+        <a href="#">
+          <font-awesome-icon
+            style="font-size: 20px;"
+            icon="fa-brands footer_icon fa-twitter"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -43,12 +42,12 @@ export default {};
 </script>
 <style lang="css">
 .post-messengers {
-    color: #000!important;
-    font-weight: 700!important;
-    margin-right: 1rem!important;
-    margin-bottom: 0!important;
-    font-family: "Poppins",sans-serif;
-    font-size: 1rem;
-    line-height: 1.63;
+  color: #000 !important;
+  font-weight: 700 !important;
+  margin-right: 1rem !important;
+  margin-bottom: 0 !important;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  line-height: 1.63;
 }
 </style>

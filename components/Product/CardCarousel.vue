@@ -16,7 +16,7 @@
 import VueSlickCarousel from "vue-slick-carousel";
 import "vue-slick-carousel/dist/vue-slick-carousel-theme.css";
 import "vue-slick-carousel/dist/vue-slick-carousel.css";
-import ProductCard from "../smallComponents/ProductCard.vue";
+import ProductCard from "../../smallComponents/ProductCard.vue";
 export default {
   props: ["products"],
   data() {

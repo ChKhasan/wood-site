@@ -8,7 +8,6 @@
         :data-aos-delay="(1 + (index % 5)) * 100"
         v-bind:key="index"
         :product="item"
-        img="../static/images/product-19.jpg"
       />
 
       <ShoppingCard
@@ -28,15 +27,15 @@
         data-aos="fade-up"
         data-aos-duration="1000"
         data-aos-delay="800"
-        >Shop Now</nuxt-link
+        >Показать Сейчас</nuxt-link
       >
     </div>
   </div>
 </template>
 <script>
-import ProductCard from "../smallComponents/ProductCard.vue";
+import ProductCard from "../../smallComponents/ProductCard.vue";
 import { mapState } from "vuex";
-import ShoppingCard from "~/smallComponents/ShoppingCard.vue";
+import ShoppingCard from "../../smallComponents/ShoppingCard.vue";
 
 export default {
   props: ["products", "category"],
@@ -69,21 +68,5 @@ export default {
   grid-template-columns: 1fr;
   grid-gap: 30px;
 }
-/* .w_sh_card {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 30px;
-} */
 
-/* @media (min-width: 576px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 992px) {
-  .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-} */
 </style>
