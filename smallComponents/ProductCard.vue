@@ -3,9 +3,7 @@
     class="product_card d-flex flex-column justify-content-between position-relative"
   >
     <nuxt-link class="mt-1" :to="`/product/${product.slug}`">
-      <div
-        class="product-card-banner  d-flex align-items-end"
-      >
+      <div class="product-card-banner d-flex align-items-end">
         <img :src="product.product_images[0].lg_img" alt="" />
         <!-- <div class="status_sale status" v-if="false"><span>SALE</span></div>
       <div class="status_new status" v-else><span>SALE</span></div>
@@ -71,7 +69,7 @@
 </template>
 <script>
 export default {
-  props: ["img", "product"],
+  props: ["product"],
 };
 </script>
 <style lang="css">
@@ -193,10 +191,10 @@ a {
   overflow: hidden;
   transition: 0.3s;
 }
-.product-card-banner img{
-width: 100%;
-height: 100%;
-object-fit: cover !important;
+.product-card-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
 }
 .product_card {
   transition: 0.3s !important;

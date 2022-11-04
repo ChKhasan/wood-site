@@ -9,7 +9,11 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <img style="width: 100%" src="@/static/images/banner-01.jpg" alt="" />
+          <img
+            style="width: 100%;"
+            src="@/static/images/banner-01.jpg"
+            alt=""
+          />
         </div>
       </div>
       <div class="row">
@@ -34,23 +38,17 @@ import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
 import TitleComp from "~/components/TitleComp.vue";
 import TeamCard from "~/smallComponents/TeamCard.vue";
 export default {
-  data() {
-    return {};
-  },
-  async asyncData({ $axios }) {
-    const siteInfo = await $axios.$get("/site-info");
-    const teamData = await $axios.$get("/team");
-    console.log(siteInfo.data);
-    let site_info = siteInfo.data;
-    let team = teamData.data.data;
-    console.log("team", team);
+
+  async asyncData({ store }) {
+    const site_info = await store.dispatch("site-info/fetchSiteInfo");
+    const team = await store.dispatch("team/fetchTeam");
     return {
       site_info,
       team,
     };
   },
   mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"))
+    this.$i18n.setLocale(localStorage.getItem("Lang"));
   },
   components: { TeamCard, TitleComp },
 };
@@ -78,30 +76,30 @@ export default {
 }
 @media (min-width: 576px) {
   .team-card-controller {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 30px;
-}
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+  }
 }
 @media (min-width: 768px) {
   .team-card-controller {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 30px;
-}
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 30px;
+  }
 }
 @media (min-width: 992px) {
   .team-card-controller {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
-}
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+  }
 }
 @media (min-width: 1200px) {
   .team-card-controller {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 30px;
-}
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 30px;
+  }
 }
 </style>

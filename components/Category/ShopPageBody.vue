@@ -141,26 +141,41 @@ export default {
       let id = this.$route.params.id;
       this.id = id;
       this.params.page = 1;
-      const products = await this.$axios.$get(
-        `${this.$route.fullPath}&paginate=6`
-      );
-      const categoryImg = await this.$axios.$get(`/categories/${this.id}`);
-      const categories = await this.$axios.$get(`/categories`);
 
-      this.categories = categories.data;
-      this.categoryImg = categoryImg.data;
-      this.productsByCategory = products.data.data;
-      this.currentPage = products.data.last_page;
+      const products = await this.$store.dispatch(
+        `products/fetchProductByParams`,
+        this.$route.fullPath
+      );
+      const categoryImg = await this.$store.dispatch(
+        `categories/fetchCategoryById`,
+        this.id
+      );
+
+      const categories = await this.$store.dispatch(
+        `categories/fetchCategories`
+      );
+
+      this.categories = categories;
+      this.categoryImg = categoryImg;
+      this.productsByCategory = products.data;
+      this.currentPage = products.last_page;
     },
 
     async searchProduct() {
-      const searchProducts = await this.$axios.$get(
-        `categories/${this.id}/products?search=${this.search}`
+      const searchProducts = await this.$store.dispatch(
+        `categories/fetchCategorySearch`,
+        {
+          id: this.id,
+          search: this.search,
+        }
       );
-      const categoryById = await this.$axios.$get(`categories/${this.id}`);
-      this.categoryById = categoryById.data;
-      this.productsByCategory = searchProducts.data.data;
-      this.currentPage = searchProducts.data.last_page;
+      const categoryById = await this.$store.dispatch(
+        `categories/fetchCategoryById`,
+        this.id
+      );
+      this.categoryById = categoryById;
+      this.productsByCategory = searchProducts.data;
+      this.currentPage = searchProducts.last_page;
     },
     async changePage(val) {
       this.params.page = val;
@@ -195,34 +210,14 @@ export default {
   padding-top: 20px;
 }
 .f-card-list li span {
-  color: #777 !important;
+  color: #777;
   line-height: 1.2 !important;
   transition: all 0.2s;
   font-weight: 400 !important;
   font-family: "Poppins", sans-serif;
   border-bottom: 1px solid transparent;
 }
-/* .f-card-list li span:hover {
-  border-bottom: 1px solid #000 !important;
-} */
-/* .hover-effect::after{
- content: "";
- position: absolute;
- left: 0;
- bottom: 0;
- width: 0;
- height: 3px;
- background: black;
- transition: .3s;
-}
-.hover-effect:hover::after{
- content: "";
- position: absolute;
- bottom: 0;
- width: 100%;
- height: 3px;
- background: #000 !important;
-} */
+
 .filter-card-title h3 {
   font-size: 20px !important;
   font-weight: 700;
@@ -237,6 +232,7 @@ export default {
 
 .active {
   border-bottom: 1px solid #000 !important;
+  color: #000 !important;
 }
 
 .color_selection .list-inline-item {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-scroll-to-top></v-scroll-to-top>
     <BannerComp />
 
     <HomeCardBox :products="products" :category="category" />
@@ -9,38 +8,20 @@
 
     <JournalComp :posts="posts" />
     <ContactCardBox />
-    <!-- <CustomServiceInfo /> -->
   </div>
 </template>
 
-<script
-  src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"
-  async
-  defer
-></script>
 <script>
-import { mapState } from "vuex";
-import productApi from "@/api/product.js";
-import categoryApi from "@/api/category.js";
-import postApi from "@/api/post.js";
 import BannerComp from "~/components/Home/BannerComp.vue";
 import HomeCardBox from "../components/Home/HomeCardBox.vue";
 import TitleComp from "../components/TitleComp.vue";
 import ContactCardBox from "../components/Home/ContactCardBox.vue";
-// import CustomServiceInfo from "../components/CustomServiceInfo.vue";
 import LayoutComp from "../layouts/default.vue";
 import JournalComp from "~/components/Home/JournalComp.vue";
-// import { VueRecaptcha } from 'vue-recaptcha';
-// import VScrollToTop from 'v-scroll-to-top'
 
 export default {
   name: "IndexPage",
-  publicRuntimeConfig: {
-    // recaptcha: {
-    //   /* reCAPTCHA options */
-    //   siteKey: process.env."6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV" // for example
-    // }
-  },
+
   data() {
     return {
       ip: [],
@@ -51,10 +32,10 @@ export default {
     console.log("log", this.$store);
     localStorage.setItem("Lang", "ru");
   },
-  async asyncData({ $axios }) {
-    const products = await productApi.getProducts($axios);
-    const category = await categoryApi.getCategories($axios);
-    const posts = await postApi.getPosts($axios);
+  async asyncData({ store }) {
+    const products = await store.dispatch("products/fetchProductsPaginate");
+    const category = await store.dispatch("categories/fetchCategoriesPaginate");
+    const posts = await store.dispatch("posts/fetchPostsPaginate", 3);
     return {
       products,
       category,
@@ -69,11 +50,6 @@ export default {
     ContactCardBox,
     LayoutComp,
     JournalComp,
-    // "vue-recaptcha": VueRecaptcha
-  },
-
-  computed: {
-    ...mapState(["data"]),
   },
 };
 </script>

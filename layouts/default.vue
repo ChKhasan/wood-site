@@ -1,5 +1,6 @@
 <template lang="html">
   <div>
+    <v-scroll-to-top></v-scroll-to-top>
     <NavbarComp :siteInfo="site_info" />
     <Nuxt />
     <FooterComp :siteInfo="site_info" />
@@ -24,9 +25,8 @@ export default {
   },
   methods: {
     async getInfo() {
-      const siteInfo = await this.$axios.$get("/site-info");
-      this.site_info = siteInfo.data;
-      console.log(this.site_info);
+      const siteInfo = await this.$store.dispatch("site-info/fetchSiteInfo");
+      this.site_info = siteInfo;
     },
   },
 };

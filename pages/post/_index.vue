@@ -9,7 +9,7 @@
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
-              style="width: 100%"
+              style="width: 100%;"
               :src="thePost.post_images[0].lg_img"
               alt=""
             />
@@ -24,7 +24,7 @@
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
-              style="width: 100%"
+              style="width: 100%;"
               :src="thisPost.post_images[0].lg_img"
               alt=""
             />
@@ -56,7 +56,7 @@
     </div>
     <div
       class="container-fluid"
-      style="border-bottom: 1px solid #e4e4e4 !important"
+      style="border-bottom: 1px solid #e4e4e4 !important;"
     ></div>
     <div class="container container mt-15 mb-5">
       <div class="row justify-content-center">
@@ -74,11 +74,7 @@
                 <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
               </div>
               <div class="pre-img mx-3">
-                <!-- <img
-                    style="width: 70px"
-                    :src="thePrevPost.post_images[0].lg_img"
-                    alt=""
-                  /> -->
+              
                 <div
                   class="prev-next-img"
                   :style="{
@@ -194,9 +190,8 @@
 import TitleComp from "~/components/TitleComp.vue";
 import LayoutComp from "~/layouts/default.vue";
 import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
-import PostMessenger from "./postMessenger.vue";
+import PostMessenger from "../../components/Posts/postMessenger.vue";
 import JournalComp from "../../components/Home/JournalComp.vue";
-import postApi from "@/api/post.js";
 
 export default {
   data() {
@@ -211,17 +206,15 @@ export default {
 
   methods: {
     async prevPost(slug) {
-      const thePost = await this.$axios.$get(`/posts/${slug}`);
-      const posts = await this.$axios.$get(`/posts`);
+      const posts = await this.$store.dispatch(`posts/fetchPosts`);
+      const thePost = await this.$store.dispatch(`posts/fetchPostBySlug`, slug);
+      this.$router.replace({
+        path: `/post/${slug}`,
+      });
+      this.thisPost = thePost;
 
-      this.thisPost = thePost.data;
-
-      let thisPrevPost = posts.data.data.filter(
-        (item) => item.id == thePost.data.id + 1
-      )[0];
-      let thisNextPost = posts.data.data.filter(
-        (item) => item.id == thePost.data.id - 1
-      )[0];
+      let thisPrevPost = posts.filter((item) => item.id == thePost.id + 1)[0];
+      let thisNextPost = posts.filter((item) => item.id == thePost.id - 1)[0];
 
       this.thisPrevPost = thisPrevPost;
       this.thisNextPost = thisNextPost;
@@ -230,17 +223,16 @@ export default {
     },
 
     async nextPost(slug) {
-      const thePost = await this.$axios.$get(`/posts/${slug}`);
-      const posts = await this.$axios.$get(`/posts`);
+      const thePost = await this.$store.dispatch(`posts/fetchPostBySlug`, slug);
+      const posts = await this.$store.dispatch(`posts/fetchPosts`);
+      this.$router.replace({
+        path: `/post/${slug}`,
+      });
+      console.log(slug);
+      this.thisPost = thePost;
 
-      this.thisPost = thePost.data;
-
-      let thisPrevPost = posts.data.data.filter(
-        (item) => item.id == thePost.data.id + 1
-      )[0];
-      let thisNextPost = posts.data.data.filter(
-        (item) => item.id == thePost.data.id - 1
-      )[0];
+      let thisPrevPost = posts.filter((item) => item.id == thePost.id + 1)[0];
+      let thisNextPost = posts.filter((item) => item.id == thePost.id - 1)[0];
 
       this.thisPrevPost = thisPrevPost;
       this.thisNextPost = thisNextPost;
@@ -248,14 +240,14 @@ export default {
       this.usePN = false;
     },
   },
-  async asyncData({ $axios, params }) {
+  async asyncData({ $axios, params, store }) {
     const thePost = await $axios.$get(`/posts/${params.index}`);
-    const posts = await $axios.$get(`/posts`);
+    const posts = await store.dispatch(`posts/fetchPosts`);
 
-    let thePrevPost = posts.data.data.filter(
+    const thePrevPost = posts.filter(
       (item) => item.id == thePost.data.id - 1
     )[0];
-    let theNextPost = posts.data.data.filter(
+    const theNextPost = posts.filter(
       (item) => item.id == thePost.data.id + 1
     )[0];
 
@@ -266,12 +258,14 @@ export default {
     };
   },
   async mounted() {
-    const posts = await this.$axios.$get(`/posts?paginate=3`);
-    const getThisPost = await this.$axios.$get(
-      `/posts/${this.$route.params.index}`
+    const posts = await this.$store.dispatch("posts/fetchPostsPaginate", 3);
+    const getThisPost = await this.$store.dispatch(
+      "posts/fetchPostBySlug",
+      this.$route.params.index
     );
-    this.thePost = getThisPost.data;
-    this.posts = posts.data.data;
+
+    this.thePost = getThisPost;
+    this.posts = posts;
   },
 
   components: {
@@ -372,6 +366,7 @@ export default {
 .next-card {
   cursor: pointer;
 }
+
 @media (min-width: 576px) {
   .previous-card {
     border-right: 1px solid #e4e4e4 !important;

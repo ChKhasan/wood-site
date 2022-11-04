@@ -2,13 +2,13 @@
   <div class="journal-card mt-5">
     <nuxt-link :to="`/post/${post.slug}`" class="j-card-img">
       <!-- <img :src="post.post_images[0].lg_img" alt="" /> -->
-      <div class="journal-img" style="transition: 1s">
+      <div class="journal-img" style="transition: 1s;">
         <img :src="post.post_images[0].lg_img" alt="" />
       </div>
     </nuxt-link>
-    <div class="j-card-body pt-5">
+    <div class="j-card-body pt-4">
       <div class="j-card-date">
-        <span> April 24, 2019 </span>
+        <span>{{ `${monthNames[month]} ${date}, ${year}` }}</span>
       </div>
       <div class="j-card-title mb-3">
         <h3>
@@ -26,6 +26,38 @@
 import BorderBlackBtn from "../smallComponents/BorderBlackBtn.vue";
 export default {
   props: ["img", "post"],
+  data() {
+    return {
+      monthNames: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      month: null,
+      date: null,
+      year: null,
+    };
+  },
+  mounted() {
+    this.getDate();
+  },
+  methods: {
+    getDate() {
+      const event = new Date(this.post.created_at);
+      this.month = event.getMonth();
+      this.date = event.getDate();
+      this.year = event.getFullYear();
+    },
+  },
   components: {
     BorderBlackBtn,
   },
@@ -74,6 +106,7 @@ export default {
   text-transform: uppercase !important;
   margin-bottom: 0.625rem !important;
   font-family: "Poppins", sans-serif;
+  font-size: 14px;
 }
 .j-card-title h3 {
   font-size: 20px !important;

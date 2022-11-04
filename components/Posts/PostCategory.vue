@@ -133,30 +133,38 @@ export default {
       let id = this.$route.params.id;
       this.id = id;
       this.params.page = 1;
-
-      const products = await this.$axios.$get(
-        `${this.$route.fullPath}&paginate=2`
+      const products = await this.$store.dispatch(
+        `products/fetchProductByParams`,
+        this.$route.fullPath
       );
-      const categoryImg = await this.$axios.$get(`/post-categories/${this.id}`);
-      const categories = await this.$axios.$get(`/post-categories`);
-
-      this.categories = categories.data;
-      this.categoryImg = categoryImg.data;
-      this.productsByCategory = products.data.data;
-      this.currentPage = products.data.last_page;
+      const categories = await this.$store.dispatch(
+        "posts/fetchPostsCategories"
+      );
+      const categoryImg = await this.$store.dispatch(
+        "posts/fetchPostsCategoryById",
+        this.id
+      );
+      this.categories = categories;
+      this.categoryImg = categoryImg;
+      this.productsByCategory = products.data;
+      this.currentPage = products.last_page;
     },
-
     async searchProduct() {
-      const searchProducts = await this.$axios.$get(
-        `/post-categories/${this.id}/posts?search=${this.search}`
+      const searchProducts = await this.$store.dispatch(
+        `posts/fetchPostCategorySearch`,
+        {
+          id: this.id,
+          search: this.search,
+        }
       );
-      const categoryById = await this.$axios.$get(
-        `/post-categories/${this.id}`
-      );
-      this.categoryById = categoryById.data;
 
-      this.productsByCategory = searchProducts.data.data;
-      this.currentPage = searchProducts.data.last_page;
+      const categoryById = await this.$store.dispatch(
+        "posts/fetchPostsCategoryById",
+        this.id
+      );
+      this.categoryById = categoryById;
+      this.productsByCategory = searchProducts.data;
+      this.currentPage = searchProducts.last_page;
     },
     async changePage(val) {
       this.params.page = val;
@@ -198,7 +206,7 @@ export default {
   padding-top: 20px;
 }
 .f-card-list li span {
-  color: #777 !important;
+  color: #777;
   line-height: 1.2 !important;
   transition: all 0.2s;
   font-weight: 400 !important;

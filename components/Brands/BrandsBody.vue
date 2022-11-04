@@ -8,9 +8,9 @@
               <h3>Бренды продуктов</h3>
             </div>
             <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none">
+              <ul class="f-card-list" style="padding-left: none;">
                 <li
-                  style="cursor: pointer"
+                  style="cursor: pointer;"
                   class="mb-1"
                   v-for="(brand, index) in brands"
                   :key="brand.id"
@@ -53,7 +53,7 @@
                 placeholder="Search"
               />
               <font-awesome-icon
-                style="cursor: pointer"
+                style="cursor: pointer;"
                 @click="searchProduct"
                 class="serach-btn"
                 icon="fa-solid fa-magnifying-glass"
@@ -123,16 +123,19 @@ export default {
       let id = this.$route.params.id;
       this.id = id;
       this.params.page = 1;
-      const products = await this.$axios.$get(
-        `${this.$route.fullPath}&paginate=2`
+      const products = await this.$store.dispatch(
+        `products/fetchProductByParams`,
+        this.$route.fullPath
       );
-      const brandImg = await this.$axios.$get(`/brands/${this.id}`);
-      const brands = await this.$axios.$get(`/brands`);
-
-      this.brands = brands.data.slice().reverse();
-      this.brandImg = brandImg.data;
-      this.productsByBrand = products.data.data;
-      this.currentPage = products.data.last_page;
+      const brands = await this.$store.dispatch(`brands/fetchBrands`);
+      const brandImg = await this.$store.dispatch(
+        `brands/fetchBrandById`,
+        this.id
+      );
+      this.brands = brands.slice().reverse();
+      this.brandImg = brandImg;
+      this.productsByBrand = products.data;
+      this.currentPage = products.last_page;
     },
 
     async searchProduct() {
@@ -160,24 +163,12 @@ export default {
       this.productsByBrand = pro.data.data;
       this.currentPage = pro.data.last_page;
     },
-
-    // takeColor(e) {
-    //   console.log(e.target);
-    //   const take = document.querySelectorAll(".list-inline-item");
-    //   take.forEach((item) => {
-    //     item.classList.remove("selected");
-    //   });
-    //   e.target.className === "list-inline-item"
-    //     ? e.target.classList.add("selected")
-    //     : e.target.parentNode.classList.add("selected");
-    // },
   },
 };
 </script>
 <style lang="css">
 .category-banner {
   width: 100%;
-  /* aspect-ratio: 1/0.5; */
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -189,7 +180,7 @@ export default {
   padding-top: 20px;
 }
 .f-card-list li span {
-  color: #777 !important;
+  color: #777;
   line-height: 1.2 !important;
   transition: all 0.2s;
   font-weight: 400 !important;
@@ -197,9 +188,7 @@ export default {
   border-bottom: 1px solid transparent;
   position: relative;
 }
-/* .f-card-list li span:hover {
-  border-bottom: 1px solid #000 !important;
-} */
+/* 
 .f-card-list li span::after {
   content: "";
   position: absolute;
@@ -209,15 +198,18 @@ export default {
   height: 1px;
   background: black;
   transition: 0.3s;
+} */
+.f-card-list li span:hover {
+  color: #000 !important;
 }
-.f-card-list li span:hover::after {
+/* .f-card-list li span:hover::after {
   content: "";
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 1px;
   background: #000 !important;
-}
+} */
 .filter-card-title h3 {
   font-size: 20px !important;
   font-weight: 700;

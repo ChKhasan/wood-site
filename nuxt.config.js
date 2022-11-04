@@ -35,9 +35,6 @@ export default {
     ],
     script: [
       {
-        src: "https://unpkg.com/vue-recaptcha@^2/dist/vue-recaptcha.js",
-      },
-      {
         src:
           "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
       },
@@ -62,8 +59,8 @@ export default {
     "@/plugins/vue-i18n",
     "@/plugins/vue-tel-input",
     "@/plugins/vue-the-mask",
-    "@/plugins/vue-recaptcha",
-    "@/plugins/bl-components"
+
+    "@/plugins/bl-components",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -82,14 +79,11 @@ export default {
     // https://go.nuxtjs.dev/bootstrap
     "@nuxtjs/axios",
     "@nuxtjs/i18n",
-    '@nuxtjs/recaptcha',
+    "@nuxtjs/recaptcha",
     "bootstrap-vue/nuxt",
     "nuxt-element-ui",
     "vue-yandex-maps/nuxt",
     "nuxt-i18n",
-    // "vue-recaptcha",
-    // "@intlify/vue-i18n-loader",
-    // options,
   ],
 
   i18n: {
@@ -109,10 +103,10 @@ export default {
   },
   recaptcha: {
     hideBadge: true, // Hide badge element (v3 & v2 via size=invisible)
-    language: "en",   // Recaptcha language (v2)
+    language: "en", // Recaptcha language (v2)
     // mode: String,       // Mode: 'base', 'enterprise'
-    siteKey: "6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV",    // Site key for requests
-    version: 2,    // Version
+    siteKey: "6LdlkNEiAAAAAKEt2rLVxjel1xMpjUjhFKKvLIUV", // Site key for requests
+    version: 2, // Version
     // size: String        // Size: 'compact', 'normal', 'invisible' (v2)
   },
   elementUI: {

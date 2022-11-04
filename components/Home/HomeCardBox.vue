@@ -5,19 +5,18 @@
         v-for="(item, index) in products"
         data-aos="fade-up"
         data-aos-duration="900"
-        :data-aos-delay="(1 + (index % 5)) * 100"
-        v-bind:key="index"
+        :key="index"
+        :data-aos-delay="(1 + ((index * 1) % 4)) * 100"
         :product="item"
       />
-
       <ShoppingCard
+        v-for="(item, index1) in category"
         data-aos="fade-up"
         data-aos-delay="200"
         data-aos-duration="900"
-        v-for="(item, index) in category"
-        v-bind:key="index"
+        :key="index1"
         :category="item"
-        :gridClass="`shopping_card-grid${index + 1}`"
+        :gridClass="`shopping_card-grid${index1 + 1}`"
       />
     </div>
     <div class="d-flex justify-content-center my-5">
@@ -34,27 +33,14 @@
 </template>
 <script>
 import ProductCard from "../../smallComponents/ProductCard.vue";
-import { mapState } from "vuex";
 import ShoppingCard from "../../smallComponents/ShoppingCard.vue";
 
 export default {
   props: ["products", "category"],
-  data() {
-    return {};
-  },
+
   components: {
     ProductCard,
     ShoppingCard,
-  },
-
-  async asyncData({ $axios, $config }) {
-    const mountains = await $axios.$get(`/posts`);
-    return { mountains };
-  },
-  mounted() {},
-
-  computed: {
-    ...mapState(["data"]),
   },
 };
 </script>
@@ -69,4 +55,14 @@ export default {
   grid-gap: 30px;
 }
 
+@media (min-width: 576px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 </style>

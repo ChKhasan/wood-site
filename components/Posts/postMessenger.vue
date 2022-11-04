@@ -6,7 +6,7 @@
         <nuxt-link to="/"> Sweaters, Clothing </nuxt-link>
       </div>
     </div>
-    <div class="col-sm-6 d-flex align-items-center justify-content-end">
+    <div class="col-sm-6 share-blog d-flex align-items-center">
       <span class="post-messengers">Share:</span>
       <div class="brands_block d-flex">
         <a href="#">
@@ -49,5 +49,15 @@ export default {};
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   line-height: 1.63;
+}
+.share-blog {
+  justify-content: start;
+  margin-top: 10px;
+}
+@media (min-width: 576px) {
+  .share-blog {
+    justify-content: end;
+  margin-top: 0;
+  }
 }
 </style>

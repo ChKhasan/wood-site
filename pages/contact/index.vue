@@ -121,7 +121,6 @@ export default {
     return {
       placemarks: [
         {
-          // coords: [41.311158, 69.279737],
           coords: [41.3, 69.2],
           properties: {}, // define properties here
           options: {}, // define options here
@@ -136,9 +135,8 @@ export default {
     this.$i18n.setLocale(localStorage.getItem("Lang"));
   },
   components: { yandexMap, ymapMarker, BreadCrumbComp },
-  async asyncData({ $axios }) {
-    const siteInfo = await $axios.$get("/site-info");
-    let site_info = siteInfo.data;
+  async asyncData({ store }) {
+    const site_info = await store.dispatch("site-info/fetchSiteInfo");
     return {
       site_info,
     };

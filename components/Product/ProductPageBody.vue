@@ -106,8 +106,7 @@
     </div>
   </div>
 </template>
-<script src="https://unpkg.com/vue-recaptcha@^2/dist/vue-recaptcha.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 <script
   src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit"
   async
