@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <BreadCrumbComp category="Товар" />
-    <ProductPageBody :product="product" />
+    <ProductPageBody :product="product" :siteInfo="siteInfo"/>
     <TitleComp title="Последние товары" />
     <div class="container container-xxl mb-120">
       <div class="row pb-4">
@@ -28,11 +28,12 @@ export default {
   },
   async asyncData({ params, store }) {
     const products = await store.dispatch("products/fetchProductsPaginate");
+    const siteInfo = await store.dispatch("site-info/fetchSiteInfo");
     const product = await store.dispatch(
       "products/fetchProductBySlug",
       params.index
     );
-    return { product, products };
+    return { product, products, siteInfo };
   },
 };
 </script>

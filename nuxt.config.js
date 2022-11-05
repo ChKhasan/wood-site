@@ -50,16 +50,16 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    // { src: "~plugins/vs-pagination", mode: "client" },
-    { src: "~/plugins/ymapPlugin.js", mode: "client" },
     { src: "~plugins/v-scroll-to-top.js", mode: "client" },
     { src: "~/plugins/aos", ssr: false },
     { src: "~/plugins/bl-components.js", mode: "client" },
+    // { src: "~/plugins/vue-ripple-directive.js", mode: "client" },
+    { src: "~/plugins/vue-touch-ripple.js", mode: "client" },
     "@/plugins/element-ui",
     "@/plugins/vue-i18n",
     "@/plugins/vue-tel-input",
     "@/plugins/vue-the-mask",
-
+    "@/plugins/vue-ripple-directive",
     "@/plugins/bl-components",
   ],
 
@@ -124,6 +124,9 @@ export default {
     { src: "~plugins/v-scroll-to-top.js", ssr: false },
     { src: "~plugins/element-ui.js", ssr: false },
     { src: "~plugins/vue-i18n.js", ssr: false },
+    { src: "~/plugins/vue-ripple-directive.js", ssr: false },
+    { src: "~/plugins/vue-toast-notifitation.js", ssr: false },
+
   ],
-  css: ["aos/dist/aos.css"],
+  css: ["aos/dist/aos.css","vue-toast-notification/dist/theme-sugar.css"],
 };

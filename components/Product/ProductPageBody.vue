@@ -30,7 +30,7 @@
                   ><font-awesome-icon :icon="['fas', 'fa-minus']"
                 /></a>
 
-                <span>{{ dynamicValidateForm.message }}</span
+                <span>{{ dynamicValidateForm.message }}{{ count }}</span
                 ><a class="count-btn" @click="countFunc(true)"
                   ><font-awesome-icon :icon="['fas', 'fa-plus']"
                 /></a>
@@ -57,6 +57,8 @@
             <div class="send-info-btn">
               <el-form-item>
                 <el-button
+                  v-ripple="'rgba(255, 255, 255, 0.35)'"
+                  :ripple="false"
                   type="primary"
                   class="send_btn"
                   @click="submitForm('dynamicValidateForm')"
@@ -71,6 +73,7 @@
             <span class="d-inline-block mr-2 fs-14">
               <font-awesome-icon :icon="['fas', 'fa-truck-fast']" />
             </span>
+
             <span class="fs-15 px-3"
               >Get it between Aug 11, 2020 - Aug 18, 2020</span
             >
@@ -92,7 +95,7 @@
               <span class="d-block col-9 fs-15 color-gray"
                 ><p class="mx-3 nav-phone">
                   <font-awesome-icon :icon="['fas', 'fa-phone']" />
-                  +998 99 730 14 99
+                  {{ siteInfo.phone_number }}
                 </p></span
               >
             </li>
@@ -115,19 +118,18 @@
 <script>
 import InformationTab from "./InformationTab.vue";
 import { VueTelInput } from "vue-tel-input";
-import { IMaskComponent } from "vue-imask";
 import { TheMask } from "vue-the-mask";
-
 export default {
-  props: ["product"],
+  props: ["product", "siteInfo"],
   components: {
     TheMask,
     InformationTab,
-    "imask-input": IMaskComponent,
     VueTelInput,
   },
   data() {
     return {
+      cursorPos: {},
+      count: 1,
       rules: {
         name: [
           {
@@ -174,16 +176,24 @@ export default {
     } catch (e) {
       console.log(e);
     }
+    this.count = localStorage.getItem("count");
   },
   methods: {
     async submitForm(formName) {
+      console.log();
+      this.$toast.open({
+        message: "Successfully",
+        type: "success",
+        duration: 5000,
+        dismissible: true,
+        position: "top-right",
+      });
       try {
         const token = await this.$recaptcha.getResponse();
-        console.log("ReCaptcha token:", token);
         await this.$axios.post("/feedback", this.dynamicValidateForm);
         await this.$recaptcha.reset();
       } catch (error) {
-        console.log("Login error:", error);
+        console.log("Error in order:", error);
       }
     },
     async recaptcha() {
@@ -202,6 +212,9 @@ export default {
       def
         ? this.dynamicValidateForm.message++
         : this.dynamicValidateForm.message--;
+
+      localStorage.setItem("count", this.dynamicValidateForm.message);
+      this.count = localStorage.getItem("count");
     },
   },
 };
@@ -459,5 +472,11 @@ export default {
   grid-template-columns: 1fr;
   margin-bottom: 16px;
   /* grid-gap: 24px; */
+}
+.vsa-item__trigger:focus,
+.vsa-item__trigger:hover {
+  outline: none;
+  background-color: #fff !important;
+  color: #000 !important;
 }
 </style>
