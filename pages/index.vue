@@ -1,23 +1,19 @@
 <template>
   <div>
-    <BannerComp />
-
-    <HomeCardBox :products="products" :category="category" />
-
+    <Banner />
+    <HomeCardBlog :products="products" :category="category" />
     <TitleComp title="Недавние Посты" />
-
-    <JournalComp :posts="posts" />
-    <ContactCardBox />
+    <NewPosts :posts="posts" />
+    <ContactCardBlog />
   </div>
 </template>
 
 <script>
-import BannerComp from "~/components/Home/BannerComp.vue";
-import HomeCardBox from "../components/Home/HomeCardBox.vue";
+import Banner from "~/components/Home/Banner.vue";
+import HomeCardBlog from "../components/Home/HomeCardBlog.vue";
 import TitleComp from "../components/TitleComp.vue";
-import ContactCardBox from "../components/Home/ContactCardBox.vue";
-import LayoutComp from "../layouts/default.vue";
-import JournalComp from "~/components/Home/JournalComp.vue";
+import ContactCardBlog from "../components/Home/ContactCardBlog.vue";
+import NewPosts from "~/components/Home/NewPosts.vue";
 
 export default {
   name: "IndexPage",
@@ -36,6 +32,7 @@ export default {
     const products = await store.dispatch("products/fetchProductsPaginate");
     const category = await store.dispatch("categories/fetchCategoriesPaginate");
     const posts = await store.dispatch("posts/fetchPostsPaginate", 3);
+    console.log(posts);
     return {
       products,
       category,
@@ -44,12 +41,11 @@ export default {
   },
 
   components: {
-    BannerComp,
-    HomeCardBox,
+    Banner,
+    HomeCardBlog,
     TitleComp,
-    ContactCardBox,
-    LayoutComp,
-    JournalComp,
+    ContactCardBlog,
+    NewPosts,
   },
 };
 </script>

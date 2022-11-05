@@ -1,14 +1,14 @@
 <template lang="html">
   <div>
     <v-scroll-to-top></v-scroll-to-top>
-    <NavbarComp :siteInfo="site_info" />
+    <Navbar :siteInfo="site_info" />
     <Nuxt />
-    <FooterComp :siteInfo="site_info" />
+    <Footer :siteInfo="site_info" />
   </div>
 </template>
 <script>
-import NavbarComp from "../components/Layout/NavbarComp.vue";
-import FooterComp from "../components/Layout/FooterComp.vue";
+import Navbar from "../components/Layout/Navbar.vue";
+import Footer from "../components/Layout/Footer.vue";
 
 export default {
   data() {
@@ -17,9 +17,10 @@ export default {
     };
   },
   components: {
-    NavbarComp,
-    FooterComp,
+    Navbar,
+    Footer,
   },
+
   mounted() {
     this.getInfo();
   },

@@ -83,9 +83,9 @@
           </div>
 
           <div class="col-2 d-flex justify-content-end">
-            <a href="#" class="nav-search d-flex align-items-center">
+            <!-- <a href="#" class="nav-search d-flex align-items-center">
               <font-awesome-icon :icon="['fas', 'fa-magnifying-glass']" />
-            </a>
+            </a> -->
           </div>
         </div>
       </div>

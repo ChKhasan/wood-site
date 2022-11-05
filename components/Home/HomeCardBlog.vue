@@ -5,7 +5,7 @@
         v-for="(item, index) in products"
         data-aos="fade-up"
         data-aos-duration="900"
-        :key="index"
+        :key="item.id"
         :data-aos-delay="(1 + ((index * 1) % 4)) * 100"
         :product="item"
       />
@@ -14,7 +14,7 @@
         data-aos="fade-up"
         data-aos-delay="200"
         data-aos-duration="900"
-        :key="index1"
+        :key="item.id"
         :category="item"
         :gridClass="`shopping_card-grid${index1 + 1}`"
       />

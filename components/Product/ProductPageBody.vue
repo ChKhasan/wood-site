@@ -30,7 +30,7 @@
                   ><font-awesome-icon :icon="['fas', 'fa-minus']"
                 /></a>
 
-                <span>{{ dynamicValidateForm.message }}{{ count }}</span
+                <span>{{ dynamicValidateForm.message }}</span
                 ><a class="count-btn" @click="countFunc(true)"
                   ><font-awesome-icon :icon="['fas', 'fa-plus']"
                 /></a>
@@ -117,14 +117,12 @@
 ></script>
 <script>
 import InformationTab from "./InformationTab.vue";
-import { VueTelInput } from "vue-tel-input";
 import { TheMask } from "vue-the-mask";
 export default {
   props: ["product", "siteInfo"],
   components: {
     TheMask,
     InformationTab,
-    VueTelInput,
   },
   data() {
     return {
@@ -139,7 +137,7 @@ export default {
           },
           {
             min: 3,
-            max: 10,
+            max: 15,
             message: "Length should be 3 to 5",
             trigger: "blur",
           },
@@ -180,21 +178,20 @@ export default {
   },
   methods: {
     async submitForm(formName) {
-      console.log();
       this.$toast.open({
         message: "Successfully",
         type: "success",
-        duration: 5000,
+        duration: 2000,
         dismissible: true,
         position: "top-right",
       });
-      try {
-        const token = await this.$recaptcha.getResponse();
-        await this.$axios.post("/feedback", this.dynamicValidateForm);
-        await this.$recaptcha.reset();
-      } catch (error) {
-        console.log("Error in order:", error);
-      }
+      // try {
+      //   const token = await this.$recaptcha.getResponse();
+      //   await this.$axios.post("/feedback", this.dynamicValidateForm);
+      //   await this.$recaptcha.reset();
+      // } catch (error) {
+      //   console.log("Error in order:", error);
+      // }
     },
     async recaptcha() {
       await this.$recaptchaLoaded();
@@ -219,7 +216,6 @@ export default {
   },
 };
 </script>
-<style src="vue-tel-input/dist/vue-tel-input.css"></style>
 <style lang="css">
 .product_info_img {
   width: 100%;
@@ -403,7 +399,7 @@ export default {
 }
 @media (min-width: 992px) {
   .pb-6 {
-    padding-bottom: 6.875rem !important;
+    padding-bottom: 5rem !important;
   }
 }
 .tel-number-input input,

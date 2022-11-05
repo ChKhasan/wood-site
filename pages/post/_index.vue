@@ -191,7 +191,7 @@ import TitleComp from "~/components/TitleComp.vue";
 import LayoutComp from "~/layouts/default.vue";
 import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
 import PostMessenger from "../../components/Posts/postMessenger.vue";
-import JournalComp from "../../components/Home/JournalComp.vue";
+import JournalComp from "../../components/Home/NewPosts.vue";
 
 export default {
   data() {

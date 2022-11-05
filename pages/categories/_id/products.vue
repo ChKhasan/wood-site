@@ -1,12 +1,12 @@
 <template lang="html">
   <div>
     <BreadCrumbComp category="Каталог" />
-    <ShopPageBody />
+    <CategoryBody />
   </div>
 </template>
 <script>
 import BreadCrumbComp from "../../../components/BreadCrumbComp.vue";
-import ShopPageBody from "../../../components/Category/ShopPageBody.vue";
+import CategoryBody from "../../../components/Category/CategoryBody.vue";
 export default {
   data() {
     return {
@@ -22,7 +22,7 @@ export default {
   },
   components: {
     BreadCrumbComp,
-    ShopPageBody,
+    CategoryBody,
   },
 };
 </script>
