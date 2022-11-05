@@ -8,11 +8,15 @@
       </div>
       <div class="pt-3 mr-40 col-md-5 pl-md-6 pl-lg-0">
         <div class="content-right primary-summary summary-sticky">
-          <p
-            class="body_type text-muted fs-12 font-weight-500 letter-spacing-05"
-          >
-            STOOL
-          </p>
+          <div class="d-flex">
+            <p
+              style="margin-right: 7px;"
+              class="body_type text-muted fs-12 font-weight-500 letter-spacing-05"
+              v-for="item in product.products_categories"
+            >
+              {{ item.title.ru }}
+            </p>
+          </div>
           <h2 class="body_title fs-30 fs-lg-40 mb-2">{{ product.title.ru }}</h2>
 
           <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
