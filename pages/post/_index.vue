@@ -4,12 +4,12 @@
     <div class="container container-xxl pt-10 mb-5 post-transition">
       <div v-if="usePN" class="row">
         <div class="col-12 d-flex justify-content-center flex-column">
-          <p class="post-date">APRIL 24, 2019</p>
-          <h1 class="post-title mb-5">{{ thePost.title.ru }}</h1>
+          <p class="post-date">{{ `${monthNames[month]} ${date}, ${year}` }}</p>
+          <h1 class="post-title mb-5">{{ thePost.title[getLang] }}</h1>
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
-              style="width: 100%;"
+              style="width: 100%"
               :src="thePost.post_images[0].lg_img"
               alt=""
             />
@@ -20,11 +20,11 @@
       <div class="row" v-else>
         <div class="col-12 d-flex justify-content-center flex-column">
           <p class="post-date">APRIL 24, 2019</p>
-          <h1 class="post-title mb-5">{{ thisPost.title.ru }}</h1>
+          <h1 class="post-title mb-5">{{ thisPost.title[getLang] }}</h1>
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
-              style="width: 100%;"
+              style="width: 100%"
               :src="thisPost.post_images[0].lg_img"
               alt=""
             />
@@ -34,29 +34,27 @@
 
       <div v-if="usePN" class="row justify-content-center">
         <div class="col-lg-9">
-          <p class="post-subtitle">subtitle</p>
+          <p class="post-subtitle">{{ thePost.subtitle[getLang] }}</p>
         </div>
         <div class="col-lg-9">
-          <p class="post-description" v-html="thePost.desc.ru"></p>
-          <p>desc</p>
+          <p class="post-description" v-html="thePost.desc[getLang]"></p>
           <PostMessenger />
         </div>
       </div>
 
       <div v-else class="row justify-content-center">
         <div class="col-lg-9">
-          <p class="post-subtitle">subtitle</p>
+          <p class="post-subtitle">{{ thePost.subtitle[getLang] }}</p>
         </div>
         <div class="col-lg-9">
-          <p class="post-description" v-html="thisPost.desc.ru"></p>
-          <p>desc</p>
+          <p class="post-description" v-html="thisPost.desc[getLang]"></p>
           <PostMessenger />
         </div>
       </div>
     </div>
     <div
       class="container-fluid"
-      style="border-bottom: 1px solid #e4e4e4 !important;"
+      style="border-bottom: 1px solid #e4e4e4 !important"
     ></div>
     <div class="container container mt-15 mb-5">
       <div class="row justify-content-center">
@@ -74,7 +72,6 @@
                 <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
               </div>
               <div class="pre-img mx-3">
-              
                 <div
                   class="prev-next-img"
                   :style="{
@@ -84,7 +81,7 @@
               </div>
               <div class="pre-title">
                 <p>PREVIOUS</p>
-                <a href="">{{ thePrevPost.title.ru }}</a>
+                <a href="">{{ thePrevPost.title[getLang] }}</a>
               </div>
             </div>
           </div>
@@ -96,7 +93,7 @@
             >
               <div class="next-title">
                 <p>NEXT</p>
-                <a href="">{{ theNextPost.title.ru }}</a>
+                <a href="">{{ theNextPost.title[getLang] }}</a>
               </div>
               <div class="next-img mx-3">
                 <!-- <img
@@ -201,10 +198,42 @@ export default {
       thisPrevPost: {},
       thisNextPost: {},
       usePN: true,
+      monthNames: [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ],
+      month: null,
+      date: null,
+      year: null,
     };
   },
-
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   methods: {
+    async getDate() {
+      let params = this.$route.params.index;
+      const thePost = await this.$store.dispatch(
+        `posts/fetchPostBySlug`,
+        params
+      );
+      const event = new Date(thePost.created_at);
+      this.month = event.getMonth();
+      this.date = event.getDate();
+      this.year = event.getFullYear();
+    },
     async prevPost(slug) {
       const posts = await this.$store.dispatch(`posts/fetchPosts`);
       const thePost = await this.$store.dispatch(`posts/fetchPostBySlug`, slug);
@@ -228,7 +257,6 @@ export default {
       this.$router.replace({
         path: `/post/${slug}`,
       });
-      console.log(slug);
       this.thisPost = thePost;
 
       let thisPrevPost = posts.filter((item) => item.id == thePost.id + 1)[0];
@@ -243,12 +271,12 @@ export default {
   async asyncData({ $axios, params, store }) {
     const thePost = await $axios.$get(`/posts/${params.index}`);
     const posts = await store.dispatch(`posts/fetchPosts`);
-
+    const indexItem = posts.findIndex((item) => item.id == thePost.data.id);
     const thePrevPost = posts.filter(
-      (item) => item.id == thePost.data.id - 1
+      (item, index) => index == indexItem - 1
     )[0];
     const theNextPost = posts.filter(
-      (item) => item.id == thePost.data.id + 1
+      (item, index) => index == indexItem + 1
     )[0];
 
     return {
@@ -258,6 +286,7 @@ export default {
     };
   },
   async mounted() {
+    this.getDate();
     const posts = await this.$store.dispatch("posts/fetchPostsPaginate", 3);
     const getThisPost = await this.$store.dispatch(
       "posts/fetchPostBySlug",

@@ -70,4 +70,7 @@ export default {
 .card-carousel-product .slick-arrow {
   display: none !important;
 }
+.card-carousel-product {
+  margin-top: 40px;
+}
 </style>

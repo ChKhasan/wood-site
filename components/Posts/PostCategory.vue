@@ -8,9 +8,9 @@
               <h3>Категории продуктов</h3>
             </div>
             <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none;">
+              <ul class="f-card-list" style="padding-left: none">
                 <li
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                   class="mb-1"
                   v-for="(category, index) in categories.slice().reverse()"
                   :key="category.id"
@@ -24,7 +24,7 @@
                       )
                     "
                   >
-                    {{ category.title.ru }}
+                    {{ category.title[lang] }}
                   </span>
                 </li>
               </ul>
@@ -40,11 +40,11 @@
 
           <div class="shop-page-img-overlay pt-xl-10">
             <p class="fs-18 font-weight-bold text-center text-white mb-2">
-              2021 Trending
+              {{ year }} Trending
             </p>
 
-            <h2 class="text-white text-center fs-30 fs-sm-40">
-              Pastel Color Vibe
+            <h2 v-if="categoryImg.title" class="text-white text-center fs-30 fs-sm-40">
+              {{ categoryImg.title[getLang] }}
             </h2>
           </div>
         </div>
@@ -58,7 +58,7 @@
                 placeholder="Search"
               />
               <font-awesome-icon
-                style="cursor: pointer;"
+                style="cursor: pointer"
                 @click="searchProduct"
                 class="serach-btn"
                 icon="fa-solid fa-magnifying-glass"
@@ -81,6 +81,7 @@
             v-for="(item, index) in productsByCategory"
             :key="index"
             :post="item"
+            :lang="lang"
           />
         </div>
         <div class="shop-pagination d-flex justify-content-center pt-5">
@@ -100,6 +101,7 @@ import ProductCard from "../../smallComponents/ProductCard.vue";
 import VsPagination from "@vuesimple/vs-pagination";
 import JournalCard from "~/smallComponents/JournalCard.vue";
 export default {
+  props: ["lang"],
   data() {
     return {
       productsByCategory: [],
@@ -116,9 +118,14 @@ export default {
       page: {
         page: 1,
       },
+      year: null,
     };
   },
-
+ computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   components: {
     ProductCard,
     VsPagination,
@@ -126,9 +133,11 @@ export default {
   },
   async mounted() {
     this.fetchSomething();
+    this.getDate();
   },
 
   methods: {
+    getDate() {},
     async fetchSomething() {
       let id = this.$route.params.id;
       this.id = id;
@@ -144,7 +153,10 @@ export default {
         "posts/fetchPostsCategoryById",
         this.id
       );
+
       this.categories = categories;
+      const event = new Date(categoryImg.created_at);
+      this.year = event.getFullYear();
       this.categoryImg = categoryImg;
       this.productsByCategory = products.data;
       this.currentPage = products.last_page;

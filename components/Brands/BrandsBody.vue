@@ -8,9 +8,9 @@
               <h3>Бренды продуктов</h3>
             </div>
             <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none;">
+              <ul class="f-card-list" style="padding-left: none">
                 <li
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                   class="mb-1"
                   v-for="(brand, index) in brands"
                   :key="brand.id"
@@ -35,11 +35,11 @@
 
           <div class="shop-page-img-overlay pt-xl-10">
             <p class="fs-18 font-weight-bold text-center text-white mb-2">
-              2021 Trending
+              {{ year }} Trending
             </p>
 
             <h2 class="text-white text-center fs-30 fs-sm-40">
-              Pastel Color Vibe
+              {{ brandImg.title }}
             </h2>
           </div>
         </div>
@@ -53,7 +53,7 @@
                 placeholder="Search"
               />
               <font-awesome-icon
-                style="cursor: pointer;"
+                style="cursor: pointer"
                 @click="searchProduct"
                 class="serach-btn"
                 icon="fa-solid fa-magnifying-glass"
@@ -107,9 +107,14 @@ export default {
       page: {
         page: 1,
       },
+      year: null,
     };
   },
-
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   components: {
     ProductCard,
     VsPagination,
@@ -120,9 +125,9 @@ export default {
 
   methods: {
     async fetchSomething() {
-      let id = this.$route.params.id;
-      this.id = id;
-      this.params.page = 1;
+      let id = await this.$route.params.id;
+      this.id = await id;
+      this.params.page = await 1;
       const products = await this.$store.dispatch(
         `products/fetchProductByParams`,
         this.$route.fullPath
@@ -132,8 +137,11 @@ export default {
         `brands/fetchBrandById`,
         this.id
       );
+      const event = new Date(brandImg.created_at);
+      this.year = event.getFullYear();
       this.brands = brands.slice().reverse();
       this.brandImg = brandImg;
+      console.log(this.brandImg);
       this.productsByBrand = products.data;
       this.currentPage = products.last_page;
     },

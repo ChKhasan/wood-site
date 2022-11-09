@@ -21,7 +21,6 @@ export default {
     @media (min-width: 768px){
 .title_may {
     font-size: 40px!important;
-    margin-bottom: 50px;
 }}
 
 .title_may h2{

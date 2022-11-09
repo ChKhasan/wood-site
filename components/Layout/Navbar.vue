@@ -1,26 +1,26 @@
 <template lang="html">
-  <div class="sticky-area" id="container">
+  <div class="sticky-area" id="container-nav" ref="navScroll">
     <div class="container-fluid" id="bg-white">
-      <div class="container container-xxl">
-        <div class="row d-none d-xl-flex">
+      <div class="container container-xl">
+        <div
+          class="row d-none d-xl-flex justify-content-between"
+          style="height: 75px"
+        >
           <div class="col-2 d-flex align-items-center">
             <div class="position-relative">
-              <!-- <button @click="locatePage('ru')">ru</button>
-              <button @click="locatePage('en')">en</button> -->
+              <nuxt-link to="/" class="navbar-brand">
+                <img :src="siteInfo.lg_logo_path" alt="" />
+              </nuxt-link>
             </div>
           </div>
           <div
-            class="col-8 d-flex py-xl-3 justify-content-between align-items-center justify-content-center"
+            class="col-6 d-flex py-xl-3 justify-content-between align-items-center justify-content-center"
           >
-            <nuxt-link to="/" class="dropdown_btn">
-              <span class="dropdown_hover home_nav" id="hover">Главный</span>
+            <nuxt-link to="/" class="dropdown_btn" v-for="item in translations" :key="item.id">
+              <span class="dropdown_hover" id="hover">{{item.val[getLang]}}</span>
             </nuxt-link>
-            <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
-              <span class="dropdown_hover home_nav" id="hover"> Каталог </span>
-            </nuxt-link>
-
-            <nuxt-link to="/" class="navbar-brand">
-              <img src="../../static/images/logo.png" alt="" />
+            <!-- <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
+              <span class="dropdown_hover" id="hover"> Каталог </span>
             </nuxt-link>
 
             <nuxt-link to="/contact" class="dropdown_btn">
@@ -28,9 +28,24 @@
             </nuxt-link>
             <nuxt-link to="/company" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> О компании </span>
-            </nuxt-link>
+            </nuxt-link> -->
           </div>
-          <div class="col-2 d-flex align-items-center justify-content-end">
+          <div class="col-1 d-flex align-items-center">
+            <el-dropdown @command="actionLangRu">
+              <span class="el-dropdown-link">
+                {{ getLang }}<i class="el-icon-arrow-down el-icon--right"></i>
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item
+                  v-for="item in language"
+                  :key="item.id"
+                  :command="item.code"
+                  >{{ item.title }}</el-dropdown-item
+                >
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+          <div class="col-2 d-flex align-items-center justify-content-start">
             <font-awesome-icon class="mx-1" :icon="['fas', 'fa-phone']" />
 
             <a
@@ -59,6 +74,22 @@
               <div class="px-3 py-2 sidebar-body">
                 <ul class="">
                   <li class="mt-5">
+                    <el-dropdown @command="actionLangRu">
+                      <span class="el-dropdown-link">
+                        {{ getLang
+                        }}<i class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                      <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item
+                          v-for="item in language"
+                          :key="item.id"
+                          :command="item.code"
+                          >{{ item.title }}</el-dropdown-item
+                        >
+                      </el-dropdown-menu>
+                    </el-dropdown>
+                  </li>
+                  <li class="mt-5">
                     <nuxt-link to="/">Главный</nuxt-link>
                   </li>
                   <li class="mt-5">
@@ -72,6 +103,7 @@
                   <li class="mt-5">
                     <nuxt-link to="/company">О компании</nuxt-link>
                   </li>
+                  <li></li>
                 </ul>
               </div>
             </b-sidebar>
@@ -82,11 +114,7 @@
             </a>
           </div>
 
-          <div class="col-2 d-flex justify-content-end">
-            <!-- <a href="#" class="nav-search d-flex align-items-center">
-              <font-awesome-icon :icon="['fas', 'fa-magnifying-glass']" />
-            </a> -->
-          </div>
+          <div class="col-2 d-flex justify-content-end"></div>
         </div>
       </div>
     </div>
@@ -94,44 +122,49 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "data-center",
-  props: ["siteInfo"],
+  props: ["siteInfo", "language", "translations"],
 
   data() {
     return {
       open: true,
       drawer: false,
-      language: "",
       currentEl: "",
       currLang: "ru",
       lang: this.siteInfo,
+      translate: [],
     };
   },
-
-  methods: {
-    locatePage(lang) {
-      console.log(this.$i18n);
-      this.$i18n.defaultLocale = lang;
-      this.$i18n.locale = lang;
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
     },
   },
+  methods: {
+    ...mapActions(["actionLangRu"]),
+  },
+
   mounted() {
-    this.language = localStorage.getItem("Lang");
-    var header = document.querySelector("#container");
+    var header = this.$refs.navScroll;
+
     let lastScrollTop = 0;
     window.addEventListener("scroll", () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       if (scrollTop > lastScrollTop) {
         header.style.top = "-128px";
         header.style.background = "transparent";
+        header.style.marginTop = "0";
       } else if (document.documentElement.scrollTop == 0) {
+        header.style.marginTop = "0";
         header.style.boxShadow = "none";
         header.style.background = "transparent";
       } else {
         header.style.top = "0";
         header.style.boxShadow = " 0 0.5rem 1rem rgb(0 0 0 / 15%)";
         header.style.background = "#fff";
+        header.style.marginTop = "0";
       }
       lastScrollTop = scrollTop;
     });
@@ -145,7 +178,13 @@ export default {
 </script>
 <style lang="css" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
-
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
+}
+.el-icon-arrow-down {
+  font-size: 12px;
+}
 .badge_box {
   position: relative;
 }
@@ -169,6 +208,7 @@ export default {
 .dropdown_hover {
   cursor: pointer;
   transition: 1s;
+  color: #fff !important;
 }
 .dropdown_hover:hover + .dropdown-bottom {
   top: 100%;

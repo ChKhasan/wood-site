@@ -9,7 +9,7 @@ export const actions = {
   },
   async fetchProductByParams({},fullPage) {
     try {
-      const res = await this.$axios.$get(`${fullPage}&paginate=6`);
+      const res = await this.$axios.$get(`${fullPage}&paginate=12`);
       return res.data;
     } catch (e) {
       console.log(e);

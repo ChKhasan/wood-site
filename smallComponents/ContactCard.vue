@@ -1,24 +1,35 @@
 <template lang="html">
   <div class="contact-card" :style="{ 'background-image': `url(${img})` }">
+    <div class="backColor" :style="{ background: `${bgcolor}` }"></div>
     <div class="c-card-title mb-5">
-      <h3>Follow Our Store <br />On Instagram</h3>
+      <h3>Следите за нашим <br />магазином в {{ title }}</h3>
     </div>
     <div class="-card-text"><a href="#">@furnitor.trending</a></div>
     <div class="c-card-btn">
-      <BorderBlackBtn :name="name" />
+      <div class="j-card-btn">
+        <a class="b-btn" :href="link">{{ name }}</a>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import BorderBlackBtn from "../smallComponents/BorderBlackBtn.vue";
 export default {
-  props: ["name", "img"],
+  props: ["name", "img", "link", "title", "bgcolor"],
   components: {
     BorderBlackBtn,
   },
 };
 </script>
 <style lang="css">
+.backColor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
 @media (min-width: 576px) {
   .contact-card {
     height: 408px;
@@ -29,6 +40,7 @@ export default {
 }
 
 .contact-card {
+  position: relative;
   padding: 50px;
   height: 320px;
   background-size: cover;
@@ -41,14 +53,7 @@ export default {
   flex-direction: column;
   transition: 0.5s;
 }
-@media (max-width: 576px) {
-  .contact-card {
-    height: 300px;
-  padding: 30px;
 
-  }
-
-}
 .c-card-title h3 {
   font-size: 30px !important;
   font-weight: 700 !important;
@@ -64,5 +69,14 @@ export default {
 }
 .c-card-btn {
   margin-top: auto !important;
+}
+@media (max-width: 576px) {
+  .contact-card {
+    height: 300px;
+    padding: 30px;
+  }
+  .c-card-title h3 {
+    font-size: 26px !important;
+  }
 }
 </style>

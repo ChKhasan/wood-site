@@ -1,12 +1,12 @@
 <template lang="html">
-  <div class="container_block card_box">
+  <div class="container container-xl card_box">
     <div class="grid-container">
       <ProductCard
         v-for="(item, index) in products"
         data-aos="fade-up"
         data-aos-duration="900"
-        :key="item.id"
         :data-aos-delay="(1 + ((index * 1) % 4)) * 100"
+        :hide="true"
         :product="item"
       />
       <ShoppingCard
@@ -21,7 +21,7 @@
     </div>
     <div class="d-flex justify-content-center my-5">
       <nuxt-link
-        to="/categories"
+        to="/categories/1/products?page=1"
         class="btn btn-outline-primary text-uppercase shop_now_btn"
         data-aos="fade-up"
         data-aos-duration="1000"
@@ -46,7 +46,7 @@ export default {
 </script>
 <style lang="css">
 .card_box {
-  padding-top: 110px;
+  padding-top: 40px;
   padding-bottom: 110px;
 }
 .grid-container {

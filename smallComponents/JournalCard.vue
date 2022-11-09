@@ -12,11 +12,11 @@
       </div>
       <div class="j-card-title mb-3">
         <h3>
-          <a href="">{{ post.title.ru }}</a>
+          <a href="">{{ post.title[getLang] ? post.title[getLang]:post.title.ru }}</a>
         </h3>
       </div>
       <div class="j-card-text">
-        <p v-html="post.desc.ru"></p>
+        <p v-html="post.desc[getLang] ? post.desc[getLang]:post.desc.ru"></p>
       </div>
       <BorderBlackBtn name="Все посты" />
     </div>
@@ -25,7 +25,7 @@
 <script>
 import BorderBlackBtn from "../smallComponents/BorderBlackBtn.vue";
 export default {
-  props: ["img", "post"],
+  props: ["img", "post","lang"],
   data() {
     return {
       monthNames: [
@@ -56,6 +56,11 @@ export default {
       this.month = event.getMonth();
       this.date = event.getDate();
       this.year = event.getFullYear();
+    },
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
     },
   },
   components: {

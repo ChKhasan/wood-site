@@ -26,7 +26,9 @@ export const actions = {
   },
   async fetchCategorySearch({},category) {
     try {
-      const res = await this.$axios.$get(`categories/${category.id}/products?search=${category.search}`);
+      const res = await this.$axios.$get(`categories/${category.id}/products`,{
+        params: category.params
+      });
       return res.data;
     } catch (e) {
       console.log(e);

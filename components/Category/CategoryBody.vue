@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="container py-5">
+  <div class="container container-xl py-5">
     <div class="row pb-6">
       <div class="col-md-3">
         <div class="shop-sticky">
@@ -8,9 +8,9 @@
               <h3>Категории продуктов</h3>
             </div>
             <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none;">
+              <ul class="f-card-list" style="padding-left: none">
                 <li
-                  style="cursor: pointer;"
+                  style="cursor: pointer"
                   class="mb-1 hover-effect"
                   v-for="(category, index) in categories.slice().reverse()"
                   :key="category.id"
@@ -22,7 +22,11 @@
                       $router.push(`/categories/${category.id}/products?page=1`)
                     "
                   >
-                    {{ category.title.ru }}
+                    {{
+                      category.title[getLang]
+                        ? category.title[getLang]
+                        : category.title.ru
+                    }}
                   </span>
                 </li>
               </ul>
@@ -50,11 +54,18 @@
 
           <div class="shop-page-img-overlay pt-xl-10">
             <p class="fs-18 font-weight-bold text-center text-white mb-2">
-              2021 Trending
+              {{ year }} Trending
             </p>
 
-            <h2 class="text-white text-center fs-30 fs-sm-40">
-              Pastel Color Vibe
+            <h2
+              v-if="categoryImg.title"
+              class="text-white text-center fs-30 fs-sm-40"
+            >
+              {{
+                categoryImg.title[getLang]
+                  ? categoryImg.title[getLang]
+                  : categoryImg.title.ru
+              }}
             </h2>
           </div>
         </div>
@@ -63,12 +74,12 @@
             <div class="position-relative">
               <input
                 type="text"
-                v-model="search"
+                v-model="params.search"
                 class="search-input"
                 placeholder="Search"
               />
               <font-awesome-icon
-                style="cursor: pointer;"
+                style="cursor: pointer"
                 @click="searchProduct"
                 class="serach-btn"
                 icon="fa-solid fa-magnifying-glass"
@@ -90,6 +101,7 @@
             img="./images/product-10.jpg"
             v-for="(item, index) in productsByCategory"
             :key="index"
+            :hide="false"
             :product="item"
           />
         </div>
@@ -115,33 +127,37 @@ export default {
       categoryById: {},
       categoryImg: {},
       id: 1,
-      search: "",
       categories: [],
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 6,
+        paginate: 12,
+        search: "",
       },
       page: {
         page: 1,
       },
+      year: null,
     };
   },
-
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   components: {
     ProductCard,
     VsPagination,
   },
-  async mounted() {
+  mounted() {
     this.fetchSomething();
   },
 
   methods: {
     async fetchSomething() {
-      let id = this.$route.params.id;
-      this.id = id;
-      this.params.page = 1;
-
+      let id = await this.$route.params.id;
+      this.id = await id;
+      this.params.page = await 1;
       const products = await this.$store.dispatch(
         `products/fetchProductByParams`,
         this.$route.fullPath
@@ -154,7 +170,8 @@ export default {
       const categories = await this.$store.dispatch(
         `categories/fetchCategories`
       );
-
+      const event = new Date(categoryImg.created_at);
+      this.year = event.getFullYear();
       this.categories = categories;
       this.categoryImg = categoryImg;
       this.productsByCategory = products.data;
@@ -162,11 +179,12 @@ export default {
     },
 
     async searchProduct() {
+      this.text = true;
       const searchProducts = await this.$store.dispatch(
         `categories/fetchCategorySearch`,
         {
           id: this.id,
-          search: this.search,
+          params: this.params,
         }
       );
       const categoryById = await this.$store.dispatch(
@@ -177,11 +195,12 @@ export default {
       this.productsByCategory = searchProducts.data;
       this.currentPage = searchProducts.last_page;
     },
+
     async changePage(val) {
       this.params.page = val;
       this.page.page = val;
 
-      this.$router.replace({
+      await this.$router.replace({
         path: `/categories/${this.id}/products`,
         query: this.page,
       });
@@ -189,8 +208,8 @@ export default {
       const pro = await this.$axios.$get(`categories/${this.id}/products`, {
         params: this.params,
       });
-      this.productsByCategory = pro.data.data;
-      this.currentPage = pro.data.last_page;
+      this.productsByCategory = await pro.data.data;
+      this.currentPage = await pro.data.last_page;
     },
   },
 };
@@ -198,8 +217,7 @@ export default {
 <style lang="css">
 .category-banner {
   width: 100%;
-  /* height: 100%; */
-  /* aspect-ratio: 1/0.5; */
+
   background-position: center;
   background-size: cover;
   overflow: hidden;

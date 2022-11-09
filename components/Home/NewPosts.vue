@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <div class="container_block container-xxl">
+    <div class="container container-xl">
       <div class="row">
         <div class="col-12 j-card-controller">
           <JournalCard

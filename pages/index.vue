@@ -1,10 +1,14 @@
 <template>
   <div>
-    <Banner />
+    <Banner :sliders="sliders" />
+    <div class="mt-5">
+      <TitleComp title="Наши Продукты" />
+    </div>
+
     <HomeCardBlog :products="products" :category="category" />
     <TitleComp title="Недавние Посты" />
     <NewPosts :posts="posts" />
-    <ContactCardBlog />
+    <ContactCardBlog :siteInfo="siteInfo" />
   </div>
 </template>
 
@@ -17,26 +21,23 @@ import NewPosts from "~/components/Home/NewPosts.vue";
 
 export default {
   name: "IndexPage",
-
-  data() {
-    return {
-      ip: [],
-    };
-  },
-  mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"));
-    console.log("log", this.$store);
-    localStorage.setItem("Lang", "ru");
-  },
+  mounted() {},
   async asyncData({ store }) {
+    const language = await store.dispatch("language/fetchLanguage");
+    if (!localStorage.getItem("Lang")) {
+      await store.dispatch("actionLangRu", language[0].code);
+    }
     const products = await store.dispatch("products/fetchProductsPaginate");
     const category = await store.dispatch("categories/fetchCategoriesPaginate");
     const posts = await store.dispatch("posts/fetchPostsPaginate", 3);
-    console.log(posts);
+    const sliders = await store.dispatch("sliders/fetchSliders");
+    const siteInfo = await store.dispatch("site-info/fetchSiteInfo");
     return {
       products,
       category,
       posts,
+      sliders,
+      siteInfo,
     };
   },
 
@@ -64,9 +65,17 @@ a {
     margin-bottom: 3.125rem !important;
   }
 }
-.container_block {
+.container {
   padding-left: 24px !important;
   padding-right: 24px !important;
+}
+@media (min-width: 576px) {
+  .container_block {
+    max-width: 540px !important;
+    margin: 0 auto !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
 }
 @media (min-width: 576px) {
   .container_block {
@@ -94,7 +103,12 @@ a {
     margin: 0 auto !important;
   }
 }
-
+@media (min-width: 1750px) {
+  .container-xl {
+    max-width: 1750px !important;
+    margin: 0 auto !important;
+  }
+}
 .container-shop {
   padding-left: 24px !important;
   padding-right: 24px !important;

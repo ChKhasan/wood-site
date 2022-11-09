@@ -17,9 +17,6 @@ export default {
     };
   },
 
-  mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"));
-  },
   components: {
     BreadCrumbComp,
     CategoryBody,

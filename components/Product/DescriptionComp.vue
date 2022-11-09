@@ -16,7 +16,6 @@ export default {};
 </script>
 <style lang="css">
 .description_comp {
-  padding-bottom: 7rem !important;
 }
 .mxw-830 {
   max-width: 830px !important;

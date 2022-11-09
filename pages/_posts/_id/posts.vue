@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <BreadCrumbComp category="Посты" />
-    <PostCategory />
+    <PostCategory :lang="getLang"/>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
   components: {
     BreadCrumbComp,
     PostCategory,
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
   },
 };
 </script>

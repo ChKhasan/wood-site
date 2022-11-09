@@ -2,16 +2,16 @@
   <div class="team-card">
     <div class="team-card-img d-flex justify-content-center">
       <div class="t-img">
-        <img :src="team.lg_img" alt="" />
+        <img :src="team.lg_img" alt="user-logo" />
       </div>
     </div>
     <div class="team-card-body d-flex justify-content-center flex-column">
-      <div class="team-card-name d-flex justify-content-center mt-4">
-        <h5>{{ team.name.ru }}</h5>
+      <div class="team-card-name d-flex justify-content-center">
+        <h5>{{ team.name[getLang] ? team.name[getLang]:team.name.ru }}</h5>
       </div>
-      <div class="team-card-position d-flex justify-content-center mt-4">
+      <div class="team-card-position d-flex justify-content-center ">
         <p>
-          {{ team.position.ru }}
+          {{ team.position[getLang] ? team.position[getLang]:team.position.ru }}
         </p>
       </div>
     </div>
@@ -20,20 +20,24 @@
 <script>
 export default {
   props: ["team"],
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
 };
 </script>
 <style lang="css">
-
 .t-img {
   border-radius: 50%;
   overflow: hidden;
   aspect-ratio: 1/1;
-  height: 130px;
-  transition:  0.5s;
+  height: 108px;
+  transition: 0.5s;
   flex-shrink: 0;
 }
 .team-card {
-  transition: .3s;
+  transition: 0.3s;
 }
 .team-card:hover {
   transform: translateY(-8px);
@@ -46,18 +50,34 @@ export default {
   flex-shrink: 0;
 }
 .team-card-name h5 {
-  font-size: 20px;
   font-family: "Poppins", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-top: 40px;
 }
 .team-card-position p {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0em;
   text-align: center;
   font-family: "Poppins", sans-serif;
-  color: #777;
+  color: #83879b;
+  text-overflow: clip;
+  overflow: hidden;
+  width: 100%;
+  height: 25px;
 }
 .team-card {
   cursor: pointer;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
-  padding: 20px;
+  
+  padding: 40px 20px 20px 20px;
+  aspect-ratio: 1/0.8;
 }
 </style>

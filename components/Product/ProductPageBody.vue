@@ -14,10 +14,10 @@
               class="body_type text-muted fs-12 font-weight-500 letter-spacing-05"
               v-for="item in product.products_categories"
             >
-              {{ item.title.ru }}
+              {{ item.title[getLang] }}
             </p>
           </div>
-          <h2 class="body_title fs-30 fs-lg-40 mb-2">{{ product.title.ru }}</h2>
+          <h2 class="body_title fs-30 fs-lg-40 mb-2">{{ product.title[getLang] }}</h2>
 
           <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
 
@@ -34,7 +34,7 @@
                   ><font-awesome-icon :icon="['fas', 'fa-minus']"
                 /></a>
 
-                <span>{{ dynamicValidateForm.message }}</span
+                <span>{{ dynamicValidateForm.count }}</span
                 ><a class="count-btn" @click="countFunc(true)"
                   ><font-awesome-icon :icon="['fas', 'fa-plus']"
                 /></a>
@@ -64,7 +64,7 @@
                   v-ripple="'rgba(255, 255, 255, 0.35)'"
                   :ripple="false"
                   type="primary"
-                  class="send_btn"
+                  class="send_btn d-flex justify-content-center align-items-center"
                   @click="submitForm('dynamicValidateForm')"
                 >
                   Отправить</el-button
@@ -157,7 +157,7 @@ export default {
       dynamicValidateForm: {
         name: "",
         phone_number: "",
-        message: "1",
+        count: 1,
         page: "https://plaza.choopon.uz",
       },
       numberModel: "",
@@ -171,7 +171,11 @@ export default {
       value: "",
     };
   },
-
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   async mounted() {
     try {
       await this.$recaptcha.init();
@@ -182,20 +186,29 @@ export default {
   },
   methods: {
     async submitForm(formName) {
-      this.$toast.open({
-        message: "Successfully",
-        type: "success",
-        duration: 2000,
-        dismissible: true,
-        position: "top-right",
-      });
-      // try {
-      //   const token = await this.$recaptcha.getResponse();
-      //   await this.$axios.post("/feedback", this.dynamicValidateForm);
-      //   await this.$recaptcha.reset();
-      // } catch (error) {
-      //   console.log("Error in order:", error);
-      // }
+      try {
+        const token = await this.$recaptcha.getResponse();
+        await this.$axios.post("/feedback", {
+          ...this.dynamicValidateForm,
+          product_id: this.product.id,
+        });
+        this.dynamicValidateForm = {
+        name: "",
+        phone_number: "",
+        count: 1,
+        page: "https://plaza.choopon.uz",
+      },
+        await this.$recaptcha.reset();
+        await this.$toast.open({
+          message: "Successfully",
+          type: "success",
+          duration: 2000,
+          dismissible: true,
+          position: "top-right",
+        });
+      } catch (error) {
+        console.log("Error in order:", error);
+      }
     },
     async recaptcha() {
       await this.$recaptchaLoaded();
@@ -210,9 +223,7 @@ export default {
       });
     },
     countFunc(def) {
-      def
-        ? this.dynamicValidateForm.message++
-        : this.dynamicValidateForm.message--;
+      def ? this.dynamicValidateForm.count++ : this.dynamicValidateForm.count--;
 
       localStorage.setItem("count", this.dynamicValidateForm.message);
       this.count = localStorage.getItem("count");

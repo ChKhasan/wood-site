@@ -1,44 +1,41 @@
 <template lang="html">
   <div>
-    <BreadCrumbComp category="Услугы" />
-    <div class="container container-xxl mt-3 py-5">
-      <div class="row pb-5">
-        <div class="col-12 d-flex justify-content-center service-title">
-          <h1>{{ site_info.title.ru }}</h1>
-        </div>
-      </div>
+    <CompanyBanner :title="site_info" />
+
+    <TitleComp title="Наш Команда" />
+    <div class="container container-xl">
       <div class="row">
-        <div class="col-12">
-          <img
-            style="width: 100%;"
-            src="@/static/images/banner-01.jpg"
-            alt=""
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 mt-5 d-flex justify-content-center">
-          <p class="info-desc" v-html="site_info.desc.ru"></p>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid hr pb-5 mb-5"></div>
-    <TitleComp title="Команда" />
-    <div class="container container-xxl">
-      <div class="row">
-        <div class="col-12 mb-5 team-card-controller">
+        <div class="col-12 mb-5 mt-4 team-card-controller">
           <TeamCard v-for="(item, index) in team" :key="index" :team="item" />
+        </div>
+      </div>
+      <div class="row company-info">
+        <div class="col-lg-7 pr-5">
+          <h1 class="company-info-title">
+            Having a place set aside for an activity you love makes it more
+            likely you’ll do it.
+          </h1>
+          <p
+            class="company-desc"
+            v-html="
+              site_info.desc[getLang]
+                ? site_info.desc[getLang]
+                : site_info.desc.ru
+            "
+          ></p>
+        </div>
+        <div class="col-lg-5 company-info-img">
+          <img src="../../static/images/Rectangle 122439.png" alt="" />
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
+import CompanyBanner from "~/components/Company/CompanyBanner.vue";
 import TitleComp from "~/components/TitleComp.vue";
 import TeamCard from "~/smallComponents/TeamCard.vue";
 export default {
-
   async asyncData({ store }) {
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     const team = await store.dispatch("team/fetchTeam");
@@ -47,15 +44,24 @@ export default {
       team,
     };
   },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   mounted() {
     this.$i18n.setLocale(localStorage.getItem("Lang"));
   },
-  components: { TeamCard, TitleComp },
+  components: { TeamCard, TitleComp, CompanyBanner },
 };
 </script>
 <style lang="css">
 .service-title h1 {
   font-weight: 600;
+}
+.company-info {
+  margin-top: 124px !important;
+  margin-bottom: 124px !important;
 }
 .info-desc {
   font-family: "Poppins", sans-serif;
@@ -72,7 +78,7 @@ export default {
 .team-card-controller {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 30px;
+  grid-gap: 24px;
 }
 @media (min-width: 576px) {
   .team-card-controller {
@@ -86,6 +92,10 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 30px;
+  }
+  .company-info-title {
+    font-size: 48px;
+    margin-top: 0 !important;
   }
 }
 @media (min-width: 992px) {
@@ -101,5 +111,33 @@ export default {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 30px;
   }
+}
+@media (min-width: 1400px) {
+  .team-card-controller {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 30px;
+  }
+}
+.company-info-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-top: 60px;
+}
+.company-desc {
+  font-family: "Poppins", sans-serif;
+
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 36px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+.company-info-img img {
+  width: 100%;
 }
 </style>

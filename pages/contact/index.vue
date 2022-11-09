@@ -39,7 +39,7 @@
           <iframe
             :src="site_info.map"
             width="100%"
-            style="border: 0; aspect-ratio: 1/0.5;"
+            style="border: 0; aspect-ratio: 1/0.5"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -56,52 +56,64 @@
             Если у вас есть отличные продукты, которые вы делаете или хотите
             работать с нами, напишите нам.
           </p>
-          <form action="">
-            <div class="row mb-6">
-              <div class="col-sm-6 mt-4">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Ваше Имя*"
-                  required=""
-                />
-              </div>
-              <div class="col-sm-6 mt-4">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Ваше Эл. адрес*"
-                  required=""
-                />
-              </div>
-            </div>
-            <div class="form-group mb-4">
-              <textarea class="form-control" rows="6">Комментарий</textarea>
-            </div>
-            <div class="custom-control custom-checkbox mb-6">
+          <div class="row mb-6">
+            <div class="col-sm-6 mt-4">
               <input
-                type="checkbox"
-                class="custom-control-input"
-                id="customCheck1"
+                type="text"
+                class="form-control"
+                placeholder="Ваше Имя*"
+                required="Please  "
+                v-model="dynamicValidateForm.name"
               />
-              <label class="custom-control-label fs-15" for="customCheck1">
-                Сохраните мое имя, адрес электронной почты и веб-сайт в этом
-                браузере для следующего комментария.</label
-              >
             </div>
-            <button
-              type="submit"
-              class="btn form-btn text-uppercase letter-spacing-05"
+            <div class="col-sm-6 mt-4">
+              <the-mask
+                v-model="dynamicValidateForm.phone_number"
+                class="form-control"
+                value="+998 "
+                placeholder="+998 __ ___-__-__"
+                :mask="['+998 ## ### ## ##', '+998 ## ### ## ##']"
+              />
+            </div>
+          </div>
+          <div class="form-group mb-4">
+            <textarea
+              class="form-control"
+              rows="6"
+              v-model="dynamicValidateForm.message"
             >
-              отправить сейчас
-            </button>
-          </form>
+Комментарий</textarea
+            >
+          </div>
+          <div class="custom-control custom-checkbox mb-6">
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customCheck1"
+            />
+            <label class="custom-control-label fs-15" for="customCheck1">
+              Сохраните мое имя, адрес электронной почты и веб-сайт в этом
+              браузере для следующего комментария.</label
+            >
+          </div>
+          <button
+            v-ripple="'rgba(255, 255, 255, 0.35)'"
+            :ripple="false"
+            class="btn form-btn text-uppercase letter-spacing-05"
+            @click="postData"
+          >
+            отправить сейчас
+          </button>
         </div>
 
         <div class="col-md-4 pl-xl-13 pl-md-6 mt-4">
           <p class="font-weight-bold adress-title mb-3">Адрес</p>
           <address class="mb-6 form-text">
-            {{ site_info.address.ru }}
+            {{
+              site_info.address[getLang]
+                ? site_info.address[getLang]
+                : site_info.address.ru
+            }}
           </address>
           <p class="font-weight-bold info-title mb-2 form-text">Информация</p>
           <p class="mb-0 form-text">{{ site_info.phone_number }}</p>
@@ -116,9 +128,16 @@
 <script>
 import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
 import { yandexMap, ymapMarker } from "vue-yandex-maps";
+import { TheMask } from "vue-the-mask";
 export default {
   data() {
     return {
+      dynamicValidateForm: {
+        name: "",
+        phone_number: "",
+        message: "",
+        page: "https://plaza.choopon.uz",
+      },
       placemarks: [
         {
           coords: [41.3, 69.2],
@@ -131,10 +150,37 @@ export default {
       ],
     };
   },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   mounted() {
     this.$i18n.setLocale(localStorage.getItem("Lang"));
   },
-  components: { yandexMap, ymapMarker, BreadCrumbComp },
+  methods: {
+    async postData() {
+      try {
+        await this.$axios.post("/feedback", this.dynamicValidateForm);
+        this.dynamicValidateForm = {
+        name: "",
+        phone_number: "",
+        message: "",
+        page: "https://plaza.choopon.uz",
+      },
+        await this.$toast.open({
+          message: "Successfully",
+          type: "success",
+          duration: 2000,
+          dismissible: true,
+          position: "top-right",
+        });
+      } catch (error) {
+        console.log("Error in order:", error);
+      }
+    },
+  },
+  components: { yandexMap, ymapMarker, BreadCrumbComp, TheMask },
   async asyncData({ store }) {
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     return {
@@ -209,12 +255,16 @@ export default {
 .map-control {
   padding-bottom: 70px;
 }
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 1%);
+}
 .form-control:focus {
-  outline: none !important;
+  /* outline: none !important;
   border: none !important;
-  /* -webkit-box-shadow: 0px 0px 5px rgba(56, 169, 240, 0.75);
-        -moz-box-shadow: 0px 0px 5px rgba(56, 169, 240, 0.75); */
-  box-shadow: 0px 0px 5px rgba(75, 77, 78, 0.75),
-    0px 0px 3px rgba(75, 77, 78, 0.75);
+*/
+  border-color: rgba(75, 77, 78, 0.01);
+  box-shadow: 0px 0px 5px rgba(75, 77, 78, 0.4),
+    0px 0px 3px rgba(75, 77, 78, 0.4);
 }
 </style>

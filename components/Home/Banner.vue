@@ -2,9 +2,10 @@
   <div>
     <div
       class="banner_comp d-flex flex-column justify-content-center bg-img-cover-center vh-100 custom-height-sm"
+      :style="{ 'background-image': `url(${sliders[0].lg_img})` }"
     >
       <div class="d-flex flex-column h-100 justify-content-center">
-        <div class="container container-xxl">
+        <div class="container container-xl">
           <div>
             <h1
               class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113"
@@ -14,14 +15,9 @@
               data-aos-duration="900"
             >
               <strong
-                class="d-block title_banner fadeInUp animated"
+                class="d-block title_banner-company fadeInUp animated"
                 data-animate="fadeInUp"
-                >Офисные</strong
-              >
-              <strong
-                class="d-block title_banner fadeInUp animated"
-                data-animate="fadeUp"
-                >кресла</strong
+                >{{ sliders[0].subtitle[getLang] }}</strong
               >
             </h1>
             <nuxt-link
@@ -40,7 +36,7 @@
         </div>
       </div>
       <div class="mt-auto">
-        <div class="container_block container-xxl">
+        <div class="container_block container-xl">
           <div></div>
         </div>
       </div>
@@ -50,7 +46,12 @@
 <script>
 export default {
   name: "BannerComp",
-  components: {},
+  props: ["sliders"],
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
 };
 </script>
 <style lang="css">
@@ -70,11 +71,12 @@ export default {
   color: #000;
   margin-bottom: 30px;
 }
-.title_banner {
+.title_banner-company {
   font-size: 60px !important;
   font-weight: 800 !important;
   font-family: "Poppins", sans-serif;
   color: #000;
+  width: 30%;
 }
 .shop_now_btn {
   border: 1px solid #000 !important;

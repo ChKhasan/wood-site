@@ -5,12 +5,12 @@
         <div class="col-lg mb-6 mb-lg-0">
           <div class="footer_logo">
             <nuxt-link to="" class="navbar-brand">
-              <img src="../../static/images/logo.png" alt="" />
+              <img :src="siteInfo.lg_logo_path" alt="" />
             </nuxt-link>
           </div>
         </div>
         <div class="col-sm-6 col-lg mb-6 mb-lg-0">
-          <ul class="list-unstyled mb-0">
+          <ul class="list-unstyled mb-0 mt-2">
             <li>
               <h3
                 class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
@@ -37,7 +37,7 @@
           </ul>
         </div>
         <div class="col-sm-6 col-lg mb-6 mb-lg-0">
-          <ul class="list-unstyled mb-0">
+          <ul class="list-unstyled mb-0 mt-2">
             <li>
               <h3
                 class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
@@ -89,11 +89,13 @@
               />
             </a>
           </div>
+
           <p
             class="mb-0 text-gray text-lg-right footer-links"
             v-if="siteInfo && siteInfo.title"
           >
-            © {{ year }} {{ siteInfo.title[$t('curLang')] }} .<br />
+            © {{ year }} {{ siteInfo.title[getLang] }} .<br />
+            {{ getLang }}
             All rights reserved.
           </p>
         </div>
@@ -110,10 +112,13 @@ export default {
       year: new Date().getFullYear(),
     };
   },
-
-  mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"));
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
   },
+
+ 
 };
 </script>
 <style lang="css">
