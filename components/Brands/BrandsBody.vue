@@ -48,7 +48,7 @@
             <div class="position-relative">
               <input
                 type="text"
-                v-model="search"
+                v-model="params.search"
                 class="search-input"
                 placeholder="Search"
               />
@@ -97,12 +97,12 @@ export default {
       brandById: {},
       brandImg: {},
       id: 1,
-      search: "",
       brands: [],
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 2,
+        paginate: 12,
+        search: "",
       },
       page: {
         page: 1,
@@ -141,20 +141,23 @@ export default {
       this.year = event.getFullYear();
       this.brands = brands.slice().reverse();
       this.brandImg = brandImg;
-      console.log(this.brandImg);
       this.productsByBrand = products.data;
       this.currentPage = products.last_page;
     },
 
     async searchProduct() {
-      const searchProducts = await this.$axios.$get(
-        `brands/${this.id}/products?search=${this.search}`
+      const searchProducts = await this.$store.dispatch(
+        `brands/fetchBrandSearch`,
+        {
+          id: this.id,
+          params: this.params,
+        }
       );
+
       const brandById = await this.$axios.$get(`brands/${this.id}`);
       this.brandById = brandById.data;
-
-      this.productsByBrand = searchProducts.data.data;
-      this.currentPage = searchProducts.data.last_page;
+      this.productsByBrand = searchProducts.data;
+      this.currentPage = searchProducts.last_page;
     },
     async changePage(val) {
       this.params.page = val;

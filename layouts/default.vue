@@ -39,7 +39,6 @@ export default {
       );
 
       this.translations = translations.filter((item,index) => item.translation_group.title === "Products");
-      console.log(this.translations);
       this.site_info = siteInfo;
       this.language = language;
     },

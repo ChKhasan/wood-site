@@ -41,7 +41,9 @@ export const actions = {
   },
   async fetchPostCategorySearch({},post) {
     try {
-      const res = await this.$axios.$get(`post-categories/${post.id}/posts?search=${post.search}`);
+      const res = await this.$axios.$get(`post-categories/${post.id}/posts`, {
+        params: post.params,
+      });
       return res.data;
     } catch (e) {
       console.log(e);

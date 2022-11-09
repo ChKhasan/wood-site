@@ -43,7 +43,10 @@
               {{ year }} Trending
             </p>
 
-            <h2 v-if="categoryImg.title" class="text-white text-center fs-30 fs-sm-40">
+            <h2
+              v-if="categoryImg.title"
+              class="text-white text-center fs-30 fs-sm-40"
+            >
               {{ categoryImg.title[getLang] }}
             </h2>
           </div>
@@ -53,7 +56,7 @@
             <div class="position-relative">
               <input
                 type="text"
-                v-model="search"
+                v-model="params.search"
                 class="search-input"
                 placeholder="Search"
               />
@@ -113,7 +116,8 @@ export default {
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 2,
+        paginate: 12,
+        search: "",
       },
       page: {
         page: 1,
@@ -121,7 +125,7 @@ export default {
       year: null,
     };
   },
- computed: {
+  computed: {
     getLang() {
       return this.$store.getters.language;
     },
@@ -166,7 +170,7 @@ export default {
         `posts/fetchPostCategorySearch`,
         {
           id: this.id,
-          search: this.search,
+          params: this.params,
         }
       );
 
@@ -192,6 +196,7 @@ export default {
       });
       this.productsByCategory = pro.data.data;
       this.currentPage = pro.data.last_page;
+      
     },
   },
 };

@@ -16,10 +16,20 @@
           <div
             class="col-6 d-flex py-xl-3 justify-content-between align-items-center justify-content-center"
           >
-            <nuxt-link to="/" class="dropdown_btn" v-for="item in translations" :key="item.id">
-              <span class="dropdown_hover" id="hover">{{item.val[getLang]}}</span>
+            <!-- <nuxt-link
+              to="/"
+              class="dropdown_btn"
+              v-for="item in translations"
+              :key="item.id"
+            >
+              <span class="dropdown_hover" id="hover">{{
+                item.val[getLang]
+              }}</span>
+            </nuxt-link> -->
+            <nuxt-link to="/" class="dropdown_btn">
+              <span class="dropdown_hover" id="hover"> Главный </span>
             </nuxt-link>
-            <!-- <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
+            <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> Каталог </span>
             </nuxt-link>
 
@@ -28,7 +38,7 @@
             </nuxt-link>
             <nuxt-link to="/company" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> О компании </span>
-            </nuxt-link> -->
+            </nuxt-link>
           </div>
           <div class="col-1 d-flex align-items-center">
             <el-dropdown @command="actionLangRu">
