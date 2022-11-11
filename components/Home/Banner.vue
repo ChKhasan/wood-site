@@ -21,7 +21,7 @@
               >
             </h1>
             <nuxt-link
-              to="/categories/1/products?page=1"
+              to="/products?page=1"
               data-aos="fade-up"
               data-aos-delay="400"
               data-aos-offset="100"

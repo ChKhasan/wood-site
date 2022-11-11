@@ -139,8 +139,8 @@
                 ></div>
               </div>
               <div class="pre-title">
-                <p>PREVIOUS</p>
-                <a href="">{{ thisPrevPost.title.ru }}</a>
+                <p>ПРЕДЫДУЩИЙ</p>
+                <a href="">{{ thisPrevPost.title[getLang] ? thisPrevPost.title[getLang]:thisPrevPost.title.ru }}</a>
               </div>
             </div>
           </div>
@@ -151,8 +151,8 @@
               class="next-card d-flex align-items-center justify-content-end"
             >
               <div class="next-title">
-                <p>NEXT</p>
-                <a href="">{{ thisNextPost.title.ru }}</a>
+                <p>СЛЕДУЮЩИЙ</p>
+                <a href="">{{ thisNextPost.title[getLang] ? thisNextPost.title[getLang]:thisNextPost.title.ru }}</a>
               </div>
               <div class="next-img mx-3">
                 <!-- <img
@@ -258,7 +258,6 @@ export default {
         path: `/post/${slug}`,
       });
       this.thisPost = thePost;
-
       let thisPrevPost = posts.filter((item) => item.id == thePost.id + 1)[0];
       let thisNextPost = posts.filter((item) => item.id == thePost.id - 1)[0];
 

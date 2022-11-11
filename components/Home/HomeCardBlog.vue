@@ -21,7 +21,7 @@
     </div>
     <div class="d-flex justify-content-center my-5">
       <nuxt-link
-        to="/categories/1/products?page=1"
+        to="/products?page=1"
         class="btn btn-outline-primary text-uppercase shop_now_btn"
         data-aos="fade-up"
         data-aos-duration="1000"

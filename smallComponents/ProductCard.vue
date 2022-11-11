@@ -162,11 +162,15 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover !important;
+  transition: .5s;
 }
 .product_card {
   transition: 0.3s !important;
 }
-.product_card:hover {
+/* .product_card:hover {
   transform: scale(1.05) !important;
+} */
+.product-card-banner:hover img {
+  transform: scale(1.2);
 }
 </style>

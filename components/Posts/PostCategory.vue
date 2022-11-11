@@ -5,7 +5,7 @@
         <div class="shop-sticky">
           <div class="filter-card">
             <div class="filter-card-title">
-              <h3>Категории продуктов</h3>
+              <h3>Все посты</h3>
             </div>
             <div class="filter-card-body">
               <ul class="f-card-list" style="padding-left: none">
@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="col-md-9">
-        <div class="shop-page-banner">
+        <!-- <div class="shop-page-banner">
           <div class="category-banner">
             <img :src="categoryImg.lg_img" alt="" />
           </div>
@@ -50,7 +50,7 @@
               {{ categoryImg.title[getLang] }}
             </h2>
           </div>
-        </div>
+        </div> -->
         <div class="d-flex mb-6 justify-content-between flex-wrap">
           <div class="d-flex col-md-6 align-items-center number-pages">
             <div class="position-relative">
@@ -135,11 +135,10 @@ export default {
     VsPagination,
     JournalCard,
   },
-  async mounted() {
+  created() {
     this.fetchSomething();
     this.getDate();
   },
-
   methods: {
     getDate() {},
     async fetchSomething() {
@@ -196,7 +195,6 @@ export default {
       });
       this.productsByCategory = pro.data.data;
       this.currentPage = pro.data.last_page;
-      
     },
   },
 };
@@ -310,11 +308,7 @@ export default {
   }
 }
 
-@media (min-width: 1200px) {
-  .shop-page-img-overlay {
-    padding-top: 4.375rem !important;
-  }
-}
+
 .number-pages {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
@@ -399,36 +393,9 @@ export default {
   color: #000 !important;
   cursor: default;
 }
-@media (min-width: 576px) {
-  .search-input {
-    padding: 1px 1.25rem;
-  }
-}
-.search-input {
-  border: none;
-  border-width: 2px !important;
-  height: calc(1.25em + 1.4375rem + 2px);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.25;
-  color: #000;
-  background-color: #fff;
-  background-clip: padding-box;
-  border-bottom: 1px solid #d2d2d2;
-  border-radius: 0;
-  box-shadow: none;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  font-family: "Poppins", sans-serif;
-}
-.search-input:focus {
-  outline: none;
-  border-bottom: 1px solid #000;
-}
-.serach-btn {
-  position: absolute;
-  top: 30%;
-  right: 0;
-}
+
+
+
 .btn-prev {
   background-image: url("@/static/images/images.png");
   background-position: center;

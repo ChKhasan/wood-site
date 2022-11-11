@@ -23,4 +23,14 @@ export const actions = {
       console.log(e);
     }
   },
+  async fetchProductSearch({},category) {
+    try {
+      const res = await this.$axios.$get(`products`,{
+        params: category.params
+      });
+      return res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

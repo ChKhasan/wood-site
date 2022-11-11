@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <BreadCrumbComp category="Товар" />
-    <ProductPageBody :product="product" />
+    <!-- <ProductPageBody :product="product" /> -->
     <TitleComp title="Последние товары" />
     <div class="container container-xxl mb-120">
       <div class="row py-5">
@@ -14,7 +14,7 @@
 </template>
 <script>
 import BreadCrumbComp from "../../components/BreadCrumbComp.vue";
-import ProductPageBody from "../../components/Product/ProductPageBody.vue";
+// import ProductPageBody from "../../components/Product/ProductPageBody.vue";
 import TitleComp from "../../components/TitleComp.vue";
 import CardCarousel from "../../components/Product/CardCarousel.vue";
 export default {
@@ -25,7 +25,7 @@ export default {
   },
   components: {
     BreadCrumbComp,
-    ProductPageBody,
+    // ProductPageBody,
     CardCarousel,
     TitleComp,
   },

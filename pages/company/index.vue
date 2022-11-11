@@ -49,9 +49,7 @@ export default {
       return this.$store.getters.language;
     },
   },
-  mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"));
-  },
+
   components: { TeamCard, TitleComp, CompanyBanner },
 };
 </script>

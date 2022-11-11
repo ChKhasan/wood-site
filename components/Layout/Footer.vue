@@ -24,7 +24,7 @@
             </li>
             <li class="py-0">
               <nuxt-link
-                to="/categories/1/products?page=1"
+                to="/products?page=1"
                 class="lh-225 footer-links"
                 >Каталог
               </nuxt-link>
@@ -34,18 +34,6 @@
                 >Контакт</nuxt-link
               >
             </li>
-          </ul>
-        </div>
-        <div class="col-sm-6 col-lg mb-6 mb-lg-0">
-          <ul class="list-unstyled mb-0 mt-2">
-            <li>
-              <h3
-                class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
-              >
-                Другие
-              </h3>
-            </li>
-
             <li class="py-0">
               <nuxt-link
                 to="/post-categories/1/posts?page=1"
@@ -57,6 +45,28 @@
             <li class="py-0">
               <nuxt-link to="/company" class="lh-225 footer-links"
                 >О компании</nuxt-link
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg mb-6 mb-lg-0">
+          <ul class="list-unstyled mb-0 mt-2">
+            <li>
+              <h3
+                class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
+              >
+                Категории
+              </h3>
+            </li>
+
+            <li class="py-0" v-for="item in categories">
+              <nuxt-link
+                :key="item.id"
+                :to="`/categories/${item.id}/products?page=1`"
+                class="lh-225 footer-links"
+                >{{
+                  item.title[getLang] ? item.title[getLang] : item.title.ru
+                }}</nuxt-link
               >
             </li>
           </ul>
@@ -95,8 +105,7 @@
             v-if="siteInfo && siteInfo.title"
           >
             © {{ year }} {{ siteInfo.title[getLang] }} .<br />
-            {{ getLang }}
-            All rights reserved.
+            Все права защищены.
           </p>
         </div>
       </div>
@@ -106,7 +115,7 @@
 <script>
 export default {
   name: "footer-comp",
-  props: ["siteInfo"],
+  props: ["siteInfo", "categories"],
   data() {
     return {
       year: new Date().getFullYear(),
@@ -117,8 +126,6 @@ export default {
       return this.$store.getters.language;
     },
   },
-
- 
 };
 </script>
 <style lang="css">

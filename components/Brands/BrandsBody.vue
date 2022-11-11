@@ -300,11 +300,7 @@ export default {
   }
 }
 
-@media (min-width: 1200px) {
-  .shop-page-img-overlay {
-    padding-top: 4.375rem !important;
-  }
-}
+
 .number-pages {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
@@ -389,36 +385,7 @@ export default {
   color: #000 !important;
   cursor: default;
 }
-@media (min-width: 576px) {
-  .search-input {
-    padding: 1px 1.25rem;
-  }
-}
-.search-input {
-  border: none;
-  border-width: 2px !important;
-  height: calc(1.25em + 1.4375rem + 2px);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.25;
-  color: #000;
-  background-color: #fff;
-  background-clip: padding-box;
-  border-bottom: 1px solid #d2d2d2;
-  border-radius: 0;
-  box-shadow: none;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  font-family: "Poppins", sans-serif;
-}
-.search-input:focus {
-  outline: none;
-  border-bottom: 1px solid #000;
-}
-.serach-btn {
-  position: absolute;
-  top: 30%;
-  right: 0;
-}
+
 .btn-prev {
   background-image: url("@/static/images/images.png");
   background-position: center;

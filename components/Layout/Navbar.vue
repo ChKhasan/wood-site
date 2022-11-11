@@ -29,15 +29,14 @@
             <nuxt-link to="/" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> Главный </span>
             </nuxt-link>
-            <nuxt-link to="/categories/1/products?page=1" class="dropdown_btn">
+            <nuxt-link to="/products?page=1" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> Каталог </span>
-            </nuxt-link>
-
-            <nuxt-link to="/contact" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> Контакт </span>
             </nuxt-link>
             <nuxt-link to="/company" class="dropdown_btn">
               <span class="dropdown_hover" id="hover"> О компании </span>
+            </nuxt-link>
+            <nuxt-link to="/contact" class="dropdown_btn">
+              <span class="dropdown_hover" id="hover"> Контакт </span>
             </nuxt-link>
           </div>
           <div class="col-1 d-flex align-items-center">
@@ -135,7 +134,7 @@
 import { mapActions } from "vuex";
 export default {
   name: "data-center",
-  props: ["siteInfo", "language", "translations"],
+  props: ["siteInfo", "language"],
 
   data() {
     return {
@@ -144,14 +143,21 @@ export default {
       currentEl: "",
       currLang: "ru",
       lang: this.siteInfo,
-      translate: [],
+      lastScrollTop: 0,
     };
   },
   computed: {
     getLang() {
       return this.$store.getters.language;
     },
+    routerName() {
+      return this.$route.name;
+    },
+    routerParams() {
+      return this.$route.params.index;
+    },
   },
+
   methods: {
     ...mapActions(["actionLangRu"]),
   },
@@ -159,10 +165,9 @@ export default {
   mounted() {
     var header = this.$refs.navScroll;
 
-    let lastScrollTop = 0;
     window.addEventListener("scroll", () => {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > lastScrollTop) {
+      if (scrollTop > this.lastScrollTop) {
         header.style.top = "-128px";
         header.style.background = "transparent";
         header.style.marginTop = "0";
@@ -176,12 +181,22 @@ export default {
         header.style.background = "#fff";
         header.style.marginTop = "0";
       }
-      lastScrollTop = scrollTop;
+      this.lastScrollTop = scrollTop;
     });
   },
+
   watch: {
-    currentEl(newVal, oldVal) {
-      console.log(newVal, oldVal);
+    routerName(oldVal, newVal) {
+      if (oldVal !== newVal) {
+        var header = this.$refs.navScroll;
+        header.style.top = "0";
+      }
+    },
+    routerParams(oldVal, newVal) {
+      if (oldVal !== newVal) {
+        var header = this.$refs.navScroll;
+        header.style.top = "0";
+      }
     },
   },
 };

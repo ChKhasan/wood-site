@@ -1,13 +1,9 @@
 <template lang="html">
   <div>
     <v-scroll-to-top></v-scroll-to-top>
-    <Navbar
-      :siteInfo="site_info"
-      :language="language"
-      :translations="translations"
-    />
+    <Navbar :siteInfo="siteInfo" :language="language" />
     <Nuxt />
-    <Footer :siteInfo="site_info" />
+    <Footer :siteInfo="siteInfo" :categories="categories" />
   </div>
 </template>
 <script>
@@ -17,9 +13,9 @@ import Footer from "../components/Layout/Footer.vue";
 export default {
   data() {
     return {
-      site_info: {},
+      siteInfo: {},
       language: [],
-      translations: [],
+      categories: [],
     };
   },
   components: {
@@ -27,21 +23,23 @@ export default {
     Footer,
   },
 
-  mounted() {
-    this.getInfo();
+  async mounted() {
+    this.siteInfo = await this.__GET();
+    this.language = await this.__GET1();
+    this.categories = await this.__GET2();
   },
   methods: {
-    async getInfo() {
-      const siteInfo = await this.$store.dispatch("site-info/fetchSiteInfo");
-      const language = await this.$store.dispatch("language/fetchLanguage");
-      const translations = await this.$store.dispatch(
-        "translation/fetchTranslations"
-      );
-
-      this.translations = translations.filter((item,index) => item.translation_group.title === "Products");
-      this.site_info = siteInfo;
-      this.language = language;
+    __GET() {
+      return this.$store.dispatch("site-info/fetchSiteInfo");
+    },
+    __GET1() {
+      return this.$store.dispatch("language/fetchLanguage");
+    },
+    __GET2() {
+      return this.$store.dispatch("categories/fetchCategories");
     },
   },
+ 
 };
+
 </script>

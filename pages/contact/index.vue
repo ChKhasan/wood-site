@@ -56,54 +56,60 @@
             Если у вас есть отличные продукты, которые вы делаете или хотите
             работать с нами, напишите нам.
           </p>
-          <div class="row mb-6">
-            <div class="col-sm-6 mt-4">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Ваше Имя*"
-                required="Please  "
-                v-model="dynamicValidateForm.name"
-              />
+          <form action="">
+            <div class="row mb-6">
+              <div class="col-sm-6 mt-4">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Ваше Имя*"
+                  required
+                  oninvalid="this.setCustomValidity('Введите имя пользователя')"
+                  oninput="this.setCustomValidity('')"
+                  v-model="dynamicValidateForm.name"
+                />
+              </div>
+              <div class="col-sm-6 mt-4">
+                <the-mask
+                  v-model="dynamicValidateForm.phone_number"
+                  class="form-control"
+                  value="+998 "
+                  required
+                  placeholder="+998 __ ___-__-__"
+                  :mask="['+998 ## ### ## ##', '+998 ## ### ## ##']"
+                />
+              </div>
             </div>
-            <div class="col-sm-6 mt-4">
-              <the-mask
-                v-model="dynamicValidateForm.phone_number"
+            <div class="form-group mb-4">
+              <textarea
                 class="form-control"
-                value="+998 "
-                placeholder="+998 __ ___-__-__"
-                :mask="['+998 ## ### ## ##', '+998 ## ### ## ##']"
-              />
-            </div>
-          </div>
-          <div class="form-group mb-4">
-            <textarea
-              class="form-control"
-              rows="6"
-              v-model="dynamicValidateForm.message"
-            >
+                rows="6"
+                required
+                v-model="dynamicValidateForm.message"
+              >
 Комментарий</textarea
+              >
+            </div>
+            <div class="custom-control custom-checkbox mb-6">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customCheck1"
+              />
+              <label class="custom-control-label fs-15" for="customCheck1">
+                Сохраните мое имя, адрес электронной почты и веб-сайт в этом
+                браузере для следующего комментария.</label
+              >
+            </div>
+            <button
+              v-ripple="'rgba(255, 255, 255, 0.35)'"
+              :ripple="false"
+              class="btn form-btn text-uppercase letter-spacing-05"
+              @click="postData"
             >
-          </div>
-          <div class="custom-control custom-checkbox mb-6">
-            <input
-              type="checkbox"
-              class="custom-control-input"
-              id="customCheck1"
-            />
-            <label class="custom-control-label fs-15" for="customCheck1">
-              Сохраните мое имя, адрес электронной почты и веб-сайт в этом
-              браузере для следующего комментария.</label
-            >
-          </div>
-          <button
-            v-ripple="'rgba(255, 255, 255, 0.35)'"
-            :ripple="false"
-            class="btn form-btn text-uppercase letter-spacing-05"
-            @click="postData"
-          >
-            отправить сейчас
-          </button>
+              отправить сейчас
+            </button>
+          </form>
         </div>
 
         <div class="col-md-4 pl-xl-13 pl-md-6 mt-4">
@@ -155,28 +161,32 @@ export default {
       return this.$store.getters.language;
     },
   },
-  mounted() {
-    this.$i18n.setLocale(localStorage.getItem("Lang"));
-  },
+
   methods: {
     async postData() {
-      try {
-        await this.$axios.post("/feedback", this.dynamicValidateForm);
-        this.dynamicValidateForm = {
-        name: "",
-        phone_number: "",
-        message: "",
-        page: "https://plaza.choopon.uz",
-      },
-        await this.$toast.open({
-          message: "Successfully",
-          type: "success",
-          duration: 2000,
-          dismissible: true,
-          position: "top-right",
-        });
-      } catch (error) {
-        console.log("Error in order:", error);
+      if (
+        this.dynamicValidateForm.name !== "" &&
+        this.dynamicValidateForm.phone_number !== "" &&
+        this.dynamicValidateForm.message !== ""
+      ) {
+        try {
+          await this.$axios.post("/feedback", this.dynamicValidateForm);
+          (this.dynamicValidateForm = {
+            name: "",
+            phone_number: "",
+            message: "",
+            page: "https://plaza.choopon.uz",
+          }),
+            await this.$toast.open({
+              message: "Successfully",
+              type: "success",
+              duration: 2000,
+              dismissible: true,
+              position: "top-right",
+            });
+        } catch (error) {
+          console.log("Error in order:", error);
+        }
       }
     },
   },
@@ -255,9 +265,10 @@ export default {
 .map-control {
   padding-bottom: 70px;
 }
-.btn:focus, .btn.focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 1%);
+.btn:focus,
+.btn.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 1%);
 }
 .form-control:focus {
   /* outline: none !important;

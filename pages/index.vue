@@ -18,10 +18,10 @@ import HomeCardBlog from "../components/Home/HomeCardBlog.vue";
 import TitleComp from "../components/TitleComp.vue";
 import ContactCardBlog from "../components/Home/ContactCardBlog.vue";
 import NewPosts from "~/components/Home/NewPosts.vue";
+import translate from "@/translate/translation";
 
 export default {
   name: "IndexPage",
-  mounted() {},
   async asyncData({ store }) {
     const language = await store.dispatch("language/fetchLanguage");
     if (!localStorage.getItem("Lang")) {
@@ -32,6 +32,7 @@ export default {
     const posts = await store.dispatch("posts/fetchPostsPaginate", 3);
     const sliders = await store.dispatch("sliders/fetchSliders");
     const siteInfo = await store.dispatch("site-info/fetchSiteInfo");
+    await translate.trans();
     return {
       products,
       category,
