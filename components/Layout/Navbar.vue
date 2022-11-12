@@ -27,16 +27,18 @@
               }}</span>
             </nuxt-link> -->
             <nuxt-link to="/" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> Главный </span>
+              <span class="dropdown_hover" id="hover">
+                {{ navbarLang.home[getLang] ? navbarLang.home[getLang]:navbarLang.home.ru }}
+              </span>
             </nuxt-link>
             <nuxt-link to="/products?page=1" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> Каталог </span>
+              <span class="dropdown_hover" id="hover"> {{navbarLang.category[getLang] ? navbarLang.category[getLang]:navbarLang.category.ru}} </span>
             </nuxt-link>
             <nuxt-link to="/company" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> О компании </span>
+              <span class="dropdown_hover" id="hover"> {{navbarLang.company[getLang] ? navbarLang.company[getLang]:navbarLang.company.ru}} </span>
             </nuxt-link>
             <nuxt-link to="/contact" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> Контакт </span>
+              <span class="dropdown_hover" id="hover"> {{navbarLang.contact[getLang] ? navbarLang.contact[getLang]:navbarLang.contact.ru}} </span>
             </nuxt-link>
           </div>
           <div class="col-1 d-flex align-items-center">
@@ -99,20 +101,17 @@
                     </el-dropdown>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/">Главный</nuxt-link>
+                    <nuxt-link to="/">{{navbarLang.home[getLang]}}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/categories/1/products?page=1"
-                      >Каталог</nuxt-link
-                    >
+                    <nuxt-link to="/products?page=1">{{navbarLang.category[getLang]}}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/contact">Контакт</nuxt-link>
+                    <nuxt-link to="/company">{{navbarLang.company[getLang]}}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/company">О компании</nuxt-link>
+                    <nuxt-link to="/contact">{{navbarLang.contact[getLang]}}</nuxt-link>
                   </li>
-                  <li></li>
                 </ul>
               </div>
             </b-sidebar>
@@ -144,6 +143,24 @@ export default {
       currLang: "ru",
       lang: this.siteInfo,
       lastScrollTop: 0,
+      navbarLang: {
+        home: {
+          ru: "Главный",
+          uz: "Asosiy",
+        },
+        category: {
+          ru: "Каталог",
+          uz: "Katalog",
+        },
+        company: {
+          ru: "О компании",
+          uz: "Kompaniya haqida",
+        },
+        contact: {
+          ru: "Контакт",
+          uz: "Aloqa",
+        },
+      },
     };
   },
   computed: {
@@ -202,7 +219,6 @@ export default {
 };
 </script>
 <style lang="css" scoped>
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;
@@ -251,7 +267,7 @@ export default {
   white-space: nowrap;
   background-color: transparent;
   border: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .dropdown-bottom {
   position: absolute;
@@ -292,8 +308,7 @@ ul {
   font-size: 1rem !important;
   line-height: 26px;
   color: #000 !important;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .navbar-brand {
   max-width: 177px;
@@ -380,7 +395,7 @@ ul {
   font-weight: 700 !important;
 }
 .nav-phone {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   margin-bottom: 0 !important;
   font-weight: 500 !important;
   font-size: 13px !important;
@@ -445,7 +460,7 @@ ul {
   background-color: #fff;
   color: #777 !important;
   font-weight: 500;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .el-dropdown-menu__item:focus,
 .el-dropdown-menu__item:not(.is-disabled):hover {
@@ -454,7 +469,7 @@ ul {
 }
 .lan-btn {
   font-weight: 500 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   color: #000 !important;
 }
 </style>

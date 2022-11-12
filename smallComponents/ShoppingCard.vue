@@ -15,7 +15,7 @@
         <router-link
           :to="`/categories/${category.id}/products?page=1`"
           class="btn btn-outline-primary text-uppercase shop_now_btn"
-          >Shop Now</router-link
+          >{{ shopNow[getLang] ? shopNow[getLang] : shopNow.ru }}</router-link
         >
       </div>
     </div>
@@ -24,6 +24,19 @@
 <script>
 export default {
   props: ["gridClass", "category"],
+  data() {
+    return {
+      shopNow: {
+        ru: "Купить сейчас",
+        uz: "Hozir xarid qilish",
+      },
+    };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
 };
 </script>
 <style lang="css">
@@ -34,6 +47,7 @@ export default {
   height: 100%;
   cursor: pointer;
   padding-top: 40px !important;
+  font-family: "Montserrat", sans-serif !important;
   transition: transform 0.5s !important;
 }
 .shopping_card:hover {
@@ -76,21 +90,18 @@ export default {
     grid-column-start: 1 !important;
     grid-column-end: 3 !important;
     aspect-ratio: 1/0.5;
-
   }
   .shopping_card-grid3 {
     grid-row-start: 6 !important;
     grid-column-start: 1 !important;
     grid-column-end: 3 !important;
     aspect-ratio: 1/0.5;
-
   }
   .shopping_card-grid2 {
     grid-row-start: 8 !important;
     grid-column-start: 1 !important;
     grid-column-end: 3 !important;
     aspect-ratio: 1/0.5;
-
   }
 }
 

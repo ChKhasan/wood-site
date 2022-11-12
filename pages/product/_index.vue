@@ -3,8 +3,10 @@
     <div>
       <BreadCrumbCategory
         :category="{
-          id: product.products_categories.id,
-          title: product.products_categories[0].title[getLang],
+          id: product.products_categories[0].id,
+          title: product.products_categories[0].title[getLang]
+            ? product.products_categories[0].title[getLang]
+            : product.products_categories[0].title.ru,
         }"
       />
       <div class="container container-xxl py-5">
@@ -42,7 +44,11 @@
               <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
 
               <form v-on:submit.prevent="submitForm">
-                <label class="ml-1 placing-title">Количество:</label>
+                <label class="ml-1 placing-title">{{
+                  productLang.count[getLang]
+                    ? productLang.count[getLang]
+                    : productLang.count.ru
+                }}</label>
                 <div class="couter-box">
                   <a class="count-btn" @click="countFunc(false)"
                     ><font-awesome-icon :icon="['fas', 'fa-minus']"
@@ -53,16 +59,29 @@
                     ><font-awesome-icon :icon="['fas', 'fa-plus']"
                   /></a>
                 </div>
-                <label for="client_name">Имя* </label><br />
+                <label for="client_name">{{
+                  productLang.name[getLang]
+                    ? productLang.name[getLang]
+                    : productLang.name.ru
+                }}</label
+                ><br />
                 <input
                   class="tel-number-input"
-                  placeholder="Ввдите Имя"
+                  :placeholder="
+                    productLang.yourName[getLang]
+                      ? productLang.yourName[getLang]
+                      : productLang.yourName.ru
+                  "
                   required
                   oninvalid="this.setCustomValidity('Введите имя пользователя')"
                   oninput="this.setCustomValidity('')"
                   v-model="dynamicValidateForm.name"
                 /><br />
-                <label for="client_phone_number">Номер телефона* </label>
+                <label for="client_phone_number">{{
+                  productLang.phoneNumber[getLang]
+                    ? productLang.phoneNumber[getLang]
+                    : productLang.phoneNumber.ru
+                }}</label>
                 <the-mask
                   v-model="dynamicValidateForm.phone_number"
                   class="tel-number-inputs"
@@ -80,34 +99,25 @@
                     :ripple="false"
                     type="primary"
                     class="send_btn d-flex justify-content-center align-items-center"
-               
                   >
-                    Отправить
+                    {{
+                      productLang.send[getLang]
+                        ? productLang.send[getLang]
+                        : productLang.send.ru
+                    }}
                   </button>
                 </div>
               </form>
-              <p class="border-bottom pb-4 mb-4 d-flex">
-                <span class="d-inline-block mr-2 fs-14">
-                  <font-awesome-icon :icon="['fas', 'fa-truck-fast']" />
-                </span>
 
-                <span class="fs-15 px-3"
-                  >Get it between Aug 11, 2020 - Aug 18, 2020</span
-                >
-              </p>
-
-              <div class="d-flex align-items-center flex-wrap mt-6">
-                <a
-                  href="#"
-                  class="text-uppercase font-weight-bold letter-spacing-05 fs-14 mr-6"
-                >
-                  <span class="ml-1 compare">Compare</span>
-                </a>
-              </div>
+              <div class="d-flex align-items-center flex-wrap mt-6"></div>
               <ul class="list-unstyled mt-5">
                 <li class="row mb-2">
                   <span class="d-block col-3 font-weight-500 fs-15"
-                    >Call Back:
+                    >{{
+                      productLang.callBack[getLang]
+                        ? productLang.callBack[getLang]
+                        : productLang.callBack.ru
+                    }}
                   </span>
                   <span class="d-block col-9 fs-15 color-gray"
                     ><p class="mx-3 nav-phone">
@@ -126,7 +136,13 @@
         </div>
       </div>
     </div>
-    <TitleComp title="Последние товары" />
+    <TitleComp
+      :title="
+        productLang.lastProducts[getLang]
+          ? productLang.lastProducts[getLang]
+          : productLang.lastProducts.ru
+      "
+    />
     <div class="container container-xxl mb-120">
       <div class="row pb-4">
         <div class="col-12">
@@ -164,6 +180,36 @@ export default {
       },
       quality: 1,
       value: "",
+      productLang: {
+        count: {
+          ru: "Количество:",
+          uz: "Miqdori:",
+        },
+        name: {
+          ru: "Имя*",
+          uz: "Ism*",
+        },
+        yourName: {
+          ru: "Ввдите Имя",
+          uz: "Ismingizni kiriting",
+        },
+        phoneNumber: {
+          ru: "Номер телефона*",
+          uz: "Telefon raqami*",
+        },
+        send: {
+          ru: "Отправить",
+          uz: "Yuborish",
+        },
+        callBack: {
+          ru: "Перезвонить:",
+          uz: "Qayta qo'ng'iroq qilish:",
+        },
+        lastProducts: {
+          ru: "Последние товары",
+          uz: "Eng so'nggi mahsulotlar",
+        },
+      },
     };
   },
   components: {
@@ -252,7 +298,7 @@ export default {
   width: 100%;
 }
 .body_type {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-weight: 400;
   font-size: 12px !important;
 }
@@ -268,7 +314,7 @@ export default {
   font-weight: 600;
   line-height: 1.25;
   color: #000;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .letter-spacing-05 {
   letter-spacing: 0.5px !important;
@@ -300,7 +346,7 @@ export default {
 }
 .body_card_info {
   color: #777 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 @media (min-width: 768px) {
   .pl-md-6,
@@ -319,13 +365,13 @@ export default {
 .quality_title {
   font-weight: 700 !important;
   color: #000 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 16px !important;
 }
 .color_title span:last-child {
   font-weight: 400 !important;
   color: #000 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 16px !important;
   margin-left: 4px;
 }
@@ -396,7 +442,7 @@ export default {
 .compare {
   font-weight: 700 !important;
   font-size: 14px !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   letter-spacing: 0.5px !important;
   color: #000;
   text-decoration: none !important  ;
@@ -411,7 +457,7 @@ export default {
 }
 .font-weight-500 {
   font-weight: 500 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .fs-15 {

@@ -2,7 +2,7 @@
   <div>
     <CompanyBanner :title="site_info" />
 
-    <TitleComp title="Наш Команда" />
+    <TitleComp :title="ourTeam[getLang] ? ourTeam[getLang] : ourTeam.ru" />
     <div class="container container-xl">
       <div class="row">
         <div class="col-12 mb-5 mt-4 team-card-controller">
@@ -12,8 +12,7 @@
       <div class="row company-info">
         <div class="col-lg-7 pr-5">
           <h1 class="company-info-title">
-            Having a place set aside for an activity you love makes it more
-            likely you’ll do it.
+           {{place[getLang] ? place[getLang] : place.ru}}
           </h1>
           <p
             class="company-desc"
@@ -36,6 +35,18 @@ import CompanyBanner from "~/components/Company/CompanyBanner.vue";
 import TitleComp from "~/components/TitleComp.vue";
 import TeamCard from "~/smallComponents/TeamCard.vue";
 export default {
+  data() {
+    return {
+      ourTeam: {
+        ru: "Наш Команда",
+        uz: "Bizning Jamoamiz",
+      },
+      place: {
+        ru: "Наличие места, отведенного для любимого дела, повышает вероятность того, что вы им займетесь.",
+        uz: "O'zingiz yoqtirgan mashg'ulot uchun joy ajratilgan bo'lsa, buni amalga oshirishingiz ehtimolini oshiradi."
+      },
+    };
+  },
   async asyncData({ store }) {
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     const team = await store.dispatch("team/fetchTeam");
@@ -62,7 +73,7 @@ export default {
   margin-bottom: 124px !important;
 }
 .info-desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.63;
@@ -118,7 +129,7 @@ export default {
   }
 }
 .company-info-title {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 30px;
   font-weight: 600;
   line-height: 38px;
@@ -127,7 +138,7 @@ export default {
   margin-top: 60px;
 }
 .company-desc {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 
   font-size: 18px;
   font-weight: 400;

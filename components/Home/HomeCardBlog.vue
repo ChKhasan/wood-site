@@ -26,7 +26,7 @@
         data-aos="fade-up"
         data-aos-duration="1000"
         data-aos-delay="800"
-        >Показать Сейчас</nuxt-link
+        >{{ showNow[getLang] ? showNow[getLang] : showNow.ru }}</nuxt-link
       >
     </div>
   </div>
@@ -37,6 +37,19 @@ import ShoppingCard from "../../smallComponents/ShoppingCard.vue";
 
 export default {
   props: ["products", "category"],
+  data() {
+    return {
+      showNow: {
+        ru: "Показать Сейчас",
+        uz: "Hozir ko'rsatish",
+      },
+    };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
 
   components: {
     ProductCard,

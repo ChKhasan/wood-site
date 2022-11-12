@@ -16,6 +16,7 @@ export default {};
 </script>
 <style lang="css">
 .description_comp {
+  font-family: "Montserrat", sans-serif !important;
 }
 .mxw-830 {
   max-width: 830px !important;

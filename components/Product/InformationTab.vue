@@ -2,7 +2,7 @@
   <div class="mt-5">
     <div class="d-none d-md-block">
       <div class="info-title d-flex justify-content-center">
-        <h1>Description</h1>
+        <h1>{{desc[getLang] ? desc[getLang]:desc.ru}}</h1>
       </div>
 
       <DescriptionComp />
@@ -10,7 +10,7 @@
     <div class="d-md-none">
       <vsa-list>
         <vsa-item>
-          <vsa-heading>Description</vsa-heading>
+          <vsa-heading>{{desc[getLang] ? desc[getLang]:desc.ru}}</vsa-heading>
 
           <vsa-content>
             <DescriptionComp />
@@ -28,7 +28,16 @@ export default {
   data() {
     return {
       activeName: "first",
+      desc: {
+        ru: "Описание",
+        uz: "Tavsif",
+      },
     };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
   },
   components: {
     DescriptionComp,
@@ -68,7 +77,7 @@ export default {
   color: #bebebe !important;
   position: relative;
   transition: all 0.2s !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 @media (min-width: 992px) {
   .el-tabs__item {

@@ -1,10 +1,18 @@
 <template lang="html">
   <div>
-    <BreadCrumbComp category="Контакт" />
+    <BreadCrumbComp
+      :category="
+        contactLang.contact[getLang]
+          ? contactLang.contact[getLang]
+          : contactLang.contact.ru
+      "
+    />
     <div class="container container-xxl mt-3 py-5 pb-14">
       <div class="row pb-5">
         <div class="col-12 contact-title">
-          <h1>Свяжитесь с нами</h1>
+          <h1>{{ contactLang.contactUs[getLang]
+          ? contactLang.contactUs[getLang]
+          : contactLang.contactUs.ru}}</h1>
         </div>
       </div>
       <div class="row">
@@ -50,11 +58,14 @@
       <div class="row">
         <div class="col-md-8 mb-8 mb-md-0 mt-4">
           <h2 class="fs-24 mb-2 form-title">
-            Мы были бы рады получить известия от вас.
+            {{ contactLang.formTitle[getLang]
+          ? contactLang.formTitle[getLang]
+          : contactLang.formTitle.ru}}
           </h2>
           <p class="mb-7 form-text">
-            Если у вас есть отличные продукты, которые вы делаете или хотите
-            работать с нами, напишите нам.
+            {{ contactLang.formText[getLang]
+          ? contactLang.formText[getLang]
+          : contactLang.formText.ru}}
           </p>
           <form action="">
             <div class="row mb-6">
@@ -62,7 +73,9 @@
                 <input
                   type="text"
                   class="form-control"
-                  placeholder="Ваше Имя*"
+                  :placeholder="contactLang.yourName[getLang]
+          ? contactLang.yourName[getLang]
+          : contactLang.yourName.ru"
                   required
                   oninvalid="this.setCustomValidity('Введите имя пользователя')"
                   oninput="this.setCustomValidity('')"
@@ -97,8 +110,9 @@
                 id="customCheck1"
               />
               <label class="custom-control-label fs-15" for="customCheck1">
-                Сохраните мое имя, адрес электронной почты и веб-сайт в этом
-                браузере для следующего комментария.</label
+               {{contactLang.save[getLang]
+          ? contactLang.save[getLang]
+          : contactLang.save.ru}}</label
               >
             </div>
             <button
@@ -107,13 +121,17 @@
               class="btn form-btn text-uppercase letter-spacing-05"
               @click="postData"
             >
-              отправить сейчас
+              {{contactLang.sendNow[getLang]
+          ? contactLang.sendNow[getLang]
+          : contactLang.sendNow.ru}}
             </button>
           </form>
         </div>
 
         <div class="col-md-4 pl-xl-13 pl-md-6 mt-4">
-          <p class="font-weight-bold adress-title mb-3">Адрес</p>
+          <p class="font-weight-bold adress-title mb-3">{{contactLang.address[getLang]
+          ? contactLang.address[getLang]
+          : contactLang.address.ru}}</p>
           <address class="mb-6 form-text">
             {{
               site_info.address[getLang]
@@ -121,7 +139,9 @@
                 : site_info.address.ru
             }}
           </address>
-          <p class="font-weight-bold info-title mb-2 form-text">Информация</p>
+          <p class="font-weight-bold info-title mb-2 form-text">{{contactLang.info[getLang]
+          ? contactLang.info[getLang]
+          : contactLang.info.ru}}</p>
           <p class="mb-0 form-text">{{ site_info.phone_number }}</p>
           <a :href="`mailto:${site_info.email}`" class="mb-7 form-text">{{
             site_info.email
@@ -154,6 +174,44 @@ export default {
           callbacks: { click: function () {} },
         },
       ],
+      contactLang: {
+        contact: {
+          ru: " Контакт",
+          uz: "Aloqa",
+        },
+        contactUs: {
+          ru: "Свяжитесь с нами",
+          uz: "Biz bilan bog'lanish",
+        },
+        formTitle: {
+          ru: "Мы были бы рады получить известия от вас.",
+          uz: "Sizdan xabar olsak xursand bo'lardik.",
+        },
+        formText: {
+          ru: "Если у вас есть отличные продукты, которые вы делаете или хотите работать с нами, напишите нам.",
+          uz: "Agar sizda ishlab chiqaradigan ajoyib mahsulotlaringiz bo'lsa yoki biz bilan ishlashni xohlasangiz, biz bilan bog'laning.",
+        },
+        yourName: {
+          ru: "Ваше Имя*",
+          uz: "Sizning ismingiz*",
+        },
+        save: {
+          ru: "Сохраните мое имя, номер телефона и веб-сайт в этом браузере для вашего следующего обзора.",
+          uz: "Keyingi sharhingiz uchun ismim, telefon nomerim va veb-saytimni ushbu brauzerda saqlang.",
+        },
+        sendNow: {
+          ru: "отправить сейчас",
+          uz: "hozir yuboring",
+        },
+        address: {
+          ru: "Адрес",
+          uz: "Manzil",
+        },
+        info: {
+          ru: "Информация",
+          uz: "Ma `lumot",
+        },
+      },
     };
   },
   computed: {
@@ -207,17 +265,17 @@ export default {
   line-height: 1.25;
   color: #000;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .form-title {
   font-size: 24px !important;
   font-weight: 700;
   line-height: 1.25;
   color: #000;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .form-text {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.63;
@@ -235,7 +293,7 @@ export default {
   font-weight: 700 !important;
   text-align: center;
   vertical-align: middle;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 0.875rem !important;
 }
 .form-btn:hover {
@@ -249,13 +307,13 @@ export default {
   font-weight: 700 !important;
   text-align: center;
   vertical-align: middle;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .adress-title,
 .info-title {
   color: #000 !important;
   font-weight: 700 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   line-height: 1.63;
 }

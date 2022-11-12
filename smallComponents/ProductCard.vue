@@ -17,7 +17,7 @@
               : product.products_categories[0].title.ru
           }}
         </p>
-        <div class="d-flex justify-content-between">
+        <div class="d-flex justify-content-between ">
           <nuxt-link class="p_card_title mt-1" :to="`/product/${product.slug}`">
             {{
               product.title[getLang] ? product.title[getLang] : product.title.ru
@@ -51,7 +51,9 @@ a {
   text-overflow: clip;
   overflow: hidden;
   width: 70%;
-  height: 20px;
+  height: 50px;
+  
+  font-family: "Montserrat", sans-serif !important;
 }
 .p_card_title_type {
   font-size: 13px !important;
@@ -63,6 +65,7 @@ a {
   font-weight: 500 !important;
   color: #000 !important;
   margin-bottom: 0 !important;
+  line-height: 20px;
 }
 .content-change-vertical {
   position: relative;
@@ -82,6 +85,7 @@ a {
   /* display: none !important; */
   transition: 0.5s;
   opacity: 0;
+  font-family: "Montserrat", sans-serif !important;
 }
 .content-change-vertical svg {
   color: black;
@@ -166,6 +170,7 @@ a {
 }
 .product_card {
   transition: 0.3s !important;
+  font-family: "Montserrat", sans-serif !important;
 }
 /* .product_card:hover {
   transform: scale(1.05) !important;

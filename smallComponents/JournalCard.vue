@@ -2,7 +2,7 @@
   <div class="journal-card mt-5">
     <nuxt-link :to="`/post/${post.slug}`" class="j-card-img">
       <!-- <img :src="post.post_images[0].lg_img" alt="" /> -->
-      <div class="journal-img" style="transition: 1s;">
+      <div class="journal-img" style="transition: 1s">
         <img :src="post.post_images[0].lg_img" alt="" />
       </div>
     </nuxt-link>
@@ -12,20 +12,24 @@
       </div>
       <div class="j-card-title mb-3">
         <h3>
-          <a href="">{{ post.title[getLang] ? post.title[getLang]:post.title.ru }}</a>
+          <a href="">{{
+            post.title[getLang] ? post.title[getLang] : post.title.ru
+          }}</a>
         </h3>
       </div>
       <div class="j-card-text">
-        <p v-html="post.desc[getLang] ? post.desc[getLang]:post.desc.ru"></p>
+        <p v-html="post.desc[getLang] ? post.desc[getLang] : post.desc.ru"></p>
       </div>
-      <BorderBlackBtn name="Все посты" />
+      <BorderBlackBtn
+        :name="allPosts[getLang] ? allPosts[getLang] : allPosts.ru"
+      />
     </div>
   </div>
 </template>
 <script>
 import BorderBlackBtn from "../smallComponents/BorderBlackBtn.vue";
 export default {
-  props: ["img", "post","lang"],
+  props: ["img", "post", "lang"],
   data() {
     return {
       monthNames: [
@@ -45,6 +49,10 @@ export default {
       month: null,
       date: null,
       year: null,
+      allPosts: {
+        ru: "Все посты",
+        uz: "Barcha postlar",
+      },
     };
   },
   mounted() {
@@ -110,12 +118,12 @@ export default {
   color: #999 !important;
   text-transform: uppercase !important;
   margin-bottom: 0.625rem !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 14px;
 }
 .j-card-title h3 {
   font-size: 20px !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-weight: 700 !important;
 }
 .j-card-text {
@@ -123,7 +131,7 @@ export default {
   position: relative;
   margin-bottom: 1.25rem !important;
   font-size: 1rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   line-height: 1.63;
   color: #777;
 }

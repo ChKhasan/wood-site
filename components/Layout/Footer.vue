@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="container-fluid bg-color py-5">
-    <div class="container_block container-xxl footer_comp">
+    <div class="container container-xl footer_comp">
       <div class="row">
         <div class="col-lg mb-6 mb-lg-0">
           <div class="footer_logo">
@@ -15,37 +15,55 @@
               <h3
                 class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
               >
-                Меню
+                {{
+                  footerLang.menu[getLang]
+                    ? footerLang.menu[getLang]
+                    : footerLang.menu.ru
+                }}
               </h3>
             </li>
 
             <li class="py-0">
-              <nuxt-link to="/" class="lh-225 footer-links">Главный</nuxt-link>
+              <nuxt-link to="/" class="lh-225 footer-links">{{
+                footerLang.home[getLang]
+                  ? footerLang.home[getLang]
+                  : footerLang.home.ru
+              }}</nuxt-link>
             </li>
             <li class="py-0">
-              <nuxt-link
-                to="/products?page=1"
-                class="lh-225 footer-links"
-                >Каталог
+              <nuxt-link to="/products?page=1" class="lh-225 footer-links"
+                >{{
+                  footerLang.category[getLang]
+                    ? footerLang.category[getLang]
+                    : footerLang.category.ru
+                }}
               </nuxt-link>
             </li>
             <li class="py-0">
-              <nuxt-link to="/contact" class="lh-225 footer-links"
-                >Контакт</nuxt-link
-              >
+              <nuxt-link to="/contact" class="lh-225 footer-links">{{
+                footerLang.contact[getLang]
+                  ? footerLang.contact[getLang]
+                  : footerLang.contact.ru
+              }}</nuxt-link>
             </li>
             <li class="py-0">
               <nuxt-link
                 to="/post-categories/1/posts?page=1"
                 class="lh-225 footer-links"
-                >Посты</nuxt-link
+                >{{
+                  footerLang.posts[getLang]
+                    ? footerLang.posts[getLang]
+                    : footerLang.posts.ru
+                }}</nuxt-link
               >
             </li>
 
             <li class="py-0">
-              <nuxt-link to="/company" class="lh-225 footer-links"
-                >О компании</nuxt-link
-              >
+              <nuxt-link to="/company" class="lh-225 footer-links">{{
+                footerLang.company[getLang]
+                  ? footerLang.company[getLang]
+                  : footerLang.company.ru
+              }}</nuxt-link>
             </li>
           </ul>
         </div>
@@ -55,7 +73,11 @@
               <h3
                 class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
               >
-                Категории
+                {{
+                  footerLang.categories[getLang]
+                    ? footerLang.categories[getLang]
+                    : footerLang.categories.ru
+                }}
               </h3>
             </li>
 
@@ -104,8 +126,18 @@
             class="mb-0 text-gray text-lg-right footer-links"
             v-if="siteInfo && siteInfo.title"
           >
-            © {{ year }} {{ siteInfo.title[getLang] }} .<br />
-            Все права защищены.
+            © {{ year }}
+            {{
+              siteInfo.title[getLang]
+                ? siteInfo.title[getLang]
+                : siteInfo.title.ru
+            }}
+            .<br />
+            {{
+              footerLang.security[getLang]
+                ? footerLang.security[getLang]
+                : footerLang.security.ru
+            }}
           </p>
         </div>
       </div>
@@ -119,6 +151,40 @@ export default {
   data() {
     return {
       year: new Date().getFullYear(),
+      footerLang: {
+        menu: {
+          ru: "МЕНЮ",
+          uz: "MENYU",
+        },
+        home: {
+          ru: "Главный",
+          uz: "Asosiy",
+        },
+        category: {
+          ru: "Каталог",
+          uz: "Katalog",
+        },
+        company: {
+          ru: "О компании",
+          uz: "Kompaniya haqida",
+        },
+        contact: {
+          ru: "Контакт",
+          uz: "Aloqa",
+        },
+        posts: {
+          ru: "Посты",
+          uz: "Xabarlar",
+        },
+        categories: {
+          ru: "КАТЕГОРИИ",
+          uz: "KATEGORIYALAR",
+        },
+        security: {
+          ru: "Все права защищены.",
+          uz: "Barcha huquqlar himoyalangan.",
+        },
+      },
     };
   },
   computed: {
@@ -129,7 +195,6 @@ export default {
 };
 </script>
 <style lang="css">
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 .bg-color {
   background-color: #f6f6f6 !important;
 }
@@ -172,7 +237,7 @@ export default {
 }
 .footer-links {
   font-weight: 500 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   line-height: 2 !important;
   color: #7c7c7c !important;
   transition: all 0.2s;
@@ -188,7 +253,7 @@ export default {
   letter-spacing: 0.5px !important;
   font-size: 14px !important;
   text-transform: uppercase !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 
   font-weight: 700 !important;
   line-height: 1.25;

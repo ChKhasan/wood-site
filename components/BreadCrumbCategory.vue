@@ -1,20 +1,24 @@
 <template lang="html">
   <div>
     <div class="container-fluid bg-color py-4 mt-70">
-      <div class="container container-xxl">
+      <div class="container container-xl">
         <div class="row">
           <div class="col-md-8">
             <div class="bread_crumb_box">
-              <router-link class="bread_crumb" to="/"> Главный </router-link>
+              <router-link class="bread_crumb" to="/">  {{
+                  allProducts[getLang] ? allProducts[getLang] : allProducts.ru
+                }} </router-link>
               <span>/</span>
               <router-link class="bread_crumb" to="/products?page=1">
-                Все продукты
+                {{
+                  allProducts[getLang] ? allProducts[getLang] : allProducts.ru
+                }}
               </router-link>
               <span>/</span>
 
               <router-link
                 class="bread_crumb"
-                :to="`/categories/${category.id}/`"
+                :to="`/categories/${category.id}/products?page=1`"
               >
                 {{ category.title }}
               </router-link>
@@ -29,16 +33,31 @@
 <script>
 export default {
   props: ["category"],
- 
+  data() {
+    return {
+      allProducts: {
+        ru: "Все Продукты",
+        uz: "Barcha mahsulotlar",
+      },
+      home: {
+        ru: "Главный",
+        uz: "Asosiy"
+      }
+    };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
 };
 </script>
 <style lang="css">
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 .bread_crumb_box span {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   font-size: 0.9375rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   color: #959595 !important;
 }
 .mt-70 {
@@ -52,7 +71,7 @@ export default {
   font-weight: 600 !important;
   letter-spacing: 0;
   text-transform: capitalize;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .last_crumb {
   font-size: 0.9375rem;
@@ -63,6 +82,6 @@ export default {
   letter-spacing: 0;
 
   text-transform: capitalize;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 </style>

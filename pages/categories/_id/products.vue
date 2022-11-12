@@ -1,49 +1,69 @@
 <template lang="html">
   <div>
     <div>
-  <BreadCrumbCategory v-if="categoryImg.title" :category="{id: categoryImg.id, title: categoryImg.title[getLang] ? categoryImg.title[getLang]:categoryImg.title.ru}" />
-  <div class="container container-xl py-5">
-    <div class="row pb-6">
-      <div class="col-md-3">
-        <div class="shop-sticky">
-          <div class="filter-card">
-            <div class="filter-card-title">
-              <h3>Категории продуктов</h3>
-            </div>
-            <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none">
-                <li style="cursor: pointer" class="mb-1 hover-effect">
-                    <span
-                      class="list-inline-item"
-                      @click="$router.push(`/products?page=1`)"
-                    >
-                      Все продукты
-                    </span>
-                  </li>
-                <li
-                  style="cursor: pointer"
-                  class="mb-1 hover-effect"
-                  v-for="(category, index) in categories.slice().reverse()"
-                  :key="category.id"
-                >
-                  <span
-                    class="list-inline-item"
-                    :class="{ active: category.id == id }"
-                    @click="
-                      $router.push(`/categories/${category.id}/products?page=1`)
-                    "
-                  >
+      <BreadCrumbCategory
+        v-if="categoryImg.title"
+        :category="{
+          id: categoryImg.id,
+          title: categoryImg.title[getLang]
+            ? categoryImg.title[getLang]
+            : categoryImg.title.ru,
+        }"
+      />
+      <div class="container container-xl py-5">
+        <div class="row pb-6">
+          <div class="col-md-3">
+            <div class="shop-sticky">
+              <div class="filter-card">
+                <div class="filter-card-title">
+                  <h3>
                     {{
-                      category.title[getLang]
-                        ? category.title[getLang]
-                        : category.title.ru
+                      categoryLang.categoriesTitle[getLang]
+                        ? categoryLang.categoriesTitle[getLang]
+                        : categoryLang.categoriesTitle.ru
                     }}
-                  </span>
-                </li>
-              </ul>
-            </div>
+                  </h3>
+                </div>
+                <div class="filter-card-body">
+                  <ul class="f-card-list" style="padding-left: none">
+                    <li style="cursor: pointer" class="mb-1 hover-effect">
+                      <span
+                        class="list-inline-item"
+                        @click="$router.push(`/products?page=1`)"
+                      >
+                        {{
+                          categoryLang.allProducts[getLang]
+                            ? categoryLang.allProducts[getLang]
+                            : categoryLang.allProducts.ru
+                        }}
+                      </span>
+                    </li>
+                    <li
+                      style="cursor: pointer"
+                      class="mb-1 hover-effect"
+                      v-for="(category, index) in categories.slice().reverse()"
+                      :key="category.id"
+                    >
+                      <span
+                        class="list-inline-item"
+                        :class="{ active: category.id == id }"
+                        @click="
+                          $router.push(
+                            `/categories/${category.id}/products?page=1`
+                          )
+                        "
+                      >
+                        {{
+                          category.title[getLang]
+                            ? category.title[getLang]
+                            : category.title.ru
+                        }}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
 
-            <!-- <div class="filter-card-title">
+                <!-- <div class="filter-card-title">
               <h3>
                 <nuxt-link
                   class="d-flex align-items-center to-brands-link"
@@ -54,41 +74,44 @@
                 /></nuxt-link>
               </h3>
             </div> -->
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="col-md-9">
-        <div class="shop-page-banner">
-          <div class="category-banner">
-            <img :src="categoryImg.lg_img" alt="" />
-          </div>
+          <div class="col-md-9">
+            <div class="shop-page-banner">
+              <div class="category-banner">
+                <img :src="categoryImg.lg_img" alt="" />
+              </div>
 
-          <div class="shop-page-img-overlay pt-xl-10">
-            <p class="fs-18 font-weight-bold text-center text-white mb-2">
-              {{ year }} Trending
-            </p>
+              <div class="shop-page-img-overlay pt-xl-10">
+                <p class="fs-18 font-weight-bold text-center text-white mb-2">
+                  {{ year }} Trending
+                </p>
 
-            <h2
-              v-if="categoryImg.title"
-              class="text-white text-center fs-30 fs-sm-40"
-            >
-              {{
-                categoryImg.title[getLang]
-                  ? categoryImg.title[getLang]
-                  : categoryImg.title.ru
-              }}
-            </h2>
-          </div>
-        </div>
-        <div class="d-flex mb-6 justify-content-between flex-wrap">
-          <div class="d-flex col-md-6 align-items-center number-pages">
-            <div class="position-relative d-flex search-blog">
+                <h2
+                  v-if="categoryImg.title"
+                  class="text-white text-center fs-30 fs-sm-40"
+                >
+                  {{
+                    categoryImg.title[getLang]
+                      ? categoryImg.title[getLang]
+                      : categoryImg.title.ru
+                  }}
+                </h2>
+              </div>
+            </div>
+
+            <div class="position-relative d-flex search-blog mt-4 mb-4">
               <input
                 type="text"
                 v-model="params.search"
                 v-on:keyup.enter="searchProduct"
                 class="search-input"
-                placeholder="Search"
+                :placeholder="
+                  categoryLang.search[getLang]
+                    ? categoryLang.search[getLang]
+                    : categoryLang.search.ru
+                "
               />
               <el-button
                 icon="el-icon-search"
@@ -108,45 +131,37 @@
                 />
               </el-button> -->
             </div>
+
+            <div class="shop-card-controller">
+              <ProductCard
+                data-aos="fade-up"
+                data-aos-delay="400"
+                data-aos-duration="900"
+                img="./images/product-10.jpg"
+                v-for="(item, index) in productsByCategory"
+                :key="index"
+                :hide="false"
+                :product="item"
+              />
+            </div>
+            <div class="shop-pagination d-flex justify-content-center pt-5">
+              <vs-pagination
+                :total-pages="currentPage"
+                :current-page="1"
+                :page-padding="2"
+                @change="changePage($event)"
+              ></vs-pagination>
+            </div>
           </div>
-          <div
-            class="ml-auto d-none col-md-6 d-md-flex align-items-center justify-content-end"
-          ></div>
-          <div
-            class="ml-auto col-12 mt-4 d-md-none d-flex align-items-center justify-content-start"
-          ></div>
-        </div>
-        <div class="shop-card-controller">
-          <ProductCard
-            data-aos="fade-up"
-            data-aos-delay="400"
-            data-aos-duration="900"
-            img="./images/product-10.jpg"
-            v-for="(item, index) in productsByCategory"
-            :key="index"
-            :hide="false"
-            :product="item"
-          />
-        </div>
-        <div class="shop-pagination d-flex justify-content-center pt-5">
-          <vs-pagination
-            :total-pages="currentPage"
-            :current-page="1"
-            :page-padding="2"
-            @change="changePage($event)"
-          ></vs-pagination>
         </div>
       </div>
     </div>
   </div>
-</div>
-  </div>
 </template>
 <script>
-
 import ProductCard from "@/smallComponents/ProductCard.vue";
 import VsPagination from "@vuesimple/vs-pagination";
-import BreadCrumbCategory from "@/components/BreadCrumbCategory.vue"
+import BreadCrumbCategory from "@/components/BreadCrumbCategory.vue";
 export default {
   data() {
     return {
@@ -165,6 +180,20 @@ export default {
         page: 1,
       },
       year: null,
+      categoryLang: {
+        categoriesTitle: {
+          ru: "Категории продуктов",
+          uz: "Mahsulot toifalari",
+        },
+        allProducts: {
+          ru: "Все продукты",
+          uz: "Barcha mahsulotlar",
+        },
+        search: {
+          ru: "Искать",
+          uz: "Qidirish",
+        },
+      },
     };
   },
   computed: {
@@ -175,38 +204,33 @@ export default {
   components: {
     ProductCard,
     VsPagination,
-    BreadCrumbCategory
+    BreadCrumbCategory,
   },
- 
-  async asyncData({store,route}) {
-    let id = await route.params.id;
-    
-    const categoryImg = await store.dispatch(
-        `categories/fetchCategoryById`,
-        id
-      );
-      const categories = await store.dispatch(
-        `categories/fetchCategories`
-      );
-      const products = await store.dispatch(
-        `products/fetchProductByParams`,
-        route.fullPath
-      );
-      const event = new Date(categoryImg.created_at);
-      const year = event.getFullYear();
-      return {
-        categoryImg,
-        year,
-        categories,
-        productsByCategory: products.data,
-        currentPage: products.last_page,
-        id
-      }
-  }
-,
-  methods: {
-   
 
+  async asyncData({ store, route }) {
+    let id = await route.params.id;
+
+    const categoryImg = await store.dispatch(
+      `categories/fetchCategoryById`,
+      id
+    );
+    const categories = await store.dispatch(`categories/fetchCategories`);
+    const products = await store.dispatch(
+      `products/fetchProductByParams`,
+      route.fullPath
+    );
+    const event = new Date(categoryImg.created_at);
+    const year = event.getFullYear();
+    return {
+      categoryImg,
+      year,
+      categories,
+      productsByCategory: products.data,
+      currentPage: products.last_page,
+      id,
+    };
+  },
+  methods: {
     async searchProduct() {
       this.text = true;
       try {
@@ -267,7 +291,7 @@ export default {
   line-height: 1.2 !important;
   transition: all 0.2s;
   font-weight: 400 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   border-bottom: 1px solid transparent;
 }
 
@@ -276,7 +300,7 @@ export default {
   font-weight: 700;
   line-height: 1.25;
   color: #000;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   margin-bottom: 0 !important;
 }
 .filter-card {
@@ -337,7 +361,7 @@ export default {
   margin-bottom: 0.5rem;
   font-weight: 700;
   line-height: 1.25;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .number {
   display: flex;
@@ -346,7 +370,7 @@ export default {
 .shop-page-img-overlay p {
   font-size: 18px !important;
   font-weight: 700 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 @media (min-width: 576px) {
   .shop-page-img-overlay h2 {
@@ -354,9 +378,8 @@ export default {
   }
 }
 
-
 .number-pages {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.63;
@@ -444,6 +467,7 @@ export default {
     padding: 1px 8px;
   }
 }
+
 .search-input {
   border: none;
   border-width: 2px !important;
@@ -460,7 +484,7 @@ export default {
   border-radius: 0;
   box-shadow: none;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .search-input:focus {
   outline: none;
@@ -510,5 +534,3 @@ export default {
   box-shadow: none !important;
 }
 </style>
-
-// <style lang="css"></style>

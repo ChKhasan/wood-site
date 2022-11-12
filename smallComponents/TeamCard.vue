@@ -50,7 +50,7 @@ export default {
   flex-shrink: 0;
 }
 .team-card-name h5 {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 28px;
   font-weight: 600;
   line-height: 34px;
@@ -65,7 +65,7 @@ export default {
   line-height: 22px;
   letter-spacing: 0em;
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   color: #83879b;
   text-overflow: clip;
   overflow: hidden;

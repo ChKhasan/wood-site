@@ -46,7 +46,7 @@ export default {};
   font-weight: 700 !important;
   margin-right: 1rem !important;
   margin-bottom: 0 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   line-height: 1.63;
 }

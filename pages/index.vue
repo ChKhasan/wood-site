@@ -2,11 +2,13 @@
   <div>
     <Banner :sliders="sliders" />
     <div class="mt-5">
-      <TitleComp title="Наши Продукты" />
+      <TitleComp
+        :title="OurProducts[getLang] ? OurProducts[getLang] : OurProducts.ru"
+      />
     </div>
 
     <HomeCardBlog :products="products" :category="category" />
-    <TitleComp title="Недавние Посты" />
+    <TitleComp :title="RecentPosts[getLang] ? RecentPosts[getLang]:RecentPosts.ru" />
     <NewPosts :posts="posts" />
     <ContactCardBlog :siteInfo="siteInfo" />
   </div>
@@ -22,6 +24,23 @@ import translate from "@/translate/translation";
 
 export default {
   name: "IndexPage",
+  data() {
+    return {
+      OurProducts: {
+        ru: "Наши Продукты",
+        uz: "Bizning mahsulotlarimiz",
+      },
+      RecentPosts: {
+        ru: "Недавние Посты",
+        uz: "Oxirgi xabarlar",
+      }
+    };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   async asyncData({ store }) {
     const language = await store.dispatch("language/fetchLanguage");
     if (!localStorage.getItem("Lang")) {
@@ -52,10 +71,10 @@ export default {
 };
 </script>
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Montserrat:wght@100;200;300;500;700&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 a {
   text-decoration: none !important;

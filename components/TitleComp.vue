@@ -25,7 +25,7 @@ export default {
 
 .title_may h2{
     font-size: 30px!important;
-    font-family: "Poppins",sans-serif;
+    font-family: "Montserrat", sans-serif !important;
     font-weight: 700;
     line-height: 1.25;
     text-align: center;

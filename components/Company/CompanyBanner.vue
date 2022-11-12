@@ -10,7 +10,7 @@
               data-aos-delay="200"
               data-aos-offset="100"
               data-aos-duration="900"
-              >{{ title.title[getLang] }}</span
+              >{{ title.title[getLang] ? title.title[getLang]:title.title.ru }}</span
             >
             <h1
               class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113"
@@ -22,7 +22,7 @@
               <strong
                 class="d-block title_banner fadeInUp animated"
                 data-animate="fadeInUp"
-                >Наша компания</strong
+                >{{ourCompany[getLang] ? ourCompany[getLang]:ourCompany.ru}}</strong
               >
             </h1>
           </div>
@@ -37,10 +37,17 @@
   </div>
 </template>
 <script>
-
 export default {
   name: "BannerComp",
   props: ["title"],
+  data() {
+    return {
+      ourCompany: {
+        ru: "Наша компания",
+        uz: "Bizning kompaniyamiz"
+      },
+    };
+  },
   computed: {
     getLang() {
       return this.$store.getters.language;
@@ -50,9 +57,6 @@ export default {
 };
 </script>
 <style lang="css">
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;700&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;500;700&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 .banner_company {
   background-image: url("../../static/images/image 50702 (1).png");
   background-position: center top;

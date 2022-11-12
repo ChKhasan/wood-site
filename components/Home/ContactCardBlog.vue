@@ -7,7 +7,11 @@
             name="Подробнее"
             v-if="siteInfo.instagram"
             :link="siteInfo.instagram"
-            title="Instagram"
+            :title="
+              contactTitle.instagram[getLang]
+                ? contactTitle.instagram[getLang]
+                : contactTitle.instagram.ru
+            "
             img="./images/instagram.png"
             bgcolor="#D7D3FF"
           />
@@ -17,7 +21,11 @@
             name="Подробнее"
             v-if="siteInfo.youtube"
             :link="siteInfo.youtube"
-            title="You Tube"
+            :title="
+              contactTitle.youtube[getLang]
+                ? contactTitle.youtube[getLang]
+                : contactTitle.youtube.ru
+            "
             img="./images/youtube.png"
             bgcolor="#FFC0C0"
           />
@@ -29,7 +37,11 @@
             name="Подробнее"
             v-if="siteInfo.facebook"
             :link="siteInfo.facebook"
-            title="Facebook"
+            :title="
+              contactTitle.facebook[getLang]
+                ? contactTitle.facebook[getLang]
+                : contactTitle.facebook.ru
+            "
             img="./images/facebook.png"
             bgcolor="#D3E5FF"
           />
@@ -39,7 +51,11 @@
             name="Подробнее"
             v-if="siteInfo.telegram"
             :link="siteInfo.telegram"
-            title="Telegram"
+            :title="
+              contactTitle.telegram[getLang]
+                ? contactTitle.telegram[getLang]
+                : contactTitle.telegram.ru
+            "
             img="./images/telegram.png"
             bgcolor="#D3F4FF"
           />
@@ -52,6 +68,33 @@
 import ContactCard from "../../smallComponents/ContactCard.vue";
 export default {
   props: ["siteInfo"],
+  data() {
+    return {
+      contactTitle: {
+        telegram: {
+          ru: "Следите за нашим магазином в Telegram",
+          uz: "Bizning do'konimizni Telegramda kuzatib boring",
+        },
+        instagram: {
+          ru: "Следите за нашим магазином в Instagram",
+          uz: "Bizning do'konimizni Instagramda kuzatib boring",
+        },
+        youtube: {
+          ru: "Следите за нашим магазином в You Tube",
+          uz: "Bizning do'konimizni You Tubeda kuzatib boring",
+        },
+        facebook: {
+          ru: "Следите за нашим магазином в Facebook",
+          uz: "Bizning do'konimizni Facebookda kuzatib boring",
+        },
+      },
+    };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
   components: {
     ContactCard,
   },

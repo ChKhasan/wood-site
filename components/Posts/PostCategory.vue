@@ -5,7 +5,13 @@
         <div class="shop-sticky">
           <div class="filter-card">
             <div class="filter-card-title">
-              <h3>Все посты</h3>
+              <h3>
+                {{
+                  postsLang.allposts[getLang]
+                    ? postsLang.allposts[getLang]
+                    : postsLang.allposts.ru
+                }}
+              </h3>
             </div>
             <div class="filter-card-body">
               <ul class="f-card-list" style="padding-left: none">
@@ -24,7 +30,11 @@
                       )
                     "
                   >
-                    {{ category.title[lang] }}
+                    {{
+                      category.title[lang]
+                        ? category.title[lang]
+                        : category.title.ru
+                    }}
                   </span>
                 </li>
               </ul>
@@ -51,30 +61,33 @@
             </h2>
           </div>
         </div> -->
-        <div class="d-flex mb-6 justify-content-between flex-wrap">
-          <div class="d-flex col-md-6 align-items-center number-pages">
-            <div class="position-relative">
-              <input
-                type="text"
-                v-model="params.search"
-                class="search-input"
-                placeholder="Search"
-              />
-              <font-awesome-icon
+
+        <div class="position-relative d-flex search-blog mt-3 mb-4">
+          <input
+            type="text"
+            v-model="params.search"
+            v-on:keyup.enter="searchProduct"
+            class="search-input"
+            :placeholder="
+              postsLang.search[getLang]
+                ? postsLang.search[getLang]
+                : postsLang.search.ru
+            "
+          />
+          <el-button
+            icon="el-icon-search"
+            :class="{ 'btn-primary': params.search !== '' }"
+            :disabled="params.search == '' ? true : false"
+            @click="searchProduct"
+          ></el-button>
+          <!-- <font-awesome-icon
                 style="cursor: pointer"
                 @click="searchProduct"
                 class="serach-btn"
                 icon="fa-solid fa-magnifying-glass"
-              />
-            </div>
-          </div>
-          <div
-            class="ml-auto d-none col-md-6 d-md-flex align-items-center justify-content-end"
-          ></div>
-          <div
-            class="ml-auto col-12 mt-4 d-md-none d-flex align-items-center justify-content-start"
-          ></div>
+              /> -->
         </div>
+
         <div class="post-card-controller">
           <JournalCard
             data-aos="fade-up"
@@ -123,6 +136,16 @@ export default {
         page: 1,
       },
       year: null,
+      postsLang: {
+        allposts: {
+          ru: "Все посты",
+          uz: "Barcha xabarlar",
+        },
+        search: {
+          ru: "Поиск",
+          uz: "Qidirish",
+        },
+      },
     };
   },
   computed: {
@@ -200,6 +223,40 @@ export default {
 };
 </script>
 <style lang="css">
+@media (min-width: 576px) {
+  .search-input {
+    padding: 1px 8px;
+  }
+}
+
+.search-input {
+  border: none;
+  border-width: 2px !important;
+  height: calc(1.25em + 1.4375rem + 2px);
+
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #000;
+  background-color: #fff;
+  background-clip: padding-box;
+  /* border-bottom: 1px solid #d2d2d2; */
+  border-bottom: 0.3px solid #dcdfe6 !important;
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  font-family: "Montserrat", sans-serif !important;
+}
+.search-input:focus {
+  outline: none;
+  border-bottom: 1px solid #d2d2d2;
+}
+.serach-btn {
+  position: absolute;
+  padding: 15px;
+  /* top: 30%; */
+  right: 0;
+}
 .shop-sticky {
   transition: 0.5s;
 }
@@ -225,7 +282,7 @@ export default {
   line-height: 1.2 !important;
   transition: all 0.2s;
   font-weight: 400 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   border-bottom: 1px solid transparent;
 }
 
@@ -234,7 +291,7 @@ export default {
   font-weight: 700;
   line-height: 1.25;
   color: #000;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   margin-bottom: 0 !important;
 }
 .filter-card {
@@ -291,7 +348,7 @@ export default {
   margin-bottom: 0.5rem;
   font-weight: 700;
   line-height: 1.25;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .number {
   display: flex;
@@ -300,7 +357,7 @@ export default {
 .shop-page-img-overlay p {
   font-size: 18px !important;
   font-weight: 700 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 @media (min-width: 576px) {
   .shop-page-img-overlay h2 {
@@ -308,9 +365,8 @@ export default {
   }
 }
 
-
 .number-pages {
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.63;
@@ -393,8 +449,6 @@ export default {
   color: #000 !important;
   cursor: default;
 }
-
-
 
 .btn-prev {
   background-image: url("@/static/images/images.png");

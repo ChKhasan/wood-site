@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <BreadCrumbComp category="Посты" />
-    <PostCategory :lang="getLang"/>
+    <BreadCrumbComp :category="posts[getLang] ? posts[getLang]:posts.ru" />
+    <PostCategory :lang="getLang" />
   </div>
 </template>
 
@@ -10,6 +10,14 @@ import BreadCrumbComp from "../../../components/BreadCrumbComp.vue";
 import PostCategory from "~/components/Posts/PostCategory.vue";
 
 export default {
+  data() {
+    return {
+      posts: {
+        ru: "Посты",
+        uz: "Xabarlar",
+      },
+    };
+  },
   components: {
     BreadCrumbComp,
     PostCategory,

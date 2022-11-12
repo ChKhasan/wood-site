@@ -2,12 +2,11 @@
   <div class="contact-card" :style="{ 'background-image': `url(${img})` }">
     <div class="backColor" :style="{ background: `${bgcolor}` }"></div>
     <div class="c-card-title mb-5">
-      <h3>Следите за нашим <br />магазином в {{ title }}</h3>
+      <h3>{{ title }}</h3>
     </div>
-    <div class="-card-text"><a href="#">@furnitor.trending</a></div>
     <div class="c-card-btn">
       <div class="j-card-btn">
-        <a class="b-btn" :href="link">{{ name }}</a>
+        <a class="b-btn" :href="link">{{ learnMore[getLang] ? learnMore[getLang]:learnMore.ru }}</a>
       </div>
     </div>
   </div>
@@ -18,6 +17,19 @@ export default {
   props: ["name", "img", "link", "title", "bgcolor"],
   components: {
     BorderBlackBtn,
+  },
+  data() {
+    return {
+      learnMore: {
+        ru: "ПОДРОБНЕЕ",
+        uz: "KO'PROQ MA'LUMOT OLISH",
+      },
+    };
+  },
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
   },
 };
 </script>
@@ -57,14 +69,14 @@ export default {
 .c-card-title h3 {
   font-size: 30px !important;
   font-weight: 700 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   line-height: 1.25;
   color: #000;
 }
 .c-card-text p {
   color: #777 !important;
   font-weight: 500 !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   margin-bottom: 1rem !important  ;
 }
 .c-card-btn {

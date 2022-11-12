@@ -17,7 +17,11 @@
               <strong
                 class="d-block title_banner-company fadeInUp animated"
                 data-animate="fadeInUp"
-                >{{ sliders[0].subtitle[getLang] }}</strong
+                >{{
+                  sliders[0].subtitle[getLang]
+                    ? sliders[0].subtitle[getLang]
+                    : sliders[0].subtitle.ru
+                }}</strong
               >
             </h1>
             <nuxt-link
@@ -30,7 +34,7 @@
               class="btn btn-outline-primary text-uppercase shop_now_btn"
               data-animate="fadeInUp"
               tabindex="0"
-              >Купить сейчас</nuxt-link
+              >{{ buyNow[getLang] ? buyNow[getLang] : buyNow.ru }}</nuxt-link
             >
           </div>
         </div>
@@ -46,6 +50,14 @@
 <script>
 export default {
   name: "BannerComp",
+  data() {
+    return {
+      buyNow: {
+        ru: "Купить сейчас",
+        uz: "Xarid qilish",
+      },
+    };
+  },
   props: ["sliders"],
   computed: {
     getLang() {
@@ -55,7 +67,6 @@ export default {
 };
 </script>
 <style lang="css">
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&family=Philosopher:wght@700&family=Poppins:ital,wght@0,100;0,300;0,400;0,500;0,800;1,100&family=Roboto&display=swap");
 .banner_comp {
   background-image: url("../../static/images/image_banner2.png");
   background-position: center top;
@@ -67,14 +78,14 @@ export default {
   font-weight: 700;
   font-size: 24px;
   line-height: 1.63;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   color: #000;
   margin-bottom: 30px;
 }
 .title_banner-company {
   font-size: 60px !important;
-  font-weight: 800 !important;
-  font-family: "Poppins", sans-serif;
+  font-weight: 700 !important;
+  font-family: "Montserrat", sans-serif !important;
   color: #000;
   width: 30%;
 }

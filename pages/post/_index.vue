@@ -1,11 +1,19 @@
 <template lang="html">
   <div class="">
-    <BreadCrumbComp category="Пост" />
+    <BreadCrumbComp
+      :category="
+        postLang.breadC[getLang] ? postLang.breadC[getLang] : postLang.breadC.ru
+      "
+    />
     <div class="container container-xxl pt-10 mb-5 post-transition">
       <div v-if="usePN" class="row">
         <div class="col-12 d-flex justify-content-center flex-column">
           <p class="post-date">{{ `${monthNames[month]} ${date}, ${year}` }}</p>
-          <h1 class="post-title mb-5">{{ thePost.title[getLang] }}</h1>
+          <h1 class="post-title mb-5">
+            {{
+              thePost.title[getLang] ? thePost.title[getLang] : thePost.title.ru
+            }}
+          </h1>
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
@@ -20,7 +28,13 @@
       <div class="row" v-else>
         <div class="col-12 d-flex justify-content-center flex-column">
           <p class="post-date">APRIL 24, 2019</p>
-          <h1 class="post-title mb-5">{{ thisPost.title[getLang] }}</h1>
+          <h1 class="post-title mb-5">
+            {{
+              thisPost.title[getLang]
+                ? thisPost.title[getLang]
+                : thisPost.title.ru
+            }}
+          </h1>
           <div class="mb-5 d-flex justify-content-center mt-5">
             <img
               class="post-banner"
@@ -34,11 +48,21 @@
 
       <div v-if="usePN" class="row justify-content-center">
         <div class="col-lg-9">
-          <p class="post-subtitle">{{ thePost.subtitle[getLang] }}</p>
+          <p class="post-subtitle">
+            {{
+              thePost.subtitle[getLang]
+                ? thePost.subtitle[getLang]
+                : thePost.subtitle.ru
+            }}
+          </p>
         </div>
         <div class="col-lg-9">
-          <p class="post-description" v-html="thePost.desc[getLang]"></p>
-          <PostMessenger />
+          <p
+            class="post-description"
+            v-html="
+              thePost.desc[getLang] ? thePost.desc[getLang] : thePost.desc.ru
+            "
+          ></p>
         </div>
       </div>
 
@@ -48,7 +72,6 @@
         </div>
         <div class="col-lg-9">
           <p class="post-description" v-html="thisPost.desc[getLang]"></p>
-          <PostMessenger />
         </div>
       </div>
     </div>
@@ -80,8 +103,18 @@
                 ></div>
               </div>
               <div class="pre-title">
-                <p>PREVIOUS</p>
-                <a href="">{{ thePrevPost.title[getLang] }}</a>
+                <p>
+                  {{
+                    postLang.prev[getLang]
+                      ? postLang.prev[getLang]
+                      : postLang.prev.ru
+                  }}
+                </p>
+                <a href="">{{
+                  thePrevPost.title[getLang]
+                    ? thePrevPost.title[getLang]
+                    : thePrevPost.title.ru
+                }}</a>
               </div>
             </div>
           </div>
@@ -92,8 +125,18 @@
               class="next-card d-flex align-items-center justify-content-end"
             >
               <div class="next-title">
-                <p>NEXT</p>
-                <a href="">{{ theNextPost.title[getLang] }}</a>
+                <p>
+                  {{
+                    postLang.next[getLang]
+                      ? postLang.next[getLang]
+                      : postLang.next.ru
+                  }}
+                </p>
+                <a href="">{{
+                  theNextPost.title[getLang]
+                    ? theNextPost.title[getLang]
+                    : theNextPost.title.ru
+                }}</a>
               </div>
               <div class="next-img mx-3">
                 <!-- <img
@@ -139,8 +182,18 @@
                 ></div>
               </div>
               <div class="pre-title">
-                <p>ПРЕДЫДУЩИЙ</p>
-                <a href="">{{ thisPrevPost.title[getLang] ? thisPrevPost.title[getLang]:thisPrevPost.title.ru }}</a>
+                <p>
+                  {{
+                    postLang.prev[getLang]
+                      ? postLang.prev[getLang]
+                      : postLang.prev.ru
+                  }}
+                </p>
+                <a href="">{{
+                  thisPrevPost.title[getLang]
+                    ? thisPrevPost.title[getLang]
+                    : thisPrevPost.title.ru
+                }}</a>
               </div>
             </div>
           </div>
@@ -151,8 +204,18 @@
               class="next-card d-flex align-items-center justify-content-end"
             >
               <div class="next-title">
-                <p>СЛЕДУЮЩИЙ</p>
-                <a href="">{{ thisNextPost.title[getLang] ? thisNextPost.title[getLang]:thisNextPost.title.ru }}</a>
+                <p>
+                  {{
+                    postLang.next[getLang]
+                      ? postLang.next[getLang]
+                      : postLang.next.ru
+                  }}
+                </p>
+                <a href="">{{
+                  thisNextPost.title[getLang]
+                    ? thisNextPost.title[getLang]
+                    : thisNextPost.title.ru
+                }}</a>
               </div>
               <div class="next-img mx-3">
                 <!-- <img
@@ -176,7 +239,13 @@
       </div>
       <div class="row mt-5 mb-5">
         <div class="col-12">
-          <TitleComp title="Недавние Посты" />
+          <TitleComp
+            :title="
+              postLang.lastPosts[getLang]
+                ? postLang.lastPosts[getLang]
+                : postLang.lastPosts.ru
+            "
+          />
           <JournalComp :posts="this.posts" />
         </div>
       </div>
@@ -215,6 +284,24 @@ export default {
       month: null,
       date: null,
       year: null,
+      postLang: {
+        prev: {
+          ru: "ПРЕДЫДУЩИЙ",
+          uz: "OLDINGI",
+        },
+        next: {
+          ru: "СЛЕДУЮЩИЙ",
+          uz: "KEYINGISI",
+        },
+        lastPosts: {
+          ru: "Недавние Посты",
+          uz: "Oxirgi xabarlar",
+        },
+        breadC: {
+          ru: "Посты",
+          uz: "Xabarlar",
+        },
+      },
     };
   },
   computed: {
@@ -313,7 +400,7 @@ export default {
   color: #999 !important;
   text-transform: uppercase !important;
   text-align: center !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .pt-10,
 .py-10 {
@@ -326,12 +413,12 @@ export default {
   font-weight: 700;
   line-height: 1.25;
   color: #000;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .owner {
   text-align: center !important;
   margin-bottom: 4.375rem !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.63;
@@ -339,7 +426,7 @@ export default {
 }
 .post-description {
   margin-bottom: 3.125rem !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.63;
@@ -372,7 +459,7 @@ export default {
   color: #000;
   text-decoration: none;
   background-color: transparent;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
   font-size: 1rem;
 }
 .next-title p,
@@ -384,7 +471,7 @@ export default {
   color: #999 !important;
   text-transform: uppercase !important;
   margin-bottom: 0.3125rem !important;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 .previous-card {
   border-right: 1px;
