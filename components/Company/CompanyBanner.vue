@@ -24,7 +24,8 @@
                 data-animate="fadeInUp"
               >
                 {{
-                  translate[getLang]?.company.title ?? translate.ru.company.title
+                  translate[getLang]?.company.title ??
+                  translate.ru.company.title
                 }}</strong
               >
             </h1>
@@ -99,6 +100,12 @@ export default {
   font-family: "Montserrat", sans-serif !important;
   margin-top: 14px;
   color: #000;
+}
+@media (max-width: 576px) {
+  .title_banner {
+    font-size: 38px;
+    line-height: 48px;
+  }
 }
 .shop_now_btn {
   border: 1px solid #000 !important;

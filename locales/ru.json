@@ -12,7 +12,9 @@
   },
   "homepage": {
     "buynow": "Купить сейчас",
-    "shownow": "Показать Сейчас"
+    "shownow": "Показать Сейчас",
+    "ourProducts": "Наши Продукты",
+    "recentPosts": "Недавние Посты"
   },
   "contact": {
     "card": {

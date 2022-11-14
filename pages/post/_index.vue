@@ -3,7 +3,7 @@
     <BreadCrumbComp
       :category="translate[getLang]?.post.breadC ?? translate.ru.post.breadC"
     />
-    <div class="container container-xxl pt-10 mb-5 post-transition">
+    <div class="container container-xl pt-10 mb-5 post-transition">
       <div v-if="usePN" class="row">
         <div class="col-12 d-flex justify-content-center flex-column">
           <p class="post-date">{{ `${monthNames[month]} ${date}, ${year}` }}</p>

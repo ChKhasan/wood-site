@@ -12,7 +12,9 @@
   },
   "homepage": {
     "buynow": "Xarid qilish",
-    "shownow": "Hozir ko'rsatish"
+    "shownow": "Hozir ko'rsatish",
+    "ourProducts": "Bizning mahsulotlarimiz",
+    "recentPosts": "Oxirgi xabarlar"
   },
   "contact": {
     "card": {

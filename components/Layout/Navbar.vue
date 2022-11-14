@@ -108,9 +108,7 @@
                         {{ getLang }}
                         <i class="el-icon-arrow-down el-icon--right"></i>
                       </span>
-                      <span>
-                        {{ lang[getLang] ?? lang.ru }}
-                      </span>
+
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item
                           v-for="item in language"
@@ -123,7 +121,8 @@
                   </li>
                   <li class="mt-5">
                     <nuxt-link to="/">{{
-                      translate[getLang]?.navbar.home ?? translate.ru.navbar.home
+                      translate[getLang]?.navbar.home ??
+                      translate.ru.navbar.home
                     }}</nuxt-link>
                   </li>
                   <li class="mt-5">

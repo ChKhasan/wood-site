@@ -3,12 +3,18 @@
     <Banner :sliders="sliders" />
     <div class="mt-5">
       <TitleComp
-        :title="OurProducts[getLang] ? OurProducts[getLang] : OurProducts.ru"
+        :title="
+          translate[getLang]?.homepage.ourProducts ??
+          translate.ru.homepage.ourProducts
+        "
       />
     </div>
     <HomeCardBlog :products="products" :category="category" />
     <TitleComp
-      :title="RecentPosts[getLang] ? RecentPosts[getLang] : RecentPosts.ru"
+      :title="
+        translate[getLang]?.homepage.recentPosts ??
+        translate.ru.homepage.recentPosts
+      "
     />
     <NewPosts :posts="posts" />
     <ContactCardBlog :siteInfo="siteInfo" />
@@ -25,25 +31,33 @@ import translate from "@/translate/translation";
 
 export default {
   name: "IndexPage",
+  head: {
+    title: "Home Page",
+    htmlAttrs: {
+      lang: "en",
+    },
+    meta: [
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { hid: "description", name: "description", content: "Ofis mebillari" },
+      { name: "format-detection", content: "telephone=no" },
+    ],
+    script: [
+      {
+        src: "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
+      },
+    ],
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+  },
   data() {
     return {
-      OurProducts: {
-        ru: "Наши Продукты",
-        uz: "Bizning mahsulotlarimiz",
-      },
-      RecentPosts: {
-        ru: "Недавние Посты",
-        uz: "Oxirgi xabarlar",
-      },
-      lang: {
+      translate: {
         ru: require("../locales/ru.json"),
         uz: require("../locales/uz.json"),
       },
     };
   },
-  mounted() {
-    console.log(this.ru);
-  },
+
   computed: {
     getLang() {
       return this.$store.getters.language;

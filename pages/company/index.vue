@@ -2,7 +2,11 @@
   <div>
     <CompanyBanner :title="site_info" />
 
-    <TitleComp :title="translate[getLang]?.company.ourTeam ?? translate.ru?.company.ourTeam" />
+    <TitleComp
+      :title="
+        translate[getLang]?.company.ourTeam ?? translate.ru?.company.ourTeam
+      "
+    />
     <div class="container container-xl">
       <div class="row">
         <div class="col-12 mb-5 mt-4 team-card-controller">
@@ -10,9 +14,11 @@
         </div>
       </div>
       <div class="row company-info">
-        <div class="col-lg-7 pr-5">
+        <div class="col-lg-7 pr-md-5">
           <h1 class="company-info-title">
-           {{translate[getLang]?.company.place ?? translate.ru?.company.place}}
+            {{
+              translate[getLang]?.company.place ?? translate.ru?.company.place
+            }}
           </h1>
           <p
             class="company-desc"
@@ -103,6 +109,7 @@ export default {
     margin-top: 0 !important;
   }
 }
+
 @media (min-width: 992px) {
   .team-card-controller {
     display: grid;
@@ -117,6 +124,7 @@ export default {
     grid-gap: 30px;
   }
 }
+
 @media (min-width: 1400px) {
   .team-card-controller {
     display: grid;
@@ -135,7 +143,6 @@ export default {
 }
 .company-desc {
   font-family: "Montserrat", sans-serif !important;
-
   font-size: 18px;
   font-weight: 400;
   line-height: 36px;
@@ -144,5 +151,29 @@ export default {
 }
 .company-info-img img {
   width: 100%;
+}
+@media (max-width: 576px) {
+ 
+ .company-info-title {
+   font-family: "Montserrat", sans-serif !important;
+ font-size: 18px;
+ font-weight: 600;
+ line-height: 23px;
+ letter-spacing: 0em;
+ text-align: justify;
+ margin-top: 60px;
+ }
+ .company-desc {
+  font-family: "Montserrat", sans-serif !important;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0em;
+    text-align: justify;
+}
+.company-info {
+  margin-top: 24px !important;
+  margin-bottom: 15px !important;
+}
 }
 </style>
