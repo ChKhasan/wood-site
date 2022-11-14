@@ -1,9 +1,7 @@
 <template lang="html">
   <div class="">
     <BreadCrumbComp
-      :category="
-        postLang.breadC[getLang] ? postLang.breadC[getLang] : postLang.breadC.ru
-      "
+      :category="translate[getLang]?.post.breadC ?? translate.ru.post.breadC"
     />
     <div class="container container-xxl pt-10 mb-5 post-transition">
       <div v-if="usePN" class="row">
@@ -104,11 +102,7 @@
               </div>
               <div class="pre-title">
                 <p>
-                  {{
-                    postLang.prev[getLang]
-                      ? postLang.prev[getLang]
-                      : postLang.prev.ru
-                  }}
+                  {{ translate[getLang]?.post.prev ?? translate.ru.post.prev }}
                 </p>
                 <a href="">{{
                   thePrevPost.title[getLang]
@@ -126,11 +120,7 @@
             >
               <div class="next-title">
                 <p>
-                  {{
-                    postLang.next[getLang]
-                      ? postLang.next[getLang]
-                      : postLang.next.ru
-                  }}
+                  {{ translate[getLang]?.post.next ?? translate.ru.post.next }}
                 </p>
                 <a href="">{{
                   theNextPost.title[getLang]
@@ -183,11 +173,7 @@
               </div>
               <div class="pre-title">
                 <p>
-                  {{
-                    postLang.prev[getLang]
-                      ? postLang.prev[getLang]
-                      : postLang.prev.ru
-                  }}
+                  {{ translate[getLang]?.post.prev ?? translate.ru.post.prev }}
                 </p>
                 <a href="">{{
                   thisPrevPost.title[getLang]
@@ -205,11 +191,7 @@
             >
               <div class="next-title">
                 <p>
-                  {{
-                    postLang.next[getLang]
-                      ? postLang.next[getLang]
-                      : postLang.next.ru
-                  }}
+                  {{ translate[getLang]?.post.next ?? translate.ru.post.next }}
                 </p>
                 <a href="">{{
                   thisNextPost.title[getLang]
@@ -241,9 +223,7 @@
         <div class="col-12">
           <TitleComp
             :title="
-              postLang.lastPosts[getLang]
-                ? postLang.lastPosts[getLang]
-                : postLang.lastPosts.ru
+              translate[getLang]?.post.lastPosts ?? translate.ru.post.lastPosts
             "
           />
           <JournalComp :posts="this.posts" />
@@ -284,23 +264,9 @@ export default {
       month: null,
       date: null,
       year: null,
-      postLang: {
-        prev: {
-          ru: "ПРЕДЫДУЩИЙ",
-          uz: "OLDINGI",
-        },
-        next: {
-          ru: "СЛЕДУЮЩИЙ",
-          uz: "KEYINGISI",
-        },
-        lastPosts: {
-          ru: "Недавние Посты",
-          uz: "Oxirgi xabarlar",
-        },
-        breadC: {
-          ru: "Посты",
-          uz: "Xabarlar",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

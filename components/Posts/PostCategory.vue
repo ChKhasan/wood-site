@@ -7,9 +7,8 @@
             <div class="filter-card-title">
               <h3>
                 {{
-                  postsLang.allposts[getLang]
-                    ? postsLang.allposts[getLang]
-                    : postsLang.allposts.ru
+                  translate[getLang]?.posts.allposts ??
+                  translate.ru.posts.allposts
                 }}
               </h3>
             </div>
@@ -69,11 +68,8 @@
             v-on:keyup.enter="searchProduct"
             class="search-input"
             :placeholder="
-              postsLang.search[getLang]
-                ? postsLang.search[getLang]
-                : postsLang.search.ru
-            "
-          />
+              translate[getLang]?.posts.search ?? translate.ru.posts.search
+            "/>
           <el-button
             icon="el-icon-search"
             :class="{ 'btn-primary': params.search !== '' }"
@@ -136,15 +132,9 @@ export default {
         page: 1,
       },
       year: null,
-      postsLang: {
-        allposts: {
-          ru: "Все посты",
-          uz: "Barcha xabarlar",
-        },
-        search: {
-          ru: "Поиск",
-          uz: "Qidirish",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

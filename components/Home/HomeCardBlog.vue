@@ -26,7 +26,9 @@
         data-aos="fade-up"
         data-aos-duration="1000"
         data-aos-delay="800"
-        >{{ showNow[getLang] ? showNow[getLang] : showNow.ru }}</nuxt-link
+        >{{
+          translate[getLang]?.homepage.shownow ?? translate.ru.homepage.shownow
+        }}</nuxt-link
       >
     </div>
   </div>
@@ -39,9 +41,9 @@ export default {
   props: ["products", "category"],
   data() {
     return {
-      showNow: {
-        ru: "Показать Сейчас",
-        uz: "Hozir ko'rsatish",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

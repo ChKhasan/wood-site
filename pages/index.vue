@@ -6,9 +6,10 @@
         :title="OurProducts[getLang] ? OurProducts[getLang] : OurProducts.ru"
       />
     </div>
-
     <HomeCardBlog :products="products" :category="category" />
-    <TitleComp :title="RecentPosts[getLang] ? RecentPosts[getLang]:RecentPosts.ru" />
+    <TitleComp
+      :title="RecentPosts[getLang] ? RecentPosts[getLang] : RecentPosts.ru"
+    />
     <NewPosts :posts="posts" />
     <ContactCardBlog :siteInfo="siteInfo" />
   </div>
@@ -33,8 +34,15 @@ export default {
       RecentPosts: {
         ru: "Недавние Посты",
         uz: "Oxirgi xabarlar",
-      }
+      },
+      lang: {
+        ru: require("../locales/ru.json"),
+        uz: require("../locales/uz.json"),
+      },
     };
+  },
+  mounted() {
+    console.log(this.ru);
   },
   computed: {
     getLang() {

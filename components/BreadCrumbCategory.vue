@@ -5,13 +5,17 @@
         <div class="row">
           <div class="col-md-8">
             <div class="bread_crumb_box">
-              <router-link class="bread_crumb" to="/">  {{
-                  allProducts[getLang] ? allProducts[getLang] : allProducts.ru
-                }} </router-link>
+              <router-link class="bread_crumb" to="/">
+                {{
+                  translate[getLang]?.breadCrumbCategory.home ??
+                  translate.ru.breadCrumbCategory.home
+                }}
+              </router-link>
               <span>/</span>
               <router-link class="bread_crumb" to="/products?page=1">
                 {{
-                  allProducts[getLang] ? allProducts[getLang] : allProducts.ru
+                  translate[getLang]?.breadCrumbCategory.allProducts ??
+                  translate.ru.breadCrumbCategory.allProducts
                 }}
               </router-link>
               <span>/</span>
@@ -35,14 +39,10 @@ export default {
   props: ["category"],
   data() {
     return {
-      allProducts: {
-        ru: "Все Продукты",
-        uz: "Barcha mahsulotlar",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
-      home: {
-        ru: "Главный",
-        uz: "Asosiy"
-      }
     };
   },
   computed: {

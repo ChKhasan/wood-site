@@ -2,7 +2,9 @@
   <div class="mt-5">
     <div class="d-none d-md-block">
       <div class="info-title d-flex justify-content-center">
-        <h1>{{desc[getLang] ? desc[getLang]:desc.ru}}</h1>
+        <h1>
+          {{ translate[getLang]?.product.desc ?? translate.ru.product.desc }}
+        </h1>
       </div>
 
       <DescriptionComp />
@@ -10,7 +12,9 @@
     <div class="d-md-none">
       <vsa-list>
         <vsa-item>
-          <vsa-heading>{{desc[getLang] ? desc[getLang]:desc.ru}}</vsa-heading>
+          <vsa-heading>{{
+            translate[getLang]?.product.desc ?? translate.ru.product.desc
+          }}</vsa-heading>
 
           <vsa-content>
             <DescriptionComp />
@@ -28,9 +32,9 @@ export default {
   data() {
     return {
       activeName: "first",
-      desc: {
-        ru: "Описание",
-        uz: "Tavsif",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

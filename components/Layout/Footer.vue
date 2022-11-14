@@ -16,34 +16,28 @@
                 class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
               >
                 {{
-                  footerLang.menu[getLang]
-                    ? footerLang.menu[getLang]
-                    : footerLang.menu.ru
+                  translate[getLang]?.footer.menu ?? translate.ru.footer.menu
                 }}
               </h3>
             </li>
 
             <li class="py-0">
               <nuxt-link to="/" class="lh-225 footer-links">{{
-                footerLang.home[getLang]
-                  ? footerLang.home[getLang]
-                  : footerLang.home.ru
+                translate[getLang]?.footer.home ?? translate.ru.footer.home
               }}</nuxt-link>
             </li>
             <li class="py-0">
               <nuxt-link to="/products?page=1" class="lh-225 footer-links"
                 >{{
-                  footerLang.category[getLang]
-                    ? footerLang.category[getLang]
-                    : footerLang.category.ru
+                  translate[getLang]?.footer.category ??
+                  translate.ru.footer.category
                 }}
               </nuxt-link>
             </li>
             <li class="py-0">
               <nuxt-link to="/contact" class="lh-225 footer-links">{{
-                footerLang.contact[getLang]
-                  ? footerLang.contact[getLang]
-                  : footerLang.contact.ru
+                translate[getLang]?.footer.contact ??
+                translate.ru.footer.contact
               }}</nuxt-link>
             </li>
             <li class="py-0">
@@ -51,18 +45,15 @@
                 to="/post-categories/1/posts?page=1"
                 class="lh-225 footer-links"
                 >{{
-                  footerLang.posts[getLang]
-                    ? footerLang.posts[getLang]
-                    : footerLang.posts.ru
+                  translate[getLang]?.footer.posts ?? translate.ru.footer.posts
                 }}</nuxt-link
               >
             </li>
 
             <li class="py-0">
               <nuxt-link to="/company" class="lh-225 footer-links">{{
-                footerLang.company[getLang]
-                  ? footerLang.company[getLang]
-                  : footerLang.company.ru
+                translate[getLang]?.footer.company ??
+                translate.ru.footer.company
               }}</nuxt-link>
             </li>
           </ul>
@@ -74,9 +65,8 @@
                 class="fs-14 mb-3 text-uppercase footer-link-title letter-spacing-05"
               >
                 {{
-                  footerLang.categories[getLang]
-                    ? footerLang.categories[getLang]
-                    : footerLang.categories.ru
+                  translate[getLang]?.footer.categories ??
+                  translate.ru.footer.categories
                 }}
               </h3>
             </li>
@@ -86,9 +76,7 @@
                 :key="item.id"
                 :to="`/categories/${item.id}/products?page=1`"
                 class="lh-225 footer-links"
-                >{{
-                  item.title[getLang] ? item.title[getLang] : item.title.ru
-                }}</nuxt-link
+                >{{ item?.title[getLang] ?? item.title.ru }}</nuxt-link
               >
             </li>
           </ul>
@@ -127,16 +115,11 @@
             v-if="siteInfo && siteInfo.title"
           >
             © {{ year }}
-            {{
-              siteInfo.title[getLang]
-                ? siteInfo.title[getLang]
-                : siteInfo.title.ru
-            }}
+            {{ siteInfo?.title[getLang] ?? siteInfo.title.ru }}
             .<br />
             {{
-              footerLang.security[getLang]
-                ? footerLang.security[getLang]
-                : footerLang.security.ru
+              translate[getLang]?.footer.security ??
+              translate.ru.footer.security
             }}
           </p>
         </div>
@@ -151,39 +134,9 @@ export default {
   data() {
     return {
       year: new Date().getFullYear(),
-      footerLang: {
-        menu: {
-          ru: "МЕНЮ",
-          uz: "MENYU",
-        },
-        home: {
-          ru: "Главный",
-          uz: "Asosiy",
-        },
-        category: {
-          ru: "Каталог",
-          uz: "Katalog",
-        },
-        company: {
-          ru: "О компании",
-          uz: "Kompaniya haqida",
-        },
-        contact: {
-          ru: "Контакт",
-          uz: "Aloqa",
-        },
-        posts: {
-          ru: "Посты",
-          uz: "Xabarlar",
-        },
-        categories: {
-          ru: "КАТЕГОРИИ",
-          uz: "KATEGORIYALAR",
-        },
-        security: {
-          ru: "Все права защищены.",
-          uz: "Barcha huquqlar himoyalangan.",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

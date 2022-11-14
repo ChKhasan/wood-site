@@ -18,9 +18,8 @@
                 <div class="filter-card-title">
                   <h3>
                     {{
-                      categoryLang.categoriesTitle[getLang]
-                        ? categoryLang.categoriesTitle[getLang]
-                        : categoryLang.categoriesTitle.ru
+                      translate[getLang]?.categories.categories ??
+                      translate.ru.categories.categories
                     }}
                   </h3>
                 </div>
@@ -32,9 +31,8 @@
                         @click="$router.push(`/products?page=1`)"
                       >
                         {{
-                          categoryLang.allProducts[getLang]
-                            ? categoryLang.allProducts[getLang]
-                            : categoryLang.allProducts.ru
+                          translate[getLang]?.categories.allProducts ??
+                          translate.ru.categories.allProducts
                         }}
                       </span>
                     </li>
@@ -108,9 +106,8 @@
                 v-on:keyup.enter="searchProduct"
                 class="search-input"
                 :placeholder="
-                  categoryLang.search[getLang]
-                    ? categoryLang.search[getLang]
-                    : categoryLang.search.ru
+                  translate[getLang]?.categories.search ??
+                  translate.ru.categories.search
                 "
               />
               <el-button
@@ -180,19 +177,9 @@ export default {
         page: 1,
       },
       year: null,
-      categoryLang: {
-        categoriesTitle: {
-          ru: "Категории продуктов",
-          uz: "Mahsulot toifalari",
-        },
-        allProducts: {
-          ru: "Все продукты",
-          uz: "Barcha mahsulotlar",
-        },
-        search: {
-          ru: "Искать",
-          uz: "Qidirish",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

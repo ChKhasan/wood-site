@@ -2,7 +2,7 @@
   <div class="team-card">
     <div class="team-card-img d-flex justify-content-center">
       <div class="t-img">
-        <img :src="team.lg_img" alt="user-logo" />
+        <img :src="team.lg_img" :alt="team.name.ru" />
       </div>
     </div>
     <div class="team-card-body d-flex justify-content-center flex-column">

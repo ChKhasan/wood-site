@@ -1,19 +1,23 @@
 <template lang="html">
   <div>
-    <BreadCrumbComp :category="categoryLang.allProducts[getLang]
-                        ? categoryLang.allProducts[getLang]
-                        : categoryLang.allProducts.ru" />
+    <BreadCrumbComp
+      :category="
+        translate[getLang]?.products.allProducts ??
+        translate.ru.products.allProducts
+      "
+    />
     <div class="container container-xl py-5">
       <div class="row pb-6">
         <div class="col-md-3">
           <div class="shop-sticky">
             <div class="filter-card">
               <div class="filter-card-title">
-                <h3>{{
-                      categoryLang.categoriesTitle[getLang]
-                        ? categoryLang.categoriesTitle[getLang]
-                        : categoryLang.categoriesTitle.ru
-                    }}</h3>
+                <h3>
+                  {{
+                    translate[getLang]?.products.categoriesTitle ??
+                    translate.ru.products.categoriesTitle
+                  }}
+                </h3>
               </div>
               <div class="filter-card-body">
                 <ul class="f-card-list" style="padding-left: none">
@@ -22,11 +26,10 @@
                       class="list-inline-item active"
                       @click="$router.push(`/products?page=1`)"
                     >
-                    {{
-                      categoryLang.allProducts[getLang]
-                        ? categoryLang.allProducts[getLang]
-                        : categoryLang.allProducts.ru
-                    }}
+                      {{
+                        translate[getLang]?.products.allProducts ??
+                        translate.ru.products.allProducts
+                      }}
                     </span>
                   </li>
                   <li
@@ -57,23 +60,24 @@
           </div>
         </div>
         <div class="col-md-9">
-            <div class="position-relative d-flex search-blog mt-4 mb-4">
-              <input
-                type="text"
-                v-model="params.search"
-                v-on:keyup.enter="searchProduct"
-                class="search-input"
-                :placeholder="categoryLang.search[getLang]
-                        ? categoryLang.search[getLang]
-                        : categoryLang.search.ru"
-              />
-              <el-button
-                icon="el-icon-search"
-                :class="{ 'btn-primary': params.search !== '' }"
-                :disabled="params.search == '' ? true : false"
-                @click="searchProduct"
-              ></el-button>
-              <!-- <el-button
+          <div class="position-relative d-flex search-blog mt-4 mb-4">
+            <input
+              type="text"
+              v-model="params.search"
+              v-on:keyup.enter="searchProduct"
+              class="search-input"
+              :placeholder="
+                translate[getLang]?.products.search ??
+                translate.ru.products.search
+              "
+            />
+            <el-button
+              icon="el-icon-search"
+              :class="{ 'btn-primary': params.search !== '' }"
+              :disabled="params.search == '' ? true : false"
+              @click="searchProduct"
+            ></el-button>
+            <!-- <el-button
                 class="btn"
                 :class="{ 'btn-primary': params.search !== '' }"
                 :disabled="params.search == '' ? true : false"
@@ -84,9 +88,8 @@
                   icon="fa-solid fa-magnifying-glass"
                 />
               </el-button> -->
-            </div>
+          </div>
 
-         
           <div class="shop-card-controller">
             <ProductCard
               data-aos="fade-up"
@@ -133,19 +136,9 @@ export default {
         page: 1,
       },
       year: null,
-      categoryLang: {
-        categoriesTitle: {
-          ru: "Категории продуктов",
-          uz: "Mahsulot toifalari",
-        },
-        allProducts: {
-          ru: "Все продукты",
-          uz: "Barcha mahsulotlar",
-        },
-        search: {
-          ru: "Искать",
-          uz: "Qidirish",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

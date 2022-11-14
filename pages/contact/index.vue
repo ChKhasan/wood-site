@@ -2,17 +2,18 @@
   <div>
     <BreadCrumbComp
       :category="
-        contactLang.contact[getLang]
-          ? contactLang.contact[getLang]
-          : contactLang.contact.ru
+        translate[getLang]?.contact.contact ?? translate.ru.contact.contact
       "
     />
     <div class="container container-xxl mt-3 py-5 pb-14">
       <div class="row pb-5">
         <div class="col-12 contact-title">
-          <h1>{{ contactLang.contactUs[getLang]
-          ? contactLang.contactUs[getLang]
-          : contactLang.contactUs.ru}}</h1>
+          <h1>
+            {{
+              translate[getLang]?.contact.contactUs ??
+              translate.ru.contact.contactUs
+            }}
+          </h1>
         </div>
       </div>
       <div class="row">
@@ -58,14 +59,16 @@
       <div class="row">
         <div class="col-md-8 mb-8 mb-md-0 mt-4">
           <h2 class="fs-24 mb-2 form-title">
-            {{ contactLang.formTitle[getLang]
-          ? contactLang.formTitle[getLang]
-          : contactLang.formTitle.ru}}
+            {{
+              translate[getLang]?.contact.formTitle ??
+              translate.ru.contact.formTitle
+            }}
           </h2>
           <p class="mb-7 form-text">
-            {{ contactLang.formText[getLang]
-          ? contactLang.formText[getLang]
-          : contactLang.formText.ru}}
+            {{
+              translate[getLang]?.contact.formText ??
+              translate.ru.contact.formText
+            }}
           </p>
           <form action="">
             <div class="row mb-6">
@@ -73,9 +76,10 @@
                 <input
                   type="text"
                   class="form-control"
-                  :placeholder="contactLang.yourName[getLang]
-          ? contactLang.yourName[getLang]
-          : contactLang.yourName.ru"
+                  :placeholder="
+                    translate[getLang]?.contact.yourName ??
+                    translate.ru.contact.yourName
+                  "
                   required
                   oninvalid="this.setCustomValidity('Введите имя пользователя')"
                   oninput="this.setCustomValidity('')"
@@ -110,9 +114,9 @@
                 id="customCheck1"
               />
               <label class="custom-control-label fs-15" for="customCheck1">
-               {{contactLang.save[getLang]
-          ? contactLang.save[getLang]
-          : contactLang.save.ru}}</label
+                {{
+                  translate[getLang]?.contact.save ?? translate.ru.contact.save
+                }}</label
               >
             </div>
             <button
@@ -121,17 +125,21 @@
               class="btn form-btn text-uppercase letter-spacing-05"
               @click="postData"
             >
-              {{contactLang.sendNow[getLang]
-          ? contactLang.sendNow[getLang]
-          : contactLang.sendNow.ru}}
+              {{
+                translate[getLang]?.contact.sendNow ??
+                translate.ru.contact.sendNow
+              }}
             </button>
           </form>
         </div>
 
         <div class="col-md-4 pl-xl-13 pl-md-6 mt-4">
-          <p class="font-weight-bold adress-title mb-3">{{contactLang.address[getLang]
-          ? contactLang.address[getLang]
-          : contactLang.address.ru}}</p>
+          <p class="font-weight-bold adress-title mb-3">
+            {{
+              translate[getLang]?.contact.address ??
+              translate.ru.contact.address
+            }}
+          </p>
           <address class="mb-6 form-text">
             {{
               site_info.address[getLang]
@@ -139,9 +147,9 @@
                 : site_info.address.ru
             }}
           </address>
-          <p class="font-weight-bold info-title mb-2 form-text">{{contactLang.info[getLang]
-          ? contactLang.info[getLang]
-          : contactLang.info.ru}}</p>
+          <p class="font-weight-bold info-title mb-2 form-text">
+            {{ translate[getLang]?.contact.info ?? translate.ru.contact.info }}
+          </p>
           <p class="mb-0 form-text">{{ site_info.phone_number }}</p>
           <a :href="`mailto:${site_info.email}`" class="mb-7 form-text">{{
             site_info.email
@@ -174,44 +182,11 @@ export default {
           callbacks: { click: function () {} },
         },
       ],
-      contactLang: {
-        contact: {
-          ru: " Контакт",
-          uz: "Aloqa",
-        },
-        contactUs: {
-          ru: "Свяжитесь с нами",
-          uz: "Biz bilan bog'lanish",
-        },
-        formTitle: {
-          ru: "Мы были бы рады получить известия от вас.",
-          uz: "Sizdan xabar olsak xursand bo'lardik.",
-        },
-        formText: {
-          ru: "Если у вас есть отличные продукты, которые вы делаете или хотите работать с нами, напишите нам.",
-          uz: "Agar sizda ishlab chiqaradigan ajoyib mahsulotlaringiz bo'lsa yoki biz bilan ishlashni xohlasangiz, biz bilan bog'laning.",
-        },
-        yourName: {
-          ru: "Ваше Имя*",
-          uz: "Sizning ismingiz*",
-        },
-        save: {
-          ru: "Сохраните мое имя, номер телефона и веб-сайт в этом браузере для вашего следующего обзора.",
-          uz: "Keyingi sharhingiz uchun ismim, telefon nomerim va veb-saytimni ushbu brauzerda saqlang.",
-        },
-        sendNow: {
-          ru: "отправить сейчас",
-          uz: "hozir yuboring",
-        },
-        address: {
-          ru: "Адрес",
-          uz: "Manzil",
-        },
-        info: {
-          ru: "Информация",
-          uz: "Ma `lumot",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
+     
     };
   },
   computed: {

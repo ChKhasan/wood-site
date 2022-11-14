@@ -2,7 +2,7 @@
   <div>
     <CompanyBanner :title="site_info" />
 
-    <TitleComp :title="ourTeam[getLang] ? ourTeam[getLang] : ourTeam.ru" />
+    <TitleComp :title="translate[getLang]?.company.ourTeam ?? translate.ru?.company.ourTeam" />
     <div class="container container-xl">
       <div class="row">
         <div class="col-12 mb-5 mt-4 team-card-controller">
@@ -12,7 +12,7 @@
       <div class="row company-info">
         <div class="col-lg-7 pr-5">
           <h1 class="company-info-title">
-           {{place[getLang] ? place[getLang] : place.ru}}
+           {{translate[getLang]?.company.place ?? translate.ru?.company.place}}
           </h1>
           <p
             class="company-desc"
@@ -37,13 +37,9 @@ import TeamCard from "~/smallComponents/TeamCard.vue";
 export default {
   data() {
     return {
-      ourTeam: {
-        ru: "Наш Команда",
-        uz: "Bizning Jamoamiz",
-      },
-      place: {
-        ru: "Наличие места, отведенного для любимого дела, повышает вероятность того, что вы им займетесь.",
-        uz: "O'zingiz yoqtirgan mashg'ulot uchun joy ajratilgan bo'lsa, buni amalga oshirishingiz ehtimolini oshiradi."
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

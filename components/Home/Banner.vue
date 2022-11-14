@@ -18,9 +18,7 @@
                 class="d-block title_banner-company fadeInUp animated"
                 data-animate="fadeInUp"
                 >{{
-                  sliders[0].subtitle[getLang]
-                    ? sliders[0].subtitle[getLang]
-                    : sliders[0].subtitle.ru
+                  sliders[0]?.subtitle[getLang] ?? sliders[0].subtitle.ru
                 }}</strong
               >
             </h1>
@@ -34,7 +32,10 @@
               class="btn btn-outline-primary text-uppercase shop_now_btn"
               data-animate="fadeInUp"
               tabindex="0"
-              >{{ buyNow[getLang] ? buyNow[getLang] : buyNow.ru }}</nuxt-link
+              >{{
+                translate[getLang]?.homepage.buynow ??
+                translate.ru.homepage.buynow
+              }}</nuxt-link
             >
           </div>
         </div>
@@ -52,9 +53,9 @@ export default {
   name: "BannerComp",
   data() {
     return {
-      buyNow: {
-        ru: "Купить сейчас",
-        uz: "Xarid qilish",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

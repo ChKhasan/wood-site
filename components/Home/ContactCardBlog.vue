@@ -8,9 +8,8 @@
             v-if="siteInfo.instagram"
             :link="siteInfo.instagram"
             :title="
-              contactTitle.instagram[getLang]
-                ? contactTitle.instagram[getLang]
-                : contactTitle.instagram.ru
+              translate[getLang]?.contact.card.instagram ??
+              translate.ru.contact.card.instagram
             "
             img="./images/instagram.png"
             bgcolor="#D7D3FF"
@@ -22,9 +21,8 @@
             v-if="siteInfo.youtube"
             :link="siteInfo.youtube"
             :title="
-              contactTitle.youtube[getLang]
-                ? contactTitle.youtube[getLang]
-                : contactTitle.youtube.ru
+              translate[getLang]?.contact.card.youtube ??
+              translate.ru.contact.card.youtube
             "
             img="./images/youtube.png"
             bgcolor="#FFC0C0"
@@ -38,9 +36,8 @@
             v-if="siteInfo.facebook"
             :link="siteInfo.facebook"
             :title="
-              contactTitle.facebook[getLang]
-                ? contactTitle.facebook[getLang]
-                : contactTitle.facebook.ru
+              translate[getLang]?.contact.card.facebook ??
+              translate.ru.contact.card.facebook
             "
             img="./images/facebook.png"
             bgcolor="#D3E5FF"
@@ -52,9 +49,8 @@
             v-if="siteInfo.telegram"
             :link="siteInfo.telegram"
             :title="
-              contactTitle.telegram[getLang]
-                ? contactTitle.telegram[getLang]
-                : contactTitle.telegram.ru
+              translate[getLang]?.contact.card.telegram ??
+              translate.ru.contact.card.telegram
             "
             img="./images/telegram.png"
             bgcolor="#D3F4FF"
@@ -70,23 +66,9 @@ export default {
   props: ["siteInfo"],
   data() {
     return {
-      contactTitle: {
-        telegram: {
-          ru: "Следите за нашим магазином в Telegram",
-          uz: "Bizning do'konimizni Telegramda kuzatib boring",
-        },
-        instagram: {
-          ru: "Следите за нашим магазином в Instagram",
-          uz: "Bizning do'konimizni Instagramda kuzatib boring",
-        },
-        youtube: {
-          ru: "Следите за нашим магазином в You Tube",
-          uz: "Bizning do'konimizni You Tubeda kuzatib boring",
-        },
-        facebook: {
-          ru: "Следите за нашим магазином в Facebook",
-          uz: "Bizning do'konimizni Facebookda kuzatib boring",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

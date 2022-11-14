@@ -45,9 +45,8 @@
 
               <form v-on:submit.prevent="submitForm">
                 <label class="ml-1 placing-title">{{
-                  productLang.count[getLang]
-                    ? productLang.count[getLang]
-                    : productLang.count.ru
+                  translate[getLang]?.product.count ??
+                  translate.ru.product.count
                 }}</label>
                 <div class="couter-box">
                   <a class="count-btn" @click="countFunc(false)"
@@ -60,17 +59,14 @@
                   /></a>
                 </div>
                 <label for="client_name">{{
-                  productLang.name[getLang]
-                    ? productLang.name[getLang]
-                    : productLang.name.ru
+                  translate[getLang]?.product.name ?? translate.ru.product.name
                 }}</label
                 ><br />
                 <input
                   class="tel-number-input"
                   :placeholder="
-                    productLang.yourName[getLang]
-                      ? productLang.yourName[getLang]
-                      : productLang.yourName.ru
+                    translate[getLang]?.product.yourName ??
+                    translate.ru.product.yourName
                   "
                   required
                   oninvalid="this.setCustomValidity('Введите имя пользователя')"
@@ -78,9 +74,8 @@
                   v-model="dynamicValidateForm.name"
                 /><br />
                 <label for="client_phone_number">{{
-                  productLang.phoneNumber[getLang]
-                    ? productLang.phoneNumber[getLang]
-                    : productLang.phoneNumber.ru
+                  translate[getLang]?.product.phoneNumber ??
+                  translate.ru.product.phoneNumber
                 }}</label>
                 <the-mask
                   v-model="dynamicValidateForm.phone_number"
@@ -101,9 +96,8 @@
                     class="send_btn d-flex justify-content-center align-items-center"
                   >
                     {{
-                      productLang.send[getLang]
-                        ? productLang.send[getLang]
-                        : productLang.send.ru
+                      translate[getLang]?.product.send ??
+                      translate.ru.product.send
                     }}
                   </button>
                 </div>
@@ -111,15 +105,14 @@
 
               <div class="d-flex align-items-center flex-wrap mt-6"></div>
               <ul class="list-unstyled mt-5">
-                <li class="row mb-2">
-                  <span class="d-block col-3 font-weight-500 fs-15"
+                <li class="row mb-2 flex-wrap">
+                  <span class="d-block col-6 font-weight-500 fs-15"
                     >{{
-                      productLang.callBack[getLang]
-                        ? productLang.callBack[getLang]
-                        : productLang.callBack.ru
+                      translate[getLang]?.product.callBack ??
+                      translate.ru.product.callBack
                     }}
                   </span>
-                  <span class="d-block col-9 fs-15 color-gray"
+                  <span class="d-block col-6 fs-15 color-gray"
                     ><p class="mx-3 nav-phone">
                       <font-awesome-icon :icon="['fas', 'fa-phone']" />
                       {{ siteInfo.phone_number }}
@@ -138,9 +131,8 @@
     </div>
     <TitleComp
       :title="
-        productLang.lastProducts[getLang]
-          ? productLang.lastProducts[getLang]
-          : productLang.lastProducts.ru
+        translate[getLang]?.product.lastProducts ??
+        translate.ru.product.lastProducts
       "
     />
     <div class="container container-xxl mb-120">
@@ -180,35 +172,9 @@ export default {
       },
       quality: 1,
       value: "",
-      productLang: {
-        count: {
-          ru: "Количество:",
-          uz: "Miqdori:",
-        },
-        name: {
-          ru: "Имя*",
-          uz: "Ism*",
-        },
-        yourName: {
-          ru: "Ввдите Имя",
-          uz: "Ismingizni kiriting",
-        },
-        phoneNumber: {
-          ru: "Номер телефона*",
-          uz: "Telefon raqami*",
-        },
-        send: {
-          ru: "Отправить",
-          uz: "Yuborish",
-        },
-        callBack: {
-          ru: "Перезвонить:",
-          uz: "Qayta qo'ng'iroq qilish:",
-        },
-        lastProducts: {
-          ru: "Последние товары",
-          uz: "Eng so'nggi mahsulotlar",
-        },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

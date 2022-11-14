@@ -10,7 +10,7 @@
               data-aos-delay="200"
               data-aos-offset="100"
               data-aos-duration="900"
-              >{{ title.title[getLang] ? title.title[getLang]:title.title.ru }}</span
+              >{{ title.title[getLang] ?? title.title.ru }}</span
             >
             <h1
               class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113"
@@ -22,7 +22,10 @@
               <strong
                 class="d-block title_banner fadeInUp animated"
                 data-animate="fadeInUp"
-                >{{ourCompany[getLang] ? ourCompany[getLang]:ourCompany.ru}}</strong
+              >
+                {{
+                  translate[getLang]?.company.title ?? translate.ru.company.title
+                }}</strong
               >
             </h1>
           </div>
@@ -42,9 +45,9 @@ export default {
   props: ["title"],
   data() {
     return {
-      ourCompany: {
-        ru: "Наша компания",
-        uz: "Bizning kompaniyamiz"
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

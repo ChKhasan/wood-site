@@ -4,7 +4,7 @@
   >
     <nuxt-link class="mt-1" :to="`/product/${product.slug}`">
       <div class="product-card-banner d-flex align-items-end">
-        <img :src="product.product_images[0].lg_img" alt="" />
+        <img :src="product.product_images[0].lg_img" :alt="product.title[getLang] ? product.title[getLang] : product.title.ru" />
       </div>
     </nuxt-link>
 

@@ -28,17 +28,35 @@
             </nuxt-link> -->
             <nuxt-link to="/" class="dropdown_btn">
               <span class="dropdown_hover" id="hover">
-                {{ navbarLang.home[getLang] ? navbarLang.home[getLang]:navbarLang.home.ru }}
+                {{
+                  translate[getLang]?.navbar.home ?? translate.ru.navbar.home
+                }}
               </span>
             </nuxt-link>
+
             <nuxt-link to="/products?page=1" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> {{navbarLang.category[getLang] ? navbarLang.category[getLang]:navbarLang.category.ru}} </span>
+              <span class="dropdown_hover" id="hover">
+                {{
+                  translate[getLang]?.navbar.category ??
+                  translate.ru.navbar.category
+                }}
+              </span>
             </nuxt-link>
             <nuxt-link to="/company" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> {{navbarLang.company[getLang] ? navbarLang.company[getLang]:navbarLang.company.ru}} </span>
+              <span class="dropdown_hover" id="hover">
+                {{
+                  translate[getLang]?.navbar.company ??
+                  translate.ru.navbar.company
+                }}
+              </span>
             </nuxt-link>
             <nuxt-link to="/contact" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover"> {{navbarLang.contact[getLang] ? navbarLang.contact[getLang]:navbarLang.contact.ru}} </span>
+              <span class="dropdown_hover" id="hover">
+                {{
+                  translate[getLang]?.navbar.contact ??
+                  translate.ru.navbar.contact
+                }}
+              </span>
             </nuxt-link>
           </div>
           <div class="col-1 d-flex align-items-center">
@@ -87,8 +105,11 @@
                   <li class="mt-5">
                     <el-dropdown @command="actionLangRu">
                       <span class="el-dropdown-link">
-                        {{ getLang
-                        }}<i class="el-icon-arrow-down el-icon--right"></i>
+                        {{ getLang }}
+                        <i class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                      <span>
+                        {{ lang[getLang] ?? lang.ru }}
                       </span>
                       <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item
@@ -101,16 +122,27 @@
                     </el-dropdown>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/">{{navbarLang.home[getLang]}}</nuxt-link>
+                    <nuxt-link to="/">{{
+                      translate[getLang]?.navbar.home ?? translate.ru.navbar.home
+                    }}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/products?page=1">{{navbarLang.category[getLang]}}</nuxt-link>
+                    <nuxt-link to="/products?page=1">{{
+                      translate[getLang]?.navbar.category ??
+                      translate.ru.navbar.category
+                    }}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/company">{{navbarLang.company[getLang]}}</nuxt-link>
+                    <nuxt-link to="/company">{{
+                      translate[getLang]?.navbar.company ??
+                      translate.ru.navbar.company
+                    }}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/contact">{{navbarLang.contact[getLang]}}</nuxt-link>
+                    <nuxt-link to="/contact">{{
+                      translate[getLang]?.navbar.contact ??
+                      translate.ru.navbar.contact
+                    }}</nuxt-link>
                   </li>
                 </ul>
               </div>
@@ -143,23 +175,13 @@ export default {
       currLang: "ru",
       lang: this.siteInfo,
       lastScrollTop: 0,
-      navbarLang: {
-        home: {
-          ru: "Главный",
-          uz: "Asosiy",
-        },
-        category: {
-          ru: "Каталог",
-          uz: "Katalog",
-        },
-        company: {
-          ru: "О компании",
-          uz: "Kompaniya haqida",
-        },
-        contact: {
-          ru: "Контакт",
-          uz: "Aloqa",
-        },
+      lang: {
+        ru: "ru",
+        uz: "uz",
+      },
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

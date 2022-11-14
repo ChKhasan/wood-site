@@ -3,7 +3,7 @@
     <nuxt-link :to="`/post/${post.slug}`" class="j-card-img">
       <!-- <img :src="post.post_images[0].lg_img" alt="" /> -->
       <div class="journal-img" style="transition: 1s">
-        <img :src="post.post_images[0].lg_img" alt="" />
+        <img :src="post.post_images[0].lg_img" :alt="post.title.ru" />
       </div>
     </nuxt-link>
     <div class="j-card-body pt-4">

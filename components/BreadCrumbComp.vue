@@ -6,7 +6,9 @@
           <div class="col-md-8">
             <div class="bread_crumb_box">
               <router-link class="bread_crumb" to="/">
-                {{  home[getLang] ? home[getLang] : home.ru }}
+                {{
+                  translate[getLang]?.navbar.home ?? translate.ru.navbar.home
+                }}
               </router-link>
               <span>/</span>
               <a href="#" class="last_crumb">{{ category }}</a
@@ -23,9 +25,9 @@ export default {
   props: ["category"],
   data() {
     return {
-      home: {
-        ru: "Главный",
-        uz: "Asosiy",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },
