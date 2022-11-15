@@ -5,26 +5,29 @@
         <div class="row">
           <div class="col-md-8">
             <div class="bread_crumb_box">
-              <router-link class="bread_crumb" to="/">
-                {{
-                  translate[getLang]?.breadCrumbCategory.home ??
-                  translate.ru.breadCrumbCategory.home
-                }}
+              <router-link to="/">
+                <h5 class="bread_crumb">
+                  {{
+                    translate[getLang]?.breadCrumbCategory.home ??
+                    translate.ru.breadCrumbCategory.home
+                  }}
+                </h5>
               </router-link>
               <span>/</span>
-              <router-link class="bread_crumb" to="/products?page=1">
-                {{
-                  translate[getLang]?.breadCrumbCategory.allProducts ??
-                  translate.ru.breadCrumbCategory.allProducts
-                }}
+              <router-link to="/products?page=1">
+                <h5 class="bread_crumb">
+                  {{
+                    translate[getLang]?.breadCrumbCategory.allProducts ??
+                    translate.ru.breadCrumbCategory.allProducts
+                  }}
+                </h5>
               </router-link>
               <span>/</span>
 
-              <router-link
-                class="bread_crumb"
-                :to="`/categories/${category.id}/products?page=1`"
-              >
-                {{ category.title }}
+              <router-link :to="`/categories/${category.id}/products?page=1`">
+                <h5 class="bread_crumb">
+                  {{ category.title }}
+                </h5>
               </router-link>
               <span></span>
             </div>

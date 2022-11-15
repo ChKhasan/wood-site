@@ -6,7 +6,10 @@
     </div>
     <div class="c-card-btn">
       <div class="j-card-btn">
-        <a class="b-btn" :href="link">{{ learnMore[getLang] ? learnMore[getLang]:learnMore.ru }}</a>
+        <a class="b-btn" :href="link">{{
+          translate[getLang]?.contact.card.learnMore ??
+          translate.ru.contact.card.learnMore
+        }}</a>
       </div>
     </div>
   </div>
@@ -20,9 +23,9 @@ export default {
   },
   data() {
     return {
-      learnMore: {
-        ru: "ПОДРОБНЕЕ",
-        uz: "KO'PROQ MA'LUMOT OLISH",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

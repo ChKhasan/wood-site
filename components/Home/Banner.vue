@@ -40,17 +40,13 @@
           </div>
         </div>
       </div>
-      <div class="mt-auto">
-        <div class="container_block container-xl">
-          <div></div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: "BannerComp",
+  props: ["sliders"],
   data() {
     return {
       translate: {
@@ -59,7 +55,6 @@ export default {
       },
     };
   },
-  props: ["sliders"],
   computed: {
     getLang() {
       return this.$store.getters.language;

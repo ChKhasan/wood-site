@@ -16,16 +16,6 @@
           <div
             class="col-6 d-flex py-xl-3 justify-content-between align-items-center justify-content-center"
           >
-            <!-- <nuxt-link
-              to="/"
-              class="dropdown_btn"
-              v-for="item in translations"
-              :key="item.id"
-            >
-              <span class="dropdown_hover" id="hover">{{
-                item.val[getLang]
-              }}</span>
-            </nuxt-link> -->
             <nuxt-link to="/" class="dropdown_btn">
               <span class="dropdown_hover" id="hover">
                 {{
@@ -42,7 +32,8 @@
                 }}
               </span>
             </nuxt-link>
-            <nuxt-link to="/company" class="dropdown_btn">
+            <!-- <nuxt-link :to="`/${getLang}/company`" class="dropdown_btn"> -->
+            <nuxt-link :to="`/company`" class="dropdown_btn">
               <span class="dropdown_hover" id="hover">
                 {{
                   translate[getLang]?.navbar.company ??
@@ -152,7 +143,6 @@
               <img src="../../static/images/logo.png" alt="" />
             </a>
           </div>
-
           <div class="col-2 d-flex justify-content-end"></div>
         </div>
       </div>
@@ -182,6 +172,7 @@ export default {
         ru: require("@/locales/ru.json"),
         uz: require("@/locales/uz.json"),
       },
+      language: "uz",
     };
   },
   computed: {
@@ -198,9 +189,17 @@ export default {
 
   methods: {
     ...mapActions(["actionLangRu"]),
+    // changeLang(code) {
+    //   this.$store.dispatch("actionLangRu", code),
+    //     this.$router.replace({
+    //       path: `/${code}/company`,
+    //     });
+    //   localStorage.setItem("Lang", code);
+    // },
   },
 
   mounted() {
+    this.language = this.$route.params.company;
     var header = this.$refs.navScroll;
 
     window.addEventListener("scroll", () => {

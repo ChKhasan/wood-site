@@ -5,19 +5,19 @@
         <div class="shop-sticky">
           <div class="filter-card">
             <div class="filter-card-title">
-              <h3>
+              <h1>
                 {{
                   translate[getLang]?.posts.allposts ??
                   translate.ru.posts.allposts
                 }}
-              </h3>
+              </h1>
             </div>
             <div class="filter-card-body">
               <ul class="f-card-list" style="padding-left: none">
                 <li
                   style="cursor: pointer"
                   class="mb-1"
-                  v-for="(category, index) in categories.slice().reverse()"
+                  v-for="category in categories.slice().reverse()"
                   :key="category.id"
                 >
                   <span
@@ -42,25 +42,6 @@
         </div>
       </div>
       <div class="col-md-9">
-        <!-- <div class="shop-page-banner">
-          <div class="category-banner">
-            <img :src="categoryImg.lg_img" alt="" />
-          </div>
-
-          <div class="shop-page-img-overlay pt-xl-10">
-            <p class="fs-18 font-weight-bold text-center text-white mb-2">
-              {{ year }} Trending
-            </p>
-
-            <h2
-              v-if="categoryImg.title"
-              class="text-white text-center fs-30 fs-sm-40"
-            >
-              {{ categoryImg.title[getLang] }}
-            </h2>
-          </div>
-        </div> -->
-
         <div class="position-relative d-flex search-blog mt-3 mb-4">
           <input
             type="text"
@@ -69,19 +50,14 @@
             class="search-input"
             :placeholder="
               translate[getLang]?.posts.search ?? translate.ru.posts.search
-            "/>
+            "
+          />
           <el-button
             icon="el-icon-search"
             :class="{ 'btn-primary': params.search !== '' }"
             :disabled="params.search == '' ? true : false"
             @click="searchProduct"
           ></el-button>
-          <!-- <font-awesome-icon
-                style="cursor: pointer"
-                @click="searchProduct"
-                class="serach-btn"
-                icon="fa-solid fa-magnifying-glass"
-              /> -->
         </div>
 
         <div class="post-card-controller">
@@ -120,7 +96,7 @@ export default {
       categoryById: {},
       categoryImg: {},
       id: 1,
-      search: "",
+
       categories: [],
       currentPage: 1,
       params: {
@@ -150,10 +126,8 @@ export default {
   },
   created() {
     this.fetchSomething();
-    this.getDate();
   },
   methods: {
-    getDate() {},
     async fetchSomething() {
       let id = this.$route.params.id;
       this.id = id;
@@ -276,7 +250,7 @@ export default {
   border-bottom: 1px solid transparent;
 }
 
-.filter-card-title h3 {
+.filter-card-title h1 {
   font-size: 20px !important;
   font-weight: 700;
   line-height: 1.25;

@@ -8,16 +8,25 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "my,project" },
+      {
+        hid: "description",
+        name: "description",
+        content: "",
+      },
+      {
+        hid: "keywords",
+        name: "keywords",
+        content:
+          "Woodline,Cheap Furniture,table, stucco,furniture,chair,office chairs,Cheap,стол, стул,Офисные кресла,Дешевая мебель,кресла,офис,мебель,Арзон Мебеллар,Arzon,Мебель,Mebillar,Kreslolar,Ofis kerslolari,Ofis",
+      },
       { name: "format-detection", content: "telephone=no" },
     ],
     script: [
       {
-        src:
-          "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
+        src: "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
       },
     ],
-    link: [{ rel: "image", type: "image/png", href: "./short_logo.png" }],
+    link: [{ rel: "icon", type: "image/png", href: "/short_logo.png" }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

@@ -1,7 +1,6 @@
 <template lang="html">
   <div class="journal-card mt-5">
     <nuxt-link :to="`/post/${post.slug}`" class="j-card-img">
-      <!-- <img :src="post.post_images[0].lg_img" alt="" /> -->
       <div class="journal-img" style="transition: 1s">
         <img :src="post.post_images[0].lg_img" :alt="post.title.ru" />
       </div>
@@ -21,7 +20,7 @@
         <p v-html="post.desc[getLang] ? post.desc[getLang] : post.desc.ru"></p>
       </div>
       <BorderBlackBtn
-        :name="allPosts[getLang] ? allPosts[getLang] : allPosts.ru"
+        :name=" translate[getLang]?.posts.allposts ?? translate.ru.posts.allposts"
       />
     </div>
   </div>
@@ -49,9 +48,9 @@ export default {
       month: null,
       date: null,
       year: null,
-      allPosts: {
-        ru: "Все посты",
-        uz: "Barcha postlar",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

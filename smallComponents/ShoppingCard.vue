@@ -8,14 +8,16 @@
       <div class="sh_title">
         <h1>
           {{ category.title.ru }} <br />
-          category
+          <!-- category -->
         </h1>
       </div>
       <div>
         <router-link
           :to="`/categories/${category.id}/products?page=1`"
           class="btn btn-outline-primary text-uppercase shop_now_btn"
-          >{{ shopNow[getLang] ? shopNow[getLang] : shopNow.ru }}</router-link
+          >{{
+            translate[getLang]?.homepage.buynow ?? translate.ru.homepage.buynow
+          }}</router-link
         >
       </div>
     </div>
@@ -26,9 +28,9 @@ export default {
   props: ["gridClass", "category"],
   data() {
     return {
-      shopNow: {
-        ru: "Купить сейчас",
-        uz: "Hozir xarid qilish",
+      translate: {
+        ru: require("@/locales/ru.json"),
+        uz: require("@/locales/uz.json"),
       },
     };
   },

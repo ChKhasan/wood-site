@@ -12,12 +12,12 @@
           <div class="shop-sticky">
             <div class="filter-card">
               <div class="filter-card-title">
-                <h3>
+                <h1>
                   {{
                     translate[getLang]?.products.categoriesTitle ??
                     translate.ru.products.categoriesTitle
                   }}
-                </h3>
+                </h1>
               </div>
               <div class="filter-card-body">
                 <ul class="f-card-list" style="padding-left: none">
@@ -77,17 +77,6 @@
               :disabled="params.search == '' ? true : false"
               @click="searchProduct"
             ></el-button>
-            <!-- <el-button
-                class="btn"
-                :class="{ 'btn-primary': params.search !== '' }"
-                :disabled="params.search == '' ? true : false"
-                @click="searchProduct"
-              >
-                <font-awesome-icon
-                  style="cursor: pointer"
-                  icon="fa-solid fa-magnifying-glass"
-                />
-              </el-button> -->
           </div>
 
           <div class="shop-card-controller">
@@ -121,21 +110,13 @@ import VsPagination from "@vuesimple/vs-pagination";
 export default {
   head: {
     title: "Все продукты",
-    htmlAttrs: {
-      lang: "en",
-    },
+
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "Ofis mebillari" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    script: [
-      {
-        src: "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
-      },
-    ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   data() {
     return {

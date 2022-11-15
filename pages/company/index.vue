@@ -4,7 +4,7 @@
 
     <TitleComp
       :title="
-        translate[getLang]?.company.ourTeam ?? translate.ru?.company.ourTeam
+        translate[language]?.company.ourTeam ?? translate.ru?.company.ourTeam
       "
     />
     <div class="container container-xl">
@@ -17,14 +17,14 @@
         <div class="col-lg-7 pr-md-5">
           <h1 class="company-info-title">
             {{
-              translate[getLang]?.company.place ?? translate.ru?.company.place
+              translate[language]?.company.place ?? translate.ru?.company.place
             }}
           </h1>
           <p
             class="company-desc"
             v-html="
-              site_info.desc[getLang]
-                ? site_info.desc[getLang]
+              site_info.desc[language]
+                ? site_info.desc[language]
                 : site_info.desc.ru
             "
           ></p>
@@ -49,12 +49,15 @@ export default {
       },
     };
   },
-  async asyncData({ store }) {
+  async asyncData({ store, route }) {
+    const language = route.params.company;
+    console.log(language);
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     const team = await store.dispatch("team/fetchTeam");
     return {
       site_info,
       team,
+      language
     };
   },
   computed: {
@@ -64,6 +67,11 @@ export default {
   },
 
   components: { TeamCard, TitleComp, CompanyBanner },
+  // watch: {
+  //   getLang(newVal, oldVal) {
+  //     newVal = "uz";
+  //   },
+  // },
 };
 </script>
 <style lang="css">
@@ -153,27 +161,26 @@ export default {
   width: 100%;
 }
 @media (max-width: 576px) {
- 
- .company-info-title {
-   font-family: "Montserrat", sans-serif !important;
- font-size: 18px;
- font-weight: 600;
- line-height: 23px;
- letter-spacing: 0em;
- text-align: justify;
- margin-top: 60px;
- }
- .company-desc {
-  font-family: "Montserrat", sans-serif !important;
+  .company-info-title {
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: justify;
+    margin-top: 60px;
+  }
+  .company-desc {
+    font-family: "Montserrat", sans-serif !important;
     font-size: 16px;
     font-weight: 400;
     line-height: 26px;
     letter-spacing: 0em;
     text-align: justify;
-}
-.company-info {
-  margin-top: 24px !important;
-  margin-bottom: 15px !important;
-}
+  }
+  .company-info {
+    margin-top: 24px !important;
+    margin-bottom: 15px !important;
+  }
 }
 </style>

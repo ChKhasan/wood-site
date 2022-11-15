@@ -60,18 +60,6 @@
                     </li>
                   </ul>
                 </div>
-
-                <!-- <div class="filter-card-title">
-              <h3>
-                <nuxt-link
-                  class="d-flex align-items-center to-brands-link"
-                  to="/brands/1/products?page=1"
-                  >Просмотреть бренды &nbsp;<font-awesome-icon
-                    size="1x"
-                    :icon="['fas', 'fa-arrow-right']"
-                /></nuxt-link>
-              </h3>
-            </div> -->
               </div>
             </div>
           </div>
@@ -86,7 +74,7 @@
                   {{ year }} Trending
                 </p>
 
-                <h2
+                <h1
                   v-if="categoryImg.title"
                   class="text-white text-center fs-30 fs-sm-40"
                 >
@@ -95,7 +83,7 @@
                       ? categoryImg.title[getLang]
                       : categoryImg.title.ru
                   }}
-                </h2>
+                </h1>
               </div>
             </div>
 
@@ -116,17 +104,6 @@
                 :disabled="params.search == '' ? true : false"
                 @click="searchProduct"
               ></el-button>
-              <!-- <el-button
-                class="btn"
-                :class="{ 'btn-primary': params.search !== '' }"
-                :disabled="params.search == '' ? true : false"
-                @click="searchProduct"
-              >
-                <font-awesome-icon
-                  style="cursor: pointer"
-                  icon="fa-solid fa-magnifying-glass"
-                />
-              </el-button> -->
             </div>
 
             <div class="shop-card-controller">
@@ -162,22 +139,13 @@ import BreadCrumbCategory from "@/components/BreadCrumbCategory.vue";
 export default {
   head: {
     title: "Категории продуктов",
-    htmlAttrs: {
-      lang: "en",
-    },
+
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { hid: "description", name: "description", content: "Ofis mebillari" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    script: [
-      {
-        src:
-          "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
-      },
-    ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
   },
   data() {
     return {

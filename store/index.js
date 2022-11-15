@@ -1,5 +1,3 @@
-import translate from "@/translate/translation";
-
 export const state = () => ({
   lang: localStorage.getItem("Lang"),
   translate: [],
@@ -7,6 +5,7 @@ export const state = () => ({
 export const mutations = {
   langRu(state, payload) {
     localStorage.setItem("Lang", payload);
+
     state.lang = localStorage.getItem("Lang");
   },
   fetchTranslation(state, translates) {

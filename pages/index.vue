@@ -30,25 +30,8 @@ import NewPosts from "~/components/Home/NewPosts.vue";
 import translate from "@/translate/translation";
 
 export default {
+  loading: false,
   name: "IndexPage",
-  head: {
-    title: "Home Page",
-    htmlAttrs: {
-      lang: "en",
-    },
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Ofis mebillari" },
-      { name: "format-detection", content: "telephone=no" },
-    ],
-    script: [
-      {
-        src: "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
-      },
-    ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-  },
   data() {
     return {
       translate: {

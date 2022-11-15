@@ -116,7 +116,9 @@
           >
             © {{ year }}
             {{ siteInfo?.title[getLang] ?? siteInfo.title.ru }}
-            .<br />
+            .
+          </p>
+          <p class="mb-0 text-gray text-lg-right footer-links">
             {{
               translate[getLang]?.footer.security ??
               translate.ru.footer.security
@@ -176,9 +178,7 @@ export default {
 .text-gray {
   color: #7c7c7c !important;
 }
-.footer-links {
-  font-weight: 500 !important;
-}
+
 
 @media (min-width: 992px) {
   .brands_block {
@@ -191,7 +191,7 @@ export default {
 .footer-links {
   font-weight: 500 !important;
   font-family: "Montserrat", sans-serif !important;
-  line-height: 2 !important;
+  line-height: 30px !important;
   color: #7c7c7c !important;
   transition: all 0.2s;
   font-size: 1rem;

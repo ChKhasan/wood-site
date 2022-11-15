@@ -129,11 +129,6 @@
                 }}</a>
               </div>
               <div class="next-img mx-3">
-                <!-- <img
-                    style="width: 70px"
-                    :src="theNextPost.post_images[0].lg_img"
-                    alt=""
-                  /> -->
                 <div
                   class="prev-next-img"
                   :style="{
@@ -159,11 +154,6 @@
                 <font-awesome-icon :icon="['fas', 'fa-arrow-left']" />
               </div>
               <div class="pre-img mx-3">
-                <!-- <img
-                    style="width: 70px"
-                    :src="thisPrevPost.post_images[0].lg_img"
-                    alt=""
-                  /> -->
                 <div
                   class="prev-next-img"
                   :style="{
@@ -200,11 +190,6 @@
                 }}</a>
               </div>
               <div class="next-img mx-3">
-                <!-- <img
-                    style="width: 70px"
-                    :src="thisNextPost.post_images[0].lg_img"
-                    alt=""
-                  /> -->
                 <div
                   class="prev-next-img"
                   :style="{
@@ -236,7 +221,6 @@
 import TitleComp from "~/components/TitleComp.vue";
 import LayoutComp from "~/layouts/default.vue";
 import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
-import PostMessenger from "../../components/Posts/postMessenger.vue";
 import JournalComp from "../../components/Home/NewPosts.vue";
 
 export default {
@@ -353,7 +337,6 @@ export default {
     TitleComp,
     LayoutComp,
     BreadCrumbComp,
-    PostMessenger,
     JournalComp,
   },
 };

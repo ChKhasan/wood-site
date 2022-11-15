@@ -33,13 +33,13 @@
                   }}
                 </p>
               </div>
-              <h2 class="body_title fs-30 fs-lg-40 mb-2">
+              <h1 class="body_title fs-30 fs-lg-40 mb-2">
                 {{
                   product.title[getLang]
                     ? product.title[getLang]
                     : product.title.ru
                 }}
-              </h2>
+              </h1>
 
               <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
 

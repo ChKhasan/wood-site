@@ -7,11 +7,13 @@
     </div>
     <div class="team-card-body d-flex justify-content-center flex-column">
       <div class="team-card-name d-flex justify-content-center">
-        <h5>{{ team.name[getLang] ? team.name[getLang]:team.name.ru }}</h5>
+        <h5>{{ team.name[getLang] ? team.name[getLang] : team.name.ru }}</h5>
       </div>
-      <div class="team-card-position d-flex justify-content-center ">
+      <div class="team-card-position d-flex justify-content-center">
         <p>
-          {{ team.position[getLang] ? team.position[getLang]:team.position.ru }}
+          {{
+            team.position[getLang] ? team.position[getLang] : team.position.ru
+          }}
         </p>
       </div>
     </div>
@@ -76,7 +78,7 @@ export default {
   cursor: pointer;
   border: 1px solid rgb(228, 228, 228);
   border-radius: 5px;
-  
+
   padding: 40px 20px 20px 20px;
   aspect-ratio: 1/0.8;
 }

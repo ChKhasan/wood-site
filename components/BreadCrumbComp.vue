@@ -5,14 +5,16 @@
         <div class="row">
           <div class="col-md-8">
             <div class="bread_crumb_box">
-              <router-link class="bread_crumb" to="/">
-                {{
-                  translate[getLang]?.navbar.home ?? translate.ru.navbar.home
-                }}
+              <router-link to="/">
+                <h5 class="bread_crumb">
+                  {{
+                    translate[getLang]?.navbar.home ?? translate.ru.navbar.home
+                  }}
+                </h5>
               </router-link>
               <span>/</span>
-              <a href="#" class="last_crumb">{{ category }}</a
-              ><span></span>
+              <h5 class="last_crumb">{{ category }}</h5>
+              <span></span>
             </div>
           </div>
         </div>
@@ -50,6 +52,7 @@ export default {
   margin-top: 76px;
 }
 .bread_crumb {
+  display: inline;
   font-size: 0.9375rem;
   text-transform: capitalize;
   list-style: none;
@@ -66,7 +69,7 @@ export default {
   color: #000 !important;
   font-weight: 600 !important;
   letter-spacing: 0;
-
+  display: inline;
   text-transform: capitalize;
   font-family: "Montserrat", sans-serif !important;
 }
