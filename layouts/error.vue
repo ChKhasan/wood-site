@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row justify-content-center align-items-center error-page">
       <h1 v-if="error.statusCode === 404">{{ error.statusCode }}Not found</h1>
-      <h1 v-if="error.statusCode !== 404">Error</h1>
+      <h1 v-if="error.statusCode !== 404">{{error }}</h1>
     </div>
   </div>
 </template>

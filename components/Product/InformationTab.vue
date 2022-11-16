@@ -7,7 +7,7 @@
         </h1>
       </div>
 
-      <DescriptionComp />
+      <DescriptionComp :desc="desc" />
     </div>
     <div class="d-md-none">
       <vsa-list>
@@ -17,7 +17,7 @@
           }}</vsa-heading>
 
           <vsa-content>
-            <DescriptionComp />
+            <DescriptionComp :desc="desc" />
           </vsa-content>
         </vsa-item>
       </vsa-list>
@@ -29,6 +29,7 @@ import DescriptionComp from "./DescriptionComp.vue";
 import { VsaList, VsaItem, VsaHeading, VsaContent } from "vue-simple-accordion";
 import "vue-simple-accordion/dist/vue-simple-accordion.css";
 export default {
+  props: ["desc"],
   data() {
     return {
       activeName: "first",

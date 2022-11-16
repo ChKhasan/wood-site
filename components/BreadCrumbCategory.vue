@@ -14,7 +14,7 @@
                 </h5>
               </router-link>
               <span>/</span>
-              <router-link to="/products?page=1">
+              <router-link :to="`/${getLang}/products?page=1`">
                 <h5 class="bread_crumb">
                   {{
                     translate[getLang]?.breadCrumbCategory.allProducts ??
@@ -24,7 +24,7 @@
               </router-link>
               <span>/</span>
 
-              <router-link :to="`/categories/${category.id}/products?page=1`">
+              <router-link :to="`/${getLang}/categories/${category.id}/products?page=1`">
                 <h5 class="bread_crumb">
                   {{ category.title }}
                 </h5>

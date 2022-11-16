@@ -4,7 +4,7 @@
 
     <TitleComp
       :title="
-        translate[language]?.company.ourTeam ?? translate.ru?.company.ourTeam
+        translate[getLang]?.company.ourTeam ?? translate.ru?.company.ourTeam
       "
     />
     <div class="container container-xl">
@@ -17,14 +17,14 @@
         <div class="col-lg-7 pr-md-5">
           <h1 class="company-info-title">
             {{
-              translate[language]?.company.place ?? translate.ru?.company.place
+              translate[getLang]?.company.place ?? translate.ru?.company.place
             }}
           </h1>
           <p
             class="company-desc"
             v-html="
-              site_info.desc[language]
-                ? site_info.desc[language]
+              site_info.desc[getLang]
+                ? site_info.desc[getLang]
                 : site_info.desc.ru
             "
           ></p>
@@ -49,8 +49,12 @@ export default {
       },
     };
   },
+  mounted() {
+console.log(this.$router);
+  },
   async asyncData({ store, route }) {
-    const language = route.params.company;
+    const language = route.params.lang;
+    // console.log(route);
     console.log(language);
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     const team = await store.dispatch("team/fetchTeam");

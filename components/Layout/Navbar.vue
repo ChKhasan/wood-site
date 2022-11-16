@@ -24,7 +24,7 @@
               </span>
             </nuxt-link>
 
-            <nuxt-link to="/products?page=1" class="dropdown_btn">
+            <nuxt-link :to="`/${getLang}/products?page=1`" class="dropdown_btn">
               <span class="dropdown_hover" id="hover">
                 {{
                   translate[getLang]?.navbar.category ??
@@ -33,7 +33,7 @@
               </span>
             </nuxt-link>
             <!-- <nuxt-link :to="`/${getLang}/company`" class="dropdown_btn"> -->
-            <nuxt-link :to="`/company`" class="dropdown_btn">
+            <nuxt-link :to="`/${getLang}/company`" class="dropdown_btn">
               <span class="dropdown_hover" id="hover">
                 {{
                   translate[getLang]?.navbar.company ??
@@ -41,7 +41,7 @@
                 }}
               </span>
             </nuxt-link>
-            <nuxt-link to="/contact" class="dropdown_btn">
+            <nuxt-link :to="`/${getLang}/contact`" class="dropdown_btn">
               <span class="dropdown_hover" id="hover">
                 {{
                   translate[getLang]?.navbar.contact ??
@@ -51,7 +51,7 @@
             </nuxt-link>
           </div>
           <div class="col-1 d-flex align-items-center">
-            <el-dropdown @command="actionLangRu">
+            <el-dropdown @command="changeLang">
               <span class="el-dropdown-link">
                 {{ getLang }}<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
@@ -123,13 +123,13 @@
                     }}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/company">{{
+                    <nuxt-link :to="`/${getLang}/company`">{{
                       translate[getLang]?.navbar.company ??
                       translate.ru.navbar.company
                     }}</nuxt-link>
                   </li>
                   <li class="mt-5">
-                    <nuxt-link to="/contact">{{
+                    <nuxt-link :to="`/${getLang}/contact`">{{
                       translate[getLang]?.navbar.contact ??
                       translate.ru.navbar.contact
                     }}</nuxt-link>
@@ -189,37 +189,40 @@ export default {
 
   methods: {
     ...mapActions(["actionLangRu"]),
-    // changeLang(code) {
-    //   this.$store.dispatch("actionLangRu", code),
-    //     this.$router.replace({
-    //       path: `/${code}/company`,
-    //     });
-    //   localStorage.setItem("Lang", code);
-    // },
+    changeLang(code) {
+      this.$store.dispatch("actionLangRu", code),
+        this.$router.replace({
+          params: {
+            lang: code,
+          },
+        });
+      localStorage.setItem("Lang", code);
+    },
   },
 
   mounted() {
-    this.language = this.$route.params.company;
     var header = this.$refs.navScroll;
-
-    window.addEventListener("scroll", () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > this.lastScrollTop) {
-        header.style.top = "-128px";
-        header.style.background = "transparent";
-        header.style.marginTop = "0";
-      } else if (document.documentElement.scrollTop == 0) {
-        header.style.marginTop = "0";
-        header.style.boxShadow = "none";
-        header.style.background = "transparent";
-      } else {
-        header.style.top = "0";
-        header.style.boxShadow = " 0 0.5rem 1rem rgb(0 0 0 / 15%)";
-        header.style.background = "#fff";
-        header.style.marginTop = "0";
-      }
-      this.lastScrollTop = scrollTop;
-    });
+    console.log(localStorage.getItem("Lang"));
+    this.$store.dispatch("actionLangRu", this.$route.params.lang ?? (localStorage.getItem("Lang"))),
+      window.addEventListener("scroll", () => {
+        let scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollTop > this.lastScrollTop) {
+          header.style.top = "-128px";
+          header.style.background = "transparent";
+          header.style.marginTop = "0";
+        } else if (document.documentElement.scrollTop == 0) {
+          header.style.marginTop = "0";
+          header.style.boxShadow = "none";
+          header.style.background = "transparent";
+        } else {
+          header.style.top = "0";
+          header.style.boxShadow = " 0 0.5rem 1rem rgb(0 0 0 / 15%)";
+          header.style.background = "#fff";
+          header.style.marginTop = "0";
+        }
+        this.lastScrollTop = scrollTop;
+      });
   },
 
   watch: {

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import BreadCrumbComp from "../../../components/BreadCrumbComp.vue";
-import PostCategory from "~/components/Posts/PostCategory.vue";
+import BreadCrumbComp from "@/components/BreadCrumbComp.vue";
+import PostCategory from "@/components/Posts/PostCategory.vue";
 
 export default {
   data() {

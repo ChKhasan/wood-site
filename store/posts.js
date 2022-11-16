@@ -49,4 +49,14 @@ export const actions = {
       console.log(e);
     }
   },
+  async fetchPostsByCategory({}, params) {
+    try {
+      const res = await this.$axios.$get(
+        `/post-categories/${params.id}/posts?${params.query}&paginate=12`
+      );
+      return res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };

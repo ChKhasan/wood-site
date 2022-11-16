@@ -218,10 +218,10 @@
   </div>
 </template>
 <script>
-import TitleComp from "~/components/TitleComp.vue";
-import LayoutComp from "~/layouts/default.vue";
-import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
-import JournalComp from "../../components/Home/NewPosts.vue";
+import TitleComp from "@/components/TitleComp.vue";
+import LayoutComp from "@/layouts/default.vue";
+import BreadCrumbComp from "@/components/BreadCrumbComp.vue";
+import JournalComp from "@/components/Home/NewPosts.vue";
 
 export default {
   data() {
@@ -275,7 +275,7 @@ export default {
       const posts = await this.$store.dispatch(`posts/fetchPosts`);
       const thePost = await this.$store.dispatch(`posts/fetchPostBySlug`, slug);
       this.$router.replace({
-        path: `/post/${slug}`,
+        path: `/${this.getLang}/post/${slug}`,
       });
       this.thisPost = thePost;
 
@@ -292,7 +292,7 @@ export default {
       const thePost = await this.$store.dispatch(`posts/fetchPostBySlug`, slug);
       const posts = await this.$store.dispatch(`posts/fetchPosts`);
       this.$router.replace({
-        path: `/post/${slug}`,
+        path: `/${this.getLang}/post/${slug}`,
       });
       this.thisPost = thePost;
       let thisPrevPost = posts.filter((item) => item.id == thePost.id + 1)[0];

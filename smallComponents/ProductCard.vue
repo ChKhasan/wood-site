@@ -2,7 +2,7 @@
   <div
     class="product_card d-flex flex-column justify-content-between position-relative"
   >
-    <nuxt-link class="mt-1" :to="`/product/${product.slug}`">
+    <nuxt-link class="mt-1" :to="`/${getLang}/product/${product.slug}`">
       <div class="product-card-banner d-flex align-items-end">
         <img :src="product.product_images[0].lg_img" :alt="product.title.ru" />
       </div>
@@ -17,8 +17,11 @@
               : product.products_categories[0].title.ru
           }}
         </p>
-        <div class="d-flex justify-content-between ">
-          <nuxt-link class="p_card_title mt-1" :to="`/product/${product.slug}`">
+        <div class="d-flex justify-content-between">
+          <nuxt-link
+            class="p_card_title mt-1"
+            :to="`/${getLang}/product/${product.slug}`"
+          >
             {{
               product.title[getLang] ? product.title[getLang] : product.title.ru
             }}
@@ -52,7 +55,7 @@ a {
   overflow: hidden;
   width: 70%;
   height: 50px;
-  
+
   font-family: "Montserrat", sans-serif !important;
 }
 .p_card_title_type {
@@ -166,7 +169,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover !important;
-  transition: .5s;
+  transition: 0.5s;
 }
 .product_card {
   transition: 0.3s !important;

@@ -4,9 +4,9 @@
       <BreadCrumbCategory
         :category="{
           id: product.products_categories[0].id,
-          title: product.products_categories[0].title[getLang]
-            ? product.products_categories[0].title[getLang]
-            : product.products_categories[0].title.ru,
+          title:
+            product.products_categories[0]?.title[getLang] ??
+            product.products_categories[0].title.ru,
         }"
       />
       <div class="container container-xxl py-5">
@@ -17,7 +17,11 @@
               v-for="(img, index) in product.product_images"
               :key="index"
             >
-              <img class="my-2 product_info_img" :src="img.lg_img" alt="" />
+              <img
+                class="my-2 product_info_img"
+                :src="img.lg_img"
+                :alt="product.title.ru"
+              />
             </a>
           </div>
           <div class="pt-3 mr-40 col-md-5 pl-md-6 pl-lg-0">
@@ -125,7 +129,7 @@
         </div>
 
         <div class="row justify-content-center">
-          <InformationTab />
+          <InformationTab :desc="product?.desc[getLang] ?? product.desc.ru" />
         </div>
       </div>
     </div>
@@ -193,7 +197,7 @@ export default {
       "products/fetchProductBySlug",
       params.index
     );
-    console.log(product.products_categories);
+    console.log(product);
     return { product, products, siteInfo };
   },
 

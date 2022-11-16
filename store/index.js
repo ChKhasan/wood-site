@@ -8,11 +8,9 @@ export const mutations = {
 
     state.lang = localStorage.getItem("Lang");
   },
+
   fetchTranslation(state, translates) {
     state.translate.push(...translates);
-  },
-  transMutation() {
-    console.log(state.translate);
   },
 };
 export const actions = {

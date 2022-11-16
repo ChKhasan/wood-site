@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="journal-card mt-5">
-    <nuxt-link :to="`/post/${post.slug}`" class="j-card-img">
+    <nuxt-link :to="`/${getLang}/post/${post.slug}`" class="j-card-img">
       <div class="journal-img" style="transition: 1s">
         <img :src="post.post_images[0].lg_img" :alt="post.title.ru" />
       </div>

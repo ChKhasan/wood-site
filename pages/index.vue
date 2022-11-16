@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import Banner from "~/components/Home/Banner.vue";
-import HomeCardBlog from "../components/Home/HomeCardBlog.vue";
-import TitleComp from "../components/TitleComp.vue";
-import ContactCardBlog from "../components/Home/ContactCardBlog.vue";
-import NewPosts from "~/components/Home/NewPosts.vue";
+import Banner from "@/components/Home/Banner.vue";
+import HomeCardBlog from "@/components/Home/HomeCardBlog.vue";
+import TitleComp from "@/components/TitleComp.vue";
+import ContactCardBlog from "@/components/Home/ContactCardBlog.vue";
+import NewPosts from "@/components/Home/NewPosts.vue";
 import translate from "@/translate/translation";
 
 export default {
@@ -47,10 +47,10 @@ export default {
     },
   },
   async asyncData({ store }) {
-    const language = await store.dispatch("language/fetchLanguage");
     if (!localStorage.getItem("Lang")) {
-      await store.dispatch("actionLangRu", language[0].code);
+      await store.dispatch("actionLangRu", "ru");
     }
+    
     const products = await store.dispatch("products/fetchProductsPaginate");
     const category = await store.dispatch("categories/fetchCategoriesPaginate");
     const posts = await store.dispatch("posts/fetchPostsPaginate", 3);

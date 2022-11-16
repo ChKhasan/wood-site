@@ -24,7 +24,7 @@
                   <li style="cursor: pointer" class="mb-1 hover-effect">
                     <span
                       class="list-inline-item active"
-                      @click="$router.push(`/products?page=1`)"
+                      @click="$router.push(`/${getLang}/products?page=1`)"
                     >
                       {{
                         translate[getLang]?.products.allProducts ??
@@ -43,7 +43,7 @@
                       :class="{ active: category.id == id }"
                       @click="
                         $router.push(
-                          `/categories/${category.id}/products?page=1`
+                          `/${getLang}/categories/${category.id}/products?page=1`
                         )
                       "
                     >
@@ -157,7 +157,7 @@ export default {
     const categories = await store.dispatch(`categories/fetchCategories`);
     const products = await store.dispatch(
       `products/fetchProductByParams`,
-      route.fullPath
+      route.query
     );
     return {
       categories,

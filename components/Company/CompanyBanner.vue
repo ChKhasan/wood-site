@@ -10,7 +10,7 @@
               data-aos-delay="200"
               data-aos-offset="100"
               data-aos-duration="900"
-              >{{ title.title[$route.params.company] ?? title.title.ru }}</span
+              >{{ title.title[getLang] ?? title.title.ru }}</span
             >
             <h1
               class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113"
@@ -24,7 +24,7 @@
                 data-animate="fadeInUp"
               >
                 {{
-                  translate[$route.params.company]?.company.title ??
+                  translate[getLang]?.company.title ??
                   translate.ru.company.title
                 }}</strong
               >

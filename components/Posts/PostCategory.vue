@@ -25,7 +25,7 @@
                     :class="{ active: category.id == id }"
                     @click="
                       $router.push(
-                        `/post-categories/${category.id}/posts?page=1`
+                        `/${getLang}/post-categories/${category.id}/posts?page=1`
                       )
                     "
                   >
@@ -133,9 +133,14 @@ export default {
       this.id = id;
       this.params.page = 1;
       const products = await this.$store.dispatch(
-        `products/fetchProductByParams`,
-        this.$route.fullPath
+        `posts/fetchPostsByCategory`,
+        {
+          query: this.$route.query,
+          id: this.$route.params.id,
+        }
       );
+
+      console.log(products);
       const categories = await this.$store.dispatch(
         "posts/fetchPostsCategories"
       );

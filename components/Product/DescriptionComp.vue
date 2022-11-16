@@ -1,18 +1,13 @@
 <template lang="html">
   <div class="description_comp pt-2 pb-5">
     <div class="text-center mt-40"></div>
-    <p class="mxw-830 mx-auto mb-0 color-gray">
-      Perfect for Equestrian homes or every horse lover. Designer premium
-      signature aluminum alloy all Arthur Court is compliance with FDA
-      regulations. Aluminum Serveware can be chilled in the freezer or
-      refrigerator and warmed in the oven to 350. Wash by hand with mild dish
-      soap and dry immediately – do not put in the dishwasher. Comes in Gift Box
-      perfect for Equestrian home or Horse lover in your life.
-    </p>
+    <p class="mxw-830 mx-auto mb-0 color-gray" v-html="desc"></p>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props: ["desc"],
+};
 </script>
 <style lang="css">
 .description_comp {

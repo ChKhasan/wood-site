@@ -28,7 +28,7 @@
                     <li style="cursor: pointer" class="mb-1 hover-effect">
                       <span
                         class="list-inline-item"
-                        @click="$router.push(`/products?page=1`)"
+                        @click="$router.push(`/${getLang}/products?page=1`)"
                       >
                         {{
                           translate[getLang]?.categories.allProducts ??
@@ -47,7 +47,7 @@
                         :class="{ active: category.id == id }"
                         @click="
                           $router.push(
-                            `/categories/${category.id}/products?page=1`
+                            `/${getLang}/categories/${category.id}/products?page=1`
                           )
                         "
                       >
@@ -189,10 +189,12 @@ export default {
       id
     );
     const categories = await store.dispatch(`categories/fetchCategories`);
-    const products = await store.dispatch(
-      `products/fetchProductByParams`,
-      route.fullPath
-    );
+    const products = await store.dispatch(`products/fetchProductByCategory`, {
+      query: route.query,
+      id: route.params.id,
+    });
+    console.log(route);
+    console.log(products);
     const event = new Date(categoryImg.created_at);
     const year = event.getFullYear();
     return {
@@ -234,13 +236,13 @@ export default {
       this.page.page = val;
 
       await this.$router.replace({
-        path: `/categories/${this.id}/products`,
+        path: `/${this.getLang}/categories/${this.id}/products`,
         query: this.page,
       });
-
       const pro = await this.$axios.$get(`categories/${this.id}/products`, {
         params: this.params,
       });
+      console.log(pro);
       this.productsByCategory = await pro.data.data;
       this.currentPage = await pro.data.last_page;
     },
