@@ -2,7 +2,7 @@
   <div>
     <div class="container container-xl">
       <div class="row">
-        <div class="col-xl-6 my-4">
+        <div class="col-12 my-4 contact-grid">
           <ContactCard
             name="Подробнее"
             v-if="siteInfo.instagram"
@@ -14,8 +14,7 @@
             img="./images/instagram.png"
             bgcolor="#D7D3FF"
           />
-        </div>
-        <div class="col-xl-6 my-4">
+
           <ContactCard
             name="Подробнее"
             v-if="siteInfo.youtube"
@@ -27,10 +26,7 @@
             img="./images/youtube.png"
             bgcolor="#FFC0C0"
           />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-xl-6 my-4">
+
           <ContactCard
             name="Подробнее"
             v-if="siteInfo.facebook"
@@ -42,8 +38,7 @@
             img="./images/facebook.png"
             bgcolor="#D3E5FF"
           />
-        </div>
-        <div class="col-xl-6 my-4">
+
           <ContactCard
             name="Подробнее"
             v-if="siteInfo.telegram"
@@ -83,9 +78,17 @@ export default {
 };
 </script>
 <style lang="css">
-.contact-card-controller {
+.contact-grid {
   display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 30px;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
 }
+
+@media (min-width: 820px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+  }
+}
+
 </style>

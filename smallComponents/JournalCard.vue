@@ -156,9 +156,13 @@ export default {
 .j-card-title h3 {
   text-overflow: clip;
   overflow: hidden;
-  width: 70%;
-  height: 20px;
   white-space: wrap;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  flex-grow: 1;
 }
 .journal-img {
   height: 200px;
