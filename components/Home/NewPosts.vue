@@ -27,7 +27,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 30px;
-  padding-bottom: 120px;
+  padding-bottom: 20px;
 }
 @media (min-width: 576px) {
   .j-card-controller {

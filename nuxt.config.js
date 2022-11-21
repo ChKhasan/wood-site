@@ -26,7 +26,7 @@ export default {
         src: "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit",
       },
     ],
-    link: [{ rel: "icon", type: "image/png", href: "/short_logo.png" }],
+    // link: [{ rel: "icon", type: "image/png", href: "/short_logo.png" }],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

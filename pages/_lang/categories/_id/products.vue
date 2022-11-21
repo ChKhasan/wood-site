@@ -10,7 +10,7 @@
             : categoryImg.title.ru,
         }"
       />
-      <div class="container container-xl py-5">
+      <div class="container container-xl py-5" id="top">
         <div class="row pb-6">
           <div class="col-md-3">
             <div class="shop-sticky">
@@ -38,7 +38,7 @@
                     </li>
                     <li
                       style="cursor: pointer"
-                      class="mb-1 hover-effect"
+                      class="mb-1 hover-effect mb-2"
                       v-for="(category, index) in categories.slice().reverse()"
                       :key="category.id"
                     >
@@ -157,7 +157,7 @@ export default {
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 12,
+        paginate: window.innerWidth < 576 ? 9 : 18,
         search: "",
       },
       page: {
@@ -183,7 +183,7 @@ export default {
 
   async asyncData({ store, route }) {
     let id = await route.params.id;
-
+    let width = window.innerWidth;
     const categoryImg = await store.dispatch(
       `categories/fetchCategoryById`,
       id
@@ -192,9 +192,10 @@ export default {
     const products = await store.dispatch(`products/fetchProductByCategory`, {
       query: route.query,
       id: route.params.id,
+      paginate: width < 576 ? 9 : 18,
     });
-    console.log(route);
-    console.log(products);
+    console.log(window.width);
+
     const event = new Date(categoryImg.created_at);
     const year = event.getFullYear();
     return {
@@ -232,6 +233,10 @@ export default {
     },
 
     async changePage(val) {
+      // document.location.href = "#top";
+      let width = window.innerWidth;
+
+      window.scrollTo({ top: "300px", behavior: "smooth" });
       this.params.page = val;
       this.page.page = val;
 
@@ -242,7 +247,6 @@ export default {
       const pro = await this.$axios.$get(`categories/${this.id}/products`, {
         params: this.params,
       });
-      console.log(pro);
       this.productsByCategory = await pro.data.data;
       this.currentPage = await pro.data.last_page;
     },
@@ -252,7 +256,7 @@ export default {
 <style lang="css">
 .category-banner {
   width: 100%;
-
+  max-height: 300px;
   background-position: center;
   background-size: cover;
   overflow: hidden;
@@ -318,6 +322,7 @@ export default {
 }
 .shop-page-banner img {
   width: 100%;
+  object-fit: cover;
 }
 
 .shop-page-img-overlay {
@@ -362,10 +367,28 @@ export default {
 }
 .shop-card-controller {
   display: grid;
-  grid-template-columns: auto;
-  grid-gap: 30px;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
 }
-@media (min-width: 576px) {
+@media (min-width: 300px) and (max-width: 650px) {
+  .shop-card-controller {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 7px;
+  }
+}
+@media (min-width: 650px) {
+  .shop-card-controller {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+  }
+}
+@media (min-width: 992px) {
+  .shop-card-controller {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+}
+/* @media (min-width: 576px) {
   .shop-card-controller {
     grid-template-columns: 1fr 1fr;
   }
@@ -379,7 +402,7 @@ export default {
   .shop-card-controller {
     grid-template-columns: 1fr 1fr 1fr;
   }
-}
+} */
 @media (min-width: 1200px) {
   .container_block {
     max-width: 1200px !important;
@@ -508,5 +531,12 @@ export default {
 }
 .search-blog .btn-primary:focus {
   box-shadow: none !important;
+}
+@media (max-width: 576px) {
+  .shop-page-banner {
+    position: relative;
+    margin-bottom: 50px;
+    padding-top: 50px;
+  }
 }
 </style>

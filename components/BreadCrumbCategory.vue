@@ -24,8 +24,10 @@
               </router-link>
               <span>/</span>
 
-              <router-link :to="`/${getLang}/categories/${category.id}/products?page=1`">
-                <h5 class="bread_crumb">
+              <router-link
+                :to="`/${getLang}/categories/${category.id}/products?page=1`"
+              >
+                <h5 class="last_crumb">
                   {{ category.title }}
                 </h5>
               </router-link>
@@ -67,6 +69,7 @@ export default {
   margin-top: 76px;
 }
 .bread_crumb {
+  display: inline;
   font-size: 0.9375rem;
   text-transform: capitalize;
   list-style: none;
@@ -77,6 +80,7 @@ export default {
   font-family: "Montserrat", sans-serif !important;
 }
 .last_crumb {
+  display: inline;
   font-size: 0.9375rem;
   text-transform: capitalize;
   list-style: none;
@@ -86,5 +90,17 @@ export default {
 
   text-transform: capitalize;
   font-family: "Montserrat", sans-serif !important;
+}
+@media (max-width: 576px) {
+  .bread_crumb {
+    font-size: 12px;
+  }
+  .last_crumb {
+    font-size: 12px;
+  }
+  .bread_crumb_box span {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
 }
 </style>

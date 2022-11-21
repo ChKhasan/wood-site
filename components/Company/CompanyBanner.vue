@@ -1,34 +1,49 @@
 <template lang="html">
   <div>
-    <div class="banner_company d-flex flex-column justify-content-center">
-      <div class="d-flex flex-column justify-content-center">
+    <div
+      class="banner_company d-flex flex-column justify-content-center"
+      :style="{ 'background-image': `url(${sliders[0].lg_img})` }"
+    >
+      <div
+        class="d-flex flex-column justify-content-center"
+        style="height: 100%"
+      >
         <div class="container container-xl">
           <div class="row align-items-center banner_company-title flex-column">
-            <span
-              class="title_banner-text"
-              data-aos="fade-up"
-              data-aos-delay="200"
-              data-aos-offset="100"
-              data-aos-duration="900"
-              >{{ title.title[getLang] ?? title.title.ru }}</span
-            >
             <h1
-              class="mb-4 mb-md-8 fs-60 fs-xxl-120 heading-home-01 lh-113"
+              class="d-block title_banner fadeInUp animated"
               data-aos="fade-up"
               data-aos-delay="400"
-              data-aos-offset="400"
+              data-aos-offset="100"
               data-aos-duration="900"
             >
-              <strong
-                class="d-block title_banner fadeInUp animated"
-                data-animate="fadeInUp"
-              >
-                {{
-                  translate[getLang]?.company.title ??
-                  translate.ru.company.title
-                }}</strong
-              >
+              {{ sliders[0]?.title[getLang] ?? sliders[0].title.ru }}
             </h1>
+            <span
+              class="company_banner-text"
+              data-aos="fade-up"
+              data-aos-delay="600"
+              data-aos-offset="100"
+              data-aos-duration="900"
+              >{{
+                sliders[0]?.subtitle[getLang] ?? sliders[0].subtitle.ru
+              }}</span
+            >
+            <nuxt-link
+              :to="`  `"
+              data-aos="fade-up"
+              data-aos-delay="800"
+              data-aos-offset="100"
+              data-aos-duration="900"
+              href="shop-page-02.html"
+              class="btn btn-outline-primary text-uppercase shop_now_btn"
+              data-animate="fadeInUp"
+              tabindex="0"
+              >{{
+                translate[getLang]?.homepage.buynow ??
+                translate.ru.homepage.buynow
+              }}</nuxt-link
+            >
           </div>
         </div>
       </div>
@@ -43,7 +58,7 @@
 <script>
 export default {
   name: "BannerComp",
-  props: ["title"],
+  props: ["title", "sliders"],
   data() {
     return {
       translate: {
@@ -61,7 +76,6 @@ export default {
 </script>
 <style lang="css">
 .banner_company {
-  background-image: url("../../static/images/image 50702 (1).png");
   background-position: center top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -70,8 +84,7 @@ export default {
   margin-bottom: 124px;
 }
 .banner_company-title {
-  margin-top: 76px;
-  padding-top: 8%;
+  margin-bottom: 100px;
 }
 .newIn {
   font-weight: 100 !important;
@@ -81,43 +94,40 @@ export default {
   color: #000;
   margin-top: 30px;
 }
-.title_banner-text {
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 34px;
+.company_banner-text {
+  font-family: "Montserrat", sans-serif !important;
+  color: #fff;
+  width: 50%;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 36px;
   letter-spacing: 0em;
   text-align: center;
-  font-family: "Montserrat", sans-serif !important;
 }
 .title_banner {
-  font-family: "Montserrat";
-  font-size: 48px;
-  font-weight: 700 !important;
-  line-height: 59px;
-  letter-spacing: 0em;
   text-align: center;
   font-family: "Montserrat", sans-serif !important;
   margin-top: 14px;
-  color: #000;
+  color: #fff;
+
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 68px;
+  letter-spacing: 0em;
+  text-align: center;
+  margin-bottom: 28px;
 }
-@media (max-width: 576px) {
+
+@media (max-width: 1400px) {
   .title_banner {
-    font-size: 38px;
-    line-height: 48px;
+    font-size: 40px;
+    line-height: 58px;
   }
-}
-.shop_now_btn {
-  border: 1px solid #000 !important;
-  border-radius: 0 !important;
-  color: #000;
-  font-weight: 700 !important;
-  padding: 0.625rem 1.875rem !important;
-  margin-top: 20px;
-}
-.shop_now_btn:hover {
-  border: 1px solid #000 !important;
-  background-color: black !important;
-  color: #fff !important;
+  .company_banner-text {
+    font-size: 16px;
+    line-height: 30px;
+    width: 60%;
+  }
 }
 .design-by-span {
   font-weight: 600 !important;
@@ -128,6 +138,20 @@ export default {
 @media (max-width: 991.98px) {
   .custom-height-sm {
     height: 600px !important;
+  }
+}
+@media (max-width: 576px) {
+  .title_banner {
+    font-size: 30px;
+    line-height: 48px;
+  }
+  .company_banner-text {
+    font-size: 14px;
+    line-height: 24px;
+    width: 90%;
+  }
+  .banner_company {
+    margin-bottom: 54px;
   }
 }
 </style>

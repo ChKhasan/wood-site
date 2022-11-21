@@ -22,10 +22,10 @@
     <div class="d-flex justify-content-center my-5">
       <nuxt-link
         to="/products?page=1"
-        class="btn btn-outline-primary text-uppercase shop_now_btn"
+        class="btn btn-outline-primary text-uppercase shop_now_btn-shop"
         data-aos="fade-up"
-        data-aos-duration="1000"
-        data-aos-delay="800"
+        data-aos-delay="200"
+        data-aos-duration="800"
         >{{
           translate[getLang]?.homepage.shownow ?? translate.ru.homepage.shownow
         }}</nuxt-link
@@ -60,24 +60,5 @@ export default {
 };
 </script>
 <style lang="css">
-.card_box {
-  padding-top: 40px;
-  padding-bottom: 110px;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 30px;
-}
 
-@media (min-width: 576px) {
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (min-width: 992px) {
-  .grid-container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
 </style>

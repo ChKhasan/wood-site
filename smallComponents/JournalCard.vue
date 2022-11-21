@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="journal-card mt-5">
+  <div class="journal-card mt-4">
     <nuxt-link :to="`/${getLang}/post/${post.slug}`" class="j-card-img">
       <div class="journal-img" style="transition: 1s">
         <img :src="post.post_images[0].lg_img" :alt="post.title.ru" />
@@ -11,16 +11,18 @@
       </div>
       <div class="j-card-title mb-3">
         <h3>
-          <a href="">{{
+          <nuxt-link :to="`/${getLang}/post/${post.slug}`" class="post-link">{{
             post.title[getLang] ? post.title[getLang] : post.title.ru
-          }}</a>
+          }}</nuxt-link>
         </h3>
       </div>
       <div class="j-card-text">
         <p v-html="post.desc[getLang] ? post.desc[getLang] : post.desc.ru"></p>
       </div>
       <BorderBlackBtn
-        :name=" translate[getLang]?.posts.allposts ?? translate.ru.posts.allposts"
+        :name="
+          translate[getLang]?.posts.allposts ?? translate.ru.posts.allposts
+        "
       />
     </div>
   </div>
@@ -32,18 +34,18 @@ export default {
   data() {
     return {
       monthNames: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апреля",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь",
       ],
       month: null,
       date: null,
@@ -76,6 +78,12 @@ export default {
 };
 </script>
 <style lang="css">
+.post-link {
+  transition: 0.3s;
+}
+.post-link:hover {
+  color: #777;
+}
 .journal-card {
   transition: 0.3s;
 }

@@ -73,4 +73,20 @@ export default {
   text-transform: capitalize;
   font-family: "Montserrat", sans-serif !important;
 }
+@media (max-width: 576px) {
+  .bread_crumb {
+    font-size: 12px;
+  }
+  .last_crumb {
+    font-size: 12px;
+  }
+  .bread_crumb_box span {
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+  .py-4 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+}
 </style>

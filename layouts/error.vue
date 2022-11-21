@@ -10,6 +10,13 @@
 <script>
 export default {
   layout: "error-layout",
+  head() {
+    return {
+      link: [
+        { rel: "icon", type: "image/png", href: this.siteInfo.lg_favicon_path },
+      ],
+    };
+  },
   props: {
     error: {
       type: Object,

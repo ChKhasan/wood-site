@@ -9,23 +9,42 @@
           <div class="col-2 d-flex align-items-center">
             <div class="position-relative">
               <nuxt-link to="/" class="navbar-brand">
-                <img :src="siteInfo.lg_logo_path" alt="" />
+                <img
+                  :src="
+                    navStyle
+                      ? siteInfo.lg_logo_path
+                      : siteInfo.lg_dark_logo_path
+                  "
+                  alt=""
+                />
               </nuxt-link>
             </div>
           </div>
           <div
             class="col-6 d-flex py-xl-3 justify-content-between align-items-center justify-content-center"
           >
-            <NuxtLink v-for="link in links" :to="link.to" class="dropdown_btn">
-              <span class="dropdown_hover" id="hover">
+            <nuxt-link v-for="link in links" :to="link.to" class="dropdown_btn">
+              <span
+                class="home-navbar links-color"
+                :style="navStyle ? 'color: #000' : 'color: #fff'"
+                ref="companyLinks"
+                id="hover"
+              >
                 {{ link.name }}
               </span>
-            </NuxtLink>
+            </nuxt-link>
           </div>
           <div class="col-1 d-flex align-items-center">
             <el-dropdown @command="changeLang">
-              <span class="el-dropdown-link">
-                {{ getLang }}<i class="el-icon-arrow-down el-icon--right"></i>
+              <span
+                class="el-dropdown-link"
+                :style="navStyle ? 'color: #000' : 'color: #fff'"
+              >
+                {{ getLang
+                }}<i
+                  class="el-icon-arrow-down el-icon--right"
+                  :style="navStyle ? 'color: #000' : 'color: #fff'"
+                ></i>
               </span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item
@@ -38,12 +57,23 @@
             </el-dropdown>
           </div>
           <div class="col-2 d-flex align-items-center justify-content-start">
-            <font-awesome-icon class="mx-1" :icon="['fas', 'fa-phone']" />
+            <font-awesome-icon
+              v-if="navStyle"
+              style="color: #000"
+              class="mx-2"
+              :icon="['fas', 'fa-phone']"
+            />
+            <font-awesome-icon
+              v-else
+              style="color: #fff"
+              class="mx-2"
+              :icon="['fas', 'fa-phone']"
+            />
 
             <a
               :href="`tel:${siteInfo.phone_number}`"
-              id="hover-effect"
-              class="nav-phone"
+              class="nav-phone-home links-color"
+              :style="navStyle ? 'color: #000' : 'color: #fff'"
               >{{ siteInfo.phone_number }}</a
             >
           </div>
@@ -54,8 +84,11 @@
             <b-button
               v-b-toggle.sidebar-no-header
               class="navbar-toggler border-0 px-0 canvas-toggle"
-              ><span class="fs-24 toggle-icon"></span
+            >
+              <span v-if="navStyle" class="fs-24 toggle-icon-black"></span>
+              <span v-else class="fs-24 toggle-icon-white"></span
             ></b-button>
+
             <b-sidebar
               id="sidebar-no-header"
               aria-labelledby="sidebar-no-header-title"
@@ -73,7 +106,11 @@
                       class="sidebar-logo"
                       alt=""
                     />
-                    <span class="d-flex align-items-center" variant="primary" block @click="hide"
+                    <span
+                      class="d-flex align-items-center"
+                      variant="primary"
+                      block
+                      @click="hide"
                       ><svg
                         viewBox="0 0 16 16"
                         width="1em"
@@ -115,7 +152,12 @@
           </div>
           <div class="d-flex justify-content-center col-8">
             <a href="" class="navbar-brand">
-              <img src="../../static/images/logo.png" alt="" />
+              <img
+                :src="
+                  navStyle ? siteInfo.lg_logo_path : siteInfo.lg_dark_logo_path
+                "
+                alt=""
+              />
             </a>
           </div>
           <div class="col-2 d-flex justify-content-end"></div>
@@ -139,11 +181,16 @@ export default {
       currLang: "ru",
       lang: this.siteInfo,
       lastScrollTop: 0,
-
+      lang: {
+        ru: "ru",
+        uz: "uz",
+      },
       translate: {
         ru: require("@/locales/ru.json"),
         uz: require("@/locales/uz.json"),
       },
+
+      navStyle: false,
     };
   },
   computed: {
@@ -196,12 +243,12 @@ export default {
           },
         });
       localStorage.setItem("Lang", code);
-      console.log(window.innerWidth);
     },
   },
 
   mounted() {
     var header = this.$refs.navScroll;
+
     this.$store.dispatch(
       "actionLangRu",
       this.$route.params.lang ?? localStorage.getItem("Lang")
@@ -213,15 +260,18 @@ export default {
           header.style.top = "-128px";
           header.style.background = "transparent";
           header.style.marginTop = "0";
+          this.navStyle = true;
         } else if (document.documentElement.scrollTop == 0) {
           header.style.marginTop = "0";
           header.style.boxShadow = "none";
           header.style.background = "transparent";
+          this.navStyle = false;
         } else {
           header.style.top = "0";
           header.style.boxShadow = " 0 0.5rem 1rem rgb(0 0 0 / 15%)";
           header.style.background = "#fff";
           header.style.marginTop = "0";
+          this.navStyle = true;
         }
         this.lastScrollTop = scrollTop;
       });
@@ -248,13 +298,31 @@ export default {
 .b-icon.bi {
   font-size: 30px;
 }
-a.nuxt-link-active {
-  font-weight: bold;
+.drawer-lang-box {
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  width: 100%;
+  padding: 0 20px;
+  cursor: pointer;
 }
-/* exact link will show the primary color for only the exact matching link */
+.b-sidebar:not(.b-sidebar-right) > .b-sidebar-header .close {
+  margin-left: auto;
+  margin-top: 25px !important;
+}
+
+.drawer-lang {
+  color: rgb(0 0 0 / 30%);
+}
+.activeDrawer {
+  color: black;
+}
 .drawer-links {
   padding-bottom: 5px;
   border-bottom: 1px solid rgb(0 0 0 / 30%);
+}
+.drawer-links a:hover {
+  color: #000 !important;
 }
 .el-dropdown-link {
   cursor: pointer;
@@ -283,12 +351,11 @@ a.nuxt-link-active {
   position: relative;
   transition: 2s;
 }
-.dropdown_hover {
+.home-navbar {
   cursor: pointer;
-  transition: 1s;
-  color: #fff !important;
+  color: #fff;
 }
-.dropdown_hover:hover + .dropdown-bottom {
+.home-navbar:hover + .dropdown-bottom {
   top: 100%;
   display: flex;
   opacity: 1;
@@ -310,7 +377,6 @@ a.nuxt-link-active {
   position: absolute;
   background: white;
   top: 150%;
-
   z-index: 1000 !important;
   display: none;
   transition: 0.2s !important;
@@ -327,7 +393,6 @@ a.nuxt-link-active {
   box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 18%);
 }
 a {
-  color: #000 !important;
   text-decoration: none;
   background-color: transparent;
   text-decoration: none !important;
@@ -340,11 +405,11 @@ ul {
   padding-left: 0 !important;
 }
 .el-dropdown-link,
-.dropdown_hover {
+.home-navbar {
   font-weight: 700 !important;
   font-size: 1rem !important;
   line-height: 26px;
-  color: #000 !important;
+  color: #fff;
   font-family: "Montserrat", sans-serif !important;
   letter-spacing: 0.8px;
 }
@@ -366,7 +431,8 @@ ul {
   z-index: 1000 !important;
 }
 
-.toggle-icon {
+.toggle-icon-black,
+.toggle-icon-white {
   bottom: 0;
   display: block;
   height: 2px;
@@ -376,26 +442,35 @@ ul {
   position: absolute;
   top: 0;
   transition: all 0.3s;
-  background-color: black !important;
+}
+.toggle-icon-black {
+  background-color: black;
+}
+.toggle-icon-white {
+  background-color: white;
 }
 .navbar-light .navbar-toggler {
   color: #000;
   border-color: rgba(0, 0, 0, 0.1);
 }
-.toggle-icon::before {
+.toggle-icon-white::before,
+.toggle-icon-black::before {
   content: "";
   position: absolute;
   width: 18px;
   left: -6px;
   top: 8px;
 }
-.toggle-icon::after {
+.toggle-icon-white::after,
+.toggle-icon-black::after {
   top: -8px;
   left: -9px;
   width: 15px;
 }
-.toggle-icon::before,
-.toggle-icon::after {
+.toggle-icon-white::before,
+.toggle-icon-black::before,
+.toggle-icon-white::after,
+.toggle-icon-black::after {
   content: "";
   height: 2px;
   left: 0;
@@ -409,7 +484,14 @@ ul {
     -webkit-transform 0.3s ease-in-out;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
-  background-color: black !important;
+}
+.toggle-icon-white::before,
+.toggle-icon-white::after {
+  background-color: #fff;
+}
+.toggle-icon-black::before,
+.toggle-icon-black::after {
+  background-color: #000;
 }
 .navbar-toggler,
 .toggle-bar {
@@ -432,16 +514,17 @@ ul {
   font-size: 16px !important;
   font-weight: 700 !important;
 }
-.nav-phone {
+.nav-phone-home {
   font-family: "Montserrat", sans-serif !important;
   margin-bottom: 0 !important;
   font-weight: 500 !important;
   font-size: 13px !important;
   position: relative;
-  transition: color 10s;
+  /* transition: color 0.3s !important; */
+  color: #fff;
 }
-.nav-phone:hover {
-  color: #777 !important;
+.nav-phone-home:hover {
+  color: #999;
 }
 .navbar-toggler:active {
   border: 0 !important;
@@ -459,23 +542,23 @@ ul {
   margin-top: 50px !important;
 }
 
-.dropdown_hover::after {
+.home-navbar::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 0;
   height: 1px;
-  background: black;
+  background: #fff;
   transition: 0.3s;
 }
-.dropdown_hover:hover::after {
+.home-navbar:hover::after {
   content: "";
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 1px;
-  background: #000 !important;
+  background: #fff !important;
 }
 .el-dropdown {
   vertical-align: top;
@@ -503,22 +586,7 @@ ul {
   font-family: "Montserrat", sans-serif !important;
   color: #000 !important;
 }
-.b-sidebar-header .close {
-  margin-left: auto;
-  margin-top: 25px !important;
-}
-
-.drawer-lang {
-  color: rgb(0 0 0 / 30%);
-}
-.activeDrawer {
-  color: black;
-}
-.drawer-lang-box {
-  position: absolute;
-  left: 0;
-  bottom: 20px;
-  width: 100%;
-  padding: 0 20px;
+.drawer-link:hover {
+  color: #777 !important;
 }
 </style>

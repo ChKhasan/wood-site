@@ -1,14 +1,14 @@
 <template lang="html">
   <div>
     <v-scroll-to-top></v-scroll-to-top>
-    <Navbar :siteInfo="siteInfo" :language="language" />
+    <HomeHeader :siteInfo="siteInfo" :language="language" />
     <Nuxt />
     <Footer :siteInfo="siteInfo" :categories="categories" />
   </div>
 </template>
 <script>
-import Navbar from "../components/Layout/Navbar.vue";
-import Footer from "../components/Layout/Footer.vue";
+import HomeHeader from "@/components/Layout/HomeHeader.vue";
+import Footer from "@/components/Layout/Footer.vue";
 
 export default {
   head() {
@@ -26,17 +26,14 @@ export default {
     };
   },
   components: {
-    Navbar,
+    HomeHeader,
     Footer,
   },
 
   async mounted() {
     this.siteInfo = await this.__GET();
     this.language = await this.__GET1();
-
     this.categories = await this.__GET2();
-    await this.categories?.splice(5);
-    console.log("sdfsdfsdadfsdfsd");
   },
   methods: {
     __GET() {

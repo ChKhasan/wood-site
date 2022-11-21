@@ -9,11 +9,11 @@
             product.products_categories[0].title.ru,
         }"
       />
-      <div class="container container-xxl py-5">
+      <div class="container container-xl">
         <div class="row pb-4">
-          <div class="col-md-6 mb-8 mb-md-0">
+          <div class="col-md-6 mb-8 mb-md-0 mt-5">
             <a
-              href=""
+              href="#"
               v-for="(img, index) in product.product_images"
               :key="index"
             >
@@ -37,15 +37,13 @@
                   }}
                 </p>
               </div>
-              <h1 class="body_title fs-30 fs-lg-40 mb-2">
+              <h1 class="body_title fs-lg-40 mb-2">
                 {{
                   product.title[getLang]
                     ? product.title[getLang]
                     : product.title.ru
                 }}
               </h1>
-
-              <p class="mt-3 mb-6 body_card_info" v-html="info"></p>
 
               <form v-on:submit.prevent="submitForm">
                 <label class="ml-1 placing-title">{{
@@ -108,19 +106,22 @@
               </form>
 
               <div class="d-flex align-items-center flex-wrap mt-6"></div>
-              <ul class="list-unstyled mt-5">
+              <ul class="list-unstyled mt-2">
                 <li class="row mb-2 flex-wrap">
-                  <span class="d-block col-6 font-weight-500 fs-15"
+                  <span class="d-block mt-4 col-md-6 font-weight-500 fs-15"
                     >{{
                       translate[getLang]?.product.callBack ??
                       translate.ru.product.callBack
                     }}
                   </span>
-                  <span class="d-block col-6 fs-15 color-gray"
-                    ><p class="mx-3 nav-phone">
+                  <span class="d-block mt-4 col-md-6 fs-15 color-gray"
+                    ><a
+                      :href="`tel:${siteInfo.phone_number}`"
+                      class="nav-phone"
+                    >
                       <font-awesome-icon :icon="['fas', 'fa-phone']" />
                       {{ siteInfo.phone_number }}
-                    </p></span
+                    </a></span
                   >
                 </li>
               </ul>
@@ -128,7 +129,7 @@
           </div>
         </div>
 
-        <div class="row justify-content-center">
+        <div v-if="product.desc.ru" class="row justify-content-center">
           <InformationTab :desc="product?.desc[getLang] ?? product.desc.ru" />
         </div>
       </div>
@@ -206,7 +207,7 @@ export default {
       return this.$store.getters.language;
     },
   },
-  async created() {
+  async mounted() {
     try {
       await this.$recaptcha.init();
     } catch (e) {
@@ -221,7 +222,7 @@ export default {
         this.dynamicValidateForm.phone_number !== ""
       ) {
         try {
-          const token = await this.$recaptcha.getResponse();
+          await this.$recaptcha.getResponse();
           await this.$axios.post("/feedback", {
             ...this.dynamicValidateForm,
             product_id: this.product.id,
@@ -241,13 +242,19 @@ export default {
             });
           await this.$recaptcha.reset();
         } catch (error) {
-          console.log("Error in order:", error);
+          await this.$toast.open({
+            message: error,
+            type: "error",
+            duration: 2000,
+            dismissible: true,
+            position: "top-right",
+          });
         }
       }
     },
     async recaptcha() {
       await this.$recaptchaLoaded();
-      const token = await this.$recaptcha("login");
+      await this.$recaptcha("login");
     },
 
     countFunc(def) {
@@ -261,11 +268,16 @@ export default {
 </script>
 
 <style lang="css">
+.nav-phone:hover {
+  color: #777 !important;
+}
 .mb-120 {
   margin-bottom: 120px;
 }
 .product_info_img {
   width: 100%;
+  height: 400px;
+  object-fit: contain;
 }
 .body_type {
   font-family: "Montserrat", sans-serif !important;
@@ -281,6 +293,7 @@ export default {
   font-size: 30px !important;
 }
 .body_title {
+  font-size: 30px;
   font-weight: 600;
   line-height: 1.25;
   color: #000;
@@ -523,5 +536,18 @@ export default {
   outline: none;
   background-color: #fff !important;
   color: #000 !important;
+}
+@media (max-width: 576px) {
+  .body_title {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: #000;
+    font-family: "Montserrat", sans-serif !important;
+  }
+  .product_info_img {
+    height: 300px;
+    object-fit: contain;
+  }
 }
 </style>

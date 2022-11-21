@@ -23,7 +23,7 @@
                 <ul class="f-card-list" style="padding-left: none">
                   <li style="cursor: pointer" class="mb-1 hover-effect">
                     <span
-                      class="list-inline-item active"
+                      class="list-inline-item active mb-2"
                       @click="$router.push(`/${getLang}/products?page=1`)"
                     >
                       {{
@@ -34,7 +34,7 @@
                   </li>
                   <li
                     style="cursor: pointer"
-                    class="mb-1 hover-effect"
+                    class="mb-1 hover-effect mb-2"
                     v-for="(category, index) in categories.slice().reverse()"
                     :key="category.id"
                   >
@@ -73,6 +73,7 @@
             />
             <el-button
               icon="el-icon-search"
+              class="search-btn"
               :class="{ 'btn-primary': params.search !== '' }"
               :disabled="params.search == '' ? true : false"
               @click="searchProduct"
@@ -93,11 +94,13 @@
           </div>
           <div class="shop-pagination d-flex justify-content-center pt-5">
             <vs-pagination
-              :total-pages="currentPage"
+              :total-pages="9"
               :current-page="1"
-              :page-padding="2"
+              
+              :page-padding="1"
               @change="changePage($event)"
             ></vs-pagination>
+          
           </div>
         </div>
       </div>
@@ -128,7 +131,7 @@ export default {
       currentPage: 1,
       params: {
         page: 1,
-        paginate: 12,
+        paginate: window.innerWidth < 576 ? 9 : 18,
         search: "",
       },
       page: {
@@ -153,12 +156,12 @@ export default {
 
   async asyncData({ store, route }) {
     let id = await route.params.id;
-
+    let width = window.innerWidth;
     const categories = await store.dispatch(`categories/fetchCategories`);
-    const products = await store.dispatch(
-      `products/fetchProductByParams`,
-      route.query
-    );
+    const products = await store.dispatch(`products/fetchProductByParams`, {
+      query: route.query,
+      paginate: width < 576 ? 9 : 18,
+    });
     return {
       categories,
       productsByCategory: products.data,
@@ -188,11 +191,12 @@ export default {
     },
 
     async changePage(val) {
+      window.scrollTo({ top: "300px", behavior: "smooth" });
       this.params.page = val;
       this.page.page = val;
 
       await this.$router.replace({
-        path: `/products`,
+        path: `/${this.getLang}/products`,
         query: this.page,
       });
 
@@ -227,7 +231,7 @@ export default {
   border-bottom: 1px solid transparent;
 }
 
-.filter-card-title h3 {
+.filter-card-title h1 {
   font-size: 20px !important;
   font-weight: 700;
   line-height: 1.25;
@@ -318,10 +322,29 @@ export default {
 }
 .shop-card-controller {
   display: grid;
-  grid-template-columns: auto;
-  grid-gap: 30px;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
 }
-@media (min-width: 576px) {
+@media (min-width: 300px) and (max-width: 650px) {
+  .shop-card-controller {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 7px;
+  }
+}
+@media (min-width: 650px) {
+  .shop-card-controller {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+  }
+}
+@media (min-width: 992px) {
+  .shop-card-controller {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+  }
+}
+
+/* @media (min-width: 576px) {
   .shop-card-controller {
     grid-template-columns: 1fr 1fr;
   }
@@ -335,7 +358,7 @@ export default {
   .shop-card-controller {
     grid-template-columns: 1fr 1fr 1fr;
   }
-}
+} */
 @media (min-width: 1200px) {
   .container_block {
     max-width: 1200px !important;
@@ -399,9 +422,20 @@ export default {
     padding: 1px 8px;
   }
 }
-@media (max-width: 576px) {
+@media (min-width: 300px) and (max-width: 576px) {
   .search-input {
-    max-width: 70%;
+    width: 80%;
+  }
+  .search-btn {
+    width: 20%;
+  }
+}
+@media (max-width: 300px) {
+  .search-input {
+    width: 70%;
+  }
+  .search-btn {
+    width: 30%;
   }
 }
 .search-input {

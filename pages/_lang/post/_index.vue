@@ -12,7 +12,7 @@
               thePost.title[getLang] ? thePost.title[getLang] : thePost.title.ru
             }}
           </h1>
-          <div class="mb-5 d-flex justify-content-center mt-5">
+          <div class="mb-5 d-flex justify-content-center mt-3">
             <img
               class="post-banner"
               style="width: 100%"
@@ -33,7 +33,7 @@
                 : thisPost.title.ru
             }}
           </h1>
-          <div class="mb-5 d-flex justify-content-center mt-5">
+          <div class="mb-5 d-flex justify-content-center mt-3">
             <img
               class="post-banner"
               style="width: 100%"
@@ -232,18 +232,18 @@ export default {
       thisNextPost: {},
       usePN: true,
       monthNames: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
+        "Январь",
+        "Февраль",
+        "Март",
+        "Апреля",
+        "Май",
+        "Июнь",
+        "Июль",
+        "Август",
+        "Сентябрь",
+        "Октябрь",
+        "Ноябрь",
+        "Декабрь",
       ],
       month: null,
       date: null,
@@ -447,8 +447,22 @@ export default {
 .post-transition {
   transition: 0.5s;
 }
-.post-banner {
-  /* height: 100%;
-  object-fit: cover; */
+@media (max-width: 576px) {
+  .post-title {
+    font-size: 30px !important;
+
+    line-height: 1.25;
+  }
+  .pt-10,
+  .py-10 {
+    padding-top: 2.375rem !important;
+  }
+  .post-banner {
+    height: 300px;
+    object-fit: contain;
+  }
+  .post-description {
+    margin-bottom: 0 !important;
+  }
 }
 </style>

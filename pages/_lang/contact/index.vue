@@ -6,7 +6,7 @@
       "
     />
     <div class="container container-xxl mt-3 py-5 pb-14">
-      <div class="row pb-5">
+      <div class="row">
         <div class="col-12 contact-title">
           <h1>
             {{
@@ -48,7 +48,7 @@
           <iframe
             :src="site_info.map"
             width="100%"
-            style="border: 0; aspect-ratio: 1/0.5"
+            class="i-frame-map"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
@@ -70,7 +70,7 @@
               translate.ru.contact.formText
             }}
           </p>
-          <form action="">
+          <form v-on:submit.prevent="postData">
             <div class="row mb-6">
               <div class="col-sm-6 mt-4">
                 <input
@@ -107,23 +107,12 @@
 Комментарий</textarea
               >
             </div>
-            <div class="custom-control custom-checkbox mb-6">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                id="customCheck1"
-              />
-              <label class="custom-control-label fs-15" for="customCheck1">
-                {{
-                  translate[getLang]?.contact.save ?? translate.ru.contact.save
-                }}</label
-              >
-            </div>
+
+            <recaptcha required class="form-recaptcha mb-6" />
             <button
               v-ripple="'rgba(255, 255, 255, 0.35)'"
               :ripple="false"
               class="btn form-btn text-uppercase letter-spacing-05"
-              @click="postData"
             >
               {{
                 translate[getLang]?.contact.sendNow ??
@@ -150,7 +139,9 @@
           <p class="font-weight-bold info-title mb-2 form-text">
             {{ translate[getLang]?.contact.info ?? translate.ru.contact.info }}
           </p>
-          <p class="mb-0 form-text">{{ site_info.phone_number }}</p>
+          <a :href="`tel:${site_info.phone_number}`" class="mb-0 form-text">{{
+            site_info.phone_number
+          }}</a>
           <a :href="`mailto:${site_info.email}`" class="mb-7 form-text">{{
             site_info.email
           }}</a>
@@ -186,7 +177,6 @@ export default {
         ru: require("@/locales/ru.json"),
         uz: require("@/locales/uz.json"),
       },
-     
     };
   },
   computed: {
@@ -194,7 +184,13 @@ export default {
       return this.$store.getters.language;
     },
   },
-
+  async mounted() {
+    try {
+      await this.$recaptcha.init();
+    } catch (e) {
+      console.log(e);
+    }
+  },
   methods: {
     async postData() {
       if (
@@ -203,6 +199,7 @@ export default {
         this.dynamicValidateForm.message !== ""
       ) {
         try {
+          await this.$recaptcha.getResponse();
           await this.$axios.post("/feedback", this.dynamicValidateForm);
           (this.dynamicValidateForm = {
             name: "",
@@ -217,10 +214,22 @@ export default {
               dismissible: true,
               position: "top-right",
             });
+          await this.$recaptcha.reset();
         } catch (error) {
           console.log("Error in order:", error);
+          await this.$toast.open({
+            message: error,
+            type: "error",
+            duration: 2000,
+            dismissible: true,
+            position: "top-right",
+          });
         }
       }
+    },
+    async recaptcha() {
+      await this.$recaptchaLoaded();
+      await this.$recaptcha("login");
     },
   },
   components: { yandexMap, ymapMarker, BreadCrumbComp, TheMask },
@@ -233,6 +242,16 @@ export default {
 };
 </script>
 <style lang="css">
+.i-frame-map {
+  border: 0;
+  aspect-ratio: 1/0.5;
+}
+@media (max-width: 576px) {
+  .i-frame-map {
+    border: 0;
+    aspect-ratio: 1/0.8;
+  }
+}
 .contact-title h1 {
   font-size: 40px !important;
   text-align: center !important;
@@ -242,6 +261,7 @@ export default {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif !important;
 }
+
 .form-title {
   font-size: 24px !important;
   font-weight: 700;
@@ -256,6 +276,10 @@ export default {
   line-height: 1.63;
   color: #777;
   text-align: left;
+  transition: 0.3s;
+}
+.form-text:hover {
+  color: #000;
 }
 .form-btn {
   color: #fff;
@@ -292,11 +316,18 @@ export default {
   font-size: 1rem;
   line-height: 1.63;
 }
+
 .pb-14 {
   padding-bottom: 6.875rem !important;
 }
+@media (max-width: 576px) {
+  .pb-14 {
+    padding-bottom: 50px !important;
+  }
+}
 .map-control {
   padding-bottom: 70px;
+  padding-top: 50px;
 }
 .btn:focus,
 .btn.focus {
@@ -310,5 +341,22 @@ export default {
   border-color: rgba(75, 77, 78, 0.01);
   box-shadow: 0px 0px 5px rgba(75, 77, 78, 0.4),
     0px 0px 3px rgba(75, 77, 78, 0.4);
+}
+@media (max-width: 576px) {
+  .map-control {
+    padding-bottom: 10px;
+    padding-top: 30px;
+  }
+  .contact-title h1 {
+    font-size: 25px !important;
+  }
+  .py-5 {
+    padding-top: 1.5rem !important;
+  }
+  .form-title {
+    font-size: 20px !important;
+
+    line-height: 1.25;
+  }
 }
 </style>

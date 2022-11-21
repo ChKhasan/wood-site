@@ -9,7 +9,9 @@ export const actions = {
   },
   async fetchProductByParams({}, fullPage) {
     try {
-      const res = await this.$axios.$get(`/products?${fullPage}&paginate=12`);
+      const res = await this.$axios.$get(
+        `/products?${fullPage.query}&paginate=${fullPage.paginate}`
+      );
       return res.data;
     } catch (e) {
       console.log(e);
@@ -18,7 +20,7 @@ export const actions = {
   async fetchProductByCategory({}, params) {
     try {
       const res = await this.$axios.$get(
-        `/categories/${params.id}/products?${params.query}&paginate=12`
+        `/categories/${params.id}/products?${params.query}&paginate=${params.paginate}`
       );
       return res.data;
     } catch (e) {

@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <CompanyBanner :title="site_info" />
+    <CompanyBanner :title="site_info" :sliders="sliders" />
 
     <TitleComp
       :title="
@@ -41,6 +41,7 @@ import CompanyBanner from "~/components/Company/CompanyBanner.vue";
 import TitleComp from "~/components/TitleComp.vue";
 import TeamCard from "~/smallComponents/TeamCard.vue";
 export default {
+  layout: "home-layout",
   data() {
     return {
       translate: {
@@ -50,7 +51,7 @@ export default {
     };
   },
   mounted() {
-console.log(this.$router);
+    console.log(this.$router);
   },
   async asyncData({ store, route }) {
     const language = route.params.lang;
@@ -58,10 +59,12 @@ console.log(this.$router);
     console.log(language);
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     const team = await store.dispatch("team/fetchTeam");
+    const sliders = await store.dispatch("sliders/fetchSliders");
     return {
       site_info,
       team,
-      language
+      language,
+      sliders,
     };
   },
   computed: {
@@ -185,6 +188,9 @@ console.log(this.$router);
   .company-info {
     margin-top: 24px !important;
     margin-bottom: 15px !important;
+  }
+  .company-info-img img {
+    padding-bottom: 60px;
   }
 }
 </style>

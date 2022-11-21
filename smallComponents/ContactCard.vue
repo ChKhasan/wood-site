@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="contact-card" :style="{ 'background-image': `url(${img})` }">
     <div class="backColor" :style="{ background: `${bgcolor}` }"></div>
-    <div class="c-card-title mb-5">
+    <div class="c-card-title mb-2">
       <h3>{{ title }}</h3>
     </div>
     <div class="c-card-btn">
@@ -89,6 +89,7 @@ export default {
   .contact-card {
     height: 300px;
     padding: 30px;
+    background-position: right;
   }
   .c-card-title h3 {
     font-size: 26px !important;

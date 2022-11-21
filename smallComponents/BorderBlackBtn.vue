@@ -1,13 +1,20 @@
 <template lang="html">
   <div class="j-card-btn">
-    <nuxt-link class="b-btn" to="/post-categories/1/posts?page=1">{{
-      name
-    }}</nuxt-link>
+    <nuxt-link
+      class="b-btn"
+      :to="`/${getLang}/post-categories/1/posts?page=1`"
+      >{{ name }}</nuxt-link
+    >
   </div>
 </template>
 <script>
 export default {
   props: ["name"],
+  computed: {
+    getLang() {
+      return this.$store.getters.language;
+    },
+  },
 };
 </script>
 <style lang="css">
