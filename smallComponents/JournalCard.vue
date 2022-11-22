@@ -147,11 +147,15 @@ export default {
   transition: 0.5s !important;
 }
 .j-card-text p {
-  text-overflow: clip;
   overflow: hidden;
   width: 100%;
   height: 50px;
   white-space: wrap;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  flex-grow: 1;
 }
 .j-card-title h3 {
   text-overflow: clip;

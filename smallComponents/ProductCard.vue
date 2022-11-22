@@ -153,7 +153,7 @@ a {
 }
 @media (max-width: 576px) {
   .product_card {
-    padding: 5px;
+    padding: 10px;
     border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 5px;
   }

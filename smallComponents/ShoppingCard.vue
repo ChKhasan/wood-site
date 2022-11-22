@@ -58,12 +58,15 @@ export default {
 .sh_title {
   max-width: 300px;
 }
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   .sh_title h1 {
     font-size: 40px !important;
   }
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
   .sh_title h1 {
-    font-size: 43px !important;
+    font-size: 30px !important;
     font-weight: 700;
     line-height: 1.25;
   }
@@ -113,18 +116,21 @@ export default {
     grid-column-start: 1 !important;
     grid-column-end: 3 !important;
     aspect-ratio: 1/0.7;
+    min-height: 300px;
   }
   .shopping_card-grid3 {
     grid-row-start: 6 !important;
     grid-column-start: 1 !important;
     grid-column-end: 3 !important;
     aspect-ratio: 1/0.7;
+    min-height: 300px;
   }
   .shopping_card-grid2 {
     grid-row-start: 8 !important;
     grid-column-start: 1 !important;
     grid-column-end: 3 !important;
     aspect-ratio: 1/0.7;
+    min-height: 300px;
   }
 }
 
