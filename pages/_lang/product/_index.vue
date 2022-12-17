@@ -201,7 +201,6 @@ export default {
       "products/fetchProductBySlug",
       params.index
     );
-    console.log(product);
     return { product, products, siteInfo };
   },
 

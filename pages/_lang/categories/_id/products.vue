@@ -195,7 +195,6 @@ export default {
       paginate: width < 576 ? 9 : 18,
       
     });
-    console.log(window.width);
 
     const event = new Date(categoryImg.created_at);
     const year = event.getFullYear();
@@ -220,7 +219,6 @@ export default {
             params: this.params,
           }
         );
-        console.log(searchProducts);
         const categoryById = await this.$store.dispatch(
           `categories/fetchCategoryById`,
           this.id

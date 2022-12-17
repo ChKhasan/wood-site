@@ -169,7 +169,6 @@ export default {
       query: route.query,
       paginate: width < 576 ? 9 : 18,
     });
-    console.log(products);
     return {
       categories,
       productsByCategory: products.data,
@@ -191,7 +190,6 @@ export default {
 
         this.productsByCategory =
           searchProducts.data == [] ? [] : searchProducts.data;
-        console.log(searchProducts.data);
         this.currentPage = searchProducts.last_page;
       } catch (err) {
         console.log(err);

@@ -282,7 +282,6 @@ export default {
       if (oldVal !== newVal) {
         var header = this.$refs.navScroll;
         header.style.top = "0";
-        console.log(oldVal, newVal);
       }
     },
     routerParams(oldVal, newVal) {

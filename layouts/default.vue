@@ -36,7 +36,6 @@ export default {
 
     this.categories = await this.__GET2();
     await this.categories?.splice(5);
-    console.log("sdfsdfsdadfsdfsd");
   },
   methods: {
     __GET() {

@@ -54,12 +54,9 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$router);
   },
   async asyncData({ store, route }) {
     const language = route.params.lang;
-    // console.log(route);
-    console.log(language);
     const site_info = await store.dispatch("site-info/fetchSiteInfo");
     const team = await store.dispatch("team/fetchTeam");
     const sliders = await store.dispatch("sliders/fetchSliders");
