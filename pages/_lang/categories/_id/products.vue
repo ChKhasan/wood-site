@@ -24,8 +24,8 @@
                   </h3>
                 </div>
                 <div class="filter-card-body">
-                  <ul class="f-card-list" style="padding-left: none">
-                    <li style="cursor: pointer" class="mb-1 hover-effect">
+                  <ul class="f-card-list" style="padding-left: none;">
+                    <li style="cursor: pointer;" class="mb-1 hover-effect">
                       <span
                         class="list-inline-item"
                         @click="$router.push(`/${getLang}/products?page=1`)"
@@ -37,7 +37,7 @@
                       </span>
                     </li>
                     <li
-                      style="cursor: pointer"
+                      style="cursor: pointer;"
                       class="mb-1 hover-effect mb-2"
                       v-for="(category, index) in categories.slice().reverse()"
                       :key="category.id"
@@ -138,14 +138,7 @@ import VsPagination from "@vuesimple/vs-pagination";
 import BreadCrumbCategory from "@/components/BreadCrumbCategory.vue";
 export default {
   head: {
-    title: "Категории продуктов",
-
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Ofis mebillari" },
-      { name: "format-detection", content: "telephone=no" },
-    ],
+    title: "Продукты по категориям",
   },
   data() {
     return {

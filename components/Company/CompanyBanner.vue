@@ -30,7 +30,7 @@
               }}</span
             >
             <nuxt-link
-              :to="`  `"
+              :to="`/${getLang}/products?page=1`"
               data-aos="fade-up"
               data-aos-delay="800"
               data-aos-offset="100"

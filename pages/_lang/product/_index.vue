@@ -28,7 +28,7 @@
             <div class="content-right primary-summary summary-sticky">
               <div class="d-flex">
                 <p
-                  style="margin-right: 7px"
+                  style="margin-right: 7px;"
                   class="body_type text-muted fs-12 font-weight-500 letter-spacing-05"
                   v-for="item in product.products_categories"
                 >
@@ -158,6 +158,9 @@ import BreadCrumbCategory from "@/components/BreadCrumbCategory.vue";
 import { TheMask } from "vue-the-mask";
 
 export default {
+  head: {
+    title: "Продукть",
+  },
   data() {
     return {
       cursorPos: {},

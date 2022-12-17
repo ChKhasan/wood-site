@@ -15,7 +15,7 @@
           <div class="mb-5 d-flex justify-content-center mt-3">
             <img
               class="post-banner"
-              style="width: 100%"
+              style="width: 100%;"
               :src="thePost.post_images[0].lg_img"
               alt=""
             />
@@ -36,7 +36,7 @@
           <div class="mb-5 d-flex justify-content-center mt-3">
             <img
               class="post-banner"
-              style="width: 100%"
+              style="width: 100%;"
               :src="thisPost.post_images[0].lg_img"
               alt=""
             />
@@ -75,7 +75,7 @@
     </div>
     <div
       class="container-fluid"
-      style="border-bottom: 1px solid #e4e4e4 !important"
+      style="border-bottom: 1px solid #e4e4e4 !important;"
     ></div>
     <div class="container container mt-15 mb-5">
       <div class="row justify-content-center">
@@ -224,6 +224,9 @@ import BreadCrumbComp from "@/components/BreadCrumbComp.vue";
 import JournalComp from "@/components/Home/NewPosts.vue";
 
 export default {
+  head: {
+    title: "Пость",
+  },
   data() {
     return {
       posts: [],

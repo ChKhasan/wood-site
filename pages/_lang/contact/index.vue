@@ -155,6 +155,9 @@ import BreadCrumbComp from "~/components/BreadCrumbComp.vue";
 import { yandexMap, ymapMarker } from "vue-yandex-maps";
 import { TheMask } from "vue-the-mask";
 export default {
+  head: {
+    title: "Контакт",
+  },
   data() {
     return {
       dynamicValidateForm: {

@@ -42,6 +42,9 @@ import TitleComp from "~/components/TitleComp.vue";
 import TeamCard from "~/smallComponents/TeamCard.vue";
 export default {
   layout: "home-layout",
+  head: {
+    title: "Наша компания",
+  },
   data() {
     return {
       translate: {

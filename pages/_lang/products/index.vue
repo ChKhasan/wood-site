@@ -20,8 +20,8 @@
                 </h1>
               </div>
               <div class="filter-card-body">
-                <ul class="f-card-list" style="padding-left: none">
-                  <li style="cursor: pointer" class="mb-1 hover-effect">
+                <ul class="f-card-list" style="padding-left: none;">
+                  <li style="cursor: pointer;" class="mb-1 hover-effect">
                     <span
                       class="list-inline-item active mb-2"
                       @click="$router.push(`/${getLang}/products?page=1`)"
@@ -33,7 +33,7 @@
                     </span>
                   </li>
                   <li
-                    style="cursor: pointer"
+                    style="cursor: pointer;"
                     class="mb-1 hover-effect mb-2"
                     v-for="(category, index) in categories.slice().reverse()"
                     :key="category.id"
@@ -94,13 +94,11 @@
           </div>
           <div class="shop-pagination d-flex justify-content-center pt-5">
             <vs-pagination
-              :total-pages="9"
+              :total-pages="currentPage"
               :current-page="1"
-              
               :page-padding="1"
               @change="changePage($event)"
             ></vs-pagination>
-          
           </div>
         </div>
       </div>
@@ -113,13 +111,6 @@ import VsPagination from "@vuesimple/vs-pagination";
 export default {
   head: {
     title: "Все продукты",
-
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "Ofis mebillari" },
-      { name: "format-detection", content: "telephone=no" },
-    ],
   },
   data() {
     return {
@@ -153,7 +144,23 @@ export default {
     ProductCard,
     VsPagination,
   },
+  // async created() {
+  //   let id = await this.$route.params.id;
+  //   let width = window.innerWidth;
+  //   const categories = await this.$store.dispatch(`categories/fetchCategories`);
+  //   const products = await this.$store.dispatch(
+  //     `products/fetchProductByParams`,
+  //     {
+  //       query: this.$route.query,
+  //       paginate: width < 576 ? 9 : 18,
+  //     }
+  //   );
+  //   (this.categories = categories),
+  //     (this.productsByCategory = products.data),
+  //     (this.currentPage = products.last_page),
+  //     (this.id = id);
 
+  // },
   async asyncData({ store, route }) {
     let id = await route.params.id;
     let width = window.innerWidth;
@@ -162,6 +169,7 @@ export default {
       query: route.query,
       paginate: width < 576 ? 9 : 18,
     });
+    console.log(products);
     return {
       categories,
       productsByCategory: products.data,

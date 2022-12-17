@@ -67,8 +67,10 @@ import ProductCard from "@/smallComponents/ProductCard.vue";
 import ShoppingCard from "@/smallComponents/ShoppingCard.vue";
 import global from "@/mixins/global.js";
 export default {
+  head: {
+    title: "Woodline",
+  },
   layout: "home-layout",
-
   loading: false,
   name: "IndexPage",
   mixins: [global],
