@@ -13,9 +13,14 @@
               </h1>
             </div>
             <div class="filter-card-body">
-              <ul class="f-card-list" style="padding-left: none">
+              <ul class="f-card-list" style="padding-left: none;">
+                <b-skeleton v-if="skeleton" width="40%"></b-skeleton>
+                <b-skeleton v-if="skeleton" width="60%"></b-skeleton>
+                <b-skeleton v-if="skeleton" width="80%"></b-skeleton>
+
                 <li
-                  style="cursor: pointer"
+                  v-else
+                  style="cursor: pointer;"
                   class="mb-1"
                   v-for="category in categories.slice().reverse()"
                   :key="category.id"
@@ -61,7 +66,12 @@
         </div>
 
         <div class="post-card-controller">
+          <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+          <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+          <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+          <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
           <JournalCard
+            v-else
             data-aos="fade-up"
             data-aos-delay="400"
             data-aos-duration="900"
@@ -96,7 +106,7 @@ export default {
       categoryById: {},
       categoryImg: {},
       id: 1,
-
+      skeleton: true,
       categories: [],
       currentPage: 1,
       params: {
@@ -140,7 +150,6 @@ export default {
         }
       );
 
-      console.log(products);
       const categories = await this.$store.dispatch(
         "posts/fetchPostsCategories"
       );
@@ -155,6 +164,7 @@ export default {
       this.categoryImg = categoryImg;
       this.productsByCategory = products.data;
       this.currentPage = products.last_page;
+      this.skeleton = false;
     },
     async searchProduct() {
       const searchProducts = await this.$store.dispatch(

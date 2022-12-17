@@ -107,7 +107,13 @@
             </div>
 
             <div class="shop-card-controller">
+              <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+              <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+              <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+              <b-skeleton v-if="skeleton" width="100%" height="400px"></b-skeleton>
+
               <ProductCard
+              v-else
                 data-aos="fade-up"
                 data-aos-delay="400"
                 data-aos-duration="900"
@@ -146,6 +152,7 @@ export default {
       categoryById: {},
       categoryImg: {},
       id: 1,
+      skeleton: true,
       categories: [],
       currentPage: 1,
       params: {
@@ -186,6 +193,7 @@ export default {
       query: route.query,
       id: route.params.id,
       paginate: width < 576 ? 9 : 18,
+      
     });
     console.log(window.width);
 
@@ -198,6 +206,7 @@ export default {
       productsByCategory: products.data,
       currentPage: products.last_page,
       id,
+      skeleton: false
     };
   },
   methods: {
